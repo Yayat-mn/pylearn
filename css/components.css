@@ -1,0 +1,10 @@
+.CodeMirror {
+  border: 1px solid #c9d3e0;
+  border-radius: 8px;
+  height: auto;
+  font-size: 16px;
+}
+
+.CodeMirror-scroll {
+  min-height: 150px;
+}

@@ -1,0 +1,7 @@
+body {
+  font-family: Calibri, Arial, sans-serif;
+  color: var(--warna-teks);
+}
+h1 {
+  color: var(--warna-utama);
+}
