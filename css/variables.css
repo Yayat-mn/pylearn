@@ -1,3 +1,11 @@
+/* ============================================================
+   TOKEN DESAIN
+   ------------------------------------------------------------
+   Semua warna, radius, bayangan, dan jarak untuk seluruh halaman.
+   Komponen hanya boleh memakai variabel di sini; nilai hex baru
+   ditambahkan di berkas ini, bukan di components.css.
+   ============================================================ */
+
 :root {
   /* Warna utama */
   --warna-utama: #005bbf;
@@ -14,6 +22,7 @@
   --warna-bahaya-lembut: #ffdad6;
 
   /* Warna netral */
+  --warna-putih: #ffffff;
   --warna-latar: #f7f9ff;
   --warna-kartu: #ffffff;
   --warna-latar-lembut: #f1f4fa;
@@ -27,6 +36,8 @@
   /* Warna kode */
   --latar-kode: #181c20;
   --teks-kode: #eef1f7;
+  --teks-kode-redup: #b9c0cc;
+  --teks-kode-samar: #aab2c0;
   --warna-kode-aksen: #ffd43b;
 
   /* Radius */

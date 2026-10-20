@@ -1,6 +1,25 @@
-// Mengatur halaman modul: materi, navigasi tahap, dan editor Python.
+/**
+ * ============================================================
+ * HALAMAN MODUL
+ * ------------------------------------------------------------
+ * Peran   : mengatur satu halaman modul: memuat katalog + meta,
+ *           menampilkan materi/video, latihan (editor + Pyodide),
+ *           kuis, dan navigasi antartahap.
+ * Dipakai : modul.html?id=<nomor>
+ * Tahap   : #belajar -> #latihan -> #kuis (tanpa penguncian modul).
+ * Data    : data/daftar-modul.json, meta.json, materi.html,
+ *           latihan.json, dan kuis.json.
+ * Catatan : nilai/percobaan tidak disimpan; muat ulang = mulai baru.
+ * ============================================================
+ */
 
 import { buatEditor } from "../features/editor.js";
+import {
+  cariModul,
+  modulBerikutnya,
+  modulTersedia,
+  muatKatalog,
+} from "../features/katalog.js";
 import { bandingkanOutput } from "../features/latihan.js";
 import {
   buatKuis,
@@ -89,6 +108,8 @@ siapkanTransisiHalaman();
 let editor = null;
 let pythonSiap = false;
 let sedangJalan = false;
+let bisaDihentikan = false;
+let modulSiap = false;
 let tahapAktif = "belajar";
 let bagianSubbab = [];
 let tautanSubbab = new Map();
@@ -110,6 +131,10 @@ let panelKeluar = null;
 // Navigasi tahap
 // ------------------------------------------------------------
 
+/**
+ * Memindahkan penanda biru sidebar ke tautan tahap yang aktif.
+ * Dipanggil setiap tahap berubah dan setelah font selesai dimuat.
+ */
 function perbaruiPenandaSidebar() {
   if (!penandaSidebar) return;
 
@@ -128,11 +153,21 @@ function perbaruiPenandaSidebar() {
   penandaSidebar.parentElement.classList.add("navigasi-utama--siap");
 }
 
+/**
+ * Membaca hash URL dan mengembalikan tahap yang valid.
+ * Hash asing atau kosong dianggap "belajar".
+ *
+ * @returns {"belajar"|"latihan"|"kuis"}
+ */
 function namaTahapDariHash() {
   const nama = window.location.hash.replace("#", "");
   return NAMA_TAHAP[nama] ? nama : "belajar";
 }
 
+/**
+ * Menggulir halaman sampai bilah tahap berada sedikit di bawah topbar.
+ * Offset 76 px memberi ruang agar bilah tidak tertutup topbar.
+ */
 function gulirKeBilahTahap() {
   if (!navTahap) return;
 
@@ -149,12 +184,20 @@ function gulirKeBilahTahap() {
   });
 }
 
+/**
+ * Menyelaraskan tautan sidebar, bilah tahap, remah, dan judul tahap.
+ *
+ * @param {"belajar"|"latihan"|"kuis"} nama
+ */
 function perbaruiNavigasiTahap(nama) {
   tahapAktif = nama;
 
   // Program yang masih berjalan dihentikan agar tidak bekerja tanpa terlihat.
   if (sedangJalan && nama !== "latihan") {
     dibatalkanPengguna = true;
+    // Worker ikut dimatikan oleh hentikan(); paksa pemuatan ulang agar
+    // tombol Stop tidak aktif saat Pyodide dimuat kembali.
+    pythonSiap = false;
     hentikan("Program dihentikan karena berpindah tahap.");
   }
 
@@ -192,17 +235,31 @@ function perbaruiNavigasiTahap(nama) {
   }
 }
 
+/**
+ * Menampilkan hanya satu panel tahap.
+ *
+ * @param {"belajar"|"latihan"|"kuis"} nama
+ */
 function terapkanPanelTahap(nama) {
   panelTahap.forEach((panel) => {
     panel.hidden = panel.dataset.panel !== nama;
   });
 }
 
+/**
+ * Menerapkan tahap tanpa animasi (dipakai saat halaman pertama dibuka).
+ *
+ * @param {"belajar"|"latihan"|"kuis"} nama
+ */
 function terapkanTahap(nama) {
   perbaruiNavigasiTahap(nama);
   terapkanPanelTahap(nama);
 }
 
+/**
+ * Membersihkan sisa animasi tahap sebelumnya. Dipanggil saat pengguna
+ * berpindah tahap dengan cepat agar panel lama tidak tertinggal terlihat.
+ */
 function bersihkanTransisiTahap() {
   if (timerTransisiTahap) {
     clearTimeout(timerTransisiTahap);
@@ -220,6 +277,13 @@ function bersihkanTransisiTahap() {
   });
 }
 
+/**
+ * Berpindah tahap, memperbarui hash, dan menjalankan animasi bila
+ * pengguna tidak meminta gerak dikurangi.
+ *
+ * @param {"belajar"|"latihan"|"kuis"} nama
+ * @param {{gulir?: boolean, perbaruiHash?: boolean, animasi?: boolean}} opsi
+ */
 function tampilkanTahap(nama, {
   gulir = false,
   perbaruiHash = false,
@@ -294,10 +358,6 @@ function tampilkanTahap(nama, {
   });
 });
 
-window.addEventListener("popstate", () => {
-  tampilkanTahap(namaTahapDariHash(), { perbaruiHash: false });
-});
-
 window.addEventListener("hashchange", () => {
   tampilkanTahap(namaTahapDariHash(), { perbaruiHash: false });
 });
@@ -306,6 +366,11 @@ window.addEventListener("hashchange", () => {
 // Tab media: Teks dan Video
 // ------------------------------------------------------------
 
+/**
+ * Menampilkan panel Teks atau Video, termasuk status tab dan aside.
+ *
+ * @param {"teks"|"video"} nama
+ */
 function terapkanMedia(nama) {
   const video = nama === "video";
 
@@ -324,8 +389,19 @@ function terapkanMedia(nama) {
   // Daftar subbab tidak diperlukan saat menonton video.
   elemen.kartuSubbab.hidden = video;
   elemen.asideModul.classList.toggle("aside-modul--tanpa-subbab", video);
+
+  // Saat kembali ke teks, tandai subbab yang sedang terlihat.
+  if (!video) {
+    requestAnimationFrame(periksaSubbabAktif);
+  }
 }
 
+/**
+ * Beralih media dengan View Transition bila didukung, lalu jatuh ke
+ * animasi CSS sederhana bila tidak.
+ *
+ * @param {"teks"|"video"} nama
+ */
 function tampilkanMedia(nama) {
   const videoSekarang = !elemen.panelVideo.hidden;
 
@@ -393,6 +469,11 @@ document.querySelector(".tab-media").addEventListener("keydown", (event) => {
 // Subbab
 // ------------------------------------------------------------
 
+/**
+ * Menandai satu subbab sebagai aktif di daftar kanan.
+ *
+ * @param {string|null} idAktif
+ */
 function terapkanSubbabAktif(idAktif) {
   tautanSubbab.forEach((tautan, id) => {
     const aktif = id === idAktif;
@@ -407,8 +488,13 @@ function terapkanSubbabAktif(idAktif) {
   });
 }
 
+/**
+ * Mencari subbab terakhir yang sudah melewati ambang atas viewport.
+ * Daftar subbab berurutan, jadi perulangan berhenti saat melewati ambang.
+ */
 function periksaSubbabAktif() {
-  if (document.getElementById("belajar").hidden) return;
+  // Perhitungan posisi hanya berguna saat panel teks terlihat.
+  if (tahapAktif !== "belajar" || elemen.panelTeks.hidden) return;
 
   const ambang = 150;
   let idAktif = null;
@@ -429,6 +515,12 @@ function periksaSubbabAktif() {
   terapkanSubbabAktif(idAktif);
 }
 
+/**
+ * Merender daftar subbab dari meta.json menjadi tautan yang mengarah ke
+ * section materi dengan id `subbab-<nomor>`.
+ *
+ * @param {Array<{id: string, judul: string}>|undefined} subbab
+ */
 function tampilkanNavigasiSubbab(subbab) {
   elemen.daftarSubbab.replaceChildren();
   tautanSubbab.clear();
@@ -483,6 +575,10 @@ function tampilkanNavigasiSubbab(subbab) {
   });
 }
 
+/**
+ * Mengumpulkan section `[id^="subbab-"]` dari materi yang baru dimuat,
+ * lalu memperbarui penanda subbab aktif.
+ */
 function siapkanSubbabDariMateri() {
   bagianSubbab = [
     ...elemen.kontenMateri.querySelectorAll("[id^='subbab-']"),
@@ -492,6 +588,7 @@ function siapkanSubbabDariMateri() {
 }
 
 window.addEventListener("scroll", () => {
+  if (tahapAktif !== "belajar" || elemen.panelTeks.hidden) return;
   if (permintaanGulir !== null) return;
 
   permintaanGulir = requestAnimationFrame(() => {
@@ -506,6 +603,11 @@ window.addEventListener("resize", perbaruiPenandaSidebar);
 // Tujuan dan video
 // ------------------------------------------------------------
 
+/**
+ * Merender tujuan pembelajaran; menampilkan pesan bila datanya kosong.
+ *
+ * @param {string[]|undefined} tujuan
+ */
 function tampilkanTujuan(tujuan) {
   elemen.daftarTujuan.replaceChildren();
 
@@ -524,6 +626,12 @@ function tampilkanTujuan(tujuan) {
   });
 }
 
+/**
+ * Menyisipkan iframe YouTube hanya jika `youtubeId` berisi 11 karakter
+ * yang valid. URL penuh atau id kosong akan menampilkan kartu kosong.
+ *
+ * @param {{youtubeId?: string, judul?: string}} video
+ */
 function tampilkanVideo(video) {
   const idVideo = String(video.youtubeId || "").trim();
   const valid = /^[A-Za-z0-9_-]{11}$/.test(idVideo);
@@ -566,6 +674,11 @@ function tampilkanVideo(video) {
 // Memuat data modul
 // ------------------------------------------------------------
 
+/**
+ * Mengisi judul, deskripsi, remah, dan kartu sidebar dari meta.json.
+ *
+ * @param {object} modul
+ */
 function tampilkanHeader(modul) {
   const nomor = String(modul.id).padStart(2, "0");
   const jumlahSubbab = Array.isArray(modul.subbab)
@@ -584,7 +697,17 @@ function tampilkanHeader(modul) {
   document.title = `${modul.judul || "Modul"} — PYLearn`;
 }
 
+/**
+ * Menampilkan keadaan "modul tidak tersedia" dan menonaktifkan seluruh
+ * alat interaktif. Dipakai untuk id salah, modul "segera", dan kegagalan
+ * pemuatan data.
+ *
+ * @param {string} judul
+ * @param {string} pesan
+ */
 function tampilkanKesalahan(judul, pesan) {
+  document.title = `${judul} — PYLearn`;
+
   elemen.nomor.textContent = "Modul";
   elemen.judul.textContent = judul;
   elemen.deskripsi.textContent = pesan;
@@ -611,10 +734,8 @@ function tampilkanKesalahan(judul, pesan) {
   jumlahPercobaan = 0;
   latihanBenar = false;
   modulAktif = null;
-  katalogModul = [];
+  modulSiap = false;
 
-  elemen.tombolJalankan.disabled = true;
-  elemen.tombolPeriksa.disabled = true;
   elemen.statusPython.textContent = "Modul tidak tersedia.";
   aturStatusLatihan("Tidak ada latihan");
   elemen.wadahTarget.hidden = true;
@@ -625,9 +746,18 @@ function tampilkanKesalahan(judul, pesan) {
     "Kuis tidak tersedia"
   );
 
+  perbaruiTombol();
   tampilkanTahap("belajar", { perbaruiHash: false });
 }
 
+/**
+ * Mengambil materi HTML lalu menyiapkan daftar subbab.
+ * `innerHTML` aman di sini karena berkas berasal dari folder proyek
+ * sendiri, bukan dari input pengguna.
+ *
+ * @param {string} folder
+ * @param {string} namaFile
+ */
 async function muatMateri(folder, namaFile) {
   try {
     const respons = await fetch(`data/${folder}/${namaFile}`);
@@ -657,6 +787,14 @@ async function muatMateri(folder, namaFile) {
 // Data dan status latihan
 // ------------------------------------------------------------
 
+/**
+ * Memeriksa bentuk `latihan.json` dan mengisi nilai bawaan.
+ * Melempar error bila output target tidak ada, karena latihan tidak
+ * mungkin dinilai tanpa target.
+ *
+ * @param {any} data
+ * @returns {object}
+ */
 function validasiLatihan(data) {
   if (!data || typeof data !== "object" || Array.isArray(data)) {
     throw new Error("Data latihan tidak valid.");
@@ -684,6 +822,12 @@ function validasiLatihan(data) {
   };
 }
 
+/**
+ * Mengisi editor tanpa dianggap sebagai perubahan pengguna.
+ * Tanpa penanda ini, memuat kode awal akan mereset status latihan.
+ *
+ * @param {string} kode
+ */
 function aturKodeEditor(kode) {
   if (!editor) return;
 
@@ -696,6 +840,11 @@ function aturKodeEditor(kode) {
   }
 }
 
+/**
+ * Dipanggil CodeMirror setiap kali isi editor berubah.
+ * Setelah latihan dinyatakan benar, perubahan kode membatalkan status
+ * benar agar pengguna memeriksa ulang hasil editnya.
+ */
 function tanganiPerubahanKode() {
   if (sedangMengisiKode || !latihanBenar) return;
 
@@ -705,6 +854,12 @@ function tanganiPerubahanKode() {
   sembunyikanUmpanBalik();
 }
 
+/**
+ * Menulis status latihan beserta warna lencananya.
+ *
+ * @param {string} teks
+ * @param {""|"proses"|"benar"|"salah"} jenis
+ */
 function aturStatusLatihan(teks, jenis = "") {
   elemen.statusLatihan.textContent = teks;
   elemen.statusLatihan.classList.toggle("lencana--biru", jenis === "proses");
@@ -715,6 +870,10 @@ function aturStatusLatihan(teks, jenis = "") {
   elemen.statusLatihan.classList.toggle("lencana--bahaya", jenis === "salah");
 }
 
+/**
+ * Menghitung ulang label status dari keadaan latihan saat ini.
+ * Urutan prioritas: benar > solusi terbuka > percobaan > belum diperiksa.
+ */
 function perbaruiStatusLatihan() {
   if (!latihanSiap) {
     aturStatusLatihan("Latihan belum tersedia");
@@ -742,6 +901,10 @@ function perbaruiStatusLatihan() {
   aturStatusLatihan("Belum diperiksa");
 }
 
+/**
+ * Menyembunyikan seluruh umpan balik, petunjuk, solusi, dan tombol
+ * lanjut kuis. Dipakai sebelum pemeriksaan baru atau saat data diganti.
+ */
 function sembunyikanUmpanBalik() {
   elemen.umpanBalik.hidden = true;
   elemen.umpanBalik.classList.remove(
@@ -755,6 +918,11 @@ function sembunyikanUmpanBalik() {
   elemen.tombolLanjutKuis.hidden = true;
 }
 
+/**
+ * Menampilkan petunjuk secara bertahap.
+ *
+ * @param {number} jumlah banyaknya petunjuk yang boleh terlihat
+ */
 function tampilkanPetunjuk(jumlah) {
   const petunjuk = latihan.petunjuk.slice(0, jumlah);
 
@@ -769,6 +937,9 @@ function tampilkanPetunjuk(jumlah) {
   elemen.wadahPetunjuk.hidden = petunjuk.length === 0;
 }
 
+/**
+ * Umpan balik saat output sesuai target.
+ */
 function tampilkanUmpanBalikBenar() {
   elemen.umpanBalik.hidden = false;
   elemen.umpanBalik.classList.remove("umpan-balik-latihan--salah");
@@ -787,6 +958,13 @@ function tampilkanUmpanBalikBenar() {
   elemen.tombolLanjutKuis.hidden = false;
 }
 
+/**
+ * Umpan balik saat output belum sesuai, error, atau timeout.
+ * Setelah tiga percobaan, seluruh petunjuk dan kunci (bila ada)
+ * ditampilkan.
+ *
+ * @param {{output: string, error: string|null, dihentikan: boolean}} hasil
+ */
 function tampilkanUmpanBalikSalah(hasil) {
   const batasTercapai = jumlahPercobaan >= 3;
   const jumlahPetunjuk = batasTercapai
@@ -835,6 +1013,12 @@ function tampilkanUmpanBalikSalah(hasil) {
   }
 }
 
+/**
+ * Umpan balik ketika pemeriksaan tidak bisa dijalankan (misalnya
+ * Pyodide gagal dimuat). Tidak dihitung sebagai percobaan.
+ *
+ * @param {string} pesan
+ */
 function tampilkanUmpanBalikTeknis(pesan) {
   elemen.umpanBalik.hidden = false;
   elemen.umpanBalik.classList.remove("umpan-balik-latihan--benar");
@@ -850,6 +1034,13 @@ function tampilkanUmpanBalikTeknis(pesan) {
   elemen.tombolLanjutKuis.hidden = true;
 }
 
+/**
+ * Menilai hasil eksekusi terhadap output target.
+ * Output yang cocok dan tidak mengandung error dianggap benar.
+ *
+ * @param {{output: string, error: string|null, dihentikan: boolean}} hasil
+ * @returns {boolean} true bila proses penilaian berjalan
+ */
 function nilaiLatihan(hasil) {
   if (!latihan) return false;
 
@@ -873,6 +1064,12 @@ function nilaiLatihan(hasil) {
   return true;
 }
 
+/**
+ * Mengisi panel latihan dan editor dari data latihan.
+ *
+ * @param {object} data hasil validasiLatihan()
+ * @param {object} modul meta.json
+ */
 function tampilkanLatihan(data, modul) {
   elemen.judulLatihan.textContent = data.judul;
   elemen.instruksiLatihan.textContent =
@@ -888,6 +1085,12 @@ function tampilkanLatihan(data, modul) {
   aturKodeEditor(kodeAwal);
 }
 
+/**
+ * Keadaan latihan ketika `latihan.json` tidak ada atau tidak valid.
+ * Editor tetap bisa dipakai untuk mencoba kode bebas.
+ *
+ * @param {object} modul meta.json
+ */
 function tampilkanLatihanKosong(modul) {
   elemen.judulLatihan.textContent = "Latihan belum tersedia";
   elemen.instruksiLatihan.textContent =
@@ -899,6 +1102,13 @@ function tampilkanLatihanKosong(modul) {
   perbaruiStatusLatihan();
 }
 
+/**
+ * Memuat latihan modul. Kegagalan tidak menghentikan materi/kuis;
+ * panel latihan hanya menampilkan keadaan kosong.
+ *
+ * @param {string} folder
+ * @param {object} modul meta.json
+ */
 async function muatLatihan(folder, modul) {
   aturStatusLatihan("Memuat latihan...", "proses");
   elemen.tombolPeriksa.disabled = true;
@@ -930,10 +1140,19 @@ async function muatLatihan(folder, modul) {
     latihanBenar = false;
     tampilkanLatihanKosong(modul);
   } finally {
-    aturTombol(false);
+    // Jangan menyentuh sedangJalan di sini: program mungkin sedang berjalan
+    // saat latihan selesai dimuat.
+    perbaruiTombol();
   }
 }
 
+/**
+ * Menentukan tombol setelah kuis lulus:
+ * - modul berikutnya bila sudah "tersedia",
+ * - halaman penutup bila belum ada/belum siap.
+ *
+ * @returns {{label: string, href: string}}
+ */
 function tentukanTujuanLanjut() {
   const id = Number(modulAktif?.id);
 
@@ -941,16 +1160,9 @@ function tentukanTujuanLanjut() {
     return { label: "Kembali ke Dashboard", href: "index.html" };
   }
 
-  if (id >= 8) {
-    return {
-      label: "Lihat Halaman Penutup",
-      href: "selesai.html?id=8",
-    };
-  }
+  const berikutnya = modulBerikutnya(katalogModul, id);
 
-  const berikutnya = katalogModul.find((modul) => modul.id === id + 1);
-
-  if (berikutnya && berikutnya.status === "tersedia") {
+  if (modulTersedia(berikutnya)) {
     return {
       label: `Lanjut ke Modul ${berikutnya.id}`,
       href: `modul.html?id=${berikutnya.id}`,
@@ -964,6 +1176,13 @@ function tentukanTujuanLanjut() {
   };
 }
 
+/**
+ * Memuat kuis dan merendernya. Kuis yang hilang tidak menghalangi
+ * materi dan latihan yang sudah tampil.
+ *
+ * @param {string} folder
+ * @param {object} modul meta.json
+ */
 async function muatKuis(folder, modul) {
   try {
     const namaFile = modul.fileKuis || "kuis.json";
@@ -994,6 +1213,15 @@ async function muatKuis(folder, modul) {
   }
 }
 
+/**
+ * Membuat elemen navigasi modul sebelumnya/berikutnya.
+ * Modul "segera" tampil sebagai teks nonaktif, bukan tautan.
+ *
+ * @param {object|null|undefined} modul
+ * @param {"sebelumnya"|"berikutnya"} arah
+ * @param {string} idElemen
+ * @returns {HTMLElement}
+ */
 function buatNavigasiModul(modul, arah, idElemen) {
   const panah = arah === "sebelumnya" ? "←" : "→";
 
@@ -1025,58 +1253,77 @@ function buatNavigasiModul(modul, arah, idElemen) {
   return tautan;
 }
 
-async function muatNavigasiModul(id) {
-  try {
-    const respons = await fetch("data/daftar-modul.json");
+/**
+ * Mengganti navigasi bawaan HTML dengan tautan sesuai katalog.
+ *
+ * @param {Array<object>} daftar
+ * @param {number} id
+ */
+function tampilkanNavigasiModul(daftar, id) {
+  const sebelumnya = cariModul(daftar, id - 1);
+  const berikutnya = cariModul(daftar, id + 1);
 
-    if (!respons.ok) {
-      throw new Error("Katalog modul tidak dapat dimuat.");
-    }
+  const tautanSebelumnya = buatNavigasiModul(
+    sebelumnya,
+    "sebelumnya",
+    "tautan-sebelumnya"
+  );
+  const tautanBerikutnya = buatNavigasiModul(
+    berikutnya,
+    "berikutnya",
+    "tautan-berikutnya"
+  );
 
-    const data = await respons.json();
-    const daftar = Array.isArray(data.modul) ? data.modul : [];
+  elemen.tautanSebelumnya.replaceWith(tautanSebelumnya);
+  elemen.tautanBerikutnya.replaceWith(tautanBerikutnya);
 
-    katalogModul = daftar;
-
-    const sebelumnya = daftar.find((modul) => modul.id === id - 1);
-    const berikutnya = daftar.find((modul) => modul.id === id + 1);
-
-    const tautanSebelumnya = buatNavigasiModul(
-      sebelumnya,
-      "sebelumnya",
-      "tautan-sebelumnya"
-    );
-    const tautanBerikutnya = buatNavigasiModul(
-      berikutnya,
-      "berikutnya",
-      "tautan-berikutnya"
-    );
-
-    elemen.tautanSebelumnya.replaceWith(tautanSebelumnya);
-    elemen.tautanBerikutnya.replaceWith(tautanBerikutnya);
-
-    elemen.tautanSebelumnya = tautanSebelumnya;
-    elemen.tautanBerikutnya = tautanBerikutnya;
-  } catch (error) {
-    console.error("Kesalahan memuat navigasi modul:", error);
-  }
+  elemen.tautanSebelumnya = tautanSebelumnya;
+  elemen.tautanBerikutnya = tautanBerikutnya;
 }
 
+/**
+ * Titik masuk halaman: memvalidasi id, memeriksa status katalog,
+ * lalu memuat meta dan seluruh bagian modul secara paralel.
+ */
 async function muatModul() {
   const params = new URLSearchParams(window.location.search);
   const id = Number(params.get("id"));
 
-  if (!Number.isInteger(id) || id < 1 || id > 8) {
+  if (!Number.isInteger(id) || id < 1) {
     tampilkanKesalahan(
       "Modul tidak ditemukan",
-      "Nomor modul harus berada di antara 1 dan 8."
+      "Nomor modul tidak valid. Kembali ke dashboard untuk memilih modul."
     );
     return;
   }
 
-  const folder = `modul-${String(id).padStart(2, "0")}`;
-
   try {
+    // Katalog dimuat lebih dulu agar modul yang masih "segera" mendapat
+    // pesan yang tepat, bukan error 404 dari meta.json.
+    const daftar = await muatKatalog();
+    katalogModul = daftar;
+
+    const entri = cariModul(daftar, id);
+
+    if (!entri) {
+      tampilkanKesalahan(
+        "Modul tidak ditemukan",
+        `Modul ${id} tidak terdaftar dalam kurikulum PYLearn.`
+      );
+      return;
+    }
+
+    tampilkanNavigasiModul(daftar, id);
+
+    if (!modulTersedia(entri)) {
+      tampilkanKesalahan(
+        "Modul belum tersedia",
+        `Modul ${id}: ${entri.judul} masih disiapkan. Kamu dapat membuka modul yang sudah tersedia dari dashboard.`
+      );
+      return;
+    }
+
+    const folder = entri.slug || `modul-${String(id).padStart(2, "0")}`;
     const respons = await fetch(`data/${folder}/meta.json`);
 
     if (!respons.ok) {
@@ -1095,15 +1342,19 @@ async function muatModul() {
     await Promise.all([
       muatLatihan(folder, modul),
       muatMateri(folder, modul.fileMateri || "materi.html"),
-      muatNavigasiModul(modul.id || id),
       muatKuis(folder, modul),
     ]);
+
+    // Tombol baru dibuka setelah seluruh bagian selesai dimuat. Ini
+    // mencegah kode dijalankan saat editor masih diisi kode awal.
+    modulSiap = true;
+    perbaruiTombol();
   } catch (error) {
     console.error("Kesalahan memuat modul:", error);
 
     tampilkanKesalahan(
       "Gagal memuat modul",
-      "Pastikan halaman dibuka lewat HTTP server (Live Server), bukan file://, dan data modul tersedia."
+      "Materi modul tidak dapat dimuat. Periksa koneksi dan pastikan halaman dibuka lewat HTTP server (Live Server), bukan file://."
     );
   }
 }
@@ -1112,29 +1363,55 @@ async function muatModul() {
 // Editor dan Python
 // ------------------------------------------------------------
 
-function aturTombol(jalan, bisaDihentikan = false) {
-  sedangJalan = jalan;
-
-  elemen.tombolJalankan.disabled = jalan || !editor;
-  elemen.tombolStop.disabled = !bisaDihentikan;
-  elemen.tombolPeriksa.disabled = jalan || !editor || !latihanSiap;
+/**
+ * Menghitung ulang status ketiga tombol dari keadaan saat ini.
+ * Dipusatkan di sini agar pemuatan data di latar belakang tidak
+ * membuka tombol yang seharusnya masih terkunci.
+ */
+function perbaruiTombol() {
+  elemen.tombolJalankan.disabled = sedangJalan || !editor || !modulSiap;
+  elemen.tombolStop.disabled = !(sedangJalan && bisaDihentikan);
+  elemen.tombolPeriksa.disabled =
+    sedangJalan || !editor || !latihanSiap || !modulSiap;
 }
 
+/**
+ * Menandai apakah program sedang berjalan. Status tombol selalu
+ * dihitung ulang dari keadaan saat ini, sehingga pemuatan latihan di
+ * latar belakang tidak bisa membuka kembali tombol yang sedang dipakai.
+ *
+ * @param {boolean} jalan
+ * @param {boolean} bisaStop true setelah program benar-benar mulai
+ */
+function aturProses(jalan, bisaStop = false) {
+  sedangJalan = jalan;
+  bisaDihentikan = Boolean(jalan && bisaStop);
+  perbaruiTombol();
+}
+
+/**
+ * Membuat editor CodeMirror. Kegagalan CDN tidak menghentikan halaman;
+ * tombol dihitung ulang dan status editor ditampilkan ke pengguna.
+ */
 function siapkanEditor() {
   try {
     editor = buatEditor(elemen.areaKode, {
       saatBerubah: tanganiPerubahanKode,
     });
-    elemen.tombolJalankan.disabled = false;
+    perbaruiTombol();
   } catch (error) {
     console.error("Kesalahan membuat editor:", error);
 
     elemen.statusPython.textContent = "Editor gagal dimuat.";
-    elemen.tombolJalankan.disabled = true;
-    elemen.tombolPeriksa.disabled = true;
+    perbaruiTombol();
   }
 }
 
+/**
+ * Memuat Python sekali; pemanggilan berikutnya memakai worker yang sama.
+ * Jika pemuatan gagal, error diteruskan ke pemanggil dan worker sudah
+ * dibersihkan oleh python-runner.
+ */
 async function pastikanPython() {
   if (pythonSiap) return;
 
@@ -1146,6 +1423,12 @@ async function pastikanPython() {
   pythonSiap = true;
 }
 
+/**
+ * Menulis output program ke panel. Pesan error ditempel di bawah output
+ * agar mahasiswa bisa membaca penyebabnya.
+ *
+ * @param {{output: string, error: string|null}} hasil
+ */
 function tampilkanOutput(hasil) {
   let teks = hasil.output || "(tidak ada output)";
 
@@ -1156,8 +1439,14 @@ function tampilkanOutput(hasil) {
   elemen.output.textContent = teks;
 }
 
+/**
+ * Alur eksekusi utama: kunci editor, muat Python, jalankan kode,
+ * tampilkan output, dan (bila diminta) nilai latihan.
+ *
+ * @param {boolean} periksa true = bandingkan dengan target latihan
+ */
 async function jalankanProgram(periksa = false) {
-  if (!editor || sedangJalan) return;
+  if (!editor || !modulSiap || sedangJalan) return;
   if (periksa && (!latihanSiap || !latihan)) return;
 
   const mode = periksa ? "periksa" : "jalankan";
@@ -1165,7 +1454,8 @@ async function jalankanProgram(periksa = false) {
   dibatalkanPengguna = false;
   let sudahDinilai = false;
 
-  aturTombol(true, false);
+  aturProses(true);
+  editor.aturBolehUbah(false);
   elemen.output.textContent = periksa
     ? "Menyiapkan pemeriksaan..."
     : "Menyiapkan Python...";
@@ -1189,7 +1479,7 @@ async function jalankanProgram(periksa = false) {
     }
 
     // Tombol Stop baru aktif setelah program benar-benar mulai berjalan.
-    aturTombol(true, true);
+    aturProses(true, true);
     elemen.statusPython.textContent = periksa
       ? "Memeriksa output..."
       : "Program berjalan...";
@@ -1223,8 +1513,9 @@ async function jalankanProgram(periksa = false) {
     }
 
     modeJalan = null;
-    aturTombol(false);
     dibatalkanPengguna = false;
+    editor.aturBolehUbah(true);
+    aturProses(false);
   }
 }
 

@@ -1,4 +1,26 @@
 /* ============================================================
+   KOMPONEN UI PYLearn
+   ------------------------------------------------------------
+   Daftar isi:
+   01. Komponen umum (tombol, lencana, kartu)
+   02. Sidebar dan navigasi utama
+   03. Bingkai utama, topbar, dan konten
+   04. Banner dashboard
+   05. Kartu ringkasan
+   06. Daftar modul
+   07. Footer dan tirai
+   08. Editor dan output
+   09. Responsif dasar
+   10. Halaman modul
+   11. Transisi halaman dan media
+   12. Kuis
+   13. Halaman penutup
+   ------------------------------------------------------------
+   Semua warna diambil dari css/variables.css. Bagian yang
+   memakai breakpoint diberi catatan pada masing-masing media query.
+   ============================================================ */
+
+/* ============================================================
    KOMPONEN UMUM
    ============================================================ */
 
@@ -11,7 +33,7 @@
   border: 0;
   border-radius: var(--radius-kecil);
   background: var(--warna-utama);
-  color: #ffffff;
+  color: var(--warna-putih);
   font-size: 14px;
   font-weight: 500;
   line-height: 1.25;
@@ -21,7 +43,7 @@
 
 .tombol:hover {
   background: var(--warna-utama-gelap);
-  color: #ffffff;
+  color: var(--warna-putih);
 }
 
 .tombol:active {
@@ -140,7 +162,7 @@
   height: 42px;
   border-radius: var(--radius-sedang);
   background: var(--warna-utama);
-  color: #ffffff;
+  color: var(--warna-putih);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -226,7 +248,7 @@
 .navigasi-utama__tautan--aktif,
 .navigasi-utama__tautan--aktif:hover {
   background: var(--warna-utama);
-  color: #ffffff;
+  color: var(--warna-putih);
 }
 
 .navigasi-utama--siap .navigasi-utama__tautan--aktif,
@@ -739,7 +761,11 @@
 }
 
 /* ============================================================
-   RESPONSIF
+   RESPONSIF DASAR
+   ------------------------------------------------------------
+   1024px: sidebar berubah menjadi drawer (dikendalikan sidebar.js).
+   820px : grid dua kolom mulai ditumpuk.
+   640px : tata letak satu kolom dan tombol melebar.
    ============================================================ */
 
 @media (max-width: 1024px) {
@@ -948,7 +974,7 @@
 .tahap-nav__tautan--aktif,
 .tahap-nav__tautan--aktif:hover {
   background: var(--warna-utama);
-  color: #ffffff;
+  color: var(--warna-putih);
   box-shadow: var(--bayangan-kartu);
 }
 
@@ -966,7 +992,7 @@
 
 .tahap-nav__tautan--aktif .tahap-nav__nomor {
   background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  color: var(--warna-putih);
 }
 
 .panel-tahap {
@@ -1164,19 +1190,19 @@
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-pil);
   background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  color: var(--warna-putih);
   font-size: 18px;
 }
 
 .video-kosong__judul {
-  color: #ffffff;
+  color: var(--warna-putih);
   font-size: 15px;
   font-weight: 600;
 }
 
 .video-kosong__teks {
   max-width: 360px;
-  color: #b9c0cc;
+  color: var(--teks-kode-redup);
   font-size: 12px;
 }
 
@@ -1354,7 +1380,7 @@
 }
 
 .area-editor__status {
-  color: #aab2c0;
+  color: var(--teks-kode-samar);
   font-size: 11px;
 }
 
@@ -1670,6 +1696,11 @@
 
 /* ============================================================
    TRANSISI HALAMAN DAN MEDIA
+   ------------------------------------------------------------
+   Lapisan `.transisi-halaman` dibuat oleh
+   js/features/transisi-halaman.js. Animasi Teks <-> Video memakai
+   View Transitions API bila tersedia; keyframes di bawah adalah
+   fallback untuk browser yang belum mendukungnya.
    ============================================================ */
 
 .transisi-halaman {
@@ -1831,6 +1862,10 @@ body.halaman-keluar {
 
 /* ============================================================
    KUIS
+   ------------------------------------------------------------
+   Struktur kuis dirender oleh js/features/kuis.js ke dalam
+   #wadah-kuis pada modul.html. Kelas di sini hanya mengatur
+   tampilan, bukan logika jawaban.
    ============================================================ */
 
 .status-kuis {
@@ -2025,7 +2060,7 @@ body.halaman-keluar {
 .pilihan-kuis--dipilih .pilihan-kuis__huruf {
   border-color: var(--warna-utama);
   background: var(--warna-utama);
-  color: #ffffff;
+  color: var(--warna-putih);
 }
 
 .pilihan-kuis--benar,
@@ -2038,7 +2073,7 @@ body.halaman-keluar {
 .pilihan-kuis--benar .pilihan-kuis__huruf {
   border-color: var(--warna-sukses);
   background: var(--warna-sukses);
-  color: #ffffff;
+  color: var(--warna-putih);
 }
 
 .pilihan-kuis--salah,
@@ -2051,7 +2086,7 @@ body.halaman-keluar {
 .pilihan-kuis--salah .pilihan-kuis__huruf {
   border-color: var(--warna-bahaya);
   background: var(--warna-bahaya);
-  color: #ffffff;
+  color: var(--warna-putih);
 }
 
 .pilihan-kuis--nonaktif {
@@ -2156,7 +2191,7 @@ body.halaman-keluar {
   width: 56px;
   height: 56px;
   border-radius: var(--radius-pil);
-  color: #ffffff;
+  color: var(--warna-putih);
   font-size: 26px;
   font-weight: 700;
 }
@@ -2206,6 +2241,9 @@ body.halaman-keluar {
 
 /* ============================================================
    HALAMAN PENUTUP
+   ------------------------------------------------------------
+   Dipakai selesai.html. Isi kartu (judul, status, aksi) diubah
+   oleh js/pages/selesai.js sesuai status modul di katalog.
    ============================================================ */
 
 .konten-selesai {

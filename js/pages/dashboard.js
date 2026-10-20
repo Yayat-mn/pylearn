@@ -1,7 +1,22 @@
-// Mengatur dashboard: memuat katalog modul dan navigasi sidebar.
+/**
+ * ============================================================
+ * DASHBOARD
+ * ------------------------------------------------------------
+ * Peran   : merender daftar modul dari katalog dan mengatur
+ *           navigasi section pada halaman index.html.
+ * Dipakai : index.html
+ * Data    : data/daftar-modul.json (lewat features/katalog.js).
+ * Alur    : muatKatalog() -> kartu modul -> penanda sidebar.
+ * ============================================================
+ */
 
+import { muatKatalog } from "../features/katalog.js";
 import { siapkanSidebar } from "../features/sidebar.js";
 import { siapkanTransisiHalaman } from "../features/transisi-halaman.js";
+
+// ------------------------------------------------------------
+// Referensi elemen dan penyiapan awal
+// ------------------------------------------------------------
 
 const wadahModul = document.getElementById("wadah-modul");
 const statusModul = document.getElementById("status-modul");
@@ -21,6 +36,11 @@ const bagianDaftarModul = document.getElementById("daftar-modul");
 siapkanSidebar({ sidebar, tombolMenu, tirai });
 siapkanTransisiHalaman();
 
+// ------------------------------------------------------------
+// Kartu modul
+// ------------------------------------------------------------
+
+// Membuat lencana status kecil dengan warna sesuai jenisnya.
 function buatLencana(teks, jenis) {
   const lencana = document.createElement("span");
   lencana.className = `lencana lencana--${jenis}`;
@@ -28,6 +48,13 @@ function buatLencana(teks, jenis) {
   return lencana;
 }
 
+/**
+ * Membuat satu kartu modul. Kartu modul "segera" sengaja tidak memakai
+ * tautan agar tidak membuka halaman yang materinya belum ada.
+ *
+ * @param {object} modul entri katalog
+ * @returns {HTMLElement}
+ */
 function buatKartuModul(modul) {
   const tersedia = modul.status === "tersedia";
   const nomor = String(modul.id).padStart(2, "0");
@@ -117,6 +144,12 @@ function buatKartuModul(modul) {
   return kartu;
 }
 
+/**
+ * Mengganti isi wadah dengan kartu-kartu modul dan memperbarui jumlah
+ * modul yang tersedia di sidebar.
+ *
+ * @param {Array<object>} daftar
+ */
 function tampilkanDaftarModul(daftar) {
   wadahModul.replaceChildren();
 
@@ -134,27 +167,19 @@ function tampilkanDaftarModul(daftar) {
   statusModul.hidden = true;
 }
 
+/**
+ * Memuat katalog dan merender daftar. Jika gagal, tampilkan pesan dan
+ * jangan biarkan angka statis di HTML menyesatkan pembaca.
+ */
 async function muatDaftarModul() {
   try {
-    const respons = await fetch("data/daftar-modul.json");
-
-    if (!respons.ok) {
-      throw new Error(`HTTP ${respons.status}`);
-    }
-
-    const data = await respons.json();
-
-    if (!Array.isArray(data.modul)) {
-      throw new Error("Format katalog modul tidak sesuai.");
-    }
-
-    // Urutkan berdasarkan id agar tampilan tidak bergantung urutan berkas.
-    const daftar = [...data.modul].sort((a, b) => a.id - b.id);
+    const daftar = await muatKatalog();
     tampilkanDaftarModul(daftar);
-
   } catch (error) {
     console.error("Gagal memuat daftar modul:", error);
 
+    // Jangan biarkan angka statis dari HTML tampil seolah katalog berhasil.
+    jumlahTersedia.textContent = "—";
     statusModul.hidden = false;
     statusModul.classList.add("status-modul--gagal");
     statusModul.textContent =
@@ -171,6 +196,10 @@ const AMBANG_BAGIAN = 140;
 let kunciNavigasiSampai = 0;
 let permintaanGulir = null;
 
+/**
+ * Menempatkan penanda biru tepat di belakang tautan sidebar yang aktif.
+ * Dihitung dari offset elemen agar tetap pas saat teks/font berubah.
+ */
 function perbaruiPenanda() {
   if (!penandaNavigasi) return;
 
@@ -189,6 +218,13 @@ function perbaruiPenanda() {
   penandaNavigasi.parentElement.classList.add("navigasi-utama--siap");
 }
 
+/**
+ * Menandai satu section sebagai aktif.
+ *
+ * @param {"dashboard"|"daftar-modul"} nama
+ * @param {boolean} kunci true saat menu diklik, agar status aktif tidak
+ *   langsung ditimpa oleh scroll halus yang masih berjalan
+ */
 function aturNavigasiAktif(nama, kunci = false) {
   tautanBagian.forEach((tautan) => {
     const aktif = tautan.dataset.bagian === nama;
@@ -210,6 +246,10 @@ function aturNavigasiAktif(nama, kunci = false) {
   perbaruiPenanda();
 }
 
+/**
+ * Menentukan section yang sedang terlihat berdasarkan posisi daftar modul.
+ * Pemindaian hanya menulis DOM bila status benar-benar berubah.
+ */
 function periksaBagianAktif() {
   if (!bagianDashboard || !bagianDaftarModul) return;
   if (performance.now() < kunciNavigasiSampai) return;

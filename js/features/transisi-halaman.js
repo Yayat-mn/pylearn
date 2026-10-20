@@ -1,9 +1,22 @@
-// Transisi antarhalaman: lapisan latar memudar sebelum berpindah halaman.
+/**
+ * ============================================================
+ * TRANSISI ANTARHALAMAN
+ * ------------------------------------------------------------
+ * Peran   : memasang lapisan gelap sebelum berpindah ke halaman
+ *           internal, lalu menavigasi setelah animasi selesai.
+ * Dipakai : index.html, modul.html, selesai.html.
+ * Catatan : tautan hash di halaman yang sama tidak dicegat agar
+ *           smooth scroll dan navigasi tahap tetap bekerja.
+ * ============================================================
+ */
 
 const KELAS_AKTIF = "transisi-halaman--aktif";
 const KELAS_KELUAR = "halaman-keluar";
 const DURASI_MS = 190;
 
+/**
+ * Memasang listener klik global (fase capture) untuk transisi.
+ */
 export function siapkanTransisiHalaman() {
   const kurangiGerak = window.matchMedia(
     "(prefers-reduced-motion: reduce)"

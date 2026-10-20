@@ -23,6 +23,7 @@
 </head>
 <body>
 
+  <!-- ==================== SIDEBAR ==================== -->
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
     <a class="merek" href="index.html" aria-label="PYLearn, kembali ke dashboard">
       <span class="merek__ikon" aria-hidden="true">PY</span>
@@ -111,6 +112,7 @@
   </aside>
 
   <div class="bingkai-utama">
+    <!-- ==================== TOPBAR ==================== -->
     <header class="topbar">
       <button class="tombol-menu" id="tombol-menu" type="button"
               aria-controls="sidebar" aria-expanded="false"
@@ -138,8 +140,10 @@
       </div>
     </header>
 
+    <!-- ==================== KONTEN MODUL ==================== -->
     <main class="konten-utama konten-modul">
 
+      <!-- Identitas modul; diisi oleh js/pages/modul.js. -->
       <section class="modul-header" aria-labelledby="judul-modul">
         <div class="modul-header__isi">
           <span class="lencana lencana--biru" id="nomor-modul">Modul</span>
@@ -164,6 +168,7 @@
         </a>
       </section>
 
+      <!-- Bilah tiga tahap; hash URL menentukan tahap yang tampil. -->
       <nav class="tahap-nav" aria-label="Tahap pembelajaran">
         <a class="tahap-nav__tautan tahap-nav__tautan--aktif"
            href="#belajar"
@@ -183,6 +188,7 @@
       </nav>
 
       <div class="panel-tahap-wadah">
+      <!-- Tahap 1: materi teks dan video. -->
       <section class="panel-tahap" id="belajar" data-panel="belajar"
                aria-label="Tahap belajar">
         <div class="tab-media" role="tablist" aria-label="Pilih media belajar">
@@ -249,6 +255,7 @@
         </div>
       </section>
 
+      <!-- Tahap 2: latihan kode dan pemeriksaan output. -->
       <section class="panel-tahap" id="latihan" data-panel="latihan"
                aria-label="Tahap latihan" hidden>
         <div class="kartu-latihan">
@@ -335,6 +342,7 @@
         </div>
       </section>
 
+      <!-- Tahap 3: kuis; isinya dirender oleh js/features/kuis.js. -->
       <section class="panel-tahap" id="kuis" data-panel="kuis"
                aria-label="Tahap kuis" hidden>
         <div class="kuis" id="wadah-kuis">
@@ -343,6 +351,7 @@
       </section>
       </div>
 
+      <!-- Navigasi modul sebelumnya/berikutnya, diisi dari katalog. -->
       <nav class="navigasi-modul" id="navigasi-modul" aria-label="Navigasi modul">
         <span class="navigasi-modul__kosong" id="tautan-sebelumnya">Modul sebelumnya</span>
         <a class="navigasi-modul__tautan" href="index.html">Kembali ke Dashboard</a>
@@ -350,14 +359,17 @@
       </nav>
     </main>
 
+    <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
       <span>PYLearn — Multimedia Pembelajaran Python</span>
       <span>Kelompok 4 · PTIK B 2024</span>
     </footer>
   </div>
 
+  <!-- Tirai gelap saat drawer mobile terbuka. -->
   <div class="tirai" id="tirai" hidden></div>
 
+  <!-- CodeMirror dimuat sebelum modul agar editor siap saat halaman dibuka. -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/python/python.min.js"></script>
   <script type="module" src="js/pages/modul.js"></script>

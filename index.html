@@ -21,6 +21,7 @@
 </head>
 <body>
 
+  <!-- ==================== SIDEBAR ==================== -->
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
     <a class="merek" href="index.html" aria-label="PYLearn, kembali ke dashboard">
       <span class="merek__ikon" aria-hidden="true">PY</span>
@@ -95,6 +96,7 @@
   </aside>
 
   <div class="bingkai-utama">
+    <!-- ==================== TOPBAR ==================== -->
     <header class="topbar">
       <button class="tombol-menu" id="tombol-menu" type="button"
               aria-controls="sidebar" aria-expanded="false"
@@ -120,8 +122,10 @@
       </div>
     </header>
 
+    <!-- ==================== KONTEN DASHBOARD ==================== -->
     <main class="konten-utama">
 
+      <!-- Banner utama dan ajakan mulai belajar. -->
       <section class="banner" id="dashboard" aria-labelledby="judul-banner">
         <div class="banner__isi">
           <span class="lencana lencana--biru">Kurikulum Dasar</span>
@@ -152,6 +156,7 @@
         </div>
       </section>
 
+      <!-- Ringkasan angka kurikulum; isinya statis. -->
       <section class="ringkasan" aria-label="Ringkasan kurikulum">
         <article class="kartu-ringkasan">
           <span class="kartu-ringkasan__ikon" aria-hidden="true">
@@ -205,6 +210,7 @@
         </article>
       </section>
 
+      <!-- Daftar modul dirender oleh js/pages/dashboard.js. -->
       <section class="bagian-modul" id="daftar-modul"
                aria-labelledby="judul-daftar-modul">
         <div class="bagian-modul__kepala">
@@ -236,14 +242,17 @@
 
     </main>
 
+    <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
       <p>© 2026 PYLearn — Kelompok 4 PTIK B 2024</p>
       <p>Multimedia Pembelajaran Python</p>
     </footer>
   </div>
 
+  <!-- Tirai gelap saat drawer mobile terbuka. -->
   <div class="tirai" id="tirai" hidden></div>
 
+  <!-- Skrip halaman dimuat sebagai ES module. -->
   <script type="module" src="js/pages/dashboard.js"></script>
 </body>
 </html>

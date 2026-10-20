@@ -21,6 +21,7 @@
 </head>
 <body>
 
+  <!-- ==================== SIDEBAR ==================== -->
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
     <a class="merek" href="index.html" aria-label="PYLearn, kembali ke dashboard">
       <span class="merek__ikon" aria-hidden="true">PY</span>
@@ -60,6 +61,7 @@
       </a>
 
       <a class="navigasi-utama__tautan navigasi-utama__tautan--aktif"
+         id="tautan-selesai"
          href="selesai.html"
          aria-current="page">
         <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
@@ -102,6 +104,7 @@
   </aside>
 
   <div class="bingkai-utama">
+    <!-- ==================== TOPBAR ==================== -->
     <header class="topbar">
       <button class="tombol-menu" id="tombol-menu" type="button"
               aria-controls="sidebar" aria-expanded="false"
@@ -129,8 +132,10 @@
       </div>
     </header>
 
+    <!-- ==================== KONTEN PENUTUP ==================== -->
     <main class="konten-utama konten-selesai">
 
+      <!-- Kartu utama; isinya diubah oleh js/pages/selesai.js. -->
       <section class="selesai-kartu" aria-labelledby="judul-selesai">
         <span class="selesai-kartu__ikon" id="ikon-selesai" aria-hidden="true">✓</span>
         <span class="lencana lencana--tersedia" id="lencana-selesai">
@@ -165,6 +170,7 @@
         </p>
       </section>
 
+      <!-- Langkah lanjutan yang selalu tersedia. -->
       <section class="selesai-langkah" aria-labelledby="judul-langkah">
         <div class="selesai-langkah__kepala">
           <h2 class="selesai-langkah__judul" id="judul-langkah">
@@ -207,14 +213,17 @@
 
     </main>
 
+    <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
       <p>© 2026 PYLearn — Kelompok 4 PTIK B 2024</p>
       <p>Multimedia Pembelajaran Python</p>
     </footer>
   </div>
 
+  <!-- Tirai gelap saat drawer mobile terbuka. -->
   <div class="tirai" id="tirai" hidden></div>
 
+  <!-- Skrip halaman dimuat sebagai ES module. -->
   <script type="module" src="js/pages/selesai.js"></script>
 </body>
 </html>

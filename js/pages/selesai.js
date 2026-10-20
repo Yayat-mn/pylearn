@@ -1,5 +1,22 @@
-// Mengatur halaman penutup: menampilkan modul yang selesai dan langkah lanjutan.
+/**
+ * ============================================================
+ * HALAMAN PENUTUP
+ * ------------------------------------------------------------
+ * Peran   : menampilkan ringkasan modul yang selesai dan langkah
+ *           berikutnya (modul lanjutan atau kembali ke dashboard).
+ * Dipakai : selesai.html
+ * Data    : data/daftar-modul.json + meta.json modul terkait.
+ * Catatan : nilai kuis tidak pernah dikirim ke halaman ini dan tidak
+ *           disimpan; status hanya disimpulkan dari katalog.
+ * ============================================================
+ */
 
+import {
+  cariModul,
+  modulBerikutnya,
+  modulTersedia,
+  muatKatalog,
+} from "../features/katalog.js";
 import { siapkanSidebar } from "../features/sidebar.js";
 import { siapkanTransisiHalaman } from "../features/transisi-halaman.js";
 
@@ -15,6 +32,7 @@ const elemen = {
   lencanaTopbar: document.getElementById("lencana-topbar"),
   sidebarJudul: document.getElementById("sidebar-judul-selesai"),
   sidebarInfo: document.getElementById("sidebar-info-selesai"),
+  tautanSelesai: document.getElementById("tautan-selesai"),
 };
 
 const sidebar = document.getElementById("sidebar");
@@ -25,6 +43,10 @@ siapkanSidebar({ sidebar, tombolMenu, tirai });
 siapkanTransisiHalaman();
 aturPenandaSidebar();
 muatSelesai();
+
+// ------------------------------------------------------------
+// Penanda menu sidebar
+// ------------------------------------------------------------
 
 // Menempatkan penanda biru pada menu yang sedang aktif.
 function aturPenandaSidebar() {
@@ -50,6 +72,11 @@ function aturPenandaSidebar() {
   }
 }
 
+// ------------------------------------------------------------
+// Pembentuk tampilan
+// ------------------------------------------------------------
+
+// Membuat tautan bergaya tombol untuk aksi halaman penutup.
 function buatTautan(label, href, garis = false) {
   const tautan = document.createElement("a");
   tautan.className = `tombol${garis ? " tombol--garis" : ""}`;
@@ -58,52 +85,125 @@ function buatTautan(label, href, garis = false) {
   return tautan;
 }
 
-function tampilkanKesalahan(pesan) {
-  elemen.ikon.textContent = "!";
-  elemen.lencana.className = "lencana lencana--bahaya";
-  elemen.lencana.textContent = "Tidak tersedia";
-  elemen.judul.textContent = "Halaman penutup";
-  elemen.teks.textContent = pesan;
-  elemen.status.textContent = "—";
-  elemen.catatan.textContent =
-    "Kembali ke dashboard untuk melihat modul yang sudah tersedia.";
-  elemen.aksi.replaceChildren(
-    buatTautan("Kembali ke Dashboard", "index.html")
-  );
-  elemen.lencanaTopbar.className = "lencana lencana--bahaya";
-  elemen.lencanaTopbar.textContent = "Tidak tersedia";
-  elemen.sidebarJudul.textContent = "Halaman penutup";
-  elemen.sidebarInfo.textContent = "Ringkasan modul tidak dapat dimuat.";
+/**
+ * Menulis satu keadaan halaman sekaligus. Semua cabang di bawah memakai
+ * fungsi ini agar elemen yang harus berubah tidak ada yang terlewat.
+ *
+ * @param {{
+ *   ikon?: string,
+ *   lencanaTeks: string,
+ *   lencanaJenis?: "tersedia"|"segera"|"bahaya",
+ *   judul: string,
+ *   teks: string,
+ *   status: string,
+ *   catatan: string,
+ *   aksi?: HTMLElement[],
+ *   topbarTeks?: string,
+ *   topbarJenis?: "tersedia"|"segera"|"bahaya",
+ *   sidebarJudul?: string,
+ *   sidebarInfo?: string
+ * }} tampilan
+ */
+function terapkanTampilan({
+  ikon = "✓",
+  lencanaTeks,
+  lencanaJenis = "tersedia",
+  judul,
+  teks,
+  status,
+  catatan,
+  aksi = [],
+  topbarTeks = lencanaTeks,
+  topbarJenis = lencanaJenis,
+  sidebarJudul = "Halaman penutup",
+  sidebarInfo = "",
+}) {
+  elemen.ikon.textContent = ikon;
+
+  elemen.lencana.className = `lencana lencana--${lencanaJenis}`;
+  elemen.lencana.textContent = lencanaTeks;
+
+  elemen.judul.textContent = judul;
+  elemen.teks.textContent = teks;
+  elemen.status.textContent = status;
+  elemen.catatan.textContent = catatan;
+
+  elemen.aksi.replaceChildren(...aksi);
+
+  elemen.lencanaTopbar.className = `lencana lencana--${topbarJenis}`;
+  elemen.lencanaTopbar.textContent = topbarTeks;
+
+  elemen.sidebarJudul.textContent = sidebarJudul;
+  elemen.sidebarInfo.textContent = sidebarInfo;
 }
+
+/**
+ * Menampilkan keadaan gagal yang seragam untuk id salah, modul tidak
+ * terdaftar, atau katalog yang tidak dapat dimuat.
+ *
+ * @param {string} pesan
+ */
+function tampilkanKesalahan(pesan) {
+  document.title = "Halaman Penutup — PYLearn";
+
+  terapkanTampilan({
+    ikon: "!",
+    lencanaTeks: "Tidak tersedia",
+    lencanaJenis: "bahaya",
+    judul: "Halaman penutup",
+    teks: pesan,
+    status: "—",
+    catatan: "Kembali ke dashboard untuk melihat modul yang sudah tersedia.",
+    aksi: [buatTautan("Kembali ke Dashboard", "index.html")],
+    topbarTeks: "Tidak tersedia",
+    topbarJenis: "bahaya",
+    sidebarInfo: "Ringkasan modul tidak dapat dimuat.",
+  });
+}
+
+// ------------------------------------------------------------
+// Pemuatan data
+// ------------------------------------------------------------
 
 async function muatSelesai() {
   const params = new URLSearchParams(window.location.search);
-  const id = Number(params.get("id")) || 1;
+  const nilaiId = params.get("id");
+  const id =
+    nilaiId === null || nilaiId.trim() === "" ? 1 : Number(nilaiId);
 
-  if (!Number.isInteger(id) || id < 1 || id > 8) {
-    tampilkanKesalahan("Modul yang diminta tidak ditemukan.");
+  if (!Number.isInteger(id) || id < 1) {
+    tampilkanKesalahan(
+      "Nomor modul tidak valid. Kembali ke dashboard untuk memilih modul."
+    );
     return;
   }
 
+  // Menu sidebar harus tetap menunjuk modul yang sedang dibuka.
+  if (elemen.tautanSelesai) {
+    elemen.tautanSelesai.href = `selesai.html?id=${id}`;
+  }
+
   try {
-    const folder = `modul-${String(id).padStart(2, "0")}`;
+    const daftar = await muatKatalog();
+    const entri = cariModul(daftar, id);
 
-    const responsKatalog = await fetch("data/daftar-modul.json");
-
-    if (!responsKatalog.ok) {
-      throw new Error("Katalog modul tidak dapat dimuat.");
+    if (!entri) {
+      tampilkanKesalahan(
+        `Modul ${id} belum terdaftar dalam kurikulum. Kembali ke dashboard untuk memilih modul.`
+      );
+      return;
     }
 
-    const katalog = await responsKatalog.json();
-    const daftar = Array.isArray(katalog.modul) ? katalog.modul : [];
-    const entri = daftar.find((modul) => modul.id === id);
+    const berikutnya = modulBerikutnya(daftar, id);
+    const modulTerakhir = !berikutnya;
 
-    let judulModul = entri?.judul || `Modul ${id}`;
+    let judulModul = entri.judul || `Modul ${id}`;
 
     // Meta hanya diambil untuk modul yang sudah tersedia agar tidak memicu
     // permintaan 404 pada modul yang masih disiapkan.
-    if (entri && entri.status === "tersedia") {
+    if (modulTersedia(entri)) {
       try {
+        const folder = entri.slug || `modul-${String(id).padStart(2, "0")}`;
         const responsMeta = await fetch(`data/${folder}/meta.json`);
 
         if (responsMeta.ok) {
@@ -115,116 +215,114 @@ async function muatSelesai() {
       }
     }
 
-    const berikutnya = daftar.find((modul) => modul.id === id + 1);
-    const modulTerakhir = id >= 8;
-
     elemen.modul.textContent = judulModul;
-    document.title = `Modul ${id} selesai — PYLearn`;
 
-    // Modul 8 adalah mini project. Jangan tampilkan tautan bila belum siap.
+    // Modul terakhir adalah mini project. Jangan tampilkan tautan bila
+    // materinya belum siap.
     if (modulTerakhir) {
-      const modulDelapan = daftar.find((modul) => modul.id === 8);
-      const proyekSiap =
-        modulDelapan && modulDelapan.status === "tersedia";
-
-      if (!proyekSiap) {
-        elemen.ikon.textContent = "✓";
-        elemen.lencana.className = "lencana lencana--segera";
-        elemen.lencana.textContent = "Mini project segera";
-        elemen.judul.textContent = "Halaman penutup";
-        elemen.teks.textContent =
-          "Rangkaian modul PYLearn akan ditutup dengan mini project pada Modul 8. Materi tersebut belum tersedia saat ini.";
-        elemen.status.textContent = "Menunggu Modul 8";
-        elemen.catatan.textContent =
-          "Kembali ke dashboard untuk melihat modul yang sudah tersedia.";
-        elemen.aksi.replaceChildren(
-          buatTautan("Kembali ke Dashboard", "index.html")
-        );
-        elemen.lencanaTopbar.className = "lencana lencana--segera";
-        elemen.lencanaTopbar.textContent = "Mini project segera";
-        elemen.sidebarJudul.textContent = "Halaman penutup";
-        elemen.sidebarInfo.textContent = "Mini project sedang disiapkan.";
+      if (!modulTersedia(entri)) {
+        document.title = "Mini Project Segera — PYLearn";
+        terapkanTampilan({
+          ikon: "✓",
+          lencanaTeks: "Mini project segera",
+          lencanaJenis: "segera",
+          judul: "Halaman penutup",
+          teks:
+            "Rangkaian modul PYLearn akan ditutup dengan mini project pada Modul 8. Materi tersebut belum tersedia saat ini.",
+          status: "Menunggu Modul 8",
+          catatan:
+            "Kembali ke dashboard untuk melihat modul yang sudah tersedia.",
+          aksi: [buatTautan("Kembali ke Dashboard", "index.html")],
+          topbarTeks: "Mini project segera",
+          topbarJenis: "segera",
+          sidebarInfo: "Mini project sedang disiapkan.",
+        });
         return;
       }
 
-      elemen.ikon.textContent = "✓";
-      elemen.lencana.className = "lencana lencana--tersedia";
-      elemen.lencana.textContent = "Kursus selesai";
-      elemen.judul.textContent = "Selamat, seluruh modul selesai!";
-      elemen.teks.textContent =
-        "Kamu telah menyelesaikan seluruh rangkaian modul PYLearn. Terapkan materi yang sudah dipelajari melalui mini project Python.";
-      elemen.status.textContent = "Kursus selesai";
-      elemen.catatan.textContent =
-        "Mini project menjadi penerapan akhir dari seluruh materi.";
-      elemen.aksi.replaceChildren(
-        buatTautan("Buka Mini Project", "modul.html?id=8"),
-        buatTautan("Kembali ke Dashboard", "index.html", true)
-      );
-      elemen.lencanaTopbar.className = "lencana lencana--tersedia";
-      elemen.lencanaTopbar.textContent = "Kursus selesai";
-      elemen.sidebarJudul.textContent = "Seluruh modul selesai";
-      elemen.sidebarInfo.textContent =
-        "Saatnya menerapkan materi dalam mini project.";
+      document.title = "Kursus Selesai — PYLearn";
+      terapkanTampilan({
+        ikon: "✓",
+        lencanaTeks: "Kursus selesai",
+        judul: "Selamat, seluruh modul selesai!",
+        teks:
+          "Kamu telah menyelesaikan seluruh rangkaian modul PYLearn. Terapkan materi yang sudah dipelajari melalui mini project Python.",
+        status: "Kursus selesai",
+        catatan: "Mini project menjadi penerapan akhir dari seluruh materi.",
+        aksi: [
+          buatTautan("Buka Mini Project", `modul.html?id=${id}`),
+          buatTautan("Kembali ke Dashboard", "index.html", true),
+        ],
+        topbarTeks: "Kursus selesai",
+        sidebarJudul: "Seluruh modul selesai",
+        sidebarInfo: "Saatnya menerapkan materi dalam mini project.",
+      });
       return;
     }
 
     // Halaman penutup hanya untuk modul yang sudah benar-benar tersedia.
-    if (!entri || entri.status !== "tersedia") {
-      elemen.ikon.textContent = "!";
-      elemen.lencana.className = "lencana lencana--segera";
-      elemen.lencana.textContent = "Belum tersedia";
-      elemen.judul.textContent = "Modul belum tersedia";
-      elemen.teks.textContent = entri
-        ? `Modul ${id}: ${judulModul} belum dapat diselesaikan karena materinya masih disiapkan.`
-        : `Modul ${id} belum terdaftar dalam kurikulum.`;
-      elemen.status.textContent = "Menunggu";
-      elemen.catatan.textContent =
-        "Kembali ke dashboard untuk melihat modul yang sudah tersedia.";
-      elemen.aksi.replaceChildren(
-        buatTautan("Kembali ke Dashboard", "index.html")
-      );
-      elemen.lencanaTopbar.className = "lencana lencana--segera";
-      elemen.lencanaTopbar.textContent = "Belum tersedia";
-      elemen.sidebarJudul.textContent = "Modul belum tersedia";
-      elemen.sidebarInfo.textContent = "Materi modul sedang disiapkan.";
+    if (!modulTersedia(entri)) {
+      document.title = `Modul ${id} Belum Tersedia — PYLearn`;
+      terapkanTampilan({
+        ikon: "!",
+        lencanaTeks: "Belum tersedia",
+        lencanaJenis: "segera",
+        judul: "Modul belum tersedia",
+        teks: `Modul ${id}: ${judulModul} belum dapat diselesaikan karena materinya masih disiapkan.`,
+        status: "Menunggu",
+        catatan:
+          "Kembali ke dashboard untuk melihat modul yang sudah tersedia.",
+        aksi: [buatTautan("Kembali ke Dashboard", "index.html")],
+        topbarTeks: "Belum tersedia",
+        topbarJenis: "segera",
+        sidebarJudul: "Modul belum tersedia",
+        sidebarInfo: "Materi modul sedang disiapkan.",
+      });
       return;
     }
 
-    if (berikutnya && berikutnya.status === "tersedia") {
-      elemen.judul.textContent = `Modul ${id} selesai!`;
-      elemen.teks.textContent = `Kamu sudah menyelesaikan ${judulModul}. Lanjutkan ke Modul ${berikutnya.id}: ${berikutnya.judul} untuk mempelajari materi berikutnya.`;
-      elemen.status.textContent = "Lulus";
-      elemen.catatan.textContent =
-        "Nilai kuis hanya ditampilkan saat kuis dan tidak disimpan. Kamu dapat mengulang modul kapan saja.";
-      elemen.aksi.replaceChildren(
-        buatTautan(
-          `Lanjut ke Modul ${berikutnya.id}`,
-          `modul.html?id=${berikutnya.id}`
-        ),
-        buatTautan(`Ulangi Modul ${id}`, `modul.html?id=${id}`, true)
-      );
-      elemen.lencanaTopbar.className = "lencana lencana--tersedia";
-      elemen.lencanaTopbar.textContent = "Modul selesai";
-      elemen.sidebarJudul.textContent = `Modul ${id} selesai`;
-      elemen.sidebarInfo.textContent =
-        `Lanjut ke Modul ${berikutnya.id}: ${berikutnya.judul}.`;
+    if (modulTersedia(berikutnya)) {
+      document.title = `Modul ${id} Selesai — PYLearn`;
+      terapkanTampilan({
+        ikon: "✓",
+        lencanaTeks: "Modul selesai",
+        judul: `Modul ${id} selesai!`,
+        teks: `Kamu sudah menyelesaikan ${judulModul}. Lanjutkan ke Modul ${berikutnya.id}: ${berikutnya.judul} untuk mempelajari materi berikutnya.`,
+        status: "Lulus",
+        catatan:
+          "Nilai kuis hanya ditampilkan saat kuis dan tidak disimpan. Kamu dapat mengulang modul kapan saja.",
+        aksi: [
+          buatTautan(
+            `Lanjut ke Modul ${berikutnya.id}`,
+            `modul.html?id=${berikutnya.id}`
+          ),
+          buatTautan(`Ulangi Modul ${id}`, `modul.html?id=${id}`, true),
+        ],
+        topbarTeks: "Modul selesai",
+        sidebarJudul: `Modul ${id} selesai`,
+        sidebarInfo: `Lanjut ke Modul ${berikutnya.id}: ${berikutnya.judul}.`,
+      });
       return;
     }
 
     // Modul berikutnya belum tersedia.
-    elemen.judul.textContent = `Modul ${id} selesai!`;
-    elemen.teks.textContent = `Kamu sudah menyelesaikan ${judulModul}. Modul berikutnya belum tersedia saat ini, jadi kamu bisa mengulang modul ini atau kembali ke dashboard.`;
-    elemen.status.textContent = "Selesai";
-    elemen.catatan.textContent =
-      "Modul baru akan tampil di dashboard setelah tersedia. Nilai kuis tidak disimpan.";
-    elemen.aksi.replaceChildren(
-      buatTautan(`Ulangi Modul ${id}`, `modul.html?id=${id}`),
-      buatTautan("Kembali ke Dashboard", "index.html", true)
-    );
-    elemen.lencanaTopbar.className = "lencana lencana--tersedia";
-    elemen.lencanaTopbar.textContent = "Modul selesai";
-    elemen.sidebarJudul.textContent = `Modul ${id} selesai`;
-    elemen.sidebarInfo.textContent = "Modul berikutnya sedang disiapkan.";
+    document.title = `Modul ${id} Selesai — PYLearn`;
+    terapkanTampilan({
+      ikon: "✓",
+      lencanaTeks: "Modul selesai",
+      judul: `Modul ${id} selesai!`,
+      teks: `Kamu sudah menyelesaikan ${judulModul}. Modul berikutnya belum tersedia saat ini, jadi kamu bisa mengulang modul ini atau kembali ke dashboard.`,
+      status: "Selesai",
+      catatan:
+        "Modul baru akan tampil di dashboard setelah tersedia. Nilai kuis tidak disimpan.",
+      aksi: [
+        buatTautan(`Ulangi Modul ${id}`, `modul.html?id=${id}`),
+        buatTautan("Kembali ke Dashboard", "index.html", true),
+      ],
+      topbarTeks: "Modul selesai",
+      sidebarJudul: `Modul ${id} selesai`,
+      sidebarInfo: "Modul berikutnya sedang disiapkan.",
+    });
   } catch (error) {
     console.error("Kesalahan memuat halaman penutup:", error);
     tampilkanKesalahan(

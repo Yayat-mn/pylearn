@@ -1,3 +1,11 @@
+/* ============================================================
+   DASAR HALAMAN
+   ------------------------------------------------------------
+   Reset ringan, tipografi, dan perilaku dasar elemen. Warna dan
+   jarak diambil dari css/variables.css agar tidak ada nilai
+   hardcoded di komponen.
+   ============================================================ */
+
 *,
 *::before,
 *::after {

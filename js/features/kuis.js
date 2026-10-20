@@ -1,8 +1,31 @@
-// Logika kuis: validasi data, penilaian, dan tampilan soal pilihan ganda.
+/**
+ * ============================================================
+ * KUIS PILIHAN GANDA
+ * ------------------------------------------------------------
+ * Peran   : memvalidasi kuis.json, merender soal, menahan jawaban
+ *           setelah dikumpulkan, menilai, dan menampilkan pembahasan.
+ * Dipakai : js/pages/modul.js (muatKuis).
+ * Aturan  : nilai = round(benar / total * 100); lulus bila nilai
+ *           >= batasLulus. Jawaban tidak dapat diubah setelah submit.
+ * ============================================================
+ */
 
 const HURUF = ["A", "B", "C", "D"];
 
-// Memastikan data kuis lengkap sebelum ditampilkan.
+// Menghormati preferensi pengguna yang meminta gerak dikurangi.
+function perilakuGulir() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
+}
+
+/**
+ * Memastikan data kuis lengkap dan konsisten sebelum dirender.
+ * Semua teks di-trim; kunci jawaban harus sesuai jumlah pilihan.
+ *
+ * @param {any} data isi kuis.json
+ * @returns {{judul: string, batasLulus: number, soal: Array<object>}}
+ */
 export function validasiKuis(data) {
   if (!data || typeof data !== "object" || Array.isArray(data)) {
     throw new Error("Data kuis tidak valid.");
@@ -78,7 +101,13 @@ export function validasiKuis(data) {
   };
 }
 
-// Nilai dibulatkan agar cocok dengan aturan penilaian pada skema data.
+/**
+ * Menghitung nilai 0–100. Pembulatan mengikuti aturan skema data.
+ *
+ * @param {number} jumlahBenar
+ * @param {number} jumlahSoal
+ * @returns {number}
+ */
 export function hitungNilai(jumlahBenar, jumlahSoal) {
   if (!Number.isFinite(jumlahBenar) || !Number.isFinite(jumlahSoal)) {
     return 0;
@@ -89,6 +118,14 @@ export function hitungNilai(jumlahBenar, jumlahSoal) {
   return Math.round((jumlahBenar / jumlahSoal) * 100);
 }
 
+/**
+ * Pembantu kecil untuk membuat elemen dengan kelas dan teks sekaligus.
+ *
+ * @param {string} tag
+ * @param {string} kelas
+ * @param {string} [teks]
+ * @returns {HTMLElement}
+ */
 function buatElemen(tag, kelas = "", teks) {
   const elemen = document.createElement(tag);
 
@@ -98,7 +135,13 @@ function buatElemen(tag, kelas = "", teks) {
   return elemen;
 }
 
-// Kartu informasi saat kuis belum dapat dimuat.
+/**
+ * Kartu informasi saat kuis belum dapat dimuat.
+ *
+ * @param {HTMLElement|null} wadah
+ * @param {string} pesan
+ * @param {string} judul
+ */
 export function tampilkanKuisKosong(
   wadah,
   pesan,
@@ -119,12 +162,22 @@ export function tampilkanKuisKosong(
   wadah.appendChild(kartu);
 }
 
-// Menampilkan seluruh kuis dan mengelola jawaban di dalam satu wadah.
+/**
+ * Merender seluruh kuis ke dalam `wadah` dan memasang interaksinya.
+ * Setelah submit, input dinonaktifkan dan jawaban tidak dapat diubah.
+ *
+ * @param {{
+ *   wadah: HTMLElement,
+ *   data: object,
+ *   saatUlangi?: () => void,
+ *   dapatkanLanjut?: () => {label: string, href: string}|null
+ * }} opsi
+ * @returns {{ulangi: () => void}|null}
+ */
 export function buatKuis({
   wadah,
   data,
   saatUlangi,
-  saatLanjut,
   dapatkanLanjut,
 }) {
   if (!wadah) return null;
@@ -378,6 +431,9 @@ export function buatKuis({
     const wadahAksi = buatElemen("div", "kuis__hasil-aksi");
 
     if (lulus) {
+      // Tujuan lanjut ditentukan halaman (modul berikutnya atau halaman
+      // penutup). Bila katalog belum siap, tombol utama tidak ditampilkan;
+      // tautan dashboard di bawah tetap menjadi jalan keluar.
       const tujuan =
         typeof dapatkanLanjut === "function" ? dapatkanLanjut() : null;
 
@@ -389,15 +445,6 @@ export function buatKuis({
         );
         tautan.href = tujuan.href;
         wadahAksi.appendChild(tautan);
-      } else {
-        const tombol = buatElemen("button", "tombol", "Lanjut");
-        tombol.type = "button";
-        tombol.addEventListener("click", () => {
-          if (typeof saatLanjut === "function") {
-            saatLanjut({ nilai, jumlahBenar, total });
-          }
-        });
-        wadahAksi.appendChild(tombol);
       }
     } else {
       const tombol = buatElemen("button", "tombol", "Ulangi Modul");
@@ -423,7 +470,7 @@ export function buatKuis({
     hasil.append(ikon, lencanaHasil, label, skor, pesan, wadahAksi);
 
     requestAnimationFrame(() => {
-      hasil.scrollIntoView({ block: "center", behavior: "smooth" });
+      hasil.scrollIntoView({ block: "center", behavior: perilakuGulir() });
     });
   }
 
@@ -464,7 +511,7 @@ export function buatKuis({
       const pertama = soal[belumDijawab[0] - 1];
       pertama.kartu.scrollIntoView({
         block: "center",
-        behavior: "smooth",
+        behavior: perilakuGulir(),
       });
 
       const inputPertama = pertama.inputs[0];
