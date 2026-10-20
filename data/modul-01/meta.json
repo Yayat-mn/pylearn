@@ -1,0 +1,39 @@
+
+{
+  "id": 1,
+  "slug": "modul-01",
+  "judul": "Pengenalan Python",
+  "deskripsi": "Mengenal bahasa pemrograman Python, kegunaannya, serta cara menulis dan menjalankan program Python sederhana.",
+  "tujuanPembelajaran": [
+    "Mahasiswa mampu menjelaskan pengertian bahasa pemrograman Python.",
+    "Mahasiswa mampu mengidentifikasi kegunaan Python.",
+    "Mahasiswa mampu memahami struktur dasar program Python.",
+    "Mahasiswa mampu menulis dan menjalankan program Python sederhana."
+  ],
+  "subbab": [
+    {
+      "id": "1.1",
+      "judul": "Apa Itu Python?"
+    },
+    {
+      "id": "1.2",
+      "judul": "Kegunaan Python"
+    },
+    {
+      "id": "1.3",
+      "judul": "Sintaks Dasar Python"
+    },
+    {
+      "id": "1.4",
+      "judul": "Program Python Pertama"
+    }
+  ],
+  "video": {
+    "youtubeId": "iA8lLwmtKQM",
+    "judul": "Video Pengenalan Python"
+  },
+  "kodeAwal": "print(\"Halo, PYLearn!\")",
+  "fileMateri": "materi.html",
+  "fileLatihan": "latihan.json",
+  "fileKuis": "kuis.json"
+}

@@ -1,5 +1,57 @@
 :root {
-  --warna-utama: #306998;
-  --warna-aksen: #FFD43B;
-  --warna-teks: #1B2A41;
+  /* Warna utama */
+  --warna-utama: #005bbf;
+  --warna-utama-gelap: #004493;
+  --warna-utama-lembut: #d8e2ff;
+  --warna-sekunder: #4648d4;
+  --warna-sekunder-lembut: #e1e0ff;
+  --warna-aksen: #ffd43b;
+
+  /* Warna status */
+  --warna-sukses: #006c49;
+  --warna-sukses-lembut: #d9f7ec;
+  --warna-bahaya: #ba1a1a;
+  --warna-bahaya-lembut: #ffdad6;
+
+  /* Warna netral */
+  --warna-latar: #f7f9ff;
+  --warna-kartu: #ffffff;
+  --warna-latar-lembut: #f1f4fa;
+  --warna-latar-lembut-2: #ebeef4;
+  --warna-garis: #c1c6d6;
+  --warna-garis-lembut: #e5e8ee;
+  --warna-teks: #181c20;
+  --warna-teks-redup: #414754;
+  --warna-teks-samar: #727785;
+
+  /* Warna kode */
+  --latar-kode: #181c20;
+  --teks-kode: #eef1f7;
+  --warna-kode-aksen: #ffd43b;
+
+  /* Radius */
+  --radius-kecil: 8px;
+  --radius-sedang: 12px;
+  --radius-besar: 16px;
+  --radius-pil: 9999px;
+
+  /* Bayangan */
+  --bayangan-kartu:
+    0 1px 2px rgba(24, 28, 32, 0.05),
+    0 1px 3px rgba(24, 28, 32, 0.04);
+  --bayangan-naik: 0 8px 24px rgba(0, 68, 147, 0.12);
+  --tirai: rgba(24, 28, 32, 0.45);
+
+  /* Jarak */
+  --jarak-1: 4px;
+  --jarak-2: 8px;
+  --jarak-3: 12px;
+  --jarak-4: 16px;
+  --jarak-5: 24px;
+  --jarak-6: 32px;
+  --jarak-7: 48px;
+
+  /* Tata letak */
+  --lebar-sidebar: 280px;
+  --lebar-konten: 1180px;
 }

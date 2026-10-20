@@ -1,6 +1,10 @@
 // Tugas berkas ini: mengubah sebuah <textarea> menjadi editor kode Python.
 
-export function buatEditor(textarea) {
+export function buatEditor(textarea, { saatBerubah } = {}) {
+  if (typeof CodeMirror === "undefined") {
+    throw new Error("CodeMirror belum termuat.");
+  }
+
   const editor = CodeMirror.fromTextArea(textarea, {
     mode: "python",
     lineNumbers: true,
@@ -16,8 +20,14 @@ export function buatEditor(textarea) {
     },
   });
 
+  if (typeof saatBerubah === "function") {
+    editor.on("change", saatBerubah);
+  }
+
   return {
     ambilKode: () => editor.getValue(),
     isiKode: (kode) => editor.setValue(kode),
+    // Dipanggil saat panel editor baru ditampilkan agar ukurannya dihitung ulang.
+    segarkan: () => editor.refresh(),
   };
 }

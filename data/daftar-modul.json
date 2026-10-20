@@ -1,0 +1,70 @@
+{
+  "judul": "PYLearn",
+  "deskripsi": "Multimedia pembelajaran Python untuk mahasiswa semester awal.",
+  "modul": [
+    {
+      "id": 1,
+      "slug": "modul-01",
+      "judul": "Pengenalan Python",
+      "deskripsi": "Mengenal bahasa pemrograman Python, kegunaannya, serta cara menulis dan menjalankan program Python sederhana.",
+      "jumlahSubbab": 4,
+      "status": "tersedia"
+    },
+    {
+      "id": 2,
+      "slug": "modul-02",
+      "judul": "Variabel dan Tipe Data",
+      "deskripsi": "Menyimpan nilai dalam variabel serta mengenali tipe data dasar.",
+      "jumlahSubbab": 3,
+      "status": "segera"
+    },
+    {
+      "id": 3,
+      "slug": "modul-03",
+      "judul": "Operator Python",
+      "deskripsi": "Menggunakan operator aritmetika, perbandingan, dan logika.",
+      "jumlahSubbab": 3,
+      "status": "segera"
+    },
+    {
+      "id": 4,
+      "slug": "modul-04",
+      "judul": "Percabangan",
+      "deskripsi": "Mengatur alur program dengan if, elif, dan else.",
+      "jumlahSubbab": 3,
+      "status": "segera"
+    },
+    {
+      "id": 5,
+      "slug": "modul-05",
+      "judul": "Perulangan",
+      "deskripsi": "Mengulang instruksi dengan for dan while.",
+      "jumlahSubbab": 3,
+      "status": "segera"
+    },
+    {
+      "id": 6,
+      "slug": "modul-06",
+      "judul": "Struktur Data Dasar",
+      "deskripsi": "Mengelola kumpulan data dengan list, tuple, dan dictionary.",
+      "jumlahSubbab": 3,
+      "status": "segera"
+    },
+    {
+      "id": 7,
+      "slug": "modul-07",
+      "judul": "Fungsi",
+      "deskripsi": "Membuat dan memanggil function agar kode dapat digunakan ulang.",
+      "jumlahSubbab": 3,
+      "status": "segera"
+    },
+    {
+      "id": 8,
+      "slug": "modul-08",
+      "judul": "Mini Project Python",
+      "deskripsi": "Menerapkan materi sebelumnya dalam proyek Python sederhana.",
+      "jumlahSubbab": 3,
+      "status": "segera"
+    }
+  ]
+}

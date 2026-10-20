@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Modul Pembelajaran — PYLearn</title>
+  <meta name="description"
+        content="Materi, latihan kode, dan kuis interaktif Python dalam PYLearn.">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
+    <a class="merek" href="index.html" aria-label="PYLearn, kembali ke dashboard">
+      <span class="merek__ikon" aria-hidden="true">PY</span>
+      <span class="merek__teks">
+        <strong>PYLearn</strong>
+        <span>Python Pathway</span>
+      </span>
+    </a>
+
+    <nav class="navigasi-utama" aria-label="Navigasi modul">
+      <span class="navigasi-utama__penanda" aria-hidden="true"></span>
+
+      <a class="navigasi-utama__tautan" href="index.html">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        Dashboard Modul
+      </a>
+
+      <a class="navigasi-utama__tautan navigasi-utama__tautan--aktif"
+         href="#belajar"
+         data-tahap="belajar"
+         aria-current="step">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </svg>
+        Materi &amp; Video
+      </a>
+
+      <a class="navigasi-utama__tautan" href="#latihan" data-tahap="latihan">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        Code Editor
+      </a>
+
+      <a class="navigasi-utama__tautan" href="#kuis" data-tahap="kuis">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="m9 11 3 3L22 4"></path>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+        Kuis &amp; Evaluasi
+      </a>
+
+      <a class="navigasi-utama__tautan" href="modul.html?id=8">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+        </svg>
+        Mini Project
+      </a>
+    </nav>
+
+    <div class="sidebar__kartu">
+      <p class="sidebar__kartu-label">Modul Saat Ini</p>
+      <p class="sidebar__kartu-judul" id="sidebar-judul-modul">Memuat modul…</p>
+      <p class="sidebar__kartu-teks" id="sidebar-info-modul">
+        Menyiapkan materi pembelajaran.
+      </p>
+    </div>
+
+    <div class="sidebar__kaki">
+      <span class="avatar" aria-hidden="true">K4</span>
+      <div class="sidebar__kaki-teks">
+        <strong>Kelompok 4</strong>
+        <span>PTIK B 2024</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="bingkai-utama">
+    <header class="topbar">
+      <button class="tombol-menu" id="tombol-menu" type="button"
+              aria-controls="sidebar" aria-expanded="false"
+              aria-label="Buka navigasi">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             aria-hidden="true">
+          <path d="M4 6h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 18h16"></path>
+        </svg>
+      </button>
+
+      <nav class="remah" aria-label="Remah roti">
+        <a class="remah__kelas" href="index.html">Kelas Python</a>
+        <span class="remah__pemisah" aria-hidden="true">›</span>
+        <span id="remah-modul">Modul</span>
+        <span class="remah__pemisah" aria-hidden="true">›</span>
+        <span class="remah__aktif" id="remah-tahap">Belajar</span>
+      </nav>
+
+      <div class="topbar__kanan">
+        <span class="lencana lencana--biru" id="lencana-subbab">Memuat…</span>
+        <span class="lencana">Python Dasar</span>
+      </div>
+    </header>
+
+    <main class="konten-utama konten-modul">
+
+      <section class="modul-header" aria-labelledby="judul-modul">
+        <div class="modul-header__isi">
+          <span class="lencana lencana--biru" id="nomor-modul">Modul</span>
+          <h1 class="modul-header__judul" id="judul-modul">Memuat modul…</h1>
+          <p class="modul-header__teks" id="deskripsi-modul">
+            Menyiapkan informasi modul.
+          </p>
+          <div class="modul-header__meta">
+            <span id="meta-subbab">— subbab</span>
+            <span class="titik-pemisah" aria-hidden="true"></span>
+            <span id="meta-video">Video belum tersedia</span>
+          </div>
+        </div>
+
+        <a class="tombol tombol--garis modul-header__kembali" href="index.html">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6"></path>
+          </svg>
+          Dashboard
+        </a>
+      </section>
+
+      <nav class="tahap-nav" aria-label="Tahap pembelajaran">
+        <a class="tahap-nav__tautan tahap-nav__tautan--aktif"
+           href="#belajar"
+           data-tahap="belajar"
+           aria-current="step">
+          <span class="tahap-nav__nomor" aria-hidden="true">1</span>
+          <span class="tahap-nav__label">Belajar</span>
+        </a>
+        <a class="tahap-nav__tautan" href="#latihan" data-tahap="latihan">
+          <span class="tahap-nav__nomor" aria-hidden="true">2</span>
+          <span class="tahap-nav__label">Latihan</span>
+        </a>
+        <a class="tahap-nav__tautan" href="#kuis" data-tahap="kuis">
+          <span class="tahap-nav__nomor" aria-hidden="true">3</span>
+          <span class="tahap-nav__label">Kuis</span>
+        </a>
+      </nav>
+
+      <div class="panel-tahap-wadah">
+      <section class="panel-tahap" id="belajar" data-panel="belajar"
+               aria-label="Tahap belajar">
+        <div class="tab-media" role="tablist" aria-label="Pilih media belajar">
+          <button class="tab-media__tombol tab-media__tombol--aktif"
+                  id="tab-teks" type="button" role="tab"
+                  aria-selected="true" aria-controls="panel-teks"
+                  data-media="teks">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            Teks
+          </button>
+          <button class="tab-media__tombol"
+                  id="tab-video" type="button" role="tab"
+                  aria-selected="false" aria-controls="panel-video"
+                  data-media="video">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true">
+              <path d="m22 8-6 4 6 4V8Z"></path>
+              <rect x="2" y="6" width="14" height="12" rx="2"></rect>
+            </svg>
+            Video
+          </button>
+        </div>
+
+        <div class="tata-letak-belajar">
+          <div class="materi-utama">
+            <div class="panel-media" id="panel-teks" role="tabpanel"
+                 aria-labelledby="tab-teks">
+              <div class="konten-materi" id="konten-materi">
+                <p class="status-materi">Memuat materi pembelajaran…</p>
+              </div>
+            </div>
+
+            <div class="panel-media" id="panel-video" role="tabpanel"
+                 aria-labelledby="tab-video" hidden>
+              <div class="video-materi" id="video-materi">
+                <div class="video-kosong">
+                  <p>Memuat video…</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="aside-modul" aria-label="Pelengkap materi">
+            <section class="kartu-aside" id="kartu-subbab">
+              <h2 class="kartu-aside__judul">Daftar Subbab</h2>
+              <ul class="daftar-subbab" id="daftar-subbab">
+                <li><span class="teks-samar">Memuat…</span></li>
+              </ul>
+            </section>
+
+            <section class="kartu-aside">
+              <h2 class="kartu-aside__judul">Tujuan Pembelajaran</h2>
+              <ul class="daftar-tujuan" id="daftar-tujuan">
+                <li><span class="teks-samar">Memuat…</span></li>
+              </ul>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section class="panel-tahap" id="latihan" data-panel="latihan"
+               aria-label="Tahap latihan" hidden>
+        <div class="kartu-latihan">
+          <div class="kartu-latihan__kepala">
+            <div>
+              <span class="lencana lencana--biru">Tahap 2</span>
+              <h2 class="kartu-latihan__judul" id="judul-latihan">Latihan Kode</h2>
+              <p class="kartu-latihan__teks" id="instruksi-latihan">
+                Memuat latihan...
+              </p>
+            </div>
+            <span class="lencana" id="status-latihan"
+                  aria-live="polite">Memuat latihan...</span>
+          </div>
+
+          <div class="latihan-target" id="wadah-target" hidden>
+            <div class="latihan-target__kepala">
+              <h3>Output yang diharapkan</h3>
+              <span class="teks-samar">Huruf besar/kecil dibedakan</span>
+            </div>
+            <pre class="latihan-target__kode" id="target-output"></pre>
+          </div>
+
+          <div class="area-editor">
+            <div class="area-editor__kepala">
+              <span>main.py</span>
+              <span class="area-editor__status" id="status-python"
+                    aria-live="polite">Python belum dimuat</span>
+            </div>
+            <textarea id="kode" spellcheck="false">print("Halo, PYLearn!")</textarea>
+          </div>
+
+          <div class="area-editor__aksi">
+            <button class="tombol" id="tombol-jalankan" type="button">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" aria-hidden="true">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Jalankan Kode
+            </button>
+
+            <button class="tombol tombol-stop" id="tombol-stop" type="button" disabled>
+              Stop
+            </button>
+
+            <button class="tombol tombol--garis" id="tombol-periksa" type="button" disabled
+                    title="Jalankan kode lalu bandingkan output dengan target latihan.">
+              Periksa Output
+            </button>
+
+            <button class="tombol" id="tombol-lanjut-kuis" type="button" hidden>
+              Lanjut ke Kuis
+            </button>
+          </div>
+
+          <div class="area-output">
+            <div class="area-output__kepala">
+              <h3>Output</h3>
+              <span class="teks-samar">Batas waktu 5 detik</span>
+            </div>
+            <pre class="panel-output" id="output"
+                 aria-live="polite">(belum ada output)</pre>
+          </div>
+
+          <div class="umpan-balik-latihan" id="umpan-balik-latihan"
+               role="status" aria-live="polite" hidden>
+            <div class="umpan-balik-latihan__kepala">
+              <span class="lencana" id="lencana-umpan-balik">Hasil</span>
+              <h3 id="judul-umpan-balik">Hasil pemeriksaan</h3>
+            </div>
+            <p class="umpan-balik-latihan__pesan" id="pesan-umpan-balik"></p>
+
+            <div class="latihan-petunjuk" id="wadah-petunjuk" hidden>
+              <h4>Petunjuk</h4>
+              <ul id="daftar-petunjuk"></ul>
+            </div>
+
+            <div class="latihan-solusi" id="wadah-solusi" hidden>
+              <h4>Solusi</h4>
+              <pre><code id="teks-solusi"></code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-tahap" id="kuis" data-panel="kuis"
+               aria-label="Tahap kuis" hidden>
+        <div class="kartu-kosong">
+          <span class="kartu-kosong__ikon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path d="m9 11 3 3L22 4"></path>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+          </span>
+          <span class="lencana">Tahap 3</span>
+          <h2 class="kartu-kosong__judul">Kuis Evaluasi</h2>
+          <p class="kartu-kosong__teks">
+            Kuis lima soal akan tersedia di sini. Setelah selesai, nilaimu langsung
+            ditampilkan beserta batas kelulusan modul.
+          </p>
+          <button class="tombol" type="button" disabled>
+            Mulai Kuis
+          </button>
+          <p class="kartu-kosong__catatan">
+            Mesin kuis sedang disiapkan pada tahap pengembangan berikutnya.
+          </p>
+        </div>
+      </section>
+      </div>
+
+      <nav class="navigasi-modul" id="navigasi-modul" aria-label="Navigasi modul">
+        <span class="navigasi-modul__kosong" id="tautan-sebelumnya">Modul sebelumnya</span>
+        <a class="navigasi-modul__tautan" href="index.html">Kembali ke Dashboard</a>
+        <span class="navigasi-modul__kosong" id="tautan-berikutnya">Modul berikutnya</span>
+      </nav>
+    </main>
+
+    <footer class="footer">
+      <span>PYLearn — Multimedia Pembelajaran Python</span>
+      <span>Kelompok 4 · PTIK B 2024</span>
+    </footer>
+  </div>
+
+  <div class="tirai" id="tirai" hidden></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/python/python.min.js"></script>
+  <script type="module" src="js/pages/modul.js"></script>
+
+</body>
+</html>

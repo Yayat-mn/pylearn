@@ -1,6 +1,3 @@
-// Tugas berkas ini: menjalankan kode Python di Web Worker dan mengembalikan hasilnya.
-// Bentuk pemakaian tetap: jalankanKode(kode) -> { output, error, dihentikan }
-
 const URL_WORKER = new URL("../workers/pyodide-worker.js", import.meta.url);
 const BATAS_WAKTU_MS = 5000;
 const BATAS_OUTPUT = 10000;

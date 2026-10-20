@@ -1,7 +1,84 @@
-body {
-  font-family: Calibri, Arial, sans-serif;
-  color: var(--warna-teks);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-h1 {
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--warna-latar);
+  color: var(--warna-teks);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  color: var(--warna-teks);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
   color: var(--warna-utama);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--warna-utama-gelap);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--warna-utama);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body.tanpa-gulir {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }
