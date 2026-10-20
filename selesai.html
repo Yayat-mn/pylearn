@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Modul Selesai — PYLearn</title>
+  <meta name="description"
+        content="Halaman penutup PYLearn: ringkasan modul yang telah diselesaikan dan langkah belajar berikutnya.">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
+    <a class="merek" href="index.html" aria-label="PYLearn, kembali ke dashboard">
+      <span class="merek__ikon" aria-hidden="true">PY</span>
+      <span class="merek__teks">
+        <strong>PYLearn</strong>
+        <span>Python Pathway</span>
+      </span>
+    </a>
+
+    <nav class="navigasi-utama" aria-label="Navigasi halaman">
+      <span class="navigasi-utama__penanda" aria-hidden="true"></span>
+
+      <a class="navigasi-utama__tautan" href="index.html">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        Dashboard Modul
+      </a>
+
+      <a class="navigasi-utama__tautan" href="index.html#daftar-modul">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 6h13"></path>
+          <path d="M8 12h13"></path>
+          <path d="M8 18h13"></path>
+          <path d="M3 6h.01"></path>
+          <path d="M3 12h.01"></path>
+          <path d="M3 18h.01"></path>
+        </svg>
+        Daftar Modul
+      </a>
+
+      <a class="navigasi-utama__tautan navigasi-utama__tautan--aktif"
+         href="selesai.html"
+         aria-current="page">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="m9 11 3 3L22 4"></path>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+        Halaman Penutup
+      </a>
+
+      <a class="navigasi-utama__tautan" href="modul.html?id=8">
+        <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+          <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+        </svg>
+        Mini Project
+      </a>
+    </nav>
+
+    <div class="sidebar__kartu">
+      <p class="sidebar__kartu-label">Status Belajar</p>
+      <p class="sidebar__kartu-judul" id="sidebar-judul-selesai">Modul selesai</p>
+      <p class="sidebar__kartu-teks" id="sidebar-info-selesai">
+        Teruskan perjalanan belajarmu.
+      </p>
+    </div>
+
+    <div class="sidebar__kaki">
+      <span class="avatar" aria-hidden="true">K4</span>
+      <div class="sidebar__kaki-teks">
+        <strong>Kelompok 4</strong>
+        <span>PTIK B 2024</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="bingkai-utama">
+    <header class="topbar">
+      <button class="tombol-menu" id="tombol-menu" type="button"
+              aria-controls="sidebar" aria-expanded="false"
+              aria-label="Buka navigasi">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round"
+             aria-hidden="true">
+          <path d="M4 6h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 18h16"></path>
+        </svg>
+      </button>
+
+      <nav class="remah" aria-label="Remah roti">
+        <a class="remah__kelas" href="index.html">Kelas Python</a>
+        <span class="remah__pemisah" aria-hidden="true">›</span>
+        <span class="remah__aktif">Halaman Penutup</span>
+      </nav>
+
+      <div class="topbar__kanan">
+        <span class="lencana lencana--tersedia" id="lencana-topbar">
+          Modul selesai
+        </span>
+        <span class="lencana">Python Dasar</span>
+      </div>
+    </header>
+
+    <main class="konten-utama konten-selesai">
+
+      <section class="selesai-kartu" aria-labelledby="judul-selesai">
+        <span class="selesai-kartu__ikon" id="ikon-selesai" aria-hidden="true">✓</span>
+        <span class="lencana lencana--tersedia" id="lencana-selesai">
+          Modul selesai
+        </span>
+        <h1 class="selesai-kartu__judul" id="judul-selesai">Modul selesai!</h1>
+        <p class="selesai-kartu__teks" id="teks-selesai">
+          Menyiapkan ringkasan hasil belajarmu.
+        </p>
+
+        <div class="selesai-kartu__ringkasan">
+          <div class="selesai-kartu__ringkasan-item">
+            <span class="selesai-kartu__ringkasan-label">Modul</span>
+            <strong id="selesai-modul">—</strong>
+          </div>
+          <div class="selesai-kartu__ringkasan-item">
+            <span class="selesai-kartu__ringkasan-label">Tahap</span>
+            <strong>Belajar · Latihan · Kuis</strong>
+          </div>
+          <div class="selesai-kartu__ringkasan-item">
+            <span class="selesai-kartu__ringkasan-label">Status</span>
+            <strong id="selesai-status">Selesai</strong>
+          </div>
+        </div>
+
+        <div class="selesai-kartu__aksi" id="aksi-selesai">
+          <a class="tombol" href="index.html">Kembali ke Dashboard</a>
+        </div>
+
+        <p class="selesai-kartu__catatan" id="catatan-selesai">
+          Nilai kuis tidak disimpan. Kamu dapat mengulang modul kapan saja.
+        </p>
+      </section>
+
+      <section class="selesai-langkah" aria-labelledby="judul-langkah">
+        <div class="selesai-langkah__kepala">
+          <h2 class="selesai-langkah__judul" id="judul-langkah">
+            Apa selanjutnya?
+          </h2>
+          <p class="selesai-langkah__teks">
+            Pilih langkah yang paling sesuai dengan kebutuhanmu.
+          </p>
+        </div>
+
+        <div class="selesai-langkah__daftar">
+          <article class="selesai-langkah__item">
+            <span class="selesai-langkah__nomor" aria-hidden="true">01</span>
+            <h3>Ulangi materi</h3>
+            <p>
+              Buka kembali bagian yang masih sulit dan jalankan contoh kodenya
+              melalui editor.
+            </p>
+          </article>
+
+          <article class="selesai-langkah__item">
+            <span class="selesai-langkah__nomor" aria-hidden="true">02</span>
+            <h3>Latihan lagi</h3>
+            <p>
+              Kerjakan latihan kode untuk memperkuat pemahaman sebelum
+              melanjutkan.
+            </p>
+          </article>
+
+          <article class="selesai-langkah__item">
+            <span class="selesai-langkah__nomor" aria-hidden="true">03</span>
+            <h3>Lanjut ke modul berikutnya</h3>
+            <p>
+              Modul baru akan tampil di dashboard setelah materi dan kuisnya
+              siap.
+            </p>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 PYLearn — Kelompok 4 PTIK B 2024</p>
+      <p>Multimedia Pembelajaran Python</p>
+    </footer>
+  </div>
+
+  <div class="tirai" id="tirai" hidden></div>
+
+  <script type="module" src="js/pages/selesai.js"></script>
+</body>
+</html>

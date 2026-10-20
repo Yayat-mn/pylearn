@@ -1,0 +1,61 @@
+{
+  "judul": "Kuis Modul 1: Pengenalan Python",
+  "batasLulus": 60,
+  "soal": [
+    {
+      "pertanyaan": "Python adalah ...",
+      "pilihan": [
+        "sistem operasi",
+        "bahasa pemrograman tingkat tinggi",
+        "aplikasi pengolah kata",
+        "mesin pencari"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Python adalah bahasa pemrograman tingkat tinggi yang digunakan untuk memberikan instruksi kepada komputer."
+    },
+    {
+      "pertanyaan": "Fungsi yang digunakan untuk menampilkan keluaran ke layar adalah ...",
+      "pilihan": [
+        "input()",
+        "print()",
+        "len()",
+        "type()"
+      ],
+      "jawaban": "B",
+      "pembahasan": "print() menampilkan keluaran ke layar. input() digunakan untuk menerima masukan dari pengguna."
+    },
+    {
+      "pertanyaan": "Teks yang diapit tanda kutip dalam Python disebut ...",
+      "pilihan": [
+        "integer",
+        "variabel",
+        "string",
+        "komentar"
+      ],
+      "jawaban": "C",
+      "pembahasan": "String adalah teks yang diapit tanda kutip, baik kutip tunggal maupun kutip ganda."
+    },
+    {
+      "pertanyaan": "Pernyataan yang benar tentang huruf besar dan kecil dalam Python adalah ...",
+      "pilihan": [
+        "Python membedakan print dan Print.",
+        "Python menganggap print dan Print sama.",
+        "Python hanya menerima huruf kapital.",
+        "Python tidak memakai huruf dalam kode."
+      ],
+      "jawaban": "A",
+      "pembahasan": "Python bersifat case-sensitive, sehingga print dan Print dianggap berbeda."
+    },
+    {
+      "pertanyaan": "Perintah yang paling tepat untuk menampilkan teks Halo, PYLearn! adalah ...",
+      "pilihan": [
+        "print(Halo, PYLearn!)",
+        "print \"Halo, PYLearn!\"",
+        "print(\"Halo, PYLearn!\")",
+        "Print(\"Halo, PYLearn!\")"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Teks harus diapit tanda kutip dan nama fungsi ditulis dengan huruf kecil: print(\"Halo, PYLearn!\")."
+    }
+  ]
+}

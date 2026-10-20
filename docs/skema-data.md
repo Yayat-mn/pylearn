@@ -161,6 +161,8 @@ Aturan penilaian:
 - Skor hanya ditampilkan, tidak disimpan. Muat ulang halaman berarti mengulang.
 - Menambah soal cukup menambah objek di array `soal`; nilai menyesuaikan
   otomatis, tetapi periksa kembali `batasLulus`.
+- Jika lulus tetapi modul berikutnya belum berstatus `tersedia`, tombol lanjut
+  mengarah ke `selesai.html?id=<nomor modul>`.
 
 ## 6. Alur halaman modul
 
@@ -170,7 +172,8 @@ Aturan penilaian:
    `outputDiharapkan`. Setelah output sesuai, tombol **Lanjut ke Kuis**
    muncul.
 3. **Kuis** — lima soal, lalu skor dan pembahasan.
-4. Jika lulus, lanjut ke modul berikutnya; modul 8 menuju `selesai.html`.
+4. Jika lulus, lanjut ke modul berikutnya bila sudah tersedia; jika belum,
+   menuju `selesai.html?id=<nomor modul>`. Modul 8 menuju `selesai.html`.
    Jika belum lulus, tombol Ulangi Modul mengembalikan ke tahap Belajar.
 
 ## 7. Menambah modul baru

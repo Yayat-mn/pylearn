@@ -2,6 +2,11 @@
 
 import { buatEditor } from "../features/editor.js";
 import { bandingkanOutput } from "../features/latihan.js";
+import {
+  buatKuis,
+  tampilkanKuisKosong,
+  validasiKuis,
+} from "../features/kuis.js";
 import { siapkanSidebar } from "../features/sidebar.js";
 import { siapkanTransisiHalaman } from "../features/transisi-halaman.js";
 import {
@@ -67,6 +72,7 @@ const elemen = {
   wadahSolusi: document.getElementById("wadah-solusi"),
   teksSolusi: document.getElementById("teks-solusi"),
   tombolLanjutKuis: document.getElementById("tombol-lanjut-kuis"),
+  wadahKuis: document.getElementById("wadah-kuis"),
   areaKode: document.getElementById("kode"),
   tombolJalankan: document.getElementById("tombol-jalankan"),
   tombolStop: document.getElementById("tombol-stop"),
@@ -92,6 +98,8 @@ let latihan = null;
 let latihanSiap = false;
 let jumlahPercobaan = 0;
 let latihanBenar = false;
+let modulAktif = null;
+let katalogModul = [];
 let modeJalan = null;
 let dibatalkanPengguna = false;
 let sedangMengisiKode = false;
@@ -602,6 +610,8 @@ function tampilkanKesalahan(judul, pesan) {
   latihanSiap = false;
   jumlahPercobaan = 0;
   latihanBenar = false;
+  modulAktif = null;
+  katalogModul = [];
 
   elemen.tombolJalankan.disabled = true;
   elemen.tombolPeriksa.disabled = true;
@@ -609,6 +619,11 @@ function tampilkanKesalahan(judul, pesan) {
   aturStatusLatihan("Tidak ada latihan");
   elemen.wadahTarget.hidden = true;
   sembunyikanUmpanBalik();
+  tampilkanKuisKosong(
+    elemen.wadahKuis,
+    pesan,
+    "Kuis tidak tersedia"
+  );
 
   tampilkanTahap("belajar", { perbaruiHash: false });
 }
@@ -919,6 +934,66 @@ async function muatLatihan(folder, modul) {
   }
 }
 
+function tentukanTujuanLanjut() {
+  const id = Number(modulAktif?.id);
+
+  if (!Number.isInteger(id)) {
+    return { label: "Kembali ke Dashboard", href: "index.html" };
+  }
+
+  if (id >= 8) {
+    return {
+      label: "Lihat Halaman Penutup",
+      href: "selesai.html?id=8",
+    };
+  }
+
+  const berikutnya = katalogModul.find((modul) => modul.id === id + 1);
+
+  if (berikutnya && berikutnya.status === "tersedia") {
+    return {
+      label: `Lanjut ke Modul ${berikutnya.id}`,
+      href: `modul.html?id=${berikutnya.id}`,
+    };
+  }
+
+  // Modul berikutnya belum tersedia: tutup alur lewat halaman penutup.
+  return {
+    label: "Lihat Halaman Penutup",
+    href: `selesai.html?id=${id}`,
+  };
+}
+
+async function muatKuis(folder, modul) {
+  try {
+    const namaFile = modul.fileKuis || "kuis.json";
+    const respons = await fetch(`data/${folder}/${namaFile}`);
+
+    if (!respons.ok) {
+      throw new Error("Kuis belum tersedia untuk modul ini.");
+    }
+
+    const data = validasiKuis(await respons.json());
+
+    buatKuis({
+      wadah: elemen.wadahKuis,
+      data,
+      saatUlangi: () => {
+        tampilkanTahap("belajar", { gulir: true, perbaruiHash: true });
+      },
+      dapatkanLanjut: tentukanTujuanLanjut,
+    });
+  } catch (error) {
+    console.error("Kesalahan memuat kuis:", error);
+
+    tampilkanKuisKosong(
+      elemen.wadahKuis,
+      "Kuis untuk modul ini belum tersedia. Kamu tetap dapat mempelajari materi dan mengerjakan latihan.",
+      "Kuis belum tersedia"
+    );
+  }
+}
+
 function buatNavigasiModul(modul, arah, idElemen) {
   const panah = arah === "sebelumnya" ? "←" : "→";
 
@@ -960,6 +1035,8 @@ async function muatNavigasiModul(id) {
 
     const data = await respons.json();
     const daftar = Array.isArray(data.modul) ? data.modul : [];
+
+    katalogModul = daftar;
 
     const sebelumnya = daftar.find((modul) => modul.id === id - 1);
     const berikutnya = daftar.find((modul) => modul.id === id + 1);
@@ -1008,6 +1085,8 @@ async function muatModul() {
 
     const modul = await respons.json();
 
+    modulAktif = modul;
+
     tampilkanHeader(modul);
     tampilkanTujuan(modul.tujuanPembelajaran);
     tampilkanNavigasiSubbab(modul.subbab);
@@ -1017,6 +1096,7 @@ async function muatModul() {
       muatLatihan(folder, modul),
       muatMateri(folder, modul.fileMateri || "materi.html"),
       muatNavigasiModul(modul.id || id),
+      muatKuis(folder, modul),
     ]);
   } catch (error) {
     console.error("Kesalahan memuat modul:", error);
