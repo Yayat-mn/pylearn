@@ -6,9 +6,9 @@ koma di akhir.
 
 ## Struktur folder
 
-```
+```text
 data/
-├── daftar-modul.json      # katalog untuk dashboard
+├── daftar-modul.json      # katalog untuk dashboard dan halaman modul
 └── modul-01 … modul-08/
     ├── meta.json          # identitas dan daftar subbab
     ├── materi.html        # isi materi teks
@@ -17,11 +17,14 @@ data/
 ```
 
 Nama folder harus sama dengan `slug` pada katalog, misalnya `modul-02`.
+JavaScript memakai `slug` bila tersedia; jika tidak, memakai pola
+`modul-XX` dengan nomor dua digit.
 
 ## 1. `data/daftar-modul.json`
 
-Sumber data untuk kartu di dashboard. Halaman modul tetap memakai
-`meta.json` sebagai sumber utama.
+Sumber data untuk kartu dashboard, navigasi modul, dan penentuan langkah
+lanjut. Halaman modul memakai `meta.json` untuk isi, tetapi status
+ketersediaan selalu diambil dari katalog.
 
 | Field | Tipe | Keterangan |
 |---|---|---|
@@ -38,16 +41,22 @@ Sumber data untuk kartu di dashboard. Halaman modul tetap memakai
 Aturan:
 
 - `id` harus unik dan berurutan 1–8.
-- `judul` dan `deskripsi` harus sama dengan `meta.json` modul terkait.
+- `judul` dan `deskripsi` sebaiknya sama dengan `meta.json` modul terkait.
 - Ubah `status` menjadi `tersedia` setelah folder modul lengkap.
 - Modul berstatus `segera` ditampilkan sebagai kartu nonaktif di dashboard.
+- Membuka `modul.html?id=<modul segera>` menampilkan pesan “Modul belum
+  tersedia”, bukan galat 404.
+- `modul.html?id=<nomor tidak dikenal>` menampilkan “Modul tidak ditemukan”.
+- Katalog dimuat satu kali per halaman dan di-cache oleh
+  `js/features/katalog.js`. Jika pemuatan gagal, cache dibersihkan agar
+  percobaan berikutnya masih bisa berhasil.
 
 ## 2. `meta.json`
 
 | Field | Tipe | Keterangan |
 |---|---|---|
 | `id` | number | Nomor modul |
-| `slug` | string | Nama folder |
+| `slug` | string | Nama folder (opsional; dipakai bila ada) |
 | `judul` | string | Judul modul |
 | `deskripsi` | string | Ringkasan modul |
 | `tujuanPembelajaran` | string[] | Daftar tujuan |
@@ -55,7 +64,7 @@ Aturan:
 | `subbab[].id` | string | Nomor subbab, misalnya `1.1` |
 | `subbab[].judul` | string | Judul subbab |
 | `video` | object | Video pembelajaran |
-| `video.youtubeId` | string | ID video saja, bukan URL penuh |
+| `video.youtubeId` | string | ID video 11 karakter, bukan URL penuh |
 | `video.judul` | string | Judul video |
 | `kodeAwal` | string | Cadangan kode awal editor |
 | `fileMateri` | string | Nama berkas materi, biasanya `materi.html` |
@@ -71,8 +80,12 @@ Contoh `video`:
 }
 ```
 
-Jika video belum tersedia, kosongkan `youtubeId` dan `judul`. Halaman modul
-akan menampilkan pesan "Video belum tersedia untuk modul ini."
+`youtubeId` harus berupa ID 11 karakter, bukan URL seperti
+`https://www.youtube.com/watch?v=...`. Jika kosong atau tidak valid, halaman
+menampilkan pesan “Video belum tersedia untuk modul ini.”
+
+Field `fileMateri`, `fileLatihan`, dan `fileKuis` bersifat opsional. Nilai
+bawaan masing-masing adalah `materi.html`, `latihan.json`, dan `kuis.json`.
 
 ## 3. `materi.html`
 
@@ -84,6 +97,10 @@ akan menampilkan pesan "Video belum tersedia untuk modul ini."
 - Gunakan `<h2>` atau `<h3>` secara konsisten untuk judul subbab.
 - Contoh kode memakai `<pre><code class="language-python">`.
 - Jangan memuat editor atau skrip di dalam berkas ini.
+
+Catatan keamanan: `materi.html` dimuat dengan `innerHTML` karena merupakan
+konten proyek yang tepercaya, bukan input pengguna. Jangan pernah memasukkan
+teks dari URL, formulir, atau data eksternal ke berkas ini tanpa sanitasi.
 
 ## 4. `latihan.json`
 
@@ -118,7 +135,7 @@ Aturan penilaian output:
 - Spasi di akhir setiap baris dihapus.
 - Baris kosong di awal dan akhir dibuang.
 - Perbandingan bersifat case-sensitive; huruf besar dan kecil dibedakan.
-- Program tetap mengikuti batas waktu 5 detik dan batas output 10.000 karakter.
+- Program mengikuti batas waktu 5 detik dan batas output 10.000 karakter.
 - Tombol Periksa Output menjalankan ulang kode, bukan memakai output lama.
 - Setiap pemeriksaan yang menghasilkan output berbeda atau error menambah
   jumlah percobaan. Stop manual dan perpindahan tahap tidak dihitung.
@@ -126,6 +143,8 @@ Aturan penilaian output:
   gagal, `kunci` ditampilkan.
 - Setelah output sesuai, tombol **Lanjut ke Kuis** muncul. Jumlah percobaan
   tidak disimpan dan kembali ke nol setelah halaman dimuat ulang.
+- Jika `kodeAwal` kosong, halaman memakai `meta.kodeAwal`; jika keduanya
+  kosong, editor mulai kosong.
 
 ## 5. `kuis.json`
 
@@ -148,11 +167,11 @@ Aturan penilaian output:
 |---|---|---|
 | `judul` | string | Judul kuis |
 | `batasLulus` | number | Nilai minimal 0–100 |
-| `soal` | array | Daftar soal |
+| `soal` | array | Daftar soal, minimal satu |
 | `soal[].pertanyaan` | string | Pertanyaan |
-| `soal[].pilihan` | string[] | Empat pilihan jawaban |
+| `soal[].pilihan` | string[] | Dua sampai empat pilihan jawaban |
 | `soal[].jawaban` | string | Huruf kunci: `A`, `B`, `C`, atau `D` |
-| `soal[].pembahasan` | string | Penjelasan jawaban benar |
+| `soal[].pembahasan` | string | Penjelasan jawaban benar (opsional) |
 
 Aturan penilaian:
 
@@ -161,26 +180,55 @@ Aturan penilaian:
 - Skor hanya ditampilkan, tidak disimpan. Muat ulang halaman berarti mengulang.
 - Menambah soal cukup menambah objek di array `soal`; nilai menyesuaikan
   otomatis, tetapi periksa kembali `batasLulus`.
-- Jika lulus tetapi modul berikutnya belum berstatus `tersedia`, tombol lanjut
-  mengarah ke `selesai.html?id=<nomor modul>`.
+- Setelah submit, jawaban dikunci dan pembahasan ditampilkan.
+- Jika lulus dan modul berikutnya `tersedia`, tombol lanjut menuju modul itu.
+  Jika tidak ada modul berikutnya yang tersedia, tombol lanjut menuju
+  `selesai.html?id=<nomor modul>`.
+- Jika belum lulus, tombol **Ulangi Modul** mereset kuis dan kembali ke tahap
+  Belajar.
 
 ## 6. Alur halaman modul
 
 1. **Belajar** — tab Teks memuat `materi.html`, tab Video memuat YouTube.
-2. **Latihan** — editor memakai `latihan.kodeAwal`; jika kosong, pakai
-   `meta.kodeAwal`. Tombol Periksa Output membandingkan hasil dengan
-   `outputDiharapkan`. Setelah output sesuai, tombol **Lanjut ke Kuis**
-   muncul.
-3. **Kuis** — lima soal, lalu skor dan pembahasan.
+   Daftar subbab dapat diklik dan disinkronkan dengan posisi gulir.
+2. **Latihan** — editor memakai `latihan.kodeAwal`. Tombol Periksa Output
+   membandingkan hasil dengan `outputDiharapkan`. Setelah output sesuai,
+   tombol **Lanjut ke Kuis** muncul.
+3. **Kuis** — soal dari `kuis.json`, lalu skor dan pembahasan.
 4. Jika lulus, lanjut ke modul berikutnya bila sudah tersedia; jika belum,
-   menuju `selesai.html?id=<nomor modul>`. Modul 8 menuju `selesai.html`.
-   Jika belum lulus, tombol Ulangi Modul mengembalikan ke tahap Belajar.
+   menuju `selesai.html?id=<nomor modul>`. Jika belum lulus, tombol Ulangi
+   Modul mengembalikan ke tahap Belajar.
 
-## 7. Menambah modul baru
+Tahap disimpan di hash URL: `#belajar`, `#latihan`, dan `#kuis`. Tidak ada
+penguncian urutan modul; semua modul yang `tersedia` dapat dibuka langsung.
+
+## 7. Halaman penutup
+
+`selesai.html?id=<nomor>` membaca katalog dan `meta.json` untuk menentukan:
+
+- id tidak valid → pesan kesalahan;
+- modul belum terdaftar → pesan kesalahan;
+- modul `segera` → “Modul belum tersedia”;
+- modul terakhir masih `segera` → “Mini project segera”;
+- modul tersedia dengan modul berikutnya tersedia → tautan lanjut;
+- modul tersedia tanpa modul berikutnya → “Kursus selesai”.
+
+## 8. Menambah modul baru
 
 1. Buat folder `data/modul-XX`.
 2. Isi `meta.json`, `materi.html`, `latihan.json`, `kuis.json`.
 3. Pastikan id subbab di materi sama dengan `meta.json`.
-4. Tambahkan entri di `data/daftar-modul.json` dan ubah status menjadi
+4. Tambahkan entri di `data/daftar-modul.json`.
+5. Uji modul dalam status `segera` terlebih dahulu, lalu ubah status menjadi
    `tersedia`.
-5. Uji alur: materi, latihan, kuis, lulus, lanjut modul.
+6. Uji alur: materi, subbab, video, latihan (gagal/benar), kuis
+   (gagal/lulus), dan tautan lanjut.
+
+## 9. Batasan Pyodide
+
+- `input()` belum terhubung ke `prompt()` browser. Hindari `input()` pada
+  latihan sampai dukungan `setStdin` ditambahkan.
+- Setiap program dijalankan di namespace baru; variabel dari eksekusi
+  sebelumnya tidak tersedia.
+- Setelah Stop atau timeout, Worker Pyodide dibuang dan perlu dimuat ulang
+  pada eksekusi berikutnya.
