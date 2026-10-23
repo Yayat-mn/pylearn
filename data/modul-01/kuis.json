@@ -3,59 +3,136 @@
   "batasLulus": 60,
   "soal": [
     {
-      "pertanyaan": "Python adalah ...",
+      "pertanyaan": "Python pertama kali dikembangkan oleh ...",
       "pilihan": [
-        "sistem operasi",
-        "bahasa pemrograman tingkat tinggi",
-        "aplikasi pengolah kata",
-        "mesin pencari"
-      ],
-      "jawaban": "B",
-      "pembahasan": "Python adalah bahasa pemrograman tingkat tinggi yang digunakan untuk memberikan instruksi kepada komputer."
-    },
-    {
-      "pertanyaan": "Fungsi yang digunakan untuk menampilkan keluaran ke layar adalah ...",
-      "pilihan": [
-        "input()",
-        "print()",
-        "len()",
-        "type()"
-      ],
-      "jawaban": "B",
-      "pembahasan": "print() menampilkan keluaran ke layar. input() digunakan untuk menerima masukan dari pengguna."
-    },
-    {
-      "pertanyaan": "Teks yang diapit tanda kutip dalam Python disebut ...",
-      "pilihan": [
-        "integer",
-        "variabel",
-        "string",
-        "komentar"
-      ],
-      "jawaban": "C",
-      "pembahasan": "String adalah teks yang diapit tanda kutip, baik kutip tunggal maupun kutip ganda."
-    },
-    {
-      "pertanyaan": "Pernyataan yang benar tentang huruf besar dan kecil dalam Python adalah ...",
-      "pilihan": [
-        "Python membedakan print dan Print.",
-        "Python menganggap print dan Print sama.",
-        "Python hanya menerima huruf kapital.",
-        "Python tidak memakai huruf dalam kode."
+        "Guido van Rossum",
+        "James Gosling",
+        "Bjarne Stroustrup",
+        "Dennis Ritchie"
       ],
       "jawaban": "A",
-      "pembahasan": "Python bersifat case-sensitive, sehingga print dan Print dianggap berbeda."
+      "pembahasan": "Python dikembangkan oleh Guido van Rossum. James Gosling dikenal sebagai pengembang Java, Bjarne Stroustrup mengembangkan C++, dan Dennis Ritchie mengembangkan bahasa C."
     },
     {
-      "pertanyaan": "Perintah yang paling tepat untuk menampilkan teks Halo, PYLearn! adalah ...",
+      "pertanyaan": "Nama Python diilhami oleh ...",
       "pilihan": [
-        "print(Halo, PYLearn!)",
-        "print \"Halo, PYLearn!\"",
-        "print(\"Halo, PYLearn!\")",
-        "Print(\"Halo, PYLearn!\")"
+        "ular piton",
+        "Monty Python's Flying Circus",
+        "logo resmi Python",
+        "nama laboratorium di Belanda"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Guido van Rossum memilih nama Python karena terinspirasi grup komedi Monty Python, bukan karena ular piton."
+    },
+    {
+      "pertanyaan": "Organisasi nirlaba yang mengelola pengembangan Python adalah ...",
+      "pilihan": [
+        "Python Software Foundation",
+        "CWI",
+        "GNU Foundation",
+        "World Wide Web Consortium"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Python Software Foundation (PSF) didirikan pada 2001 untuk mengelola dan mempromosikan pengembangan Python. CWI adalah tempat Guido memulai pengembangan Python."
+    },
+    {
+      "pertanyaan": "Python termasuk bahasa pemrograman ...",
+      "pilihan": [
+        "tingkat tinggi",
+        "tingkat rendah",
+        "assembly",
+        "bahasa markah"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Python adalah bahasa tingkat tinggi karena sintaksnya dirancang agar mudah dibaca manusia dan tidak berhubungan langsung dengan instruksi mesin."
+    },
+    {
+      "pertanyaan": "Python banyak digunakan untuk analisis data dan kecerdasan buatan karena ...",
+      "pilihan": [
+        "memiliki banyak pustaka pendukung",
+        "hanya dapat berjalan di Windows",
+        "wajib dikompilasi sebelum dijalankan",
+        "tidak mendukung pengolahan teks"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Python memiliki ekosistem pustaka yang luas, seperti pandas untuk data dan TensorFlow atau PyTorch untuk kecerdasan buatan."
+    },
+    {
+      "pertanyaan": "Manakah yang termasuk kekurangan Python?",
+      "pilihan": [
+        "lebih lambat dibanding bahasa terkompilasi pada beberapa kasus",
+        "sintaksnya sangat sulit dibaca",
+        "tidak dapat berjalan di berbagai sistem operasi",
+        "tidak memiliki komunitas pengguna"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Python memang lebih mudah ditulis, tetapi pada beberapa kasus eksekusinya lebih lambat dibanding bahasa yang dikompilasi menjadi kode mesin, seperti C atau C++."
+    },
+    {
+      "pertanyaan": "Penulisan program Hello World yang benar dalam Python adalah ...",
+      "pilihan": [
+        "print \"Hello, World!\"",
+        "Print(\"Hello, World!\")",
+        "print(\"Hello, World!\")",
+        "echo(\"Hello, World!\")"
       ],
       "jawaban": "C",
-      "pembahasan": "Teks harus diapit tanda kutip dan nama fungsi ditulis dengan huruf kecil: print(\"Halo, PYLearn!\")."
+      "pembahasan": "Python memakai fungsi print() dengan nama huruf kecil, tanda kurung, dan teks yang diapit tanda kutip."
+    },
+    {
+      "pertanyaan": "Perbedaan utama compiler dan interpreter adalah ...",
+      "pilihan": [
+        "compiler menerjemahkan seluruh kode sebelum dijalankan, interpreter menjalankan kode secara bertahap",
+        "compiler hanya digunakan untuk Python",
+        "interpreter tidak dapat membaca berkas kode",
+        "compiler tidak menghasilkan program yang dapat dijalankan"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Compiler menerjemahkan seluruh kode menjadi kode mesin sebelum program dijalankan, sedangkan interpreter menjalankan instruksi secara bertahap. Python umumnya dijalankan melalui interpreter."
+    },
+    {
+      "pertanyaan": "Saat instalasi Python di Windows, opsi yang perlu dicentang agar perintah python dikenali Command Prompt adalah ...",
+      "pilihan": [
+        "Add python.exe to PATH",
+        "Install launcher for all users",
+        "Disable path length limit",
+        "Associate files with Python"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Opsi Add python.exe to PATH menambahkan lokasi Python ke PATH Windows sehingga perintah python dapat dijalankan dari Command Prompt."
+    },
+    {
+      "pertanyaan": "Penanda utama mode interaktif Python adalah ...",
+      "pilihan": [
+        ">>>",
+        "#",
+        "$",
+        "//"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Mode interaktif menampilkan prompt >>>. Setiap instruksi yang diketik langsung dijalankan, lalu hasilnya ditampilkan."
+    },
+    {
+      "pertanyaan": "Editor PYLearn menjalankan kode dalam ...",
+      "pilihan": [
+        "mode interaktif",
+        "mode skrip",
+        "mode compiler",
+        "mode grafis"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Editor PYLearn menjalankan seluruh kode sebagai satu skrip, bukan satu per satu baris seperti mode interaktif."
+    },
+    {
+      "pertanyaan": "Fungsi input() mengembalikan nilai bertipe ...",
+      "pilihan": [
+        "integer",
+        "string",
+        "boolean",
+        "list"
+      ],
+      "jawaban": "B",
+      "pembahasan": "input() selalu mengembalikan string. Jika ingin memperoleh angka, hasilnya perlu dikonversi, misalnya dengan int(input())."
     }
   ]
 }

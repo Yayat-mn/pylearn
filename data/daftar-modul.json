@@ -6,8 +6,8 @@
       "id": 1,
       "slug": "modul-01",
       "judul": "Pengenalan Python",
-      "deskripsi": "Mengenal bahasa pemrograman Python, kegunaannya, serta cara menulis dan menjalankan program Python sederhana.",
-      "jumlahSubbab": 4,
+      "deskripsi": "Mengenal sejarah, fitur, kelebihan dan kekurangan, cara kerja, instalasi, serta cara menjalankan program Python pertama.",
+      "jumlahSubbab": 6,
       "status": "tersedia"
     },
     {

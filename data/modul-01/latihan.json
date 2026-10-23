@@ -1,11 +1,12 @@
 {
-  "judul": "Latihan Modul 1: Tiga Baris Pertama",
-  "instruksi": "Lengkapi program agar menampilkan tiga baris berikut:\nHalo, PYLearn!\nSaya sedang belajar Python.\nPython itu menyenangkan!",
+  "judul": "Latihan Modul 1: Program Pertama dalam Mode Skrip",
+  "instruksi": "Tulis program yang dijalankan dalam mode skrip dan menampilkan tiga baris berikut:\nHalo, PYLearn!\nSaya sedang belajar Python.\nPython itu menyenangkan!",
   "kodeAwal": "# Lengkapi program di bawah ini\nprint(\"Halo, PYLearn!\")",
   "outputDiharapkan": "Halo, PYLearn!\nSaya sedang belajar Python.\nPython itu menyenangkan!",
   "petunjuk": [
     "Gunakan tiga baris print(), satu baris untuk setiap kalimat.",
-    "Setiap teks di dalam print() harus diapit tanda kutip ganda atau tunggal."
+    "Setiap teks di dalam print() harus diapit tanda kutip ganda atau tunggal.",
+    "Pastikan setiap print() berada di baris baru, lalu klik Periksa Output."
   ],
   "kunci": "print(\"Halo, PYLearn!\")\nprint(\"Saya sedang belajar Python.\")\nprint(\"Python itu menyenangkan!\")"
 }
