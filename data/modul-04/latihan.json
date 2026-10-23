@@ -1,0 +1,12 @@
+{
+  "judul": "Latihan Modul 4: Grade Nilai dan Status SIM",
+  "instruksi": "Lengkapi program untuk menentukan grade nilai dan status pembuatan SIM, lalu tampilkan:\nGrade: B\nStatus SIM: Belum boleh membuat SIM",
+  "kodeAwal": "# Lengkapi percabangan berikut.\nnilai = 85\numur = 16\n\n# Tentukan grade nilai.\n\n# Tentukan status pembuatan SIM.",
+  "outputDiharapkan": "Grade: B\nStatus SIM: Belum boleh membuat SIM",
+  "petunjuk": [
+    "Gunakan if-elif-else untuk menentukan grade. Periksa kondisi dari nilai tertinggi ke terendah.",
+    "Gunakan if-else untuk memeriksa apakah umur lebih besar atau sama dengan 17.",
+    "Simpan hasil ke variabel grade dan status_sim, lalu tampilkan dengan print(\"Grade:\", grade) dan print(\"Status SIM:\", status_sim)."
+  ],
+  "kunci": "nilai = 85\numur = 16\n\nif nilai >= 90:\n    grade = \"A\"\nelif nilai >= 80:\n    grade = \"B\"\nelif nilai >= 70:\n    grade = \"C\"\nelse:\n    grade = \"D\"\n\nif umur >= 17:\n    status_sim = \"Boleh membuat SIM\"\nelse:\n    status_sim = \"Belum boleh membuat SIM\"\n\nprint(\"Grade:\", grade)\nprint(\"Status SIM:\", status_sim)"
+}

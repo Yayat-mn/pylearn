@@ -1,0 +1,43 @@
+{
+  "id": 4,
+  "slug": "modul-04",
+  "judul": "Percabangan",
+  "deskripsi": "Mengatur alur program dengan percabangan if, if-else, dan if-elif-else.",
+  "tujuanPembelajaran": [
+    "Mahasiswa mampu menjelaskan konsep percabangan.",
+    "Mahasiswa mampu menulis if dengan indentasi dan tanda titik dua yang benar.",
+    "Mahasiswa mampu menggunakan if-else untuk dua pilihan keputusan.",
+    "Mahasiswa mampu menggunakan if-elif-else untuk lebih dari dua pilihan.",
+    "Mahasiswa mampu menerapkan percabangan pada kasus sederhana seperti pengecekan umur dan grade nilai."
+  ],
+  "subbab": [
+    {
+      "id": "4.1",
+      "judul": "Konsep Percabangan dan Struktur if"
+    },
+    {
+      "id": "4.2",
+      "judul": "Indentasi, Titik Dua, dan Operator Relasi"
+    },
+    {
+      "id": "4.3",
+      "judul": "Percabangan if-else"
+    },
+    {
+      "id": "4.4",
+      "judul": "Percabangan if-elif-else"
+    },
+    {
+      "id": "4.5",
+      "judul": "Penerapan Percabangan"
+    }
+  ],
+  "video": {
+    "youtubeId": "Ixuw0M3lySI",
+    "judul": "Percabangan IF - ELIF - ELSE — Jagat Koding"
+  },
+  "kodeAwal": "print(\"Belajar percabangan Python\")",
+  "fileMateri": "materi.html",
+  "fileLatihan": "latihan.json",
+  "fileKuis": "kuis.json"
+}

@@ -1,0 +1,326 @@
+<article class="materi-python">
+  <section id="subbab-4-1" aria-labelledby="judul-4-1">
+    <h2 id="judul-4-1">4.1 Konsep Percabangan dan Struktur if</h2>
+    <p>
+      Percabangan atau <em>control flow</em> adalah cara program memilih jalur
+      yang akan dijalankan berdasarkan suatu kondisi. Dengan percabangan,
+      program tidak harus menjalankan semua perintah secara berurutan; sebagian
+      perintah hanya dijalankan jika kondisinya terpenuhi.
+    </p>
+    <p>
+      Struktur dasar percabangan di Python adalah <code>if</code>. Perintah di
+      dalam blok <code>if</code> akan dijalankan apabila kondisi bernilai
+      <code>True</code>. Jika kondisi bernilai <code>False</code>, blok tersebut
+      dilewati.
+    </p>
+    <pre><code class="language-python">nilai = 80
+
+if nilai &gt;= 75:
+    print("Lulus")</code></pre>
+    <p>
+      Pada contoh tersebut, <code>nilai &gt;= 75</code> bernilai
+      <code>True</code> karena 80 lebih besar atau sama dengan 75. Akibatnya,
+      perintah <code>print("Lulus")</code> dijalankan.
+    </p>
+    <p>
+      Jika nilai variabel diubah menjadi <code>60</code>, kondisi
+      <code>nilai &gt;= 75</code> bernilai <code>False</code>. Blok
+      <code>if</code> akan dilewati sehingga tidak ada output yang ditampilkan.
+    </p>
+    <pre><code class="language-python">nilai = 60
+
+if nilai &gt;= 75:
+    print("Lulus")</code></pre>
+    <p>
+      Pada editor PYLearn, nilai variabel diisi langsung di dalam kode karena
+      fungsi <code>input()</code> belum didukung. Kamu dapat mengubah nilai
+      variabel untuk mencoba kondisi yang berbeda.
+    </p>
+  </section>
+
+  <section id="subbab-4-2" aria-labelledby="judul-4-2">
+    <h2 id="judul-4-2">4.2 Indentasi, Titik Dua, dan Operator Relasi</h2>
+    <p>
+      Penulisan <code>if</code> di Python memiliki aturan yang harus diperhatikan
+      agar program dapat berjalan.
+    </p>
+
+    <h3>Tanda titik dua</h3>
+    <p>
+      Baris <code>if</code> harus diakhiri dengan tanda titik dua
+      (<code>:</code>). Tanda tersebut menandakan bahwa baris berikutnya adalah
+      awal blok perintah.
+    </p>
+    <pre><code class="language-python">umur = 20
+
+if umur &gt;= 17:
+    print("Boleh membuat SIM")</code></pre>
+    <p>
+      Jika tanda titik dua dihilangkan, Python akan menampilkan
+      <strong>SyntaxError</strong>.
+    </p>
+
+    <h3>Indentasi</h3>
+    <p>
+      Perintah yang berada di dalam blok <code>if</code> harus diberi indentasi,
+      yaitu menjorok ke dalam. Python mengenali blok berdasarkan indentasi.
+      Empat spasi adalah ukuran yang umum dan disarankan.
+    </p>
+    <pre><code class="language-python">nilai = 90
+
+if nilai &gt;= 75:
+    print("Nilai memenuhi syarat")
+    print("Selamat!")</code></pre>
+    <p>
+      Kedua perintah <code>print()</code> berada di dalam blok yang sama karena
+      memiliki indentasi yang sama. Jika baris perintah di dalam
+      <code>if</code> tidak diberi indentasi, Python akan menampilkan
+      <strong>IndentationError</strong>.
+    </p>
+    <p>
+      Hindari mencampur tab dan spasi dalam satu blok. Gunakan salah satu secara
+      konsisten, misalnya empat spasi untuk setiap tingkat indentasi.
+    </p>
+
+    <h3>Operator relasi dalam kondisi</h3>
+    <p>
+      Kondisi pada <code>if</code> umumnya menggunakan operator relasi atau
+      perbandingan. Operator <code>==</code> digunakan untuk memeriksa kesamaan,
+      sedangkan <code>=</code> digunakan untuk mengisi nilai ke variabel.
+    </p>
+    <pre><code class="language-python">jawaban = "ya"
+
+if jawaban == "ya":
+    print("Silakan lanjut")</code></pre>
+    <p>
+      Contoh lain adalah perbandingan angka dengan operator
+      <code>&gt;=</code>, <code>&lt;=</code>, <code>&gt;</code>, dan
+      <code>&lt;</code>.
+    </p>
+    <pre><code class="language-python">suhu = 38
+
+if suhu &gt; 37:
+    print("Suhu tubuh tinggi")</code></pre>
+    <p>
+      Hasil dari operator relasi adalah boolean, yaitu <code>True</code> atau
+      <code>False</code>. Nilai boolean itulah yang menentukan apakah blok
+      <code>if</code> dijalankan atau dilewati.
+    </p>
+  </section>
+
+  <section id="subbab-4-3" aria-labelledby="judul-4-3">
+    <h2 id="judul-4-3">4.3 Percabangan if-else</h2>
+    <p>
+      Struktur <code>if-else</code> digunakan ketika terdapat dua pilihan
+      keputusan. Jika kondisi pada <code>if</code> bernilai
+      <code>True</code>, blok <code>if</code> dijalankan. Jika bernilai
+      <code>False</code>, blok <code>else</code> yang dijalankan.
+    </p>
+    <pre><code class="language-python">nilai = 60
+
+if nilai &gt;= 75:
+    print("Lulus")
+else:
+    print("Remedial")</code></pre>
+    <p>
+      Karena <code>60 &gt;= 75</code> bernilai <code>False</code>, program
+      menjalankan blok <code>else</code> dan menampilkan
+      <code>Remedial</code>.
+    </p>
+    <p>
+      Perhatikan bahwa <code>else</code> tidak memiliki kondisi dan tetap
+      diakhiri dengan tanda titik dua. Blok <code>else</code> hanya dijalankan
+      jika semua kondisi sebelumnya tidak terpenuhi.
+    </p>
+    <p>
+      Dalam satu struktur <code>if-else</code>, hanya satu blok yang
+      dijalankan. Blok <code>if</code> dan blok <code>else</code> tidak akan
+      dijalankan bersamaan.
+    </p>
+    <pre><code class="language-python">umur = 20
+
+if umur &gt;= 17:
+    print("Boleh membuat SIM")
+else:
+    print("Belum boleh membuat SIM")</code></pre>
+  </section>
+
+  <section id="subbab-4-4" aria-labelledby="judul-4-4">
+    <h2 id="judul-4-4">4.4 Percabangan if-elif-else</h2>
+    <p>
+      Jika pilihan keputusan lebih dari dua, gunakan <code>elif</code>.
+      <code>elif</code> adalah singkatan dari <em>else if</em>, yaitu kondisi
+      tambahan yang diperiksa ketika kondisi sebelumnya tidak terpenuhi.
+    </p>
+    <pre><code class="language-python">nilai = 85
+
+if nilai &gt;= 90:
+    grade = "A"
+elif nilai &gt;= 80:
+    grade = "B"
+elif nilai &gt;= 70:
+    grade = "C"
+else:
+    grade = "D"
+
+print("Grade:", grade)  # Grade: B</code></pre>
+    <p>
+      Python memeriksa kondisi dari atas ke bawah. Kondisi
+      <code>nilai &gt;= 90</code> bernilai <code>False</code>, lalu kondisi
+      <code>nilai &gt;= 80</code> bernilai <code>True</code>. Program
+      menjalankan blok tersebut dan melewati <code>elif</code> serta
+      <code>else</code> berikutnya.
+    </p>
+
+    <h3>Urutan kondisi penting</h3>
+    <p>
+      Kondisi pada <code>if-elif-else</code> sebaiknya disusun dari yang paling
+      spesifik atau paling ketat. Pada contoh grade, urutan dimulai dari nilai
+      tertinggi. Jika kondisi <code>nilai &gt;= 70</code> diletakkan paling
+      atas, nilai 95 akan langsung dianggap <code>C</code> karena kondisi itu
+      sudah bernilai <code>True</code>.
+    </p>
+    <pre><code class="language-python">nilai = 95
+
+if nilai &gt;= 70:
+    grade = "C"
+elif nilai &gt;= 80:
+    grade = "B"
+elif nilai &gt;= 90:
+    grade = "A"
+else:
+    grade = "D"
+
+print("Grade:", grade)  # Grade: C</code></pre>
+    <p>
+      Contoh tersebut menunjukkan mengapa urutan kondisi harus diperhatikan.
+      Meskipun nilainya 95, program berhenti pada kondisi pertama yang bernilai
+      <code>True</code>.
+    </p>
+    <p>
+      Blok <code>else</code> bersifat opsional. Jika semua kondisi bernilai
+      <code>False</code> dan tidak ada <code>else</code>, tidak ada blok
+      tambahan yang dijalankan.
+    </p>
+    <pre><code class="language-python">nilai = 85
+
+if nilai &gt;= 90:
+    print("Sangat baik")
+elif nilai &gt;= 80:
+    print("Baik")
+elif nilai &gt;= 70:
+    print("Cukup")</code></pre>
+    <p>
+      Pada contoh terakhir, nilai 85 memenuhi kondisi kedua sehingga program
+      menampilkan <code>Baik</code>. Jika nilainya 60, tidak ada kondisi yang
+      terpenuhi dan program tidak menampilkan apa pun.
+    </p>
+  </section>
+
+  <section id="subbab-4-5" aria-labelledby="judul-4-5">
+    <h2 id="judul-4-5">4.5 Penerapan Percabangan</h2>
+    <p>
+      Percabangan dapat digunakan untuk menyelesaikan berbagai kasus sederhana.
+      Perhatikan empat contoh berikut.
+    </p>
+
+    <h3>Remedi nilai</h3>
+    <pre><code class="language-python">nilai = 65
+
+if nilai &gt;= 75:
+    print("Lulus")
+else:
+    print("Remedial")</code></pre>
+    <p>
+      Karena nilai 65 belum mencapai batas 75, program menampilkan
+      <code>Remedial</code>.
+    </p>
+
+    <h3>Bonus dan diskon belanja</h3>
+    <pre><code class="language-python">total = 600000
+
+if total &gt;= 500000:
+    bonus = "Voucher 50.000"
+    diskon = total * 0.10
+else:
+    bonus = "Tidak ada bonus"
+    diskon = 0
+
+print("Bonus:", bonus)
+print("Diskon:", diskon)
+print("Total bayar:", total - diskon)</code></pre>
+    <p>
+      Karena total belanja mencapai 500000, pelanggan mendapatkan bonus dan
+      diskon 10 persen. Diskonnya adalah 60000.0 sehingga total yang dibayar
+      menjadi 540000.0.
+    </p>
+
+    <h3>Batas usia membuat SIM</h3>
+    <pre><code class="language-python">umur = 20
+
+if umur &gt;= 17:
+    print("Boleh membuat SIM")
+else:
+    print("Belum boleh membuat SIM")</code></pre>
+    <p>
+      Dengan umur 20, kondisi <code>umur &gt;= 17</code> bernilai
+      <code>True</code> sehingga program menampilkan bahwa pengguna boleh
+      membuat SIM.
+    </p>
+
+    <h3>Penentuan grade nilai</h3>
+    <pre><code class="language-python">nilai = 85
+
+if nilai &gt;= 90:
+    grade = "A"
+elif nilai &gt;= 80:
+    grade = "B"
+elif nilai &gt;= 70:
+    grade = "C"
+else:
+    grade = "D"
+
+print("Grade:", grade)</code></pre>
+    <p>
+      Nilai 85 berada pada rentang 80 sampai 89 sehingga grade yang diperoleh
+      adalah <code>B</code>.
+    </p>
+    <p>
+      Pola percabangan tersebut akan digunakan pada latihan Modul 4. Kamu akan
+      menentukan grade nilai dan status pembuatan SIM berdasarkan variabel yang
+      sudah disediakan.
+    </p>
+  </section>
+
+  <section aria-labelledby="rangkuman">
+    <h2 id="rangkuman">Rangkuman</h2>
+    <ul>
+      <li>
+        Percabangan membuat program memilih jalur berdasarkan kondisi. Struktur
+        dasar di Python adalah <code>if</code>.
+      </li>
+      <li>
+        Baris <code>if</code> harus diakhiri tanda titik dua, dan blok di
+        dalamnya harus diberi indentasi yang konsisten.
+      </li>
+      <li>
+        Operator <code>==</code> digunakan untuk membandingkan nilai, sedangkan
+        <code>=</code> digunakan untuk mengisi nilai ke variabel.
+      </li>
+      <li>
+        <code>if-else</code> digunakan untuk dua pilihan keputusan. Blok
+        <code>else</code> dijalankan jika kondisi <code>if</code> bernilai
+        <code>False</code>.
+      </li>
+      <li>
+        <code>if-elif-else</code> digunakan untuk lebih dari dua pilihan.
+        Kondisi diperiksa dari atas ke bawah dan blok pertama yang bernilai
+        <code>True</code> akan dijalankan.
+      </li>
+      <li>
+        Percabangan dapat diterapkan pada kasus remedi, bonus dan diskon
+        belanja, batas usia membuat SIM, serta penentuan grade nilai.
+      </li>
+    </ul>
+  </section>
+</article>

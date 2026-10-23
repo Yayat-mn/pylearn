@@ -1,0 +1,160 @@
+{
+  "judul": "Kuis Modul 4: Percabangan",
+  "batasLulus": 60,
+  "soal": [
+    {
+      "pertanyaan": "Percabangan dalam program digunakan untuk ...",
+      "pilihan": [
+        "mengulang perintah yang sama",
+        "memilih jalur berdasarkan kondisi",
+        "menyimpan banyak data sekaligus",
+        "mengubah tipe data"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Percabangan membuat program memilih jalur yang dijalankan berdasarkan kondisi. Jika kondisi bernilai True, blok if dijalankan; jika False, blok tersebut dilewati atau blok else yang dijalankan."
+    },
+    {
+      "pertanyaan": "Pada kode if nilai >= 75: print(\"Lulus\"), blok print dijalankan jika ...",
+      "pilihan": [
+        "nilai kurang dari 75",
+        "nilai sama dengan 75 saja",
+        "kondisi bernilai True",
+        "blok selalu dijalankan"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Perintah di dalam blok if hanya dijalankan ketika kondisi bernilai True. Jika kondisi False, blok tersebut dilewati."
+    },
+    {
+      "pertanyaan": "Tanda yang wajib ditulis di akhir baris if adalah ...",
+      "pilihan": [
+        "titik koma",
+        "titik dua",
+        "kurung kurawal",
+        "tanda sama dengan"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Baris if harus diakhiri tanda titik dua (:). Tanda tersebut menandakan awal blok perintah yang diindentasi."
+    },
+    {
+      "pertanyaan": "Bagaimana penulisan perintah di dalam blok if yang benar?",
+      "pilihan": [
+        "rata kiri tanpa spasi",
+        "diapit tanda kurung",
+        "diakhiri titik koma",
+        "diberi indentasi"
+      ],
+      "jawaban": "D",
+      "pembahasan": "Perintah di dalam blok if harus diberi indentasi, umumnya empat spasi. Python mengenali blok berdasarkan indentasi yang konsisten."
+    },
+    {
+      "pertanyaan": "Jika nilai = 60, kode if nilai >= 75: print(\"Lulus\") else: print(\"Remedial\") akan menampilkan ...",
+      "pilihan": [
+        "Remedial",
+        "Lulus",
+        "60",
+        "error"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Kondisi 60 >= 75 bernilai False, sehingga blok else dijalankan dan program menampilkan Remedial."
+    },
+    {
+      "pertanyaan": "Perbedaan operator = dan == yang benar adalah ...",
+      "pilihan": [
+        "keduanya membandingkan nilai",
+        "= membandingkan dan == mengisi nilai",
+        "= mengisi nilai dan == membandingkan",
+        "keduanya mengisi nilai"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Tanda = adalah operator penugasan untuk mengisi nilai ke variabel. Tanda == adalah operator perbandingan untuk memeriksa kesamaan."
+    },
+    {
+      "pertanyaan": "Pada struktur if-else, jika kondisi if bernilai False, blok yang dijalankan adalah ...",
+      "pilihan": [
+        "blok if",
+        "blok else",
+        "program berhenti",
+        "semua blok"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Blok else dijalankan ketika kondisi if bernilai False. Dalam if-else, hanya satu blok yang dijalankan."
+    },
+    {
+      "pertanyaan": "Pada struktur if-elif-else, Python memeriksa kondisi ...",
+      "pilihan": [
+        "dari bawah ke atas",
+        "semua kondisi selalu dijalankan",
+        "hanya blok else",
+        "dari atas ke bawah sampai kondisi pertama bernilai True"
+      ],
+      "jawaban": "D",
+      "pembahasan": "Python memeriksa kondisi if dan elif dari atas ke bawah. Blok pertama yang kondisinya True dijalankan, lalu kondisi berikutnya dilewati."
+    },
+    {
+      "pertanyaan": "Jika nilai = 85, kode if nilai >= 90: grade = \"A\" elif nilai >= 80: grade = \"B\" elif nilai >= 70: grade = \"C\" else: grade = \"D\" menghasilkan grade ...",
+      "pilihan": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Kondisi nilai >= 90 False, tetapi nilai >= 80 True. Program menjalankan blok tersebut sehingga grade menjadi B."
+    },
+    {
+      "pertanyaan": "Jika umur = 16, kode if umur >= 17: print(\"Boleh membuat SIM\") else: print(\"Belum boleh membuat SIM\") menampilkan ...",
+      "pilihan": [
+        "Boleh membuat SIM",
+        "16",
+        "Belum boleh membuat SIM",
+        "error"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Karena 16 >= 17 bernilai False, program menjalankan blok else dan menampilkan Belum boleh membuat SIM."
+    },
+    {
+      "pertanyaan": "Jika total = 600000, kode if total >= 500000: diskon = total * 0.10 else: diskon = 0 menghasilkan diskon sebesar ...",
+      "pilihan": [
+        "0",
+        "6000.0",
+        "60000.0",
+        "540000.0"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Kondisi total >= 500000 bernilai True. Diskon dihitung 600000 * 0.10 = 60000.0."
+    },
+    {
+      "pertanyaan": "Jika nilai = 65, kode if nilai >= 75: print(\"Lulus\") else: print(\"Remedial\") menampilkan ...",
+      "pilihan": [
+        "Remedial",
+        "Lulus",
+        "65",
+        "error"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Karena 65 belum mencapai 75, kondisi if bernilai False sehingga blok else dijalankan dan menampilkan Remedial."
+    },
+    {
+      "pertanyaan": "Penyebab utama IndentationError pada percabangan adalah ...",
+      "pilihan": [
+        "lupa menulis titik dua",
+        "memakai operator ==",
+        "variabel berupa string",
+        "indentasi tidak konsisten"
+      ],
+      "jawaban": "D",
+      "pembahasan": "IndentationError terjadi ketika indentasi blok tidak konsisten, misalnya mencampur tab dan spasi atau tidak menjorokkan perintah di dalam if."
+    },
+    {
+      "pertanyaan": "Jika kondisi if bernilai False dan tidak ada blok else, maka ...",
+      "pilihan": [
+        "blok if tetap dijalankan",
+        "blok if dilewati",
+        "program selalu error",
+        "blok if diulang"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Tanpa else, program hanya melewati blok if ketika kondisinya False dan melanjutkan perintah setelah struktur percabangan."
+    }
+  ]
+}

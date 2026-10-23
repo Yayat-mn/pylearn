@@ -30,9 +30,9 @@
       "id": 4,
       "slug": "modul-04",
       "judul": "Percabangan",
-      "deskripsi": "Mengatur alur program dengan if, elif, dan else.",
-      "jumlahSubbab": 3,
-      "status": "segera"
+      "deskripsi": "Mengatur alur program dengan percabangan if, if-else, dan if-elif-else.",
+      "jumlahSubbab": 5,
+      "status": "tersedia"
     },
     {
       "id": 5,
