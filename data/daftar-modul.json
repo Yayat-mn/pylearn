@@ -22,9 +22,9 @@
       "id": 3,
       "slug": "modul-03",
       "judul": "Operator Python",
-      "deskripsi": "Menggunakan operator aritmetika, perbandingan, dan logika.",
-      "jumlahSubbab": 3,
-      "status": "segera"
+      "deskripsi": "Menggunakan operator aritmetika, perbandingan, dan penugasan dalam perhitungan sederhana.",
+      "jumlahSubbab": 5,
+      "status": "tersedia"
     },
     {
       "id": 4,

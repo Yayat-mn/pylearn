@@ -1,0 +1,12 @@
+{
+  "judul": "Latihan Modul 3: Perhitungan dengan Operator",
+  "instruksi": "Lengkapi perhitungan berikut dan tampilkan hasilnya:\nLuas kubus: 150\nVolume balok: 240\nEnergi potensial: 98.0\nRupiah: 160000",
+  "kodeAwal": "# Lengkapi perhitungan dan tampilkan hasilnya.\nsisi = 5\npanjang = 10\nlebar = 6\ntinggi = 4\nmassa = 2\ngravitasi = 9.8\nketinggian = 5\ndolar = 10\nkurs = 16000",
+  "outputDiharapkan": "Luas kubus: 150\nVolume balok: 240\nEnergi potensial: 98.0\nRupiah: 160000",
+  "petunjuk": [
+    "Gunakan operator * untuk perkalian.",
+    "Luas kubus = 6 * sisi * sisi; volume balok = panjang * lebar * tinggi; energi potensial = massa * gravitasi * ketinggian; rupiah = dolar * kurs.",
+    "Tampilkan empat hasil dengan label Luas kubus:, Volume balok:, Energi potensial:, dan Rupiah:, lalu klik Periksa Output."
+  ],
+  "kunci": "sisi = 5\npanjang = 10\nlebar = 6\ntinggi = 4\nmassa = 2\ngravitasi = 9.8\nketinggian = 5\ndolar = 10\nkurs = 16000\n\nluas_kubus = 6 * sisi * sisi\nvolume_balok = panjang * lebar * tinggi\nenergi_potensial = massa * gravitasi * ketinggian\nrupiah = dolar * kurs\n\nprint(\"Luas kubus:\", luas_kubus)\nprint(\"Volume balok:\", volume_balok)\nprint(\"Energi potensial:\", energi_potensial)\nprint(\"Rupiah:\", rupiah)"
+}

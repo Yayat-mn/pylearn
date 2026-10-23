@@ -1,0 +1,314 @@
+<article class="materi-python">
+  <section id="subbab-3-1" aria-labelledby="judul-3-1">
+    <h2 id="judul-3-1">3.1 Operator, Operand, Unary, dan Binary</h2>
+    <p>
+      Operator adalah simbol atau tanda yang memberi tahu Python operasi apa
+      yang harus dilakukan. Nilai atau variabel yang dikenai operasi disebut
+      <strong>operand</strong>.
+    </p>
+    <pre><code class="language-python">hasil = 10 + 5
+print(hasil)  # 15</code></pre>
+    <p>
+      Pada ekspresi <code>10 + 5</code>, angka <code>10</code> dan
+      <code>5</code> adalah operand, sedangkan <code>+</code> adalah operator.
+      Operand tidak harus berupa angka langsung; operand juga dapat berupa
+      variabel.
+    </p>
+    <pre><code class="language-python">umur = 20
+batas = 17
+
+print(umur >= batas)  # True</code></pre>
+    <p>
+      Pada contoh tersebut, <code>umur</code> dan <code>batas</code> menjadi
+      operand, sedangkan <code>&gt;=</code> adalah operator perbandingan.
+    </p>
+
+    <h3>Operator unary</h3>
+    <p>
+      Operator <strong>unary</strong> hanya membutuhkan satu operand. Contoh
+      yang paling sederhana adalah tanda minus dan plus untuk menentukan tanda
+      sebuah nilai.
+    </p>
+    <pre><code class="language-python">nilai = 10
+
+print(-nilai)  # -10
+print(+nilai)  # 10</code></pre>
+    <p>
+      Tanda minus unary mengubah tanda nilai, sedangkan tanda plus unary tidak
+      mengubah nilainya.
+    </p>
+
+    <h3>Operator binary</h3>
+    <p>
+      Operator <strong>binary</strong> membutuhkan dua operand. Operator
+      aritmatika dan perbandingan yang akan dipelajari berikutnya termasuk
+      operator binary.
+    </p>
+    <pre><code class="language-python">print(10 + 5)   # 15
+print(10 &gt; 5)   # True</code></pre>
+    <p>
+      Sebagian operator dapat berperan sebagai unary atau binary tergantung
+      konteksnya. Tanda <code>-</code> pada <code>-5</code> adalah unary,
+      sedangkan pada <code>10 - 5</code> adalah binary.
+    </p>
+  </section>
+
+  <section id="subbab-3-2" aria-labelledby="judul-3-2">
+    <h2 id="judul-3-2">3.2 Operator Aritmatika</h2>
+    <p>
+      Operator aritmatika digunakan untuk melakukan perhitungan matematika.
+      Python menyediakan lima operator aritmatika dasar yang akan kita pelajari
+      pada modul ini.
+    </p>
+    <ul>
+      <li><code>+</code> untuk penjumlahan.</li>
+      <li><code>-</code> untuk pengurangan.</li>
+      <li><code>*</code> untuk perkalian.</li>
+      <li><code>/</code> untuk pembagian.</li>
+      <li><code>%</code> untuk sisa hasil pembagian (modulus).</li>
+    </ul>
+
+    <h3>Penjumlahan dan pengurangan</h3>
+    <pre><code class="language-python">a = 10
+b = 3
+
+print(a + b)  # 13
+print(a - b)  # 7
+print(b - a)  # -7</code></pre>
+    <p>
+      Operator <code>+</code> juga dapat menggabungkan dua string, seperti yang
+      sudah dipelajari pada Modul 2. Jenis operand menentukan hasil operasinya.
+    </p>
+
+    <h3>Perkalian dan pembagian</h3>
+    <pre><code class="language-python">print(10 * 3)  # 30
+print(10 / 2)  # 5.0
+print(10 / 4)  # 2.5</code></pre>
+    <p>
+      Pembagian dengan operator <code>/</code> selalu menghasilkan tipe float,
+      termasuk ketika hasilnya bilangan bulat. Contohnya <code>10 / 2</code>
+      menghasilkan <code>5.0</code>, bukan <code>5</code>.
+    </p>
+
+    <h3>Modulus</h3>
+    <p>
+      Operator <code>%</code> menghasilkan sisa hasil pembagian. Operator ini
+      berguna untuk mengetahui apakah sebuah bilangan habis dibagi atau tidak.
+    </p>
+    <pre><code class="language-python">print(10 % 3)  # 1
+print(12 % 4)  # 0
+print(17 % 5)  # 2</code></pre>
+    <p>
+      Jika hasil modulus adalah <code>0</code>, bilangan tersebut habis dibagi.
+      Contohnya <code>12 % 4</code> menghasilkan <code>0</code>.
+    </p>
+
+    <h3>Urutan operasi dan tanda kurung</h3>
+    <p>
+      Jika terdapat beberapa operator dalam satu ekspresi, perkalian dan
+      pembagian dikerjakan lebih dahulu daripada penjumlahan dan pengurangan.
+      Gunakan tanda kurung jika ingin mengubah urutan tersebut.
+    </p>
+    <pre><code class="language-python">print(2 + 3 * 4)    # 14
+print((2 + 3) * 4)  # 20</code></pre>
+  </section>
+
+  <section id="subbab-3-3" aria-labelledby="judul-3-3">
+    <h2 id="judul-3-3">3.3 Operator Perbandingan</h2>
+    <p>
+      Operator perbandingan digunakan untuk membandingkan dua nilai. Hasil dari
+      perbandingan adalah nilai boolean, yaitu <code>True</code> atau
+      <code>False</code>. Operator perbandingan akan banyak dipakai pada materi
+      percabangan.
+    </p>
+    <ul>
+      <li><code>==</code> untuk memeriksa apakah dua nilai sama.</li>
+      <li><code>!=</code> untuk memeriksa apakah dua nilai berbeda.</li>
+      <li><code>&gt;</code> untuk memeriksa apakah nilai kiri lebih besar.</li>
+      <li><code>&lt;</code> untuk memeriksa apakah nilai kiri lebih kecil.</li>
+      <li>
+        <code>&gt;=</code> untuk memeriksa apakah nilai kiri lebih besar atau
+        sama dengan nilai kanan.
+      </li>
+      <li>
+        <code>&lt;=</code> untuk memeriksa apakah nilai kiri lebih kecil atau
+        sama dengan nilai kanan.
+      </li>
+    </ul>
+
+    <pre><code class="language-python">umur = 20
+
+print(umur == 20)  # True
+print(umur != 20)  # False
+print(umur &gt; 17)   # True
+print(umur &lt; 17)   # False
+print(umur &gt;= 20)  # True
+print(umur &lt;= 19)  # False</code></pre>
+
+    <h3>Perbedaan = dan ==</h3>
+    <p>
+      Tanda <code>=</code> adalah operator penugasan untuk mengisi nilai ke
+      variabel. Tanda <code>==</code> adalah operator perbandingan untuk
+      memeriksa apakah dua nilai sama.
+    </p>
+    <pre><code class="language-python">nilai = 10       # mengisi nilai 10 ke variabel nilai
+print(nilai == 10)  # True, karena 10 sama dengan 10
+print(nilai == 5)   # False</code></pre>
+    <p>
+      Perbandingan juga dapat dilakukan pada string. Perbandingan string
+      bersifat case-sensitive, sehingga huruf besar dan kecil dibedakan.
+    </p>
+    <pre><code class="language-python">print("Python" == "Python")  # True
+print("Python" == "python")  # False</code></pre>
+  </section>
+
+  <section id="subbab-3-4" aria-labelledby="judul-3-4">
+    <h2 id="judul-3-4">3.4 Operator Penugasan</h2>
+    <p>
+      Operator penugasan digunakan untuk memberikan nilai ke variabel. Operator
+      <code>=</code> adalah bentuk dasar yang sudah digunakan pada modul
+      sebelumnya.
+    </p>
+    <pre><code class="language-python">skor = 10
+print(skor)  # 10</code></pre>
+
+    <h3>Operator penugasan ringkas</h3>
+    <p>
+      Python menyediakan bentuk ringkas untuk mengubah nilai variabel
+      berdasarkan nilai sebelumnya. Bentuk ini disebut operator penugasan
+      gabungan.
+    </p>
+    <ul>
+      <li><code>+=</code> menambahkan nilai ke variabel.</li>
+      <li><code>-=</code> mengurangi nilai variabel.</li>
+      <li><code>*=</code> mengalikan nilai variabel.</li>
+      <li><code>/=</code> membagi nilai variabel.</li>
+      <li><code>%=</code> mengambil sisa hasil pembagian variabel.</li>
+    </ul>
+
+    <pre><code class="language-python">nilai = 20
+
+nilai += 5
+print(nilai)  # 25
+
+nilai -= 3
+print(nilai)  # 22
+
+nilai *= 2
+print(nilai)  # 44
+
+nilai /= 4
+print(nilai)  # 11.0
+
+nilai %= 3
+print(nilai)  # 2.0</code></pre>
+
+    <p>
+      Setiap bentuk ringkas memiliki bentuk panjang yang setara. Contohnya
+      <code>nilai += 5</code> sama dengan <code>nilai = nilai + 5</code>,
+      sedangkan <code>nilai *= 2</code> sama dengan
+      <code>nilai = nilai * 2</code>.
+    </p>
+    <p>
+      Perhatikan bahwa <code>/=</code> menghasilkan nilai float. Setelah
+      <code>nilai /= 4</code>, nilai <code>44</code> berubah menjadi
+      <code>11.0</code>, bukan <code>11</code>.
+    </p>
+    <p>
+      Jangan menukar operator penugasan <code>=</code> dengan operator
+      perbandingan <code>==</code>. Keduanya memiliki fungsi yang berbeda.
+    </p>
+  </section>
+
+  <section id="subbab-3-5" aria-labelledby="judul-3-5">
+    <h2 id="judul-3-5">3.5 Penerapan Operator pada Perhitungan</h2>
+    <p>
+      Operator aritmatika dapat digunakan untuk menyelesaikan perhitungan
+      sederhana. Perhatikan empat contoh berikut.
+    </p>
+
+    <h3>Luas permukaan kubus</h3>
+    <p>
+      Luas permukaan kubus dihitung dengan rumus
+      <code>6 * sisi * sisi</code>.
+    </p>
+    <pre><code class="language-python">sisi = 5
+luas_kubus = 6 * sisi * sisi
+
+print("Luas kubus:", luas_kubus)  # Luas kubus: 150</code></pre>
+
+    <h3>Volume balok</h3>
+    <p>
+      Volume balok dihitung dengan rumus
+      <code>panjang * lebar * tinggi</code>.
+    </p>
+    <pre><code class="language-python">panjang = 10
+lebar = 6
+tinggi = 4
+
+volume_balok = panjang * lebar * tinggi
+print("Volume balok:", volume_balok)  # Volume balok: 240</code></pre>
+
+    <h3>Energi potensial</h3>
+    <p>
+      Energi potensial dihitung dengan rumus
+      <code>massa * gravitasi * ketinggian</code>.
+    </p>
+    <pre><code class="language-python">massa = 2
+gravitasi = 9.8
+ketinggian = 5
+
+energi_potensial = massa * gravitasi * ketinggian
+print("Energi potensial:", energi_potensial)  # Energi potensial: 98.0</code></pre>
+
+    <h3>Konversi dolar ke rupiah</h3>
+    <p>
+      Nilai rupiah dihitung dengan mengalikan jumlah dolar dengan kurs.
+    </p>
+    <pre><code class="language-python">dolar = 10
+kurs = 16000
+
+rupiah = dolar * kurs
+print("Rupiah:", rupiah)  # Rupiah: 160000</code></pre>
+
+    <p>
+      Pola perhitungan tersebut akan digunakan pada latihan Modul 3. Kamu akan
+      menghitung keempat nilai dan menampilkannya dengan label yang sesuai.
+    </p>
+  </section>
+
+  <section aria-labelledby="rangkuman">
+    <h2 id="rangkuman">Rangkuman</h2>
+    <ul>
+      <li>
+        Operator adalah simbol yang melakukan operasi, sedangkan operand adalah
+        nilai atau variabel yang dikenai operasi.
+      </li>
+      <li>
+        Operator unary membutuhkan satu operand, seperti <code>-5</code>.
+        Operator binary membutuhkan dua operand, seperti <code>10 + 5</code>.
+      </li>
+      <li>
+        Operator aritmatika meliputi <code>+</code>, <code>-</code>,
+        <code>*</code>, <code>/</code>, dan <code>%</code>. Pembagian
+        <code>/</code> menghasilkan float, sedangkan <code>%</code> menghasilkan
+        sisa pembagian.
+      </li>
+      <li>
+        Operator perbandingan meliputi <code>==</code>, <code>!=</code>,
+        <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, dan
+        <code>&lt;=</code>. Hasilnya berupa <code>True</code> atau
+        <code>False</code>.
+      </li>
+      <li>
+        Operator penugasan <code>=</code> mengisi nilai, sedangkan
+        <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, dan
+        <code>%=</code> mengubah nilai berdasarkan nilai sebelumnya.
+      </li>
+      <li>
+        Operator aritmatika dapat diterapkan pada perhitungan luas kubus, volume
+        balok, energi potensial, dan konversi dolar ke rupiah.
+      </li>
+    </ul>
+  </section>
+</article>

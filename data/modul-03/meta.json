@@ -1,0 +1,41 @@
+{
+  "id": 3,
+  "slug": "modul-03",
+  "judul": "Operator Python",
+  "deskripsi": "Menggunakan operator aritmetika, perbandingan, dan penugasan dalam perhitungan sederhana.",
+  "tujuanPembelajaran": [
+    "Mahasiswa mampu menjelaskan pengertian operator dan operand serta perbedaan operator unary dan binary.",
+    "Mahasiswa mampu menyebutkan macam-macam operator beserta fungsi dan penggunaannya.",
+    "Mahasiswa mampu menerapkan operator aritmatika, perbandingan, dan penugasan dalam program sederhana."
+  ],
+  "subbab": [
+    {
+      "id": "3.1",
+      "judul": "Operator, Operand, Unary, dan Binary"
+    },
+    {
+      "id": "3.2",
+      "judul": "Operator Aritmatika"
+    },
+    {
+      "id": "3.3",
+      "judul": "Operator Perbandingan"
+    },
+    {
+      "id": "3.4",
+      "judul": "Operator Penugasan"
+    },
+    {
+      "id": "3.5",
+      "judul": "Penerapan Operator pada Perhitungan"
+    }
+  ],
+  "video": {
+    "youtubeId": "eITMfEEW95k",
+    "judul": "Operator Aritmatika — Jagat Koding"
+  },
+  "kodeAwal": "print(\"Belajar operator Python\")",
+  "fileMateri": "materi.html",
+  "fileLatihan": "latihan.json",
+  "fileKuis": "kuis.json"
+}

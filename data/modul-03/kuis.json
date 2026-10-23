@@ -1,0 +1,160 @@
+{
+  "judul": "Kuis Modul 3: Operator Python",
+  "batasLulus": 60,
+  "soal": [
+    {
+      "pertanyaan": "Dalam ekspresi 10 + 5, angka 10 dan 5 disebut ...",
+      "pilihan": [
+        "operator",
+        "operand",
+        "variabel",
+        "tipe data"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Operand adalah nilai atau variabel yang dikenai operasi. Pada 10 + 5, angka 10 dan 5 adalah operand, sedangkan + adalah operator."
+    },
+    {
+      "pertanyaan": "Operator yang hanya membutuhkan satu operand disebut ...",
+      "pilihan": [
+        "binary",
+        "unary",
+        "ternary",
+        "penugasan"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Operator unary hanya membutuhkan satu operand, misalnya -5 atau +nilai. Operator binary membutuhkan dua operand."
+    },
+    {
+      "pertanyaan": "Berikut yang merupakan contoh operator binary adalah ...",
+      "pilihan": [
+        "-5",
+        "+7",
+        "10 + 5",
+        "\"Halo\""
+      ],
+      "jawaban": "C",
+      "pembahasan": "10 + 5 memakai operator + dengan dua operand, yaitu 10 dan 5. Bentuk -5 dan +7 adalah contoh operator unary."
+    },
+    {
+      "pertanyaan": "Hasil dari 17 % 5 adalah ...",
+      "pilihan": [
+        "2",
+        "3",
+        "3.4",
+        "12"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Operator % menghasilkan sisa pembagian. 17 dibagi 5 menghasilkan 3 dengan sisa 2, sehingga 17 % 5 = 2."
+    },
+    {
+      "pertanyaan": "Hasil dari 10 / 4 adalah ...",
+      "pilihan": [
+        "2",
+        "2.5",
+        "3",
+        "2.0"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Operator / melakukan pembagian dan hasilnya bertipe float. Karena 10 dibagi 4 adalah 2.5, hasilnya 2.5."
+    },
+    {
+      "pertanyaan": "Operator yang menghasilkan nilai True atau False adalah ...",
+      "pilihan": [
+        "aritmatika",
+        "perbandingan",
+        "penugasan",
+        "unary"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Operator perbandingan seperti ==, !=, >, <, >=, dan <= menghasilkan nilai boolean True atau False."
+    },
+    {
+      "pertanyaan": "Perbandingan yang tepat untuk menyatakan bahwa 10 sama dengan 10 adalah ...",
+      "pilihan": [
+        "10 = 10",
+        "10 == 10",
+        "10 != 10",
+        "10 <= 5"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Tanda == adalah operator perbandingan untuk memeriksa kesamaan. Tanda = adalah operator penugasan untuk mengisi nilai."
+    },
+    {
+      "pertanyaan": "Jika x = 5, maka hasil dari x > 3 adalah ...",
+      "pilihan": [
+        "True",
+        "False",
+        "2",
+        "8"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Nilai x adalah 5. Karena 5 lebih besar daripada 3, hasil perbandingan x > 3 adalah True."
+    },
+    {
+      "pertanyaan": "Jika nilai = 10, setelah perintah nilai += 5 dijalankan, nilai menjadi ...",
+      "pilihan": [
+        "5",
+        "10",
+        "15",
+        "50"
+      ],
+      "jawaban": "C",
+      "pembahasan": "nilai += 5 sama dengan nilai = nilai + 5. Karena nilai awal 10, hasilnya 10 + 5 = 15."
+    },
+    {
+      "pertanyaan": "Bentuk panjang dari skor *= 2 adalah ...",
+      "pilihan": [
+        "skor = 2",
+        "skor = skor * 2",
+        "skor = skor + 2",
+        "skor = skor / 2"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Operator *= mengalikan nilai variabel dengan operand di kanan. Bentuk panjangnya adalah skor = skor * 2."
+    },
+    {
+      "pertanyaan": "Jika nilai = 10, setelah perintah nilai %= 3 dijalankan, nilai menjadi ...",
+      "pilihan": [
+        "1",
+        "3",
+        "10",
+        "13"
+      ],
+      "jawaban": "A",
+      "pembahasan": "nilai %= 3 sama dengan nilai = nilai % 3. Sisa pembagian 10 dibagi 3 adalah 1."
+    },
+    {
+      "pertanyaan": "Hasil dari 2 + 3 * 4 adalah ...",
+      "pilihan": [
+        "20",
+        "14",
+        "24",
+        "9"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Perkalian dikerjakan sebelum penjumlahan. Jadi 3 * 4 = 12, lalu 2 + 12 = 14."
+    },
+    {
+      "pertanyaan": "Rumus volume balok dengan panjang p, lebar l, dan tinggi t adalah ...",
+      "pilihan": [
+        "p + l + t",
+        "p * l + t",
+        "p * l * t",
+        "p / l / t"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Volume balok diperoleh dengan mengalikan panjang, lebar, dan tinggi, yaitu p * l * t."
+    },
+    {
+      "pertanyaan": "Jika massa = 2, gravitasi = 9.8, dan ketinggian = 5, maka massa * gravitasi * ketinggian menghasilkan ...",
+      "pilihan": [
+        "16.8",
+        "98.0",
+        "19.6",
+        "49.0"
+      ],
+      "jawaban": "B",
+      "pembahasan": "2 * 9.8 = 19.6, lalu 19.6 * 5 = 98.0. Nilai tersebut merupakan hasil perhitungan energi potensial pada contoh modul."
+    }
+  ]
+}
