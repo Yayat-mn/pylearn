@@ -1,0 +1,434 @@
+<article class="materi-python">
+  <section id="subbab-2-1" aria-labelledby="judul-2-1">
+    <h2 id="judul-2-1">2.1 Variabel: Konsep, Aturan Penamaan, dan Penghapusan</h2>
+    <p>
+      Variabel adalah nama yang digunakan untuk merujuk pada sebuah nilai yang
+      disimpan di memori komputer. Dengan variabel, kita dapat menyimpan data,
+      memakainya kembali, dan mengubahnya saat program berjalan.
+    </p>
+    <pre><code class="language-python">nama = "Rani"
+umur = 20
+
+print(nama)
+print(umur)</code></pre>
+    <p>
+      Tanda <code>=</code> pada contoh di atas adalah operator penugasan
+      (<em>assignment</em>), bukan tanda sama dengan dalam matematika. Perintah
+      <code>nama = "Rani"</code> berarti nilai <code>"Rani"</code> diberikan
+      kepada variabel <code>nama</code>.
+    </p>
+    <p>
+      Perbandingan nilai menggunakan tanda <code>==</code> akan dibahas pada
+      Modul 3. Untuk sekarang, ingat bahwa <code>=</code> dipakai untuk
+      mengisi nilai ke variabel.
+    </p>
+
+    <h3>Python tidak memerlukan deklarasi tipe</h3>
+    <p>
+      Pada Python, kita tidak perlu menuliskan tipe data saat membuat variabel.
+      Tipe data ditentukan secara otomatis dari nilai yang diberikan. Python
+      juga bersifat <strong>dinamis</strong>, sehingga tipe sebuah variabel
+      dapat berubah jika diberi nilai dengan tipe yang berbeda.
+    </p>
+    <pre><code class="language-python">nilai = 10
+print(type(nilai))  # tipe int
+
+nilai = "sepuluh"
+print(type(nilai))  # tipe str</code></pre>
+    <p>
+      Fungsi <code>type()</code> berguna untuk memeriksa tipe data sebuah nilai
+      atau variabel.
+    </p>
+
+    <h3>Aturan penamaan variabel</h3>
+    <ul>
+      <li>
+        Nama variabel harus diawali huruf atau garis bawah (<code>_</code>),
+        bukan angka.
+      </li>
+      <li>
+        Nama hanya boleh berisi huruf, angka, dan garis bawah. Spasi serta
+        tanda baca lain tidak diperbolehkan.
+      </li>
+      <li>
+        Python bersifat <strong>case-sensitive</strong>, sehingga
+        <code>nama</code> dan <code>Nama</code> adalah dua variabel yang
+        berbeda.
+      </li>
+      <li>
+        Nama tidak boleh sama dengan kata kunci Python, misalnya
+        <code>if</code>, <code>else</code>, <code>for</code>,
+        <code>while</code>, <code>def</code>, <code>class</code>,
+        <code>return</code>, <code>True</code>, <code>False</code>, dan
+        <code>None</code>.
+      </li>
+      <li>
+        Gunakan nama yang menjelaskan isi variabel. Penulisan dengan garis
+        bawah, seperti <code>nama_siswa</code>, lebih mudah dibaca daripada
+        <code>ns</code>.
+      </li>
+    </ul>
+    <pre><code class="language-python">nama_siswa = "Rani"  # valid
+_umur = 20           # valid
+
+# 2nama = "Rani"     # tidak valid: diawali angka
+# nama siswa = "Rani"  # tidak valid: mengandung spasi
+# class = "A"        # tidak valid: class adalah kata kunci</code></pre>
+
+    <h3>Menghapus variabel</h3>
+    <p>
+      Variabel dapat dihapus dengan perintah <code>del</code>. Setelah dihapus,
+      variabel tersebut tidak dapat digunakan lagi. Jika kita mencoba
+      mengaksesnya, Python akan menampilkan <strong>NameError</strong>.
+    </p>
+    <pre><code class="language-python">umur = 20
+print(umur)
+
+del umur
+
+# print(umur)  # NameError: name 'umur' is not defined</code></pre>
+    <p>
+      <code>NameError</code> juga dapat muncul jika kita salah mengetik nama
+      variabel atau memakai variabel yang belum pernah dibuat.
+    </p>
+  </section>
+
+  <section id="subbab-2-2" aria-labelledby="judul-2-2">
+    <h2 id="judul-2-2">2.2 Tipe Data Number</h2>
+    <p>
+      Python memiliki beberapa tipe data angka. Pada tahap awal, kita perlu
+      mengenal dua tipe yang paling sering digunakan, yaitu
+      <strong>integer</strong> dan <strong>float</strong>.
+    </p>
+
+    <h3>Integer (int)</h3>
+    <p>
+      Integer adalah bilangan bulat, baik positif, negatif, maupun nol.
+      Contohnya <code>10</code>, <code>-5</code>, dan <code>0</code>.
+    </p>
+    <pre><code class="language-python">jumlah = 10
+suhu = -5
+print(jumlah)
+print(suhu)
+print(type(jumlah))  # int</code></pre>
+
+    <h3>Float</h3>
+    <p>
+      Float adalah bilangan yang memiliki bagian desimal. Contohnya
+      <code>3.14</code>, <code>-0.5</code>, dan <code>160.0</code>. Perhatikan
+      bahwa <code>10</code> bertipe integer, sedangkan <code>10.0</code>
+      bertipe float.
+    </p>
+    <pre><code class="language-python">berat = 62.5
+rasio = -0.25
+print(berat)
+print(type(berat))  # float</code></pre>
+
+    <h3>Notasi eksponen</h3>
+    <p>
+      Bilangan yang sangat besar atau sangat kecil dapat ditulis dengan notasi
+      eksponen. Huruf <code>e</code> berarti &ldquo;kali sepuluh pangkat&rdquo;.
+      Hasil dari notasi eksponen bertipe float.
+    </p>
+    <pre><code class="language-python">print(1.5e3)   # 1500.0
+print(2e-3)    # 0.002
+print(1e6)     # 1000000.0</code></pre>
+
+    <h3>Operator penugasan =</h3>
+    <p>
+      Operator <code>=</code> dipakai untuk memberikan nilai ke variabel.
+      Nilai variabel dapat diganti dengan nilai baru selama program berjalan.
+    </p>
+    <pre><code class="language-python">umur = 20
+print(umur)
+
+umur = 21
+print(umur)</code></pre>
+    <p>
+      Pada contoh tersebut, nilai <code>20</code> diganti dengan
+      <code>21</code>. Operator <code>==</code> yang digunakan untuk
+      membandingkan dua nilai akan dipelajari pada Modul 3.
+    </p>
+
+    <h3>Mengisi beberapa variabel sekaligus</h3>
+    <p>
+      Python memungkinkan beberapa variabel diisi dalam satu baris. Jumlah
+      variabel di kiri harus sama dengan jumlah nilai di kanan.
+    </p>
+    <pre><code class="language-python">nama, umur, tinggi = "Rani", 20, 160.5
+
+print(nama)
+print(umur)
+print(tinggi)
+print(type(tinggi))  # float</code></pre>
+    <p>
+      Beberapa variabel juga dapat diberi nilai yang sama dalam satu baris.
+    </p>
+    <pre><code class="language-python">x = y = 100
+print(x, y)</code></pre>
+    <p>
+      Jika jumlah nilai tidak sesuai, Python akan menampilkan error. Contohnya
+      <code>a, b = 1, 2, 3</code> memiliki tiga nilai untuk dua variabel.
+    </p>
+  </section>
+
+  <section id="subbab-2-3" aria-labelledby="judul-2-3">
+    <h2 id="judul-2-3">2.3 Tipe Data String</h2>
+    <p>
+      String adalah tipe data untuk menyimpan teks, termasuk huruf, angka yang
+      ditulis sebagai teks, spasi, dan simbol. String ditulis dengan tanda
+      petik satu (<code>'...'</code>) atau tanda petik ganda
+      (<code>"..."</code>).
+    </p>
+    <pre><code class="language-python">nama = "Rani"
+kota = 'Bandung'
+kalimat = "Dia berkata, 'Halo!'"
+
+print(nama)
+print(kota)
+print(kalimat)</code></pre>
+    <p>
+      Jika teks mengandung tanda petik, gunakan jenis tanda petik yang berbeda
+      atau awali tanda petik di dalam teks dengan garis miring terbalik
+      (<code>\</code>).
+    </p>
+
+    <h3>String multibaris</h3>
+    <p>
+      String yang terdiri dari beberapa baris dapat dibuat dengan tiga tanda
+      petik, baik tiga tanda petik ganda maupun tiga tanda petik tunggal.
+    </p>
+    <pre><code class="language-python">paragraf = """Python adalah bahasa pemrograman.
+Sintaksnya mudah dibaca.
+Python banyak digunakan untuk analisis data."""
+
+print(paragraf)</code></pre>
+
+    <h3>Penggabungan string</h3>
+    <p>
+      Dua string atau lebih dapat digabungkan dengan operator <code>+</code>.
+      Jika ingin ada spasi, tambahkan string berisi spasi di antara keduanya.
+    </p>
+    <pre><code class="language-python">nama_depan = "Rani"
+nama_belakang = "Putri"
+
+nama_lengkap = nama_depan + " " + nama_belakang
+print(nama_lengkap)  # Rani Putri</code></pre>
+
+    <h3>Indeks string</h3>
+    <p>
+      Setiap karakter dalam string memiliki posisi yang disebut indeks. Indeks
+      dimulai dari <code>0</code>. Indeks negatif digunakan untuk menghitung
+      dari belakang, dengan <code>-1</code> sebagai karakter terakhir.
+    </p>
+    <pre><code class="language-python">teks = "Python"
+
+print(teks[0])   # P
+print(teks[1])   # y
+print(teks[-1])  # n</code></pre>
+    <p>
+      Urutan indeks untuk <code>"Python"</code> adalah
+      <code>P=0</code>, <code>y=1</code>, <code>t=2</code>,
+      <code>h=3</code>, <code>o=4</code>, dan <code>n=5</code>.
+    </p>
+
+    <h3>Pemotongan string</h3>
+    <p>
+      Pemotongan atau <em>slicing</em> mengambil sebagian string dengan pola
+      <code>[mulai:selesai]</code>. Karakter pada posisi
+      <code>selesai</code> tidak ikut diambil. Jika salah satu bagian
+      dikosongkan, Python memakai awal atau akhir string.
+    </p>
+    <pre><code class="language-python">teks = "Python"
+
+print(teks[1:4])  # yth
+print(teks[:3])   # Pyt
+print(teks[3:])   # hon
+print(teks[-3:])  # hon</code></pre>
+    <p>
+      Pemotongan menghasilkan string baru dan tidak mengubah string asli.
+    </p>
+  </section>
+
+  <section id="subbab-2-4" aria-labelledby="judul-2-4">
+    <h2 id="judul-2-4">2.4 Tipe Data Boolean</h2>
+    <p>
+      Boolean adalah tipe data yang hanya memiliki dua nilai, yaitu
+      <strong>True</strong> dan <strong>False</strong>. Penulisannya harus
+      diawali huruf kapital. Boolean banyak digunakan untuk menyatakan status
+      atau kondisi, misalnya apakah program aktif atau apakah syarat sudah
+      terpenuhi.
+    </p>
+    <pre><code class="language-python">aktif = True
+lulus = False
+
+print(aktif)
+print(lulus)
+print(type(aktif))  # bool</code></pre>
+    <p>
+      Menuliskan <code>true</code> atau <code>false</code> dengan huruf kecil
+      seluruhnya tidak dikenali sebagai nilai boolean Python. Gunakan
+      <code>True</code> dan <code>False</code>.
+    </p>
+
+    <h3>Nilai yang dianggap benar atau salah</h3>
+    <p>
+      Saat diubah menjadi boolean, beberapa nilai memiliki arti khusus.
+      Angka <code>0</code> dan string kosong <code>""</code> dianggap
+      <strong>False</strong>, sedangkan angka selain nol dan string yang
+      berisi teks dianggap <strong>True</strong>.
+    </p>
+    <pre><code class="language-python">print(bool(0))       # False
+print(bool(1))       # True
+print(bool(""))      # False
+print(bool("0"))     # True
+print(bool("Python"))  # True</code></pre>
+    <p>
+      Perhatikan bahwa <code>"0"</code> adalah string yang berisi satu
+      karakter, bukan angka nol. Karena string tersebut tidak kosong, nilainya
+      dianggap <strong>True</strong>.
+    </p>
+  </section>
+
+  <section id="subbab-2-5" aria-labelledby="judul-2-5">
+    <h2 id="judul-2-5">2.5 Konversi Tipe Data</h2>
+    <p>
+      Konversi tipe data dilakukan ketika kita ingin mengubah nilai dari satu
+      tipe ke tipe lain. Python menyediakan beberapa fungsi bawaan untuk
+      keperluan tersebut.
+    </p>
+
+    <h3>int()</h3>
+    <p>
+      Fungsi <code>int()</code> mengubah nilai menjadi integer. Jika nilai
+      berupa float, bagian desimalnya dipotong. Jika nilai berupa string, isi
+      string harus berupa bilangan bulat yang valid.
+    </p>
+    <pre><code class="language-python">print(int("25"))   # 25
+print(int(3.9))    # 3
+print(int(-2.8))   # -2
+
+# int("abc")       # ValueError</code></pre>
+
+    <h3>float()</h3>
+    <p>
+      Fungsi <code>float()</code> mengubah nilai menjadi float. Fungsi ini
+      dapat menerima angka atau string yang berisi bilangan desimal.
+    </p>
+    <pre><code class="language-python">print(float("3.14"))  # 3.14
+print(float(10))      # 10.0</code></pre>
+
+    <h3>str()</h3>
+    <p>
+      Fungsi <code>str()</code> mengubah nilai menjadi string. Fungsi ini
+      sering dipakai saat kita ingin menggabungkan angka dengan teks memakai
+      operator <code>+</code>.
+    </p>
+    <pre><code class="language-python">umur = 20
+print("Umur: " + str(umur))
+
+print(str(42))    # "42"
+print(str(3.14))  # "3.14"</code></pre>
+
+    <h3>bool()</h3>
+    <p>
+      Fungsi <code>bool()</code> mengubah nilai menjadi boolean. Angka nol dan
+      string kosong menjadi <code>False</code>; nilai lain umumnya menjadi
+      <code>True</code>.
+    </p>
+    <pre><code class="language-python">print(bool(0))     # False
+print(bool(1))     # True
+print(bool(""))    # False
+print(bool("0"))   # True</code></pre>
+
+    <h3>chr()</h3>
+    <p>
+      Fungsi <code>chr()</code> mengubah kode bilangan bulat menjadi karakter
+      Unicode. Contohnya kode <code>65</code> mewakili huruf
+      <code>A</code>.
+    </p>
+    <pre><code class="language-python">print(chr(65))  # A
+print(chr(97))  # a</code></pre>
+
+    <h3>bin(), hex(), dan oct()</h3>
+    <p>
+      Fungsi-fungsi ini mengubah bilangan bulat menjadi string representasi
+      biner, heksadesimal, dan oktal. Hasilnya berupa string yang diawali
+      <code>0b</code> untuk biner, <code>0x</code> untuk heksadesimal, dan
+      <code>0o</code> untuk oktal.
+    </p>
+    <pre><code class="language-python">print(bin(10))   # 0b1010
+print(hex(255))  # 0xff
+print(oct(8))    # 0o10</code></pre>
+    <p>
+      Jika konversi tidak dapat dilakukan, Python dapat menampilkan
+      <strong>ValueError</strong>, misalnya pada <code>int("abc")</code>.
+      Pastikan isi string sesuai dengan tipe tujuan.
+    </p>
+
+    <h3>Konversi tidak mengubah variabel asli</h3>
+    <p>
+      Fungsi konversi menghasilkan nilai baru. Variabel asli tetap memiliki
+      tipe dan nilai sebelumnya kecuali kita memberikan hasil konversi kembali
+      ke variabel tersebut.
+    </p>
+    <pre><code class="language-python">angka = "10"
+hasil = int(angka)
+
+print(type(angka))  # str
+print(type(hasil))  # int</code></pre>
+
+    <h3>Contoh gabungan</h3>
+    <pre><code class="language-python">nama = "Rani"
+umur = 20
+tinggi = 160.5
+aktif = True
+
+print("Nama:", nama)
+print("Umur:", umur)
+print("Tinggi:", tinggi)
+print("Aktif:", aktif)</code></pre>
+    <p>
+      Kode tersebut menggunakan variabel dari beberapa tipe data. Pola serupa
+      akan kamu gunakan pada latihan Modul 2.
+    </p>
+  </section>
+
+  <section aria-labelledby="rangkuman">
+    <h2 id="rangkuman">Rangkuman</h2>
+    <ul>
+      <li>
+        Variabel adalah nama yang merujuk pada nilai. Python tidak memerlukan
+        deklarasi tipe, dan tipe variabel dapat berubah.
+      </li>
+      <li>
+        Nama variabel harus diawali huruf atau garis bawah, tidak boleh
+        mengandung spasi, bersifat case-sensitive, dan tidak boleh memakai kata
+        kunci Python.
+      </li>
+      <li>
+        Variabel dapat dihapus dengan <code>del</code>. Mengakses variabel yang
+        sudah dihapus atau belum dibuat menimbulkan <code>NameError</code>.
+      </li>
+      <li>
+        Tipe number yang umum adalah <code>int</code> untuk bilangan bulat dan
+        <code>float</code> untuk bilangan desimal. Notasi eksponen seperti
+        <code>1.5e3</code> menghasilkan float.
+      </li>
+      <li>
+        String ditulis dengan tanda petik, dapat berupa string multibaris,
+        dapat digabungkan dengan <code>+</code>, serta dapat diakses dengan
+        indeks dan pemotongan.
+      </li>
+      <li>
+        Boolean hanya bernilai <code>True</code> atau <code>False</code>.
+        Angka nol dan string kosong dianggap <code>False</code>.
+      </li>
+      <li>
+        Fungsi konversi meliputi <code>int()</code>, <code>float()</code>,
+        <code>str()</code>, <code>bool()</code>, <code>chr()</code>,
+        <code>bin()</code>, <code>hex()</code>, dan <code>oct()</code>.
+      </li>
+    </ul>
+  </section>
+</article>

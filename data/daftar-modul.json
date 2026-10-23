@@ -14,9 +14,9 @@
       "id": 2,
       "slug": "modul-02",
       "judul": "Variabel dan Tipe Data",
-      "deskripsi": "Menyimpan nilai dalam variabel serta mengenali tipe data dasar.",
-      "jumlahSubbab": 3,
-      "status": "segera"
+      "deskripsi": "Menyimpan nilai dalam variabel, mengenali number, string, boolean, serta mengubah tipe data dengan fungsi konversi.",
+      "jumlahSubbab": 5,
+      "status": "tersedia"
     },
     {
       "id": 3,

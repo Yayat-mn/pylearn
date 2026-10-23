@@ -1,0 +1,43 @@
+{
+  "id": 2,
+  "slug": "modul-02",
+  "judul": "Variabel dan Tipe Data",
+  "deskripsi": "Menyimpan nilai dalam variabel, mengenali number, string, boolean, serta mengubah tipe data dengan fungsi konversi.",
+  "tujuanPembelajaran": [
+    "Mahasiswa mampu menjelaskan konsep variabel dan menerapkan aturan penamaannya.",
+    "Mahasiswa mampu membuat dan menghapus variabel.",
+    "Mahasiswa mampu membedakan tipe data number, string, dan boolean.",
+    "Mahasiswa mampu memanipulasi string dengan penggabungan, indeks, dan pemotongan.",
+    "Mahasiswa mampu mengubah tipe data dengan fungsi konversi."
+  ],
+  "subbab": [
+    {
+      "id": "2.1",
+      "judul": "Variabel: Konsep, Aturan Penamaan, dan Penghapusan"
+    },
+    {
+      "id": "2.2",
+      "judul": "Tipe Data Number"
+    },
+    {
+      "id": "2.3",
+      "judul": "Tipe Data String"
+    },
+    {
+      "id": "2.4",
+      "judul": "Tipe Data Boolean"
+    },
+    {
+      "id": "2.5",
+      "judul": "Konversi Tipe Data"
+    }
+  ],
+  "video": {
+    "youtubeId": "5isscmD6CZw",
+    "judul": "Variable dan Tipe Data — Jagat Koding"
+  },
+  "kodeAwal": "print(\"Belajar variabel dan tipe data\")",
+  "fileMateri": "materi.html",
+  "fileLatihan": "latihan.json",
+  "fileKuis": "kuis.json"
+}

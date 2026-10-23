@@ -1,0 +1,12 @@
+{
+  "judul": "Latihan Modul 2: Profil Mahasiswa",
+  "instruksi": "Lengkapi program sehingga menampilkan profil berikut:\nNama: Rani\nUmur: 20\nTinggi: 160.5\nAktif: True",
+  "kodeAwal": "# Lengkapi program profil berikut.\nnama = \"Rani\"\numur = 20\ntinggi = 160.5\naktif = True\n\n# Tampilkan nama, umur, tinggi, dan status aktif.",
+  "outputDiharapkan": "Nama: Rani\nUmur: 20\nTinggi: 160.5\nAktif: True",
+  "petunjuk": [
+    "Gunakan variabel nama, umur, tinggi, dan aktif yang sudah disediakan.",
+    "Setiap print() dapat menerima beberapa argumen yang dipisahkan koma, misalnya print(\"Nama:\", nama).",
+    "Tampilkan empat baris sesuai urutan dan ejaan output yang diminta, lalu klik Periksa Output."
+  ],
+  "kunci": "nama = \"Rani\"\numur = 20\ntinggi = 160.5\naktif = True\n\nprint(\"Nama:\", nama)\nprint(\"Umur:\", umur)\nprint(\"Tinggi:\", tinggi)\nprint(\"Aktif:\", aktif)"
+}

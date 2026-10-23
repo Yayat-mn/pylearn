@@ -37,6 +37,7 @@ Lalu buka:
 
 - Dashboard: <http://localhost:8000/index.html>
 - Modul 1: <http://localhost:8000/modul.html?id=1>
+- Modul 2: <http://localhost:8000/modul.html?id=2>
 - Halaman penutup: <http://localhost:8000/selesai.html?id=1>
 
 Alternatif tanpa Python: ekstensi **Live Server** di VS Code, lalu klik
