@@ -41,6 +41,7 @@ Lalu buka:
 - Modul 3: <http://localhost:8000/modul.html?id=3>
 - Modul 4: <http://localhost:8000/modul.html?id=4>
 - Modul 5: <http://localhost:8000/modul.html?id=5>
+- Modul 6: <http://localhost:8000/modul.html?id=6>
 - Halaman penutup: <http://localhost:8000/selesai.html?id=1>
 
 Alternatif tanpa Python: ekstensi **Live Server** di VS Code, lalu klik

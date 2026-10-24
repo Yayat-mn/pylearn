@@ -1,0 +1,573 @@
+<article class="materi-python">
+  <section id="subbab-6-1" aria-labelledby="judul-6-1">
+    <h2 id="judul-6-1">6.1 Mengenal Struktur Data: List, Tuple, dan Dictionary</h2>
+    <p>
+      Struktur data adalah cara menyimpan dan mengatur banyak nilai dalam satu
+      tempat. Selama ini kita menyimpan satu nilai pada satu variabel. Dengan
+      struktur data, beberapa nilai dapat dikelompokkan dan diolah bersama-sama.
+    </p>
+    <p>
+      Python memiliki tiga struktur data dasar yang akan dipelajari pada modul
+      ini, yaitu <strong>list</strong>, <strong>tuple</strong>, dan
+      <strong>dictionary</strong>. Ketiganya dapat menyimpan banyak item, tetapi
+      memiliki sifat dan cara akses yang berbeda.
+    </p>
+    <pre><code class="language-python">buah_list = ["apel", "jeruk", "mangga"]
+buah_tuple = ("apel", "jeruk", "mangga")
+buah_dict = {"apel": 10000, "jeruk": 8000, "mangga": 12000}
+
+print(buah_list[0])
+print(buah_tuple[1])
+print(buah_dict["mangga"])
+print(len(buah_list))
+print(len(buah_tuple))
+print(len(buah_dict))</code></pre>
+    <p>
+      List dan tuple menyimpan item secara berurutan sehingga diakses dengan
+      indeks angka. Dictionary menyimpan pasangan <em>key-value</em> sehingga
+      diakses dengan key, bukan dengan urutan posisi.
+    </p>
+
+    <h3>Perbandingan singkat</h3>
+    <ul>
+      <li>
+        <strong>List</strong> ditulis dengan kurung siku
+        <code>[ ... ]</code>. List bersifat <em>mutable</em>, yaitu isinya dapat
+        diubah setelah dibuat. Item list memiliki indeks mulai dari 0.
+      </li>
+      <li>
+        <strong>Tuple</strong> ditulis dengan kurung biasa
+        <code>( ... )</code>. Tuple bersifat <em>immutable</em>, yaitu isinya
+        tidak dapat diubah setelah dibuat. Item tuple juga memiliki indeks.
+      </li>
+      <li>
+        <strong>Dictionary</strong> ditulis dengan kurung kurawal
+        <code>{ ... }</code>. Setiap item terdiri atas key dan value. Dictionary
+        bersifat mutable, tetapi aksesnya menggunakan key yang unik.
+      </li>
+    </ul>
+    <p>
+      Ketiganya dapat berisi tipe data campuran. Namun, key pada dictionary harus
+      berupa tipe data yang tidak dapat diubah, misalnya string atau angka. Nilai
+      pada dictionary boleh berupa tipe data apa pun, termasuk list.
+    </p>
+    <p>
+      Pada editor PYLearn, nilai diisi langsung di dalam kode karena fungsi
+      <code>input()</code> belum didukung. Kamu tetap dapat mengubah nilai pada
+      kode untuk mencoba setiap contoh.
+    </p>
+  </section>
+
+  <section id="subbab-6-2" aria-labelledby="judul-6-2">
+    <h2 id="judul-6-2">6.2 List: Membuat dan Mengakses Elemen</h2>
+    <p>
+      List adalah kumpulan item terurut yang ditulis di antara kurung siku.
+      Setiap item dipisahkan dengan tanda koma. List dapat berisi string, angka,
+      boolean, bahkan list lain.
+    </p>
+    <pre><code class="language-python">buah = ["apel", "jeruk", "mangga"]
+campuran = ["Andi", 20, 3.5, True]
+kosong = []
+
+print(buah)
+print(campuran)
+print(kosong)</code></pre>
+    <p>
+      List <code>buah</code> berisi tiga string. List <code>campuran</code>
+      menunjukkan bahwa satu list boleh berisi tipe data yang berbeda. List
+      kosong dibuat dengan <code>[]</code>.
+    </p>
+
+    <h3>Mengakses item dengan indeks</h3>
+    <p>
+      Indeks list dimulai dari 0. Item pertama berada pada indeks 0, item kedua
+      pada indeks 1, dan seterusnya. Indeks negatif menghitung dari akhir list.
+    </p>
+    <pre><code class="language-python">buah = ["apel", "jeruk", "mangga", "pisang"]
+
+print(buah[0])
+print(buah[2])
+print(buah[-1])
+print(buah[-2])
+print(len(buah))</code></pre>
+    <p>
+      <code>buah[0]</code> menghasilkan <code>apel</code>, sedangkan
+      <code>buah[-1]</code> menghasilkan item terakhir, yaitu
+      <code>pisang</code>. Fungsi <code>len(buah)</code> menghasilkan jumlah item
+      pada list, yaitu 4.
+    </p>
+    <p>
+      Jika indeks yang digunakan melebihi jumlah item, Python akan menampilkan
+      <strong>IndexError</strong>. Karena indeks dimulai dari 0, indeks terakhir
+      pada list berisi 4 item adalah 3.
+    </p>
+
+    <h3>Mengubah item list</h3>
+    <p>
+      Karena list bersifat mutable, item dapat diganti dengan menuliskan indeks
+      diikuti tanda sama dengan dan nilai baru.
+    </p>
+    <pre><code class="language-python">buah = ["apel", "jeruk", "mangga"]
+buah[1] = "pisang"
+
+print(buah)</code></pre>
+    <p>
+      Item pada indeks 1 yang semula <code>jeruk</code> diganti menjadi
+      <code>pisang</code>. Perubahan ini langsung tersimpan pada list yang sama.
+    </p>
+  </section>
+
+  <section id="subbab-6-3" aria-labelledby="judul-6-3">
+    <h2 id="judul-6-3">6.3 List: Menambah, Mengubah, dan Menghapus Elemen</h2>
+    <p>
+      List menyediakan beberapa cara untuk menambah dan menghapus item. Pilih
+      cara yang sesuai dengan kebutuhan: berdasarkan posisi atau berdasarkan
+      nilai.
+    </p>
+
+    <h3>Menambah item dengan append() dan insert()</h3>
+    <p>
+      Metode <code>append()</code> menambahkan item di akhir list. Metode
+      <code>insert()</code> menambahkan item pada indeks tertentu dan menggeser
+      item setelahnya.
+    </p>
+    <pre><code class="language-python">buah = ["apel", "jeruk"]
+
+buah.append("mangga")
+buah.insert(1, "pisang")
+
+print(buah)</code></pre>
+    <p>
+      <code>append("mangga")</code> menambahkan mangga di akhir. Setelah itu,
+      <code>insert(1, "pisang")</code> menyisipkan pisang pada indeks 1 sehingga
+      hasilnya adalah <code>['apel', 'pisang', 'jeruk', 'mangga']</code>.
+    </p>
+
+    <h3>Menghapus item dengan del</h3>
+    <p>
+      Perintah <code>del</code> menghapus item berdasarkan indeksnya.
+    </p>
+    <pre><code class="language-python">buah = ["apel", "jeruk", "mangga"]
+
+del buah[1]
+print(buah)</code></pre>
+    <p>
+      Item pada indeks 1, yaitu <code>jeruk</code>, dihapus. Item setelahnya
+      bergeser sehingga list menjadi <code>['apel', 'mangga']</code>.
+    </p>
+
+    <h3>Menghapus item dengan remove()</h3>
+    <p>
+      Metode <code>remove()</code> menghapus item berdasarkan nilainya. Jika
+      nilai muncul lebih dari sekali, hanya kemunculan pertama yang dihapus.
+    </p>
+    <pre><code class="language-python">buah = ["apel", "jeruk", "mangga", "jeruk"]
+
+buah.remove("jeruk")
+print(buah)</code></pre>
+    <p>
+      Hanya <code>jeruk</code> pertama yang dihapus. Hasilnya adalah
+      <code>['apel', 'mangga', 'jeruk']</code>. Jika nilai yang dicari tidak ada,
+      Python akan menampilkan <strong>ValueError</strong>.
+    </p>
+    <p>
+      Ringkasnya, gunakan <code>del</code> jika ingin menghapus berdasarkan
+      posisi, dan gunakan <code>remove()</code> jika ingin menghapus berdasarkan
+      nilai.
+    </p>
+  </section>
+
+  <section id="subbab-6-4" aria-labelledby="judul-6-4">
+    <h2 id="judul-6-4">6.4 List: Pemotongan, Operasi, dan Perulangan Bersarang</h2>
+    <p>
+      Selain mengambil satu item, list dapat dipotong untuk mengambil beberapa
+      item sekaligus. List juga dapat digabung, diulang, dan disusun menjadi list
+      multidimensi.
+    </p>
+
+    <h3>Pemotongan list (slicing)</h3>
+    <p>
+      Slicing menggunakan bentuk <code>list[mulai:selesai]</code>. Nilai
+      <code>mulai</code> ikut diambil, sedangkan nilai <code>selesai</code> tidak
+      ikut diambil.
+    </p>
+    <pre><code class="language-python">angka = [10, 20, 30, 40, 50]
+
+print(angka[1:4])
+print(angka[:3])
+print(angka[2:])
+print(angka[-3:])
+print(angka[0:5:2])</code></pre>
+    <p>
+      <code>angka[1:4]</code> menghasilkan <code>[20, 30, 40]</code>.
+      <code>angka[:3]</code> mengambil dari awal sampai sebelum indeks 3.
+      <code>angka[2:]</code> mengambil dari indeks 2 sampai akhir. Slicing tidak
+      mengubah list asli kecuali hasilnya disimpan kembali ke variabel.
+    </p>
+
+    <h3>Penggabungan dan pengulangan</h3>
+    <p>
+      Operator <code>+</code> menggabungkan dua list, sedangkan operator
+      <code>*</code> mengulang isi list sebanyak jumlah pengulangan.
+    </p>
+    <pre><code class="language-python">awal = [1, 2]
+akhir = [3, 4]
+
+gabung = awal + akhir
+ulang = ["A", "B"] * 3
+
+print(gabung)
+print(ulang)</code></pre>
+    <p>
+      Hasil penggabungan adalah <code>[1, 2, 3, 4]</code>, sedangkan hasil
+      pengulangan adalah <code>['A', 'B', 'A', 'B', 'A', 'B']</code>.
+    </p>
+
+    <h3>List multidimensi</h3>
+    <p>
+      List multidimensi adalah list yang berisi list lain. Untuk mengakses item
+      di dalamnya, gunakan dua indeks: indeks list luar, lalu indeks list dalam.
+    </p>
+    <pre><code class="language-python">kelas = [
+    ["Andi", 80],
+    ["Budi", 90],
+    ["Citra", 85]
+]
+
+print(kelas[0])
+print(kelas[0][0])
+print(kelas[2][1])</code></pre>
+    <p>
+      <code>kelas[0]</code> menghasilkan <code>['Andi', 80]</code>, sedangkan
+      <code>kelas[0][0]</code> menghasilkan <code>Andi</code>. Nilai
+      <code>kelas[2][1]</code> adalah nilai Citra, yaitu <code>85</code>.
+    </p>
+
+    <h3>Perulangan bersarang pada list</h3>
+    <p>
+      Perulangan bersarang berarti ada perulangan di dalam perulangan. Pada list
+      multidimensi, perulangan luar menelusuri setiap baris, sedangkan
+      perulangan dalam menelusuri setiap item pada baris tersebut.
+    </p>
+    <pre><code class="language-python">kelas = [
+    ["Andi", 80],
+    ["Budi", 90],
+    ["Citra", 85]
+]
+
+for baris in kelas:
+    for data in baris:
+        print(data)</code></pre>
+    <p>
+      Outputnya berurutan: <code>Andi</code>, <code>80</code>,
+      <code>Budi</code>, <code>90</code>, <code>Citra</code>, lalu
+      <code>85</code>. Perulangan dalam dijalankan sampai selesai untuk setiap
+      baris sebelum berpindah ke baris berikutnya.
+    </p>
+  </section>
+
+  <section id="subbab-6-5" aria-labelledby="judul-6-5">
+    <h2 id="judul-6-5">6.5 Tuple: Struktur Data yang Tidak Dapat Diubah</h2>
+    <p>
+      Tuple adalah kumpulan item terurut yang bersifat immutable. Artinya, setelah
+      tuple dibuat, item di dalamnya tidak dapat diubah, ditambah, atau dihapus.
+      Tuple dapat berisi tipe data campuran dan boleh memiliki nilai duplikat.
+    </p>
+
+    <h3>Membuat tuple</h3>
+    <p>
+      Tuple dapat ditulis dengan tanda kurung biasa atau tanpa tanda kurung selama
+      item dipisahkan dengan koma.
+    </p>
+    <pre><code class="language-python">koordinat = (10, 20)
+warna = "merah", "hijau", "biru"
+
+print(koordinat)
+print(warna)</code></pre>
+    <p>
+      <code>koordinat</code> dan <code>warna</code> sama-sama tuple. Tanda kurung
+      bersifat opsional, tetapi penggunaannya membuat kode lebih mudah dibaca.
+    </p>
+
+    <h3>Tuple kosong dan tuple satu elemen</h3>
+    <p>
+      Tuple kosong ditulis <code>()</code>. Tuple dengan satu elemen wajib
+      diakhiri tanda koma, misalnya <code>("apel",)</code>. Tanpa tanda koma,
+      tanda kurung hanya mengelompokkan nilai dan hasilnya bukan tuple.
+    </p>
+    <pre><code class="language-python">kosong = ()
+satu = ("apel",)
+bukan_tuple = ("apel")
+
+print(kosong)
+print(satu)
+print(bukan_tuple)
+print(len(kosong))
+print(len(satu))</code></pre>
+    <p>
+      <code>satu</code> adalah tuple dengan satu elemen, sedangkan
+      <code>bukan_tuple</code> hanyalah string. Panjang tuple kosong adalah 0 dan
+      panjang tuple satu elemen adalah 1.
+    </p>
+
+    <h3>Akses, slicing, dan len()</h3>
+    <p>
+      Cara mengakses tuple sama seperti list, yaitu menggunakan indeks. Tuple juga
+      dapat dipotong dan dihitung panjangnya dengan <code>len()</code>.
+    </p>
+    <pre><code class="language-python">angka = (10, 20, 30, 40, 50)
+
+print(angka[0])
+print(angka[-1])
+print(angka[1:4])
+print(len(angka))</code></pre>
+    <p>
+      Hasilnya adalah <code>10</code>, <code>50</code>,
+      <code>(20, 30, 40)</code>, dan <code>5</code>. Perhatikan bahwa hasil
+      slicing tuple tetap berupa tuple.
+    </p>
+
+    <h3>Tuple bersarang</h3>
+    <p>
+      Tuple juga dapat berisi tuple lain. Item di dalam tuple bersarang diakses
+      dengan indeks tambahan.
+    </p>
+    <pre><code class="language-python">data = ("Andi", (80, 90, 85))
+
+print(data[0])
+print(data[1])
+print(data[1][1])</code></pre>
+    <p>
+      <code>data[0]</code> menghasilkan <code>Andi</code>, sedangkan
+      <code>data[1][1]</code> menghasilkan nilai kedua di dalam tuple nilai,
+      yaitu <code>90</code>.
+    </p>
+
+    <h3>Sequence unpacking</h3>
+    <p>
+      Sequence unpacking membagi item tuple menjadi beberapa variabel. Jumlah
+      variabel di kiri harus sama dengan jumlah item di kanan.
+    </p>
+    <pre><code class="language-python">data = ("Andi", 20, "Informatika")
+nama, umur, jurusan = data
+
+print(nama)
+print(umur)
+print(jurusan)</code></pre>
+    <p>
+      Setelah unpacking, <code>nama</code> berisi <code>Andi</code>,
+      <code>umur</code> berisi <code>20</code>, dan <code>jurusan</code> berisi
+      <code>Informatika</code>.
+    </p>
+
+    <h3>Mengapa tuple tidak dapat diubah?</h3>
+    <pre><code class="language-python">angka = (1, 2, 3)
+print(angka[0])
+
+# Baris berikut akan menghasilkan TypeError karena tuple tidak dapat diubah.
+# angka[0] = 10</code></pre>
+    <p>
+      Jika baris komentar di atas dijalankan, Python menampilkan
+      <strong>TypeError: 'tuple' object does not support item assignment</strong>.
+      Sifat immutable membuat tuple cocok untuk data yang harus tetap, misalnya
+      koordinat atau data konfigurasi.
+    </p>
+  </section>
+
+  <section id="subbab-6-6" aria-labelledby="judul-6-6">
+    <h2 id="judul-6-6">6.6 Dictionary: Mengakses dan Menelusuri Data</h2>
+    <p>
+      Dictionary menyimpan data dalam pasangan key dan value. Key berfungsi
+      sebagai penanda yang unik, sedangkan value adalah nilai yang terkait dengan
+      key tersebut. Dictionary ditulis dengan kurung kurawal.
+    </p>
+
+    <h3>Deklarasi dictionary</h3>
+    <p>
+      Dictionary dapat dibuat dengan literal <code>{ }</code> atau konstruktor
+      <code>dict()</code>.
+    </p>
+    <pre><code class="language-python">harga = {"apel": 10000, "jeruk": 8000, "mangga": 12000}
+harga_lain = dict(apel=10000, jeruk=8000, mangga=12000)
+
+print(harga)
+print(harga_lain)</code></pre>
+    <p>
+      Pada <code>dict()</code>, key ditulis seperti nama parameter tanpa tanda
+      kutip. Cara ini cocok untuk key berupa string sederhana.
+    </p>
+
+    <h3>Isi bervariasi dan akses dengan key</h3>
+    <p>
+      Value dictionary boleh berupa tipe data apa pun. Contoh berikut menyimpan
+      string, angka, boolean, dan list dalam satu dictionary.
+    </p>
+    <pre><code class="language-python">siswa = {
+    "nama": "Andi",
+    "umur": 20,
+    "aktif": True,
+    "nilai": [80, 90, 85]
+}
+
+print(siswa["nama"])
+print(siswa["nilai"][1])
+print(siswa.get("umur"))
+print(siswa.get("alamat"))
+print(siswa.get("alamat", "Belum diisi"))
+print(len(siswa))</code></pre>
+    <p>
+      Akses dengan <code>siswa["nama"]</code> menghasilkan nilai dari key
+      <code>nama</code>. Metode <code>get()</code> digunakan untuk mengambil nilai
+      dengan aman. Jika key tidak ada, <code>get()</code> menghasilkan
+      <code>None</code> atau nilai default yang diberikan.
+    </p>
+    <p>
+      Sebaliknya, akses langsung seperti <code>siswa["alamat"]</code> untuk key
+      yang tidak ada akan menghasilkan <strong>KeyError</strong>. Fungsi
+      <code>len(siswa)</code> menghitung jumlah pasangan key-value, yaitu 4.
+    </p>
+
+    <h3>Perulangan dengan key</h3>
+    <p>
+      Jika dictionary diulang secara langsung, yang diperoleh adalah key-nya.
+    </p>
+    <pre><code class="language-python">harga = {"apel": 10000, "jeruk": 8000, "mangga": 12000}
+
+for buah in harga:
+    print(buah)</code></pre>
+    <p>
+      Outputnya adalah <code>apel</code>, <code>jeruk</code>, dan
+      <code>mangga</code>. Untuk mengambil nilainya, gunakan key tersebut di
+      dalam perulangan.
+    </p>
+
+    <h3>Perulangan dengan items()</h3>
+    <p>
+      Metode <code>items()</code> menghasilkan pasangan key dan value. Keduanya
+      dapat ditangkap dengan dua variabel.
+    </p>
+    <pre><code class="language-python">harga = {"apel": 10000, "jeruk": 8000, "mangga": 12000}
+
+for buah, nilai in harga.items():
+    print("Harga", buah, "=", nilai)</code></pre>
+    <p>
+      Setiap iterasi menghasilkan satu key dan satu value. Outputnya adalah
+      <code>Harga apel = 10000</code>, lalu <code>Harga jeruk = 8000</code>, dan
+      <code>Harga mangga = 12000</code>.
+    </p>
+  </section>
+
+  <section id="subbab-6-7" aria-labelledby="judul-6-7">
+    <h2 id="judul-6-7">6.7 Dictionary: Menambah, Mengubah, dan Menghapus Data</h2>
+    <p>
+      Dictionary bersifat mutable. Item dapat ditambah, diubah, atau dihapus
+      menggunakan key sebagai penanda.
+    </p>
+
+    <h3>Menambah dan mengubah item</h3>
+    <p>
+      Jika key belum ada, penugasan akan menambahkan pasangan baru. Jika key sudah
+      ada, penugasan akan mengubah value lama.
+    </p>
+    <pre><code class="language-python">harga = {"apel": 10000, "jeruk": 8000}
+
+harga["mangga"] = 12000
+harga["apel"] = 11000
+
+print(harga)</code></pre>
+    <p>
+      <code>harga["mangga"] = 12000</code> menambahkan key baru, sedangkan
+      <code>harga["apel"] = 11000</code> mengubah value apel dari 10000 menjadi
+      11000.
+    </p>
+
+    <h3>Memperbarui dengan update()</h3>
+    <p>
+      Metode <code>update()</code> dapat menambahkan beberapa pasangan sekaligus.
+      Jika key sudah ada, nilainya akan ditimpa.
+    </p>
+    <pre><code class="language-python">harga = {"apel": 10000, "jeruk": 8000}
+
+harga.update({"jeruk": 9000, "mangga": 12000})
+print(harga)</code></pre>
+    <p>
+      Key <code>jeruk</code> diperbarui menjadi 9000, sedangkan key
+      <code>mangga</code> ditambahkan dengan nilai 12000.
+    </p>
+
+    <h3>Menghapus dengan del dan pop()</h3>
+    <p>
+      <code>del</code> menghapus pasangan berdasarkan key. Metode
+      <code>pop()</code> juga menghapus pasangan berdasarkan key, tetapi
+      mengembalikan value yang dihapus.
+    </p>
+    <pre><code class="language-python">harga = {"apel": 10000, "jeruk": 8000, "mangga": 12000}
+
+del harga["jeruk"]
+dihapus = harga.pop("mangga")
+
+print(harga)
+print("Nilai yang dihapus:", dihapus)</code></pre>
+    <p>
+      Setelah kedua penghapusan, dictionary hanya berisi apel. Nilai
+      <code>12000</code> dari key mangga disimpan pada variabel
+      <code>dihapus</code>.
+    </p>
+
+    <h3>Menghapus semua item dengan clear()</h3>
+    <pre><code class="language-python">harga = {"apel": 10000, "jeruk": 8000}
+
+harga.clear()
+print(harga)
+print(len(harga))</code></pre>
+    <p>
+      <code>clear()</code> mengosongkan dictionary, sehingga hasilnya
+      <code>{}</code> dan panjangnya 0.
+    </p>
+    <p>
+      Ringkasnya, gunakan <code>del</code> jika tidak memerlukan nilai yang
+      dihapus, <code>pop()</code> jika nilai yang dihapus masih dibutuhkan, dan
+      <code>clear()</code> jika seluruh isi dictionary ingin dihapus.
+    </p>
+  </section>
+
+  <section aria-labelledby="rangkuman-modul-6">
+    <h2 id="rangkuman-modul-6">Rangkuman</h2>
+    <ul>
+      <li>
+        List menggunakan <code>[ ]</code>, bersifat mutable, dan diakses dengan
+        indeks. List dapat berisi tipe data campuran.
+      </li>
+      <li>
+        <code>append()</code> menambah item di akhir, <code>insert()</code>
+        menambah pada indeks tertentu, <code>del</code> menghapus berdasarkan
+        indeks, dan <code>remove()</code> menghapus berdasarkan nilai.
+      </li>
+      <li>
+        Slicing <code>list[mulai:selesai]</code> mengambil sebagian item. Operator
+        <code>+</code> menggabungkan list dan <code>*</code> mengulang list.
+      </li>
+      <li>
+        List multidimensi berisi list lain dan dapat ditelusuri dengan
+        perulangan bersarang.
+      </li>
+      <li>
+        Tuple menggunakan <code>( )</code>, bersifat immutable, dan tetap dapat
+        diakses dengan indeks, dipotong, serta di-unpack.
+      </li>
+      <li>
+        Tuple satu elemen memerlukan tanda koma, misalnya
+        <code>("apel",)</code>.
+      </li>
+      <li>
+        Dictionary menyimpan pasangan key-value, diakses dengan key atau
+        <code>get()</code>, dan dapat ditelusuri dengan <code>items()</code>.
+      </li>
+      <li>
+        Item dictionary dapat ditambah atau diubah dengan penugasan dan
+        <code>update()</code>, lalu dihapus dengan <code>del</code>,
+        <code>pop()</code>, atau <code>clear()</code>.
+      </li>
+    </ul>
+  </section>
+</article>

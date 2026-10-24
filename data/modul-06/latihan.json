@@ -1,0 +1,12 @@
+{
+  "judul": "Latihan Modul 6: Daftar Buah, Profil, dan Harga",
+  "instruksi": "Lengkapi tiga bagian berikut:\n1. Tambahkan \"mangga\" ke akhir list buah, ubah \"jeruk\" menjadi \"pisang\", lalu hapus \"apel\". Tampilkan list akhir dengan format \"Daftar buah: ...\".\n2. Lakukan unpacking pada tuple siswa, lalu tampilkan nama dan umurnya.\n3. Tambahkan key \"mangga\" dengan nilai 12000, ubah harga \"apel\" menjadi 11000, lalu tampilkan setiap pasangan key-value dengan items() dan format \"key = value\".\n\nOutput yang diharapkan:\nDaftar buah: ['pisang', 'mangga']\nNama: Andi\nUmur: 20\napel = 11000\njeruk = 8000\nmangga = 12000",
+  "kodeAwal": "# 1. List: tambah \"mangga\" di akhir, ubah \"jeruk\" menjadi \"pisang\",\n#    lalu hapus \"apel\". Tampilkan list akhir.\n# 2. Tuple: unpacking siswa, lalu tampilkan nama dan umur.\n# 3. Dictionary: tambah \"mangga\": 12000, ubah \"apel\": 11000,\n#    lalu tampilkan setiap pasangan dengan items().\n\nbuah = [\"apel\", \"jeruk\"]\nsiswa = (\"Andi\", 20)\nharga = {\"apel\": 10000, \"jeruk\": 8000}",
+  "outputDiharapkan": "Daftar buah: ['pisang', 'mangga']\nNama: Andi\nUmur: 20\napel = 11000\njeruk = 8000\nmangga = 12000",
+  "petunjuk": [
+    "Gunakan append(\"mangga\") untuk menambah di akhir, buah[1] = \"pisang\" untuk mengubah indeks 1, dan remove(\"apel\") untuk menghapus berdasarkan nilai.",
+    "Tulis nama, umur = siswa untuk melakukan unpacking, lalu tampilkan keduanya dengan print().",
+    "Gunakan harga[\"mangga\"] = 12000 dan harga[\"apel\"] = 11000, lalu for nama_buah, nilai in harga.items(): print(nama_buah, \"=\", nilai)."
+  ],
+  "kunci": "buah = [\"apel\", \"jeruk\"]\nbuah.append(\"mangga\")\nbuah[1] = \"pisang\"\nbuah.remove(\"apel\")\nprint(\"Daftar buah:\", buah)\n\nsiswa = (\"Andi\", 20)\nnama, umur = siswa\nprint(\"Nama:\", nama)\nprint(\"Umur:\", umur)\n\nharga = {\"apel\": 10000, \"jeruk\": 8000}\nharga[\"mangga\"] = 12000\nharga[\"apel\"] = 11000\n\nfor nama_buah, nilai in harga.items():\n    print(nama_buah, \"=\", nilai)"
+}

@@ -46,9 +46,9 @@
       "id": 6,
       "slug": "modul-06",
       "judul": "Struktur Data Dasar",
-      "deskripsi": "Mengelola kumpulan data dengan list, tuple, dan dictionary.",
-      "jumlahSubbab": 3,
-      "status": "segera"
+      "deskripsi": "Mengelola kumpulan data dengan list, tuple, dan dictionary, termasuk akses, perubahan, pemotongan, dan perulangan.",
+      "jumlahSubbab": 7,
+      "status": "tersedia"
     },
     {
       "id": 7,

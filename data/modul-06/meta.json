@@ -1,0 +1,51 @@
+{
+  "id": 6,
+  "slug": "modul-06",
+  "judul": "Struktur Data Dasar",
+  "deskripsi": "Mengelola kumpulan data dengan list, tuple, dan dictionary, termasuk akses, perubahan, pemotongan, dan perulangan.",
+  "tujuanPembelajaran": [
+    "Mahasiswa mampu membedakan list, tuple, dan dictionary berdasarkan sifat mutable/immutable serta cara aksesnya (indeks atau key).",
+    "Mahasiswa mampu membuat dan mengakses elemen list, tuple, dan dictionary.",
+    "Mahasiswa mampu menambah, mengubah, dan menghapus item pada list dan dictionary.",
+    "Mahasiswa mampu memotong list dan tuple serta melakukan sequence unpacking pada tuple.",
+    "Mahasiswa mampu menelusuri isi list dan dictionary dengan perulangan."
+  ],
+  "subbab": [
+    {
+      "id": "6.1",
+      "judul": "Mengenal Struktur Data: List, Tuple, dan Dictionary"
+    },
+    {
+      "id": "6.2",
+      "judul": "List: Membuat dan Mengakses Elemen"
+    },
+    {
+      "id": "6.3",
+      "judul": "List: Menambah, Mengubah, dan Menghapus Elemen"
+    },
+    {
+      "id": "6.4",
+      "judul": "List: Pemotongan, Operasi, dan Perulangan Bersarang"
+    },
+    {
+      "id": "6.5",
+      "judul": "Tuple: Struktur Data yang Tidak Dapat Diubah"
+    },
+    {
+      "id": "6.6",
+      "judul": "Dictionary: Mengakses dan Menelusuri Data"
+    },
+    {
+      "id": "6.7",
+      "judul": "Dictionary: Menambah, Mengubah, dan Menghapus Data"
+    }
+  ],
+  "video": {
+    "youtubeId": "qVv1E2iKbMk",
+    "judul": "String, List, dan Tuple — Sagustian Learning"
+  },
+  "kodeAwal": "print(\"Belajar struktur data Python\")",
+  "fileMateri": "materi.html",
+  "fileLatihan": "latihan.json",
+  "fileKuis": "kuis.json"
+}

@@ -115,7 +115,7 @@ Buka `modul.html?id=1#kuis`.
 
 ## 6. Modul belum tersedia dan id salah
 
-- [ ] `modul.html?id=6` (atau modul `segera` lain) menampilkan
+- [ ] `modul.html?id=7` (atau modul `segera` lain) menampilkan
       **"Modul belum tersedia"**, bukan "Gagal memuat modul" atau 404.
 - [ ] `modul.html?id=8` menampilkan pesan mini project masih disiapkan.
 - [ ] `modul.html?id=abc`, `?id=0`, dan tanpa `?id` menampilkan pesan nomor
@@ -137,10 +137,12 @@ Buka `modul.html?id=1#kuis`.
 - [ ] `selesai.html?id=4` menampilkan "Modul 4 selesai!" dan status
       **Lulus** dengan tautan **Lanjut ke Modul 5**.
 - [ ] `selesai.html?id=5` menampilkan "Modul 5 selesai!" dan status
-      **Selesai** karena Modul 6 belum tersedia.
+      **Lulus** dengan tautan **Lanjut ke Modul 6**.
+- [ ] `selesai.html?id=6` menampilkan "Modul 6 selesai!" dan status
+      **Selesai** karena Modul 7 belum tersedia.
 - [ ] Tautan sidebar "Halaman Penutup" mempertahankan `?id=1`.
 - [ ] `selesai.html?id=abc` menampilkan pesan id tidak valid.
-- [ ] `selesai.html?id=6` (modul `segera`) menampilkan "Modul belum tersedia",
+- [ ] `selesai.html?id=7` (modul `segera`) menampilkan "Modul belum tersedia",
       bukan "selesai".
 - [ ] `selesai.html?id=8` menampilkan "Mini project segera".
 - [ ] Tidak ada tautan ke modul yang belum tersedia.

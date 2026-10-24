@@ -1,0 +1,171 @@
+{
+  "judul": "Kuis Modul 6: Struktur Data Dasar",
+  "batasLulus": 60,
+  "soal": [
+    {
+      "pertanyaan": "Struktur data yang bersifat mutable dan diakses menggunakan indeks angka adalah ...",
+      "pilihan": [
+        "list",
+        "tuple",
+        "dictionary",
+        "string"
+      ],
+      "jawaban": "A",
+      "pembahasan": "List bersifat mutable dan itemnya diakses dengan indeks angka yang dimulai dari 0. Tuple juga memakai indeks, tetapi bersifat immutable. Dictionary diakses dengan key."
+    },
+    {
+      "pertanyaan": "Sifat tuple yang tidak dapat diubah setelah dibuat disebut ...",
+      "pilihan": [
+        "mutable",
+        "iterable",
+        "immutable",
+        "dinamis"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Tuple bersifat immutable. Item tuple tidak dapat diubah, ditambah, atau dihapus setelah tuple dibuat."
+    },
+    {
+      "pertanyaan": "Dictionary menyimpan data dalam bentuk ...",
+      "pilihan": [
+        "indeks dan nilai",
+        "key dan value",
+        "baris dan kolom",
+        "list dan tuple"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Setiap item dictionary terdiri atas key dan value. Key harus unik dan digunakan untuk mengakses value."
+    },
+    {
+      "pertanyaan": "data = [\"Andi\", 20, True]; print(data[1]) menghasilkan ...",
+      "pilihan": [
+        "Andi",
+        "20",
+        "True",
+        "error"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Indeks 0 berisi \"Andi\", indeks 1 berisi 20, dan indeks 2 berisi True. Jadi data[1] menghasilkan 20."
+    },
+    {
+      "pertanyaan": "buah = [\"apel\", \"jeruk\"]; buah.append(\"mangga\"); buah.insert(1, \"pisang\"); print(buah) menghasilkan ...",
+      "pilihan": [
+        "['apel', 'jeruk', 'mangga', 'pisang']",
+        "['apel', 'pisang', 'jeruk', 'mangga']",
+        "['pisang', 'apel', 'jeruk', 'mangga']",
+        "['apel', 'mangga', 'jeruk', 'pisang']"
+      ],
+      "jawaban": "B",
+      "pembahasan": "append menambahkan mangga di akhir, lalu insert(1, \"pisang\") menyisipkan pisang pada indeks 1 sehingga jeruk dan mangga bergeser."
+    },
+    {
+      "pertanyaan": "Perintah del buah[1] dan buah.remove(\"jeruk\") sama-sama digunakan untuk ...",
+      "pilihan": [
+        "menambah item",
+        "menghapus item",
+        "mengubah item",
+        "mengurutkan item"
+      ],
+      "jawaban": "B",
+      "pembahasan": "del menghapus item berdasarkan indeks, sedangkan remove() menghapus item berdasarkan nilai. Keduanya menghapus item dari list."
+    },
+    {
+      "pertanyaan": "angka = [10, 20, 30, 40, 50]; print(angka[1:4]) menghasilkan ...",
+      "pilihan": [
+        "[10, 20, 30]",
+        "[20, 30, 40]",
+        "[20, 30, 40, 50]",
+        "[30, 40, 50]"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Slicing dimulai dari indeks 1 dan berhenti sebelum indeks 4, sehingga menghasilkan 20, 30, dan 40."
+    },
+    {
+      "pertanyaan": "data = [[1, 2], [3, 4]]; print(data[1][0]) menghasilkan ...",
+      "pilihan": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "jawaban": "C",
+      "pembahasan": "data[1] mengambil list kedua, yaitu [3, 4]. Indeks 0 dari list tersebut adalah 3."
+    },
+    {
+      "pertanyaan": "Tuple dengan satu elemen yang benar adalah ...",
+      "pilihan": [
+        "(\"apel\")",
+        "(\"apel\",)",
+        "[\"apel\"]",
+        "{\"apel\"}"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Tuple satu elemen memerlukan tanda koma setelah elemen. (\"apel\") hanyalah string, sedangkan (\"apel\",) adalah tuple."
+    },
+    {
+      "pertanyaan": "nama, umur = (\"Andi\", 20) merupakan contoh ...",
+      "pilihan": [
+        "slicing",
+        "unpacking",
+        "append",
+        "update"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Sequence unpacking membagi item tuple menjadi beberapa variabel. Variabel nama menerima \"Andi\" dan umur menerima 20."
+    },
+    {
+      "pertanyaan": "harga = {\"apel\": 10000}; print(harga.get(\"pisang\", 0)) menghasilkan ...",
+      "pilihan": [
+        "0",
+        "10000",
+        "None",
+        "KeyError"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Metode get() mengembalikan nilai default 0 karena key \"pisang\" tidak ada. Tanpa nilai default, get() akan menghasilkan None."
+    },
+    {
+      "pertanyaan": "harga = {\"apel\": 10000}; harga[\"mangga\"] = 12000; print(harga) menghasilkan ...",
+      "pilihan": [
+        "{'apel': 10000}",
+        "{'mangga': 12000}",
+        "error karena key mangga belum ada",
+        "{'apel': 10000, 'mangga': 12000}"
+      ],
+      "jawaban": "D",
+      "pembahasan": "Penugasan dengan key baru akan menambahkan pasangan key-value. Dictionary sekarang memiliki apel dan mangga."
+    },
+    {
+      "pertanyaan": "harga.update({\"apel\": 11000, \"mangga\": 12000}) pada dictionary yang sudah memiliki key apel akan ...",
+      "pilihan": [
+        "menolak karena key sudah ada",
+        "mengubah nilai apel dan menambah mangga",
+        "menghapus key apel",
+        "mengosongkan dictionary"
+      ],
+      "jawaban": "B",
+      "pembahasan": "update() menimpa value untuk key yang sudah ada dan menambahkan key baru. Nilai apel berubah menjadi 11000, lalu mangga ditambahkan."
+    },
+    {
+      "pertanyaan": "harga = {\"apel\": 10000, \"jeruk\": 8000}; dihapus = harga.pop(\"jeruk\"); print(len(harga)); print(dihapus) menghasilkan ...",
+      "pilihan": [
+        "1 dan 8000",
+        "2 dan 8000",
+        "1 dan 10000",
+        "2 dan None"
+      ],
+      "jawaban": "A",
+      "pembahasan": "pop() menghapus key jeruk dan mengembalikan nilainya, yaitu 8000. Dictionary kini hanya berisi apel sehingga len(harga) bernilai 1."
+    },
+    {
+      "pertanyaan": "for nama, nilai in harga.items() memberikan ...",
+      "pilihan": [
+        "hanya key",
+        "hanya value",
+        "key dan value",
+        "indeks dan key"
+      ],
+      "jawaban": "C",
+      "pembahasan": "items() menghasilkan pasangan key dan value. Dua variabel pada perulangan menerima key dan value dari setiap item dictionary."
+    }
+  ]
+}
