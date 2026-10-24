@@ -1,0 +1,47 @@
+{
+  "id": 7,
+  "slug": "modul-07",
+  "judul": "Fungsi",
+  "deskripsi": "Membuat dan memanggil fungsi, menggunakan parameter dan return, serta memahami variabel lokal dan global.",
+  "tujuanPembelajaran": [
+    "Mahasiswa mampu menjelaskan manfaat penggunaan fungsi.",
+    "Mahasiswa mampu membuat dan memanggil fungsi.",
+    "Mahasiswa mampu menggunakan parameter dan return pada fungsi.",
+    "Mahasiswa mampu membedakan fungsi dan prosedur.",
+    "Mahasiswa mampu membedakan variabel lokal dan global serta memahami urutan pencarian nama dan NameError."
+  ],
+  "subbab": [
+    {
+      "id": "7.1",
+      "judul": "Manfaat Fungsi dan Dasar Pembuatannya"
+    },
+    {
+      "id": "7.2",
+      "judul": "Fungsi dengan Parameter"
+    },
+    {
+      "id": "7.3",
+      "judul": "Fungsi yang Mengembalikan Nilai dengan return"
+    },
+    {
+      "id": "7.4",
+      "judul": "Fungsi dan Prosedur"
+    },
+    {
+      "id": "7.5",
+      "judul": "Variabel Lokal dan Global"
+    },
+    {
+      "id": "7.6",
+      "judul": "Urutan Pencarian Local-Global-Built-in dan NameError"
+    }
+  ],
+  "video": {
+    "youtubeId": "ywE2eqG3-kc",
+    "judul": "Pengenalan Fungsi — Kelas Terbuka"
+  },
+  "kodeAwal": "print(\"Belajar fungsi Python\")",
+  "fileMateri": "materi.html",
+  "fileLatihan": "latihan.json",
+  "fileKuis": "kuis.json"
+}

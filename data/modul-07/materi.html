@@ -1,0 +1,420 @@
+<article class="materi-python">
+  <section id="subbab-7-1" aria-labelledby="judul-7-1">
+    <h2 id="judul-7-1">7.1 Manfaat Fungsi dan Dasar Pembuatannya</h2>
+    <p>
+      Fungsi adalah blok kode bernama yang dirancang untuk melakukan tugas
+      tertentu. Setelah dibuat, fungsi dapat dipanggil berkali-kali tanpa perlu
+      menulis ulang isi kodenya. Fungsi membantu kita menyusun program menjadi
+      bagian-bagian yang lebih kecil dan mudah dipahami.
+    </p>
+
+    <h3>Manfaat penggunaan fungsi</h3>
+    <ul>
+      <li>
+        <strong>Menghindari pengulangan kode.</strong> Kode yang sama cukup
+        ditulis sekali di dalam fungsi, lalu dipanggil saat dibutuhkan.
+      </li>
+      <li>
+        <strong>Membuat program lebih terstruktur.</strong> Setiap fungsi
+        mempunyai tugas yang jelas sehingga program lebih mudah dibaca.
+      </li>
+      <li>
+        <strong>Memudahkan perbaikan.</strong> Jika ada kesalahan, kita cukup
+        memperbaiki satu tempat, bukan menyalin perbaikan ke banyak baris.
+      </li>
+      <li>
+        <strong>Dapat digunakan ulang.</strong> Fungsi yang sama dapat dipanggil
+        dengan nilai berbeda pada bagian program yang lain.
+      </li>
+    </ul>
+
+    <h3>Membuat dan memanggil fungsi</h3>
+    <p>
+      Fungsi dibuat dengan kata kunci <code>def</code>, diikuti nama fungsi,
+      tanda kurung, dan tanda titik dua. Isi fungsi ditulis dengan indentasi.
+      Perhatikan bentuk dasarnya berikut.
+    </p>
+    <pre><code class="language-python">def tampilkan_judul():
+    print("=== DAFTAR NILAI ===")
+    print("Mata kuliah: Python")
+
+tampilkan_judul()</code></pre>
+    <p>
+      Baris <code>def tampilkan_judul():</code> hanya mendefinisikan fungsi.
+      Fungsi baru berjalan ketika dipanggil dengan menuliskan namanya diikuti
+      tanda kurung, yaitu <code>tampilkan_judul()</code>.
+    </p>
+    <pre><code class="language-python">def sapa():
+    print("Halo, selamat datang di PYLearn!")
+    print("Semoga belajarmu menyenangkan.")
+
+sapa()
+sapa()</code></pre>
+    <p>
+      Fungsi <code>sapa()</code> dipanggil dua kali sehingga kedua baris di
+      dalamnya dijalankan dua kali. Inilah keuntungan utama fungsi: tulis sekali,
+      panggil sebanyak yang diperlukan.
+    </p>
+    <p>
+      Nama fungsi sebaiknya ditulis dengan huruf kecil dan menggunakan garis
+      bawah jika terdiri atas beberapa kata, misalnya
+      <code>hitung_total()</code> atau <code>tampilkan_menu()</code>. Nama fungsi
+      tidak boleh mengandung spasi dan tidak boleh diawali angka. Fungsi juga
+      harus didefinisikan sebelum dipanggil.
+    </p>
+  </section>
+
+  <section id="subbab-7-2" aria-labelledby="judul-7-2">
+    <h2 id="judul-7-2">7.2 Fungsi dengan Parameter</h2>
+    <p>
+      Parameter adalah variabel yang ditulis di dalam tanda kurung pada definisi
+      fungsi. Nilai yang diberikan saat fungsi dipanggil disebut argumen. Dengan
+      parameter, fungsi dapat mengolah data yang berbeda setiap kali dipanggil.
+    </p>
+
+    <h3>Fungsi dengan satu parameter</h3>
+    <pre><code class="language-python">def sapa(nama):
+    print("Halo,", nama)
+
+sapa("Andi")
+sapa("Budi")</code></pre>
+    <p>
+      Pada definisi <code>def sapa(nama):</code>, <code>nama</code> adalah
+      parameter. Nilai <code>"Andi"</code> dan <code>"Budi"</code> adalah argumen
+      yang diberikan saat pemanggilan. Fungsi yang sama menghasilkan sapaan
+      berbeda karena argumennya berbeda.
+    </p>
+
+    <h3>Fungsi dengan lebih dari satu parameter</h3>
+    <p>
+      Parameter dipisahkan dengan tanda koma. Urutan argumen saat pemanggilan
+      harus sesuai dengan urutan parameter pada definisi fungsi.
+    </p>
+    <pre><code class="language-python">def luas_persegi_panjang(panjang, lebar):
+    luas = panjang * lebar
+    print("Luas persegi panjang:", luas)
+
+luas_persegi_panjang(8, 5)
+luas_persegi_panjang(10, 3)</code></pre>
+    <p>
+      Pemanggilan <code>luas_persegi_panjang(8, 5)</code> memberikan nilai 8 ke
+      parameter <code>panjang</code> dan 5 ke parameter <code>lebar</code>.
+      Pemanggilan kedua menggunakan nilai yang berbeda sehingga hasilnya juga
+      berbeda.
+    </p>
+    <pre><code class="language-python">def rata_rata(a, b, c):
+    hasil = (a + b + c) / 3
+    print("Rata-rata:", hasil)
+
+rata_rata(80, 90, 100)</code></pre>
+    <p>
+      Fungsi <code>rata_rata()</code> memiliki tiga parameter. Jika jumlah
+      argumen tidak sesuai dengan jumlah parameter, Python akan menampilkan
+      <strong>TypeError</strong>. Pastikan setiap parameter mendapatkan nilai
+      yang sesuai saat fungsi dipanggil.
+    </p>
+  </section>
+
+  <section id="subbab-7-3" aria-labelledby="judul-7-3">
+    <h2 id="judul-7-3">7.3 Fungsi yang Mengembalikan Nilai dengan return</h2>
+    <p>
+      Kata kunci <code>return</code> digunakan untuk mengembalikan nilai dari
+      fungsi kepada bagian program yang memanggilnya. Nilai tersebut dapat
+      disimpan dalam variabel, dicetak, atau diolah lagi.
+    </p>
+
+    <h3>Mengembalikan hasil perhitungan</h3>
+    <pre><code class="language-python">def tambah(a, b):
+    return a + b
+
+hasil = tambah(5, 3)
+print("Hasil:", hasil)
+print("Dua kali hasil:", hasil * 2)</code></pre>
+    <p>
+      Fungsi <code>tambah()</code> mengembalikan nilai <code>8</code>. Nilai itu
+      disimpan pada variabel <code>hasil</code>, lalu dapat digunakan untuk
+      perhitungan berikutnya. Berbeda dari <code>print()</code> yang hanya
+      menampilkan nilai, <code>return</code> memberikan nilai kepada pemanggil.
+    </p>
+
+    <h3>Return di tengah fungsi</h3>
+    <p>
+      Ketika Python menjalankan <code>return</code>, fungsi langsung berhenti.
+      Baris setelah <code>return</code> tidak akan dijalankan. Karena itu,
+      <code>return</code> dapat dipakai untuk mengembalikan hasil lebih awal.
+    </p>
+    <pre><code class="language-python">def cek_kelulusan(nilai):
+    if nilai >= 75:
+        return "Lulus"
+    return "Belum lulus"
+
+print(cek_kelulusan(80))
+print(cek_kelulusan(60))</code></pre>
+    <p>
+      Jika nilai 80, kondisi terpenuhi dan fungsi mengembalikan
+      <code>"Lulus"</code>. Jika nilai 60, kondisi tidak terpenuhi sehingga
+      fungsi melanjutkan ke <code>return "Belum lulus"</code>.
+    </p>
+
+    <h3>Mengembalikan beberapa nilai</h3>
+    <p>
+      Sebuah fungsi dapat mengembalikan beberapa nilai sekaligus. Nilai-nilai
+      tersebut dikembalikan sebagai tuple dan dapat diterima dengan beberapa
+      variabel.
+    </p>
+    <pre><code class="language-python">def statistik(a, b, c):
+    total = a + b + c
+    rata_rata = total / 3
+    return total, rata_rata
+
+total, rata = statistik(80, 90, 100)
+print("Total:", total)
+print("Rata-rata:", rata)</code></pre>
+    <p>
+      Hasilnya adalah <code>Total: 270</code> dan
+      <code>Rata-rata: 90.0</code>. Perhatikan bahwa <code>total</code> dan
+      <code>rata_rata</code> di dalam fungsi adalah variabel lokal yang akan
+      dibahas pada subbab berikutnya.
+    </p>
+  </section>
+
+  <section id="subbab-7-4" aria-labelledby="judul-7-4">
+    <h2 id="judul-7-4">7.4 Fungsi dan Prosedur</h2>
+    <p>
+      Dalam pemrograman, fungsi biasanya mengembalikan nilai, sedangkan prosedur
+      melakukan suatu tindakan tanpa mengembalikan nilai yang akan diolah lagi.
+      Di Python, keduanya dibuat dengan <code>def</code>. Istilah prosedur
+      dipakai untuk fungsi yang tidak memiliki <code>return</code> atau tidak
+      mengembalikan nilai yang berguna.
+    </p>
+
+    <h3>Perbandingan fungsi dan prosedur</h3>
+    <pre><code class="language-python">def cetak_luas(panjang, lebar):
+    print("Luas:", panjang * lebar)
+
+def hitung_luas(panjang, lebar):
+    return panjang * lebar
+
+cetak_luas(4, 3)
+
+luas = hitung_luas(4, 3)
+print("Luas dari return:", luas)
+print("Dua kali luas:", luas * 2)</code></pre>
+    <p>
+      <code>cetak_luas()</code> adalah prosedur karena langsung mencetak hasil.
+      <code>hitung_luas()</code> adalah fungsi karena mengembalikan nilai yang
+      dapat disimpan dan digunakan lagi. Hasil <code>hitung_luas(4, 3)</code>
+      dapat dikalikan dua, sedangkan hasil <code>cetak_luas(4, 3)</code> tidak
+      dapat diolah karena hanya ditampilkan.
+    </p>
+
+    <h3>Fungsi tanpa return mengembalikan None</h3>
+    <pre><code class="language-python">def sapa():
+    print("Halo!")
+
+hasil = sapa()
+print("Nilai kembalian:", hasil)</code></pre>
+    <p>
+      Outputnya adalah <code>Halo!</code> lalu
+      <code>Nilai kembalian: None</code>. <code>None</code> adalah nilai khusus
+      Python yang berarti tidak ada nilai. Jadi, fungsi yang tidak memiliki
+      <code>return</code> tetap mengembalikan <code>None</code> secara otomatis.
+    </p>
+    <p>
+      Gunakan prosedur jika tugasnya hanya menampilkan informasi atau melakukan
+      efek samping. Gunakan fungsi dengan <code>return</code> jika hasilnya masih
+      akan dihitung, dibandingkan, atau diolah oleh bagian program lain.
+    </p>
+  </section>
+
+  <section id="subbab-7-5" aria-labelledby="judul-7-5">
+    <h2 id="judul-7-5">7.5 Variabel Lokal dan Global</h2>
+    <p>
+      Ruang lingkup atau <em>scope</em> menentukan di bagian mana sebuah variabel
+      dapat digunakan. Variabel yang dibuat di dalam fungsi bersifat lokal,
+      sedangkan variabel yang dibuat di luar fungsi bersifat global.
+    </p>
+
+    <h3>Variabel lokal</h3>
+    <p>
+      Variabel lokal hanya dapat diakses di dalam fungsi tempat variabel itu
+      dibuat. Variabel lokal juga dibuat ulang setiap kali fungsi dipanggil.
+    </p>
+    <pre><code class="language-python">def hitung():
+    hasil = 10 + 5
+    print("Hasil di dalam fungsi:", hasil)
+
+hitung()</code></pre>
+    <p>
+      Variabel <code>hasil</code> adalah variabel lokal. Variabel itu tidak
+      tersedia di luar fungsi <code>hitung()</code>.
+    </p>
+
+    <h3>Variabel global</h3>
+    <p>
+      Variabel global dibuat di luar fungsi dan dapat dibaca dari dalam fungsi.
+      Python akan mencari nama variabel di lingkup lokal terlebih dahulu, lalu
+      ke lingkup global.
+    </p>
+    <pre><code class="language-python">nama = "Andi"
+
+def sapa():
+    print("Halo,", nama)
+
+sapa()
+print("Nama dari luar:", nama)</code></pre>
+    <p>
+      Karena <code>nama</code> tidak dibuat di dalam fungsi, Python menemukannya
+      di lingkup global. Fungsi dapat membaca variabel global tanpa kata kunci
+      tambahan.
+    </p>
+
+    <h3>Variabel lokal menutupi variabel global</h3>
+    <pre><code class="language-python">nama = "Andi"
+
+def ubah_nama():
+    nama = "Budi"
+    print("Di dalam fungsi:", nama)
+
+ubah_nama()
+print("Di luar fungsi:", nama)</code></pre>
+    <p>
+      Di dalam fungsi, <code>nama = "Budi"</code> membuat variabel lokal baru.
+      Variabel lokal itu menutupi variabel global selama fungsi berjalan, tetapi
+      variabel global di luar fungsi tetap bernilai <code>"Andi"</code>.
+    </p>
+
+    <h3>Mengubah variabel global dengan global</h3>
+    <p>
+      Untuk mengubah variabel global dari dalam fungsi, gunakan kata kunci
+      <code>global</code> sebelum nama variabel. Penggunaannya sebaiknya dibatasi
+      agar alur program tetap mudah dipahami.
+    </p>
+    <pre><code class="language-python">skor = 0
+
+def tambah_skor():
+    global skor
+    skor = skor + 10
+
+tambah_skor()
+tambah_skor()
+print("Skor akhir:", skor)</code></pre>
+    <p>
+      Tanpa <code>global skor</code>, baris <code>skor = skor + 10</code> akan
+      membuat variabel lokal baru dan menimbulkan <strong>UnboundLocalError</strong>
+      saat membaca <code>skor</code>. Dengan <code>global skor</code>, fungsi
+      mengubah variabel global yang sama.
+    </p>
+  </section>
+
+  <section id="subbab-7-6" aria-labelledby="judul-7-6">
+    <h2 id="judul-7-6">7.6 Urutan Pencarian Local-Global-Built-in dan NameError</h2>
+    <p>
+      Ketika Python menemukan nama variabel atau fungsi, Python mencarinya
+      secara berurutan: <strong>Local</strong>, lalu <strong>Global</strong>,
+      lalu <strong>Built-in</strong>. Urutan ini sering disingkat L-G-B.
+    </p>
+    <ul>
+      <li>
+        <strong>Local</strong> adalah nama yang dibuat di dalam fungsi, termasuk
+        parameter dan variabel lokal.
+      </li>
+      <li>
+        <strong>Global</strong> adalah nama yang dibuat di luar fungsi pada
+        tingkat utama program.
+      </li>
+      <li>
+        <strong>Built-in</strong> adalah nama bawaan Python, misalnya
+        <code>print</code>, <code>len</code>, dan <code>sum</code>.
+      </li>
+    </ul>
+
+    <h3>Pencarian sampai ke built-in</h3>
+    <pre><code class="language-python">def tampilkan(data):
+    panjang = len(data)
+    print("Panjang data:", panjang)
+
+tampilkan([10, 20, 30, 40])</code></pre>
+    <p>
+      Nama <code>data</code> dan <code>panjang</code> ditemukan di lingkup
+      lokal. Nama <code>len</code> tidak ada di lokal maupun global, sehingga
+      Python mencarinya di built-in dan menemukan fungsi <code>len()</code>.
+    </p>
+
+    <h3>NameError ketika nama tidak ditemukan</h3>
+    <p>
+      Jika nama tidak ditemukan di local, global, maupun built-in, Python
+      menampilkan <strong>NameError</strong>. NameError juga muncul jika kita
+      mengakses variabel lokal dari luar fungsi atau salah mengetik nama
+      variabel.
+    </p>
+    <pre><code class="language-python">def hitung():
+    hasil = 10
+    return hasil
+
+print("Nilai:", hitung())
+
+# Baris berikut akan menghasilkan NameError karena hasil bersifat lokal.
+# print(hasil)</code></pre>
+    <p>
+      Kode di atas berjalan dan menampilkan <code>Nilai: 10</code>. Namun, jika
+      baris komentar <code>print(hasil)</code> dijalankan, Python akan
+      menampilkan <strong>NameError: name 'hasil' is not defined</strong>.
+    </p>
+    <pre><code class="language-python">nama = "Andi"
+
+def sapa():
+    print("Halo,", nama)
+
+    # Baris berikut akan menghasilkan NameError karena umur tidak ada.
+    # print(umur)
+
+sapa()</code></pre>
+    <p>
+      Fungsi <code>sapa()</code> menemukan <code>nama</code> di lingkup global.
+      Sebaliknya, <code>umur</code> tidak ada di local, global, maupun built-in,
+      sehingga akses terhadap <code>umur</code> akan menghasilkan NameError.
+    </p>
+    <p>
+      Hindari juga menggunakan nama built-in seperti <code>len</code> atau
+      <code>sum</code> sebagai nama variabel. Jika nama built-in ditutupi oleh
+      variabel lain, fungsi bawaan tersebut tidak dapat digunakan dengan benar.
+    </p>
+  </section>
+
+  <section aria-labelledby="rangkuman-modul-7">
+    <h2 id="rangkuman-modul-7">Rangkuman</h2>
+    <ul>
+      <li>
+        Fungsi adalah blok kode bernama yang dapat dipanggil berulang kali untuk
+        menghindari duplikasi dan membuat program lebih terstruktur.
+      </li>
+      <li>
+        Fungsi dibuat dengan <code>def</code>, diikuti nama fungsi, tanda
+        kurung, titik dua, dan isi fungsi yang diindentasi.
+      </li>
+      <li>
+        Parameter adalah variabel pada definisi fungsi, sedangkan argumen adalah
+        nilai yang diberikan saat fungsi dipanggil.
+      </li>
+      <li>
+        <code>return</code> mengembalikan nilai kepada pemanggil dan langsung
+        mengakhiri fungsi. Fungsi tanpa <code>return</code> menghasilkan
+        <code>None</code>.
+      </li>
+      <li>
+        Fungsi mengembalikan nilai, sedangkan prosedur melakukan tindakan tanpa
+        mengembalikan nilai yang akan diolah lagi.
+      </li>
+      <li>
+        Variabel lokal hanya berlaku di dalam fungsi. Variabel global dapat
+        dibaca dari dalam fungsi, tetapi perlu <code>global</code> jika ingin
+        diubah.
+      </li>
+      <li>
+        Python mencari nama dengan urutan Local, Global, lalu Built-in. Jika nama
+        tidak ditemukan, Python menampilkan <code>NameError</code>.
+      </li>
+    </ul>
+  </section>
+</article>

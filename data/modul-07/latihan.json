@@ -1,0 +1,13 @@
+{
+  "judul": "Latihan Modul 7: Nilai Mahasiswa dengan Fungsi",
+  "instruksi": "Lengkapi program berikut dengan membuat fungsi-fungsi yang diminta.\n1. Buat prosedur sapa(nama) yang mencetak \"Halo, <nama>!\"\n2. Buat fungsi hitung_total(nilai1, nilai2, nilai3) yang mengembalikan jumlah ketiga nilai.\n3. Buat fungsi hitung_rata_rata(total, jumlah) yang mengembalikan total dibagi jumlah.\n4. Buat fungsi tentukan_status(rata_rata) yang mengembalikan \"Lulus\" jika rata_rata lebih besar atau sama dengan BATAS_LULUS, atau \"Belum lulus\" jika belum.\n5. Buat prosedur tampilkan_hasil(nama, total, rata_rata) yang mencetak total, rata-rata, dan status.\n6. Panggil fungsi untuk nama \"Andi\" dengan nilai 80, 90, dan 100.\n\nOutput yang diharapkan:\nHalo, Andi!\nTotal nilai: 270\nRata-rata: 90.0\nStatus: Lulus",
+  "kodeAwal": "# 1. Prosedur sapa(nama)\n# 2. Fungsi hitung_total(nilai1, nilai2, nilai3)\n# 3. Fungsi hitung_rata_rata(total, jumlah)\n# 4. Fungsi tentukan_status(rata_rata)\n# 5. Prosedur tampilkan_hasil(nama, total, rata_rata)\n# 6. Panggil fungsi untuk Andi dengan nilai 80, 90, dan 100.\n\nBATAS_LULUS = 75",
+  "outputDiharapkan": "Halo, Andi!\nTotal nilai: 270\nRata-rata: 90.0\nStatus: Lulus",
+  "petunjuk": [
+    "Buat sapa(nama) dengan print(\"Halo,\", nama + \"!\") agar tanda seru menempel pada nama.",
+    "hitung_total() cukup menjumlahkan tiga parameter, lalu gunakan return. hitung_rata_rata() menggunakan return total / jumlah.",
+    "tentukan_status() membaca variabel global BATAS_LULUS. Gunakan if rata_rata >= BATAS_LULUS untuk mengembalikan \"Lulus\".",
+    "tampilkan_hasil() dapat memanggil tentukan_status(rata_rata) di dalam print, lalu panggil semua fungsi dari program utama."
+  ],
+  "kunci": "BATAS_LULUS = 75\n\ndef sapa(nama):\n    print(\"Halo,\", nama + \"!\")\n\ndef hitung_total(nilai1, nilai2, nilai3):\n    total = nilai1 + nilai2 + nilai3\n    return total\n\ndef hitung_rata_rata(total, jumlah):\n    return total / jumlah\n\ndef tentukan_status(rata_rata):\n    if rata_rata >= BATAS_LULUS:\n        return \"Lulus\"\n    return \"Belum lulus\"\n\ndef tampilkan_hasil(nama, total, rata_rata):\n    print(\"Total nilai:\", total)\n    print(\"Rata-rata:\", rata_rata)\n    print(\"Status:\", tentukan_status(rata_rata))\n\nsapa(\"Andi\")\nnilai_total = hitung_total(80, 90, 100)\nnilai_rata = hitung_rata_rata(nilai_total, 3)\ntampilkan_hasil(\"Andi\", nilai_total, nilai_rata)"
+}

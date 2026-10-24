@@ -54,9 +54,9 @@
       "id": 7,
       "slug": "modul-07",
       "judul": "Fungsi",
-      "deskripsi": "Membuat dan memanggil function agar kode dapat digunakan ulang.",
-      "jumlahSubbab": 3,
-      "status": "segera"
+      "deskripsi": "Membuat dan memanggil fungsi, menggunakan parameter dan return, serta memahami variabel lokal dan global.",
+      "jumlahSubbab": 6,
+      "status": "tersedia"
     },
     {
       "id": 8,

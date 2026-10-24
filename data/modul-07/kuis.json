@@ -1,0 +1,160 @@
+{
+  "judul": "Kuis Modul 7: Fungsi",
+  "batasLulus": 60,
+  "soal": [
+    {
+      "pertanyaan": "Blok kode bernama yang dapat dipanggil berulang kali untuk mengerjakan tugas tertentu disebut ...",
+      "pilihan": [
+        "variabel",
+        "fungsi",
+        "list",
+        "komentar"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Fungsi adalah blok kode bernama yang dibuat untuk melakukan tugas tertentu. Setelah dibuat, fungsi dapat dipanggil berkali-kali tanpa menulis ulang isi kodenya."
+    },
+    {
+      "pertanyaan": "Kata kunci yang digunakan untuk membuat fungsi di Python adalah ...",
+      "pilihan": [
+        "def",
+        "function",
+        "void",
+        "return"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Fungsi dibuat dengan kata kunci def, diikuti nama fungsi, tanda kurung, dan titik dua. Contohnya def sapa():."
+    },
+    {
+      "pertanyaan": "Fungsi yang sudah didefinisikan baru akan berjalan ketika ...",
+      "pilihan": [
+        "dihapus",
+        "diberi return",
+        "dipanggil dengan nama dan tanda kurung",
+        "diubah menjadi variabel"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Definisi fungsi hanya menyiapkan blok kode. Fungsi baru dijalankan saat dipanggil, misalnya sapa(), atau dengan argumen seperti sapa(\"Andi\")."
+    },
+    {
+      "pertanyaan": "Perhatikan kode berikut: def sapa(nama): print(\"Halo\", nama). Jika sapa(\"Andi\") dipanggil, outputnya adalah ...",
+      "pilihan": [
+        "Halo",
+        "Halo Andi",
+        "nama",
+        "error"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Nilai \"Andi\" diberikan ke parameter nama. print(\"Halo\", nama) mencetak Halo, spasi pemisah, lalu nilai nama sehingga hasilnya Halo Andi."
+    },
+    {
+      "pertanyaan": "Fungsi luas_persegi_panjang(panjang, lebar) memiliki ... parameter.",
+      "pilihan": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Parameter adalah variabel di dalam tanda kurung pada definisi fungsi. Fungsi tersebut memiliki dua parameter, yaitu panjang dan lebar."
+    },
+    {
+      "pertanyaan": "Perhatikan kode berikut: def tambah(a, b): return a + b; hasil = tambah(2, 3); print(hasil). Output yang dihasilkan adalah ...",
+      "pilihan": [
+        "5",
+        "23",
+        "None",
+        "error"
+      ],
+      "jawaban": "A",
+      "pembahasan": "tambah(2, 3) mengembalikan 2 + 3, yaitu 5. Nilai itu disimpan pada variabel hasil lalu dicetak."
+    },
+    {
+      "pertanyaan": "Perbedaan utama antara fungsi dan prosedur adalah ...",
+      "pilihan": [
+        "fungsi tidak punya nama",
+        "prosedur tidak bisa dipanggil",
+        "fungsi tidak boleh punya parameter",
+        "prosedur tidak mengembalikan nilai untuk diolah lagi"
+      ],
+      "jawaban": "D",
+      "pembahasan": "Fungsi mengembalikan nilai yang dapat diolah lagi, sedangkan prosedur melakukan tindakan tanpa mengembalikan nilai yang berguna. Di Python, prosedur adalah fungsi yang tidak memiliki return atau mengembalikan None."
+    },
+    {
+      "pertanyaan": "Fungsi Python yang tidak memiliki pernyataan return akan mengembalikan ...",
+      "pilihan": [
+        "0",
+        "False",
+        "None",
+        "error"
+      ],
+      "jawaban": "C",
+      "pembahasan": "Secara otomatis Python mengembalikan None dari fungsi yang tidak memiliki return. None adalah nilai khusus yang berarti tidak ada nilai."
+    },
+    {
+      "pertanyaan": "Variabel yang dibuat di dalam fungsi dan hanya dapat diakses di dalam fungsi tersebut disebut variabel ...",
+      "pilihan": [
+        "global",
+        "lokal",
+        "built-in",
+        "konstan"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Variabel lokal dibuat di dalam fungsi dan hanya berlaku di lingkup fungsi itu. Variabel tersebut tidak dapat diakses dari luar fungsi."
+    },
+    {
+      "pertanyaan": "nama = \"Andi\" yang ditulis di luar semua fungsi merupakan variabel ...",
+      "pilihan": [
+        "lokal",
+        "parameter",
+        "built-in",
+        "global"
+      ],
+      "jawaban": "D",
+      "pembahasan": "Variabel yang dibuat di tingkat utama program, di luar fungsi, bersifat global. Variabel global dapat dibaca dari dalam fungsi."
+    },
+    {
+      "pertanyaan": "Urutan pencarian nama variabel oleh Python adalah ...",
+      "pilihan": [
+        "Global, Local, Built-in",
+        "Local, Global, Built-in",
+        "Built-in, Local, Global",
+        "Local, Built-in, Global"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Python mencari nama di lingkup Local terlebih dahulu, lalu Global, lalu Built-in. Urutan ini sering disingkat L-G-B."
+    },
+    {
+      "pertanyaan": "Jika sebuah nama tidak ditemukan di local, global, maupun built-in, Python akan menampilkan ...",
+      "pilihan": [
+        "ValueError",
+        "TypeError",
+        "NameError",
+        "IndexError"
+      ],
+      "jawaban": "C",
+      "pembahasan": "NameError muncul ketika nama variabel atau fungsi tidak ditemukan. Contohnya mengakses variabel lokal dari luar fungsi atau memakai variabel yang belum dibuat."
+    },
+    {
+      "pertanyaan": "Perhatikan kode berikut: def kali(a, b): return a * b; print(kali(3, 4) + 2). Output yang dihasilkan adalah ...",
+      "pilihan": [
+        "14",
+        "12",
+        "32",
+        "error"
+      ],
+      "jawaban": "A",
+      "pembahasan": "kali(3, 4) mengembalikan 12. Nilai tersebut kemudian ditambah 2 sehingga hasil akhirnya 14."
+    },
+    {
+      "pertanyaan": "Agar fungsi dapat mengubah variabel global skor, kata kunci yang perlu ditulis sebelum pengubahan adalah ...",
+      "pilihan": [
+        "local skor",
+        "global skor",
+        "return skor",
+        "def skor"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Kata kunci global memberi tahu Python bahwa skor yang dimaksud adalah variabel global. Tanpa global, penugasan di dalam fungsi akan membuat variabel lokal baru."
+    }
+  ]
+}
