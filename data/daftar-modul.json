@@ -38,9 +38,9 @@
       "id": 5,
       "slug": "modul-05",
       "judul": "Perulangan",
-      "deskripsi": "Mengulang instruksi dengan for dan while.",
-      "jumlahSubbab": 3,
-      "status": "segera"
+      "deskripsi": "Mengulang instruksi dengan perulangan for, while, range(), dan break.",
+      "jumlahSubbab": 5,
+      "status": "tersedia"
     },
     {
       "id": 6,

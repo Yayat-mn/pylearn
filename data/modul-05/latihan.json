@@ -1,0 +1,12 @@
+{
+  "judul": "Latihan Modul 5: Putaran, Belanja, dan Hitung Mundur",
+  "instruksi": "Lengkapi tiga bagian berikut:\n1. Tampilkan \"Putaran ke-1\" sampai \"Putaran ke-3\" dengan for dan range().\n2. Jumlahkan semua harga pada list, lalu tampilkan total belanja.\n3. Tampilkan hitungan mundur 3, 2, 1 dengan while dan break.\n\nOutput yang diharapkan:\nPutaran ke-1\nPutaran ke-2\nPutaran ke-3\nTotal belanja: 50000\nHitung: 3\nHitung: 2\nHitung: 1\nSelesai",
+  "kodeAwal": "# 1. Tampilkan putaran 1 sampai 3 dengan for dan range().\n# 2. Jumlahkan semua harga, lalu tampilkan totalnya.\n# 3. Tampilkan hitungan mundur 3, 2, 1 dengan while dan break.\n\nharga = [10000, 25000, 15000]",
+  "outputDiharapkan": "Putaran ke-1\nPutaran ke-2\nPutaran ke-3\nTotal belanja: 50000\nHitung: 3\nHitung: 2\nHitung: 1\nSelesai",
+  "petunjuk": [
+    "Gunakan for i in range(1, 4): lalu tampilkan \"Putaran ke-\" + str(i).",
+    "Buat total = 0 sebelum perulangan, tambahkan setiap h ke total, lalu tampilkan \"Total belanja: \" + str(total).",
+    "Gunakan hitung = 3 dan while True:. Tampilkan hitung, hentikan dengan if hitung == 1: break, lalu kurangi hitung dengan hitung -= 1. Setelah perulangan, tampilkan \"Selesai\"."
+  ],
+  "kunci": "for i in range(1, 4):\n    print(\"Putaran ke-\" + str(i))\n\nharga = [10000, 25000, 15000]\ntotal = 0\n\nfor h in harga:\n    total += h\n\nprint(\"Total belanja: \" + str(total))\n\nhitung = 3\n\nwhile True:\n    print(\"Hitung:\", hitung)\n\n    if hitung == 1:\n        break\n\n    hitung -= 1\n\nprint(\"Selesai\")"
+}

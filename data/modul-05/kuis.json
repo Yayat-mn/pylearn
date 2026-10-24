@@ -1,0 +1,160 @@
+{
+  "judul": "Kuis Modul 5: Perulangan",
+  "batasLulus": 60,
+  "soal": [
+    {
+      "pertanyaan": "Perulangan dalam program digunakan untuk ...",
+      "pilihan": [
+        "menjalankan perintah satu kali",
+        "mengulang blok perintah",
+        "mengubah tipe data",
+        "menghentikan program"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Perulangan menjalankan blok perintah secara berulang sesuai jumlah atau kondisi yang ditentukan, sehingga kode yang sama tidak perlu ditulis berkali-kali."
+    },
+    {
+      "pertanyaan": "Perulangan for disebut counted loop karena ...",
+      "pilihan": [
+        "jumlah perulangannya sudah diketahui",
+        "tidak memerlukan kondisi",
+        "hanya dapat digunakan pada list",
+        "selalu berjalan tanpa henti"
+      ],
+      "jawaban": "A",
+      "pembahasan": "For disebut counted loop karena jumlah iterasinya dapat ditentukan sejak awal, misalnya melalui range(5) atau banyaknya elemen list."
+    },
+    {
+      "pertanyaan": "Perulangan while disebut uncounted loop karena ...",
+      "pilihan": [
+        "tidak dapat dihentikan",
+        "hanya digunakan untuk list",
+        "jumlah iterasinya tidak harus diketahui sejak awal",
+        "tidak memiliki kondisi"
+      ],
+      "jawaban": "C",
+      "pembahasan": "While bergantung pada kondisi. Perulangan berjalan selama kondisi bernilai True, sehingga jumlah iterasinya belum tentu diketahui sejak awal."
+    },
+    {
+      "pertanyaan": "range(5) menghasilkan urutan angka ...",
+      "pilihan": [
+        "1, 2, 3, 4, 5",
+        "0, 1, 2, 3, 4",
+        "0, 1, 2, 3, 4, 5",
+        "1, 2, 3, 4"
+      ],
+      "jawaban": "B",
+      "pembahasan": "range(5) dimulai dari 0 dan berhenti sebelum 5, sehingga menghasilkan 0, 1, 2, 3, dan 4."
+    },
+    {
+      "pertanyaan": "for i in range(1, 4): print(i) menampilkan ...",
+      "pilihan": [
+        "1 2 3 4",
+        "0 1 2 3",
+        "1 2 3",
+        "1 2"
+      ],
+      "jawaban": "C",
+      "pembahasan": "range(1, 4) dimulai dari 1 dan berhenti sebelum 4, sehingga menghasilkan 1, 2, dan 3."
+    },
+    {
+      "pertanyaan": "for i in range(1, 6, 2): print(i) menampilkan ...",
+      "pilihan": [
+        "1 3 5",
+        "2 4 6",
+        "1 2 3 4 5",
+        "0 2 4"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Argumen ketiga pada range() adalah langkah. range(1, 6, 2) menghasilkan 1, 3, dan 5."
+    },
+    {
+      "pertanyaan": "Pada print(\"Putaran ke-\" + str(i)), fungsi str(i) digunakan untuk ...",
+      "pilihan": [
+        "mengubah string menjadi integer",
+        "mengubah angka menjadi string",
+        "menghapus spasi",
+        "mengulang string"
+      ],
+      "jawaban": "B",
+      "pembahasan": "str(i) mengubah nilai angka menjadi string agar dapat digabung dengan teks menggunakan operator +."
+    },
+    {
+      "pertanyaan": "buah = [\"apel\", \"jeruk\", \"mangga\"]; for item in buah: print(item) menampilkan ...",
+      "pilihan": [
+        "apel jeruk mangga dalam satu baris",
+        "indeks 0 1 2",
+        "error karena list tidak bisa diulang",
+        "apel, jeruk, mangga masing-masing satu baris"
+      ],
+      "jawaban": "D",
+      "pembahasan": "Perulangan for menelusuri setiap elemen list. Setiap item ditampilkan pada baris baru sesuai urutan list."
+    },
+    {
+      "pertanyaan": "Pada perulangan while, agar perulangan dapat berhenti, ...",
+      "pilihan": [
+        "kondisi harus selalu True",
+        "variabel yang dipakai pada kondisi harus diperbarui",
+        "harus selalu memakai break",
+        "variabel tidak boleh berubah"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Variabel pada kondisi while harus diperbarui agar suatu saat kondisi bernilai False. Jika tidak, perulangan dapat berjalan terus-menerus."
+    },
+    {
+      "pertanyaan": "hitung = 1; while hitung <= 3: print(hitung); hitung += 1 menampilkan ...",
+      "pilihan": [
+        "1 2 3",
+        "1 2 3 4",
+        "0 1 2",
+        "error"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Perulangan dimulai dari 1 dan berjalan selama hitung <= 3. Nilai yang ditampilkan adalah 1, 2, dan 3."
+    },
+    {
+      "pertanyaan": "for i in range(1, 6): if i == 4: break; print(i) menampilkan ...",
+      "pilihan": [
+        "1 2 3",
+        "1 2 3 4",
+        "4 5",
+        "1 2 3 4 5"
+      ],
+      "jawaban": "A",
+      "pembahasan": "Ketika i bernilai 4, perintah break dijalankan sebelum print(i). Perulangan berhenti sehingga hanya 1, 2, dan 3 yang tampil."
+    },
+    {
+      "pertanyaan": "Perintah break digunakan untuk ...",
+      "pilihan": [
+        "melewati satu iterasi",
+        "menghentikan perulangan",
+        "mengulang dari awal",
+        "menambah nilai hitungan"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Break menghentikan perulangan lebih awal. Program kemudian melanjutkan perintah setelah blok perulangan."
+    },
+    {
+      "pertanyaan": "hitung = 3; while hitung > 0: print(hitung); hitung -= 1 menampilkan ...",
+      "pilihan": [
+        "1 2 3",
+        "3 2 1",
+        "3 2 1 0",
+        "error"
+      ],
+      "jawaban": "B",
+      "pembahasan": "Nilai hitung dimulai dari 3, ditampilkan, lalu dikurangi satu. Perulangan berhenti ketika hitung bernilai 0, sehingga outputnya 3, 2, dan 1."
+    },
+    {
+      "pertanyaan": "for i in range(3): print(\"Halo\") menampilkan Halo sebanyak ...",
+      "pilihan": [
+        "1 kali",
+        "2 kali",
+        "3 kali",
+        "4 kali"
+      ],
+      "jawaban": "C",
+      "pembahasan": "range(3) menghasilkan tiga nilai, yaitu 0, 1, dan 2. Blok print dijalankan tiga kali."
+    }
+  ]
+}

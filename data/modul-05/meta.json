@@ -1,0 +1,42 @@
+{
+  "id": 5,
+  "slug": "modul-05",
+  "judul": "Perulangan",
+  "deskripsi": "Mengulang instruksi dengan perulangan for, while, range(), dan break.",
+  "tujuanPembelajaran": [
+    "Mahasiswa mampu menjelaskan fungsi perulangan dan perbedaan for (counted loop) dengan while (uncounted loop).",
+    "Mahasiswa mampu membuat perulangan for dengan range().",
+    "Mahasiswa mampu membuat perulangan for untuk menelusuri list.",
+    "Mahasiswa mampu membuat perulangan while dengan kondisi berhenti dan perintah break."
+  ],
+  "subbab": [
+    {
+      "id": "5.1",
+      "judul": "Konsep Perulangan dan Counted vs Uncounted Loop"
+    },
+    {
+      "id": "5.2",
+      "judul": "Perulangan for dengan range()"
+    },
+    {
+      "id": "5.3",
+      "judul": "Perulangan for pada List"
+    },
+    {
+      "id": "5.4",
+      "judul": "Perulangan while dan Kondisi Berhenti"
+    },
+    {
+      "id": "5.5",
+      "judul": "Perintah break dan Penerapannya"
+    }
+  ],
+  "video": {
+    "youtubeId": "dnwqwPaMGiQ",
+    "judul": "Perulangan FOR — Jagat Koding"
+  },
+  "kodeAwal": "print(\"Belajar perulangan Python\")",
+  "fileMateri": "materi.html",
+  "fileLatihan": "latihan.json",
+  "fileKuis": "kuis.json"
+}
