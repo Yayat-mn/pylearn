@@ -1,0 +1,787 @@
+<article class="materi-python">
+  <section id="subbab-8-1" aria-labelledby="judul-8-1">
+    <h2 id="judul-8-1">8.1 Rancangan Program dan Data Global</h2>
+    <p>
+      Modul ini adalah puncak perjalanan belajar Python. Kita akan membangun
+      <strong>Pustaka Mini</strong>, yaitu aplikasi sederhana untuk mengelola
+      data buku. Program berjalan lewat menu di terminal dan menyimpan data di
+      dalam memori selama program masih berjalan.
+    </p>
+    <p>
+      Pustaka Mini menerapkan materi yang sudah dipelajari: variabel, tipe data,
+      percabangan, perulangan, list, dictionary, dan fungsi. Setiap fitur
+      dikerjakan oleh fungsi tersendiri agar program mudah dibaca dan diuji.
+    </p>
+
+    <h3>Fitur yang akan dibuat</h3>
+    <ul>
+      <li><strong>Tampilkan buku</strong> — melihat seluruh data buku.</li>
+      <li><strong>Tambah buku</strong> — menambahkan satu buku baru.</li>
+      <li><strong>Ubah buku</strong> — memperbarui data buku yang sudah ada.</li>
+      <li><strong>Hapus buku</strong> — menghapus buku setelah konfirmasi.</li>
+      <li><strong>Keluar</strong> — menghentikan program dengan rapi.</li>
+    </ul>
+
+    <h3>Menyimpan banyak buku</h3>
+    <p>
+      Satu buku memiliki judul, penulis, tahun terbit, dan stok. Karena itu,
+      satu buku paling tepat disimpan sebagai <code>dictionary</code>. Seluruh
+      buku kemudian dikumpulkan dalam <code>list</code>. Struktur ini disebut
+      <strong>list of dictionary</strong>.
+    </p>
+    <pre><code class="language-python">daftar_buku = [
+    {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
+    {"judul": "Algoritma", "penulis": "Budi", "tahun": 2023, "stok": 2},
+]
+
+for buku in daftar_buku:
+    print(buku["judul"], "-", buku["penulis"])</code></pre>
+    <p>
+      Setiap dictionary memakai kunci yang sama, yaitu <code>judul</code>,
+      <code>penulis</code>, <code>tahun</code>, dan <code>stok</code>. Kunci
+      yang seragam memudahkan fungsi lain membaca dan mengubah data.
+    </p>
+
+    <h3>Mengapa daftar_buku diletakkan di luar fungsi?</h3>
+    <p>
+      <code>daftar_buku</code> adalah variabel global karena dibuat di tingkat
+      utama program, bukan di dalam fungsi. Semua fungsi dapat membacanya.
+      Fungsi juga dapat menambah, mengubah, atau menghapus isi list tanpa
+      menulis <code>global</code>, asalkan yang diubah adalah isi list, bukan
+      nama variabelnya.
+    </p>
+    <pre><code class="language-python">daftar_buku = []
+
+def tambah_cepat(judul):
+    daftar_buku.append({"judul": judul, "penulis": "-", "tahun": 0, "stok": 0})
+
+tambah_cepat("Belajar Python")
+print(daftar_buku)</code></pre>
+    <p>
+      Namun, jika kita menulis <code>daftar_buku = []</code> di dalam fungsi,
+      Python membuat variabel lokal baru, bukan mengosongkan list global. Untuk
+      proyek ini, kita hanya memakai <code>append()</code>, <code>pop()</code>,
+      dan penggantian isi indeks sehingga <code>global</code> tidak diperlukan.
+    </p>
+
+    <h3>Rancangan menu</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Pilihan</th>
+          <th>Fungsi</th>
+          <th>Tugas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>show_data()</code></td>
+          <td>Menampilkan seluruh buku.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>insert_data()</code></td>
+          <td>Menambahkan buku baru.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>edit_data()</code></td>
+          <td>Mengubah data buku.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>delete_data()</code></td>
+          <td>Menghapus buku.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>exit()</code></td>
+          <td>Keluar dari program.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Dengan rancangan ini, setiap fungsi memiliki satu tugas yang jelas. Pola
+      tersebut akan memudahkan proses pengujian di subbab terakhir.
+    </p>
+  </section>
+
+  <section id="subbab-8-2" aria-labelledby="judul-8-2">
+    <h2 id="judul-8-2">8.2 Menampilkan Daftar Buku dengan show_data()</h2>
+    <p>
+      Fungsi <code>show_data()</code> bertugas menampilkan seluruh isi
+      <code>daftar_buku</code>. Agar pengguna mudah memilih buku saat mengubah
+      atau menghapus, setiap buku diberi nomor urut mulai dari 1.
+    </p>
+
+    <h3>Menggunakan enumerate()</h3>
+    <p>
+      <code>enumerate()</code> menghasilkan pasangan nomor dan nilai saat kita
+      melakukan perulangan. Parameter <code>start=1</code> membuat penomoran
+      dimulai dari satu, bukan nol.
+    </p>
+    <pre><code class="language-python">daftar_buku = [
+    {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
+    {"judul": "Algoritma", "penulis": "Budi", "tahun": 2023, "stok": 2},
+]
+
+def show_data():
+    print("\nDAFTAR BUKU")
+    if not daftar_buku:
+        print("Belum ada buku.")
+        return
+
+    for nomor, buku in enumerate(daftar_buku, start=1):
+        print(
+            f"{nomor}. {buku['judul']} | {buku['penulis']} | "
+            f"{buku['tahun']} | stok {buku['stok']}"
+        )
+
+show_data()</code></pre>
+    <p>
+      Tanda <code>|</code> dipakai sebagai pemisah agar kolom mudah dibaca.
+      F-string memudahkan penggabungan teks dan nilai variabel. Perhatikan
+      bahwa kunci dictionary ditulis dengan tanda kutip di dalam f-string,
+      misalnya <code>{buku['judul']}</code>.
+    </p>
+
+    <h3>Menangani daftar yang masih kosong</h3>
+    <p>
+      Jika <code>daftar_buku</code> kosong, perulangan tidak berjalan. Tanpa
+      pemeriksaan, pengguna hanya melihat judul tanpa isi. Karena itu, fungsi
+      menampilkan pesan khusus saat data kosong.
+    </p>
+    <pre><code class="language-python">daftar_buku = []
+
+def show_data():
+    print("\nDAFTAR BUKU")
+    if not daftar_buku:
+        print("Belum ada buku.")
+        return
+
+    for nomor, buku in enumerate(daftar_buku, start=1):
+        print(f"{nomor}. {buku['judul']}")
+
+show_data()</code></pre>
+    <p>
+      <code>return</code> menghentikan fungsi lebih awal. Baris perulangan di
+      bawahnya tidak dijalankan ketika daftar kosong. Pola ini disebut
+      <em>early return</em> dan membuat kode lebih mudah dibaca daripada
+      menambahkan <code>else</code> yang panjang.
+    </p>
+  </section>
+
+  <section id="subbab-8-3" aria-labelledby="judul-8-3">
+    <h2 id="judul-8-3">8.3 Menambah Buku dengan insert_data()</h2>
+    <p>
+      Fungsi <code>insert_data()</code> meminta empat data, lalu menambahkan
+      dictionary baru ke <code>daftar_buku</code> dengan <code>append()</code>.
+      Data tahun dan stok perlu diubah menjadi bilangan bulat memakai
+      <code>int()</code>.
+    </p>
+
+    <h3>Mensimulasikan input di browser</h3>
+    <p>
+      Di Python biasa, program interaktif memakai <code>input()</code>. Namun,
+      Pyodide yang berjalan di browser belum terhubung ke kotak input. Agar
+      contoh tetap dapat dijalankan, kita memakai <code>input_simulasi()</code>
+      dengan antrean jawaban. Fungsi ini hanya alat bantu pembelajaran.
+    </p>
+    <pre><code class="language-python">antrean_input = ["Belajar Python", "Rina", "2025", "5"]
+
+def input_simulasi(prompt=""):
+    print(prompt, end="")
+    if not antrean_input:
+        print("(antrean input habis)")
+        return "5"
+    jawaban = antrean_input.pop(0)
+    print(jawaban)
+    return jawaban
+
+daftar_buku = [
+    {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
+]
+
+def insert_data():
+    print("\nTAMBAH BUKU")
+    judul = input_simulasi("Judul: ")
+    penulis = input_simulasi("Penulis: ")
+
+    try:
+        tahun = int(input_simulasi("Tahun: "))
+        stok = int(input_simulasi("Stok: "))
+    except ValueError:
+        print("Tahun dan stok harus berupa angka.")
+        return
+
+    daftar_buku.append(
+        {
+            "judul": judul,
+            "penulis": penulis,
+            "tahun": tahun,
+            "stok": stok,
+        }
+    )
+    print(f"Buku '{judul}' berhasil ditambahkan.")
+
+insert_data()
+print(daftar_buku)</code></pre>
+    <p>
+      <code>try-except ValueError</code> menangani kesalahan ketika pengguna
+      mengetik teks pada tahun atau stok. Tanpa penanganan, program berhenti
+      dengan pesan error. Dengan penanganan, program memberi pesan dan kembali
+      ke menu.
+    </p>
+
+    <h3>Mengganti simulasi dengan input biasa</h3>
+    <p>
+      Pada Python yang dijalankan di terminal, ganti setiap pemanggilan
+      <code>input_simulasi("Judul: ")</code> menjadi <code>input("Judul: ")</code>.
+      Hapus juga <code>antrean_input</code> dan fungsi
+      <code>input_simulasi()</code>. Jangan lupa mengubah tahun dan stok dengan
+      <code>int()</code> karena <code>input()</code> selalu menghasilkan string.
+    </p>
+  </section>
+
+  <section id="subbab-8-4" aria-labelledby="judul-8-4">
+    <h2 id="judul-8-4">8.4 Mengubah Buku dengan edit_data()</h2>
+    <p>
+      Fungsi <code>edit_data()</code> menampilkan daftar lebih dulu agar
+      pengguna mengetahui nomor buku yang akan diubah. Setelah nomor dimasukkan,
+      fungsi meminta data baru dan mengganti dictionary pada indeks yang sesuai.
+    </p>
+
+    <h3>Nomor tampilan dan indeks list</h3>
+    <p>
+      Nomor yang dilihat pengguna dimulai dari 1, sedangkan indeks
+      <code>list</code> dimulai dari 0. Jika pengguna memilih buku nomor 1,
+      dictionary yang diubah berada pada indeks <code>0</code>. Karena itu,
+      program memakai <code>daftar_buku[nomor - 1]</code>.
+    </p>
+    <pre><code class="language-python">antrean_input = ["2", "Algoritma Edisi 2", "Budi", "2023", "5"]
+
+def input_simulasi(prompt=""):
+    print(prompt, end="")
+    if not antrean_input:
+        print("(antrean input habis)")
+        return "5"
+    jawaban = antrean_input.pop(0)
+    print(jawaban)
+    return jawaban
+
+daftar_buku = [
+    {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
+    {"judul": "Algoritma", "penulis": "Budi", "tahun": 2023, "stok": 2},
+]
+
+def show_data():
+    print("\nDAFTAR BUKU")
+    for nomor, buku in enumerate(daftar_buku, start=1):
+        print(f"{nomor}. {buku['judul']} | {buku['penulis']} | stok {buku['stok']}")
+
+def edit_data():
+    print("\nUBAH BUKU")
+    if not daftar_buku:
+        print("Belum ada buku.")
+        return
+
+    show_data()
+
+    try:
+        nomor = int(input_simulasi("Nomor buku: "))
+    except ValueError:
+        print("Nomor buku harus berupa angka.")
+        return
+
+    if nomor < 1 or nomor > len(daftar_buku):
+        print("Nomor buku tidak valid.")
+        return
+
+    judul = input_simulasi("Judul: ")
+    penulis = input_simulasi("Penulis: ")
+    tahun = int(input_simulasi("Tahun: "))
+    stok = int(input_simulasi("Stok: "))
+
+    daftar_buku[nomor - 1] = {
+        "judul": judul,
+        "penulis": penulis,
+        "tahun": tahun,
+        "stok": stok,
+    }
+    print(f"Buku '{judul}' berhasil diubah.")
+
+edit_data()
+print(daftar_buku)</code></pre>
+    <p>
+      Pemeriksaan <code>nomor &lt; 1 or nomor &gt; len(daftar_buku)</code>
+      mencegah indeks di luar jangkauan. Tanpa pemeriksaan itu, Python akan
+      menampilkan <strong>IndexError</strong> ketika pengguna mengetik nomor
+      yang tidak ada.
+    </p>
+
+    <h3>Mengubah satu bidang saja</h3>
+    <p>
+      Kode di atas mengganti seluruh dictionary agar sederhana. Jika hanya ingin
+      mengubah stok, kita bisa menulis
+      <code>daftar_buku[nomor - 1]["stok"] = stok_baru</code>. Kedua cara sama
+      valid asalkan kunci dictionary tetap lengkap dan konsisten.
+    </p>
+  </section>
+
+  <section id="subbab-8-5" aria-labelledby="judul-8-5">
+    <h2 id="judul-8-5">8.5 Menghapus Buku dengan delete_data()</h2>
+    <p>
+      Fungsi <code>delete_data()</code> meminta nomor buku, menampilkan daftar,
+      lalu meminta konfirmasi. Konfirmasi penting karena penghapusan data tidak
+      dapat dibatalkan setelah dijalankan.
+    </p>
+
+    <h3>Menggunakan pop()</h3>
+    <p>
+      <code>pop(indeks)</code> menghapus elemen pada indeks tertentu dan
+      mengembalikan nilai yang dihapus. Nilai kembalian itu dapat dipakai untuk
+      menampilkan judul buku yang berhasil dihapus.
+    </p>
+    <pre><code class="language-python">antrean_input = ["1", "y"]
+
+def input_simulasi(prompt=""):
+    print(prompt, end="")
+    if not antrean_input:
+        print("(antrean input habis)")
+        return "5"
+    jawaban = antrean_input.pop(0)
+    print(jawaban)
+    return jawaban
+
+daftar_buku = [
+    {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
+    {"judul": "Algoritma", "penulis": "Budi", "tahun": 2023, "stok": 2},
+]
+
+def show_data():
+    print("\nDAFTAR BUKU")
+    for nomor, buku in enumerate(daftar_buku, start=1):
+        print(f"{nomor}. {buku['judul']} | {buku['penulis']}")
+
+def delete_data():
+    print("\nHAPUS BUKU")
+    if not daftar_buku:
+        print("Belum ada buku.")
+        return
+
+    show_data()
+
+    try:
+        nomor = int(input_simulasi("Nomor buku: "))
+    except ValueError:
+        print("Nomor buku harus berupa angka.")
+        return
+
+    if nomor < 1 or nomor > len(daftar_buku):
+        print("Nomor buku tidak valid.")
+        return
+
+    konfirmasi = input_simulasi("Yakin hapus? (y/n): ").lower()
+    if konfirmasi != "y":
+        print("Penghapusan dibatalkan.")
+        return
+
+    buku = daftar_buku.pop(nomor - 1)
+    print(f"Buku '{buku['judul']}' berhasil dihapus.")
+
+delete_data()
+print(daftar_buku)</code></pre>
+    <p>
+      <code>lower()</code> membuat jawaban <code>Y</code> dan <code>y</code>
+      sama-sama diterima. Jika jawaban bukan <code>y</code>, fungsi berhenti
+      tanpa mengubah data.
+    </p>
+
+    <h3>Alternatif del</h3>
+    <p>
+      Python juga menyediakan <code>del daftar_buku[nomor - 1]</code>. Bedanya,
+      <code>del</code> tidak mengembalikan nilai yang dihapus. Untuk proyek ini,
+      <code>pop()</code> lebih praktis karena judul buku bisa langsung dipakai
+      pada pesan konfirmasi.
+    </p>
+  </section>
+
+  <section id="subbab-8-6" aria-labelledby="judul-8-6">
+    <h2 id="judul-8-6">8.6 Menu, Main Loop, dan if __name__ == "__main__"</h2>
+    <p>
+      Menu membuat program dapat dipakai berulang kali tanpa menjalankannya
+      ulang dari awal. Fungsi <code>show_menu()</code> menampilkan pilihan,
+      sedangkan <code>main()</code> membaca pilihan dan memanggil fungsi yang
+      sesuai.
+    </p>
+
+    <h3>Perulangan while True</h3>
+    <p>
+      <code>while True</code> berarti perulangan berjalan terus sampai ada
+      perintah <code>break</code>. Program hanya keluar ketika pengguna memilih
+      menu 5. Pilihan yang tidak dikenal tidak menghentikan program; pengguna
+      diminta memilih lagi.
+    </p>
+    <pre><code class="language-python"># Pyodide menjalankan kode dengan __name__ = "builtins".
+# Baris berikut menyamakannya dengan Python biasa.
+if __name__ == "builtins":
+    __name__ = "__main__"
+
+antrean_input = ["1", "9", "5"]
+
+def input_simulasi(prompt=""):
+    print(prompt, end="")
+    if not antrean_input:
+        print("(antrean input habis)")
+        return "5"
+    jawaban = antrean_input.pop(0)
+    print(jawaban)
+    return jawaban
+
+daftar_buku = [
+    {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
+]
+
+def show_data():
+    print("\nDAFTAR BUKU")
+    for nomor, buku in enumerate(daftar_buku, start=1):
+        print(f"{nomor}. {buku['judul']}")
+
+def show_menu():
+    print("\n=== PUSTAKA MINI ===")
+    print("1. Tampilkan  2. Tambah  3. Ubah  4. Hapus  5. Keluar")
+
+def exit():
+    print("Terima kasih telah menggunakan Pustaka Mini.")
+    return False
+
+def main():
+    while True:
+        show_menu()
+        pilihan = input_simulasi("Pilih menu (1-5): ")
+
+        if pilihan == "1":
+            show_data()
+        elif pilihan == "2":
+            print("Menu tambah belum diisi pada contoh ini.")
+        elif pilihan == "3":
+            print("Menu ubah belum diisi pada contoh ini.")
+        elif pilihan == "4":
+            print("Menu hapus belum diisi pada contoh ini.")
+        elif pilihan == "5":
+            if not exit():
+                break
+        else:
+            print("Pilihan tidak valid. Silakan pilih 1-5.")
+
+if __name__ == "__main__":
+    main()</code></pre>
+    <p>
+      Perhatikan fungsi <code>exit()</code> mengembalikan <code>False</code>.
+      Di dalam <code>main()</code>, nilai itu dipakai untuk memutuskan
+      <code>break</code>. Di Python, <code>exit</code> sebenarnya juga nama
+      fungsi bawaan untuk keluar dari interpreter. Menimpa nama tersebut bisa
+      membingungkan. Pada program nyata, nama <code>keluar()</code> lebih aman.
+      Kita tetap memakai <code>exit()</code> di modul ini agar sesuai dengan
+      rancangan proyek.
+    </p>
+
+    <h3>Mengapa memakai if __name__ == "__main__"?</h3>
+    <p>
+      Baris <code>if __name__ == "__main__":</code> memastikan
+      <code>main()</code> hanya dipanggil ketika berkas dijalankan langsung.
+      Jika berkas diimpor sebagai modul, <code>main()</code> tidak otomatis
+      berjalan. Pola ini membuat kode lebih rapi dan aman dipakai ulang.
+    </p>
+    <pre><code class="language-python"># Pyodide menjalankan kode dengan __name__ = "builtins".
+# Baris berikut menyamakannya dengan Python biasa.
+if __name__ == "builtins":
+    __name__ = "__main__"
+
+def sapa():
+    print("Halo dari modul Pustaka Mini")
+
+if __name__ == "__main__":
+    sapa()</code></pre>
+    <p>
+      Saat kode di atas dijalankan langsung, Python memberi nilai
+      <code>"__main__"</code> pada variabel <code>__name__</code> sehingga
+      <code>sapa()</code> dipanggil. Jika berkas diimpor, blok tersebut
+      dilewati.
+    </p>
+    <p>
+      Pyodide menjalankan kode di namespace khusus dengan nilai
+      <code>__name__</code> sama dengan <code>"builtins"</code>. Karena itu,
+      contoh di modul ini menambahkan pemeriksaan
+      <code>__name__ == "builtins"</code> untuk menyamakan perilaku dengan
+      Python biasa. Pada Python biasa, baris tersebut dilewati karena
+      <code>__name__</code> sudah bernilai <code>"__main__"</code>.
+    </p>
+  </section>
+
+  <section id="subbab-8-7" aria-labelledby="judul-8-7">
+    <h2 id="judul-8-7">8.7 Pengujian dan Perbaikan</h2>
+    <p>
+      Program yang selesai ditulis belum tentu benar. Kita perlu menguji setiap
+      fitur dengan urutan yang tetap, lalu membandingkan output dengan
+      rancangan. Untuk Pustaka Mini, gunakan skenario berikut.
+    </p>
+
+    <h3>Skenario pengujian</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Langkah</th>
+          <th>Tindakan</th>
+          <th>Hasil yang diharapkan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Pilih menu 1</td>
+          <td>Dua buku awal tampil dengan nomor 1 dan 2.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Pilih menu 2, isi data buku baru</td>
+          <td>Buku baru tampil pada daftar berikutnya.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Pilih menu 3, ubah buku nomor 1</td>
+          <td>Data buku nomor 1 berubah, jumlah buku tetap.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Pilih menu 4, hapus buku nomor 2, jawab y</td>
+          <td>Buku nomor 2 hilang, jumlah buku berkurang satu.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Pilih menu 5</td>
+          <td>Pesan terima kasih tampil dan program berhenti.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Kode lengkap Pustaka Mini</h3>
+    <p>
+      Kode berikut adalah versi lengkap dari seluruh fungsi yang sudah dibahas.
+      Antrean input membuat program dapat dijalankan di browser. Di Python
+      biasa, ganti <code>input_simulasi()</code> dengan <code>input()</code>.
+    </p>
+    <pre><code class="language-python"># Pyodide menjalankan kode dengan __name__ = "builtins".
+# Baris berikut menyamakannya dengan Python biasa.
+if __name__ == "builtins":
+    __name__ = "__main__"
+
+
+antrean_input = [
+    "1",
+    "2", "Belajar Python", "Rina", "2025", "5",
+    "3", "1", "Python Dasar Edisi 2", "Andi", "2024", "4",
+    "1",
+    "4", "2", "y",
+    "1",
+    "5",
+]
+
+def input_simulasi(prompt=""):
+    print(prompt, end="")
+    if not antrean_input:
+        print("(antrean input habis)")
+        return "5"
+    jawaban = antrean_input.pop(0)
+    print(jawaban)
+    return jawaban
+
+daftar_buku = [
+    {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
+    {"judul": "Algoritma", "penulis": "Budi", "tahun": 2023, "stok": 2},
+]
+
+def show_data():
+    print("\nDAFTAR BUKU")
+    if not daftar_buku:
+        print("Belum ada buku.")
+        return
+
+    for nomor, buku in enumerate(daftar_buku, start=1):
+        print(
+            f"{nomor}. {buku['judul']} | {buku['penulis']} | "
+            f"{buku['tahun']} | stok {buku['stok']}"
+        )
+
+def insert_data():
+    print("\nTAMBAH BUKU")
+    judul = input_simulasi("Judul: ")
+    penulis = input_simulasi("Penulis: ")
+
+    try:
+        tahun = int(input_simulasi("Tahun: "))
+        stok = int(input_simulasi("Stok: "))
+    except ValueError:
+        print("Tahun dan stok harus berupa angka.")
+        return
+
+    daftar_buku.append(
+        {
+            "judul": judul,
+            "penulis": penulis,
+            "tahun": tahun,
+            "stok": stok,
+        }
+    )
+    print(f"Buku '{judul}' berhasil ditambahkan.")
+
+def edit_data():
+    print("\nUBAH BUKU")
+    if not daftar_buku:
+        print("Belum ada buku.")
+        return
+
+    show_data()
+
+    try:
+        nomor = int(input_simulasi("Nomor buku: "))
+    except ValueError:
+        print("Nomor buku harus berupa angka.")
+        return
+
+    if nomor < 1 or nomor > len(daftar_buku):
+        print("Nomor buku tidak valid.")
+        return
+
+    judul = input_simulasi("Judul: ")
+    penulis = input_simulasi("Penulis: ")
+
+    try:
+        tahun = int(input_simulasi("Tahun: "))
+        stok = int(input_simulasi("Stok: "))
+    except ValueError:
+        print("Tahun dan stok harus berupa angka.")
+        return
+
+    daftar_buku[nomor - 1] = {
+        "judul": judul,
+        "penulis": penulis,
+        "tahun": tahun,
+        "stok": stok,
+    }
+    print(f"Buku '{judul}' berhasil diubah.")
+
+def delete_data():
+    print("\nHAPUS BUKU")
+    if not daftar_buku:
+        print("Belum ada buku.")
+        return
+
+    show_data()
+
+    try:
+        nomor = int(input_simulasi("Nomor buku: "))
+    except ValueError:
+        print("Nomor buku harus berupa angka.")
+        return
+
+    if nomor < 1 or nomor > len(daftar_buku):
+        print("Nomor buku tidak valid.")
+        return
+
+    konfirmasi = input_simulasi("Yakin hapus? (y/n): ").lower()
+    if konfirmasi != "y":
+        print("Penghapusan dibatalkan.")
+        return
+
+    buku = daftar_buku.pop(nomor - 1)
+    print(f"Buku '{buku['judul']}' berhasil dihapus.")
+
+def show_menu():
+    print("\n=== PUSTAKA MINI ===")
+    print("1. Tampilkan  2. Tambah  3. Ubah  4. Hapus  5. Keluar")
+
+def exit():
+    print("Terima kasih telah menggunakan Pustaka Mini.")
+    return False
+
+def main():
+    while True:
+        show_menu()
+        pilihan = input_simulasi("Pilih menu (1-5): ")
+
+        if pilihan == "1":
+            show_data()
+        elif pilihan == "2":
+            insert_data()
+        elif pilihan == "3":
+            edit_data()
+        elif pilihan == "4":
+            delete_data()
+        elif pilihan == "5":
+            if not exit():
+                break
+        else:
+            print("Pilihan tidak valid. Silakan pilih 1-5.")
+
+if __name__ == "__main__":
+    main()</code></pre>
+
+    <h3>Masalah umum dan cara memperbaikinya</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Gejala</th>
+          <th>Penyebab</th>
+          <th>Perbaikan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Data tidak muncul setelah ditambah</td>
+          <td>Dictionary baru tidak dimasukkan ke <code>daftar_buku</code>.</td>
+          <td>Pastikan memakai <code>append()</code>.</td>
+        </tr>
+        <tr>
+          <td>Buku yang diubah salah</td>
+          <td>Indeks list tidak dikurangi satu.</td>
+          <td>Gunakan <code>daftar_buku[nomor - 1]</code>.</td>
+        </tr>
+        <tr>
+          <td>IndexError saat memilih nomor</td>
+          <td>Nomor di luar jumlah data.</td>
+          <td>Periksa batas <code>1</code> sampai <code>len(daftar_buku)</code>.</td>
+        </tr>
+        <tr>
+          <td>Program berulang tanpa berhenti</td>
+          <td>Pilihan keluar tidak memanggil <code>break</code>.</td>
+          <td>Pastikan menu 5 menghentikan <code>while True</code>.</td>
+        </tr>
+        <tr>
+          <td>ValueError saat mengisi tahun</td>
+          <td>Nilai yang diketik bukan angka.</td>
+          <td>Bungkus konversi dengan <code>try-except ValueError</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Checklist sebelum menyatakan proyek selesai</h3>
+    <ul>
+      <li>Semua buku tampil dengan nomor urut yang benar.</li>
+      <li>Buku baru masuk ke daftar dan langsung terlihat pada menu 1.</li>
+      <li>Perubahan hanya mengenai buku yang dipilih.</li>
+      <li>Penghapusan hanya berjalan setelah konfirmasi <code>y</code>.</li>
+      <li>Menu 5 keluar dari program tanpa error.</li>
+      <li>Pilihan selain 1–5 menampilkan pesan dan tidak menghentikan program.</li>
+      <li>Tahun dan stok tersimpan sebagai bilangan bulat.</li>
+      <li>Tidak ada data yang hilang saat program masih berjalan.</li>
+    </ul>
+    <p>
+      Setelah seluruh checklist terpenuhi, buka tab <strong>Mini Project</strong>
+      dan tekan <strong>Periksa Output</strong>. Jika output sudah sesuai, kamu
+      dapat membuka halaman penutup dan menyelesaikan seluruh rangkaian modul
+      PYLearn.
+    </p>
+  </section>
+</article>

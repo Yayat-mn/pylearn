@@ -1,0 +1,49 @@
+{
+  "id": 8,
+  "slug": "modul-08",
+  "judul": "Mini Project Python",
+  "deskripsi": "Membangun Pustaka Mini: aplikasi data buku berbasis menu dengan fungsi, list of dictionary, dan operasi CRUD.",
+  "tujuanPembelajaran": [
+    "Mahasiswa mampu merancang program sederhana dengan data global dan fungsi-fungsi yang jelas.",
+    "Mahasiswa mampu mengelola data buku memakai list of dictionary.",
+    "Mahasiswa mampu membuat fungsi tampil, tambah, ubah, dan hapus data.",
+    "Mahasiswa mampu menyusun menu berulang dengan while True serta menghentikannya dengan benar.",
+    "Mahasiswa mampu menguji program dan memperbaiki kesalahan berdasarkan output."
+  ],
+  "subbab": [
+    {
+      "id": "8.1",
+      "judul": "Rancangan Program dan Data Global"
+    },
+    {
+      "id": "8.2",
+      "judul": "Menampilkan Daftar Buku dengan show_data()"
+    },
+    {
+      "id": "8.3",
+      "judul": "Menambah Buku dengan insert_data()"
+    },
+    {
+      "id": "8.4",
+      "judul": "Mengubah Buku dengan edit_data()"
+    },
+    {
+      "id": "8.5",
+      "judul": "Menghapus Buku dengan delete_data()"
+    },
+    {
+      "id": "8.6",
+      "judul": "Menu, Main Loop, dan if __name__ == \"__main__\""
+    },
+    {
+      "id": "8.7",
+      "judul": "Pengujian dan Perbaikan"
+    }
+  ],
+  "tanpaVideo": true,
+  "tanpaKuis": true,
+  "labelLatihan": "Mini Project",
+  "kodeAwal": "# Pustaka Mini — lengkapi fungsi di bawah ini.\n# Pyodide menjalankan kode dengan __name__ = \"builtins\".\n# Baris berikut menyamakannya dengan Python biasa.\nif __name__ == \"builtins\":\n    __name__ = \"__main__\"\n\n\nantrean_input = [\n    \"1\",\n    \"2\", \"Belajar Python\", \"Rina\", \"2025\", \"5\",\n    \"3\", \"1\", \"Python Dasar Edisi 2\", \"Andi\", \"2024\", \"4\",\n    \"1\",\n    \"4\", \"2\", \"y\",\n    \"1\",\n    \"5\",\n]\n\n\ndef input_simulasi(prompt=\"\"):\n    print(prompt, end=\"\")\n    if not antrean_input:\n        print(\"(antrean input habis)\")\n        return \"5\"\n    jawaban = antrean_input.pop(0)\n    print(jawaban)\n    return jawaban\n\n\ndaftar_buku = [\n    {\"judul\": \"Python Dasar\", \"penulis\": \"Andi\", \"tahun\": 2024, \"stok\": 3},\n    {\"judul\": \"Algoritma\", \"penulis\": \"Budi\", \"tahun\": 2023, \"stok\": 2},\n]\n\n\n# Lengkapi fungsi-fungsi berikut.\ndef show_data():\n    pass\n\n\ndef insert_data():\n    pass\n\n\ndef edit_data():\n    pass\n\n\ndef delete_data():\n    pass\n\n\ndef show_menu():\n    pass\n\n\ndef exit():\n    print(\"Terima kasih telah menggunakan Pustaka Mini.\")\n    return False\n\n\ndef main():\n    pass\n\n\nif __name__ == \"__main__\":\n    main()\n",
+  "fileMateri": "materi.html",
+  "fileLatihan": "latihan.json"
+}

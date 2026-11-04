@@ -26,6 +26,7 @@ const elemen = {
   judul: document.getElementById("judul-selesai"),
   teks: document.getElementById("teks-selesai"),
   modul: document.getElementById("selesai-modul"),
+  tahap: document.getElementById("selesai-tahap"),
   status: document.getElementById("selesai-status"),
   aksi: document.getElementById("aksi-selesai"),
   catatan: document.getElementById("catatan-selesai"),
@@ -198,6 +199,7 @@ async function muatSelesai() {
     const modulTerakhir = !berikutnya;
 
     let judulModul = entri.judul || `Modul ${id}`;
+    let metaModul = null;
 
     // Meta hanya diambil untuk modul yang sudah tersedia agar tidak memicu
     // permintaan 404 pada modul yang masih disiapkan.
@@ -207,8 +209,8 @@ async function muatSelesai() {
         const responsMeta = await fetch(`data/${folder}/meta.json`);
 
         if (responsMeta.ok) {
-          const meta = await responsMeta.json();
-          judulModul = meta.judul || judulModul;
+          metaModul = await responsMeta.json();
+          judulModul = metaModul.judul || judulModul;
         }
       } catch (error) {
         console.warn("Meta modul tidak dapat dimuat:", error);
@@ -216,6 +218,15 @@ async function muatSelesai() {
     }
 
     elemen.modul.textContent = judulModul;
+
+    const labelLatihan = metaModul?.labelLatihan || "Latihan";
+    const tahapSelesai = ["Belajar", labelLatihan];
+
+    if (!metaModul?.tanpaKuis) {
+      tahapSelesai.push("Kuis");
+    }
+
+    elemen.tahap.textContent = tahapSelesai.join(" · ");
 
     // Modul terakhir adalah mini project. Jangan tampilkan tautan bila
     // materinya belum siap.
@@ -246,16 +257,17 @@ async function muatSelesai() {
         lencanaTeks: "Kursus selesai",
         judul: "Selamat, seluruh modul selesai!",
         teks:
-          "Kamu telah menyelesaikan seluruh rangkaian modul PYLearn. Terapkan materi yang sudah dipelajari melalui mini project Python.",
+          "Kamu telah menyelesaikan seluruh rangkaian modul PYLearn, termasuk Mini Project Pustaka Mini. Terapkan terus keterampilan Python yang sudah kamu pelajari.",
         status: "Kursus selesai",
-        catatan: "Mini project menjadi penerapan akhir dari seluruh materi.",
+        catatan:
+          "Mini Project Pustaka Mini menjadi penerapan akhir seluruh materi. Kamu dapat mengulanginya kapan saja.",
         aksi: [
-          buatTautan("Buka Mini Project", `modul.html?id=${id}`),
+          buatTautan("Ulangi Mini Project", `modul.html?id=${id}`),
           buatTautan("Kembali ke Dashboard", "index.html", true),
         ],
         topbarTeks: "Kursus selesai",
         sidebarJudul: "Seluruh modul selesai",
-        sidebarInfo: "Saatnya menerapkan materi dalam mini project.",
+        sidebarInfo: "Mini Project Pustaka Mini sudah diselesaikan.",
       });
       return;
     }

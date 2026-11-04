@@ -7,8 +7,9 @@
  *           kuis, dan navigasi antartahap.
  * Dipakai : modul.html?id=<nomor>
  * Tahap   : #belajar -> #latihan -> #kuis (tanpa penguncian modul).
+ *           Modul bertanda tanpaVideo/tanpaKuis menyesuaikan tahapnya.
  * Data    : data/daftar-modul.json, meta.json, materi.html,
- *           latihan.json, dan kuis.json.
+ *           latihan.json, dan kuis.json (opsional).
  * Catatan : nilai/percobaan tidak disimpan; muat ulang = mulai baru.
  * ============================================================
  */
@@ -40,6 +41,21 @@ const NAMA_TAHAP = {
   kuis: "Kuis",
 };
 
+/**
+ * Label tahap yang tampil. Modul mini project dapat mengganti "Latihan"
+ * menjadi "Mini Project" lewat meta.labelLatihan.
+ *
+ * @param {"belajar"|"latihan"|"kuis"} nama
+ * @returns {string}
+ */
+function labelTahap(nama) {
+  if (nama === "latihan") {
+    return modulAktif?.labelLatihan || NAMA_TAHAP.latihan;
+  }
+
+  return NAMA_TAHAP[nama] || NAMA_TAHAP.belajar;
+}
+
 const ID_SUBBAB = /^subbab-/;
 
 const sidebar = document.getElementById("sidebar");
@@ -62,6 +78,7 @@ const elemen = {
   nomor: document.getElementById("nomor-modul"),
   metaSubbab: document.getElementById("meta-subbab"),
   metaVideo: document.getElementById("meta-video"),
+  pemisahMetaVideo: document.getElementById("pemisah-meta-video"),
   lencanaSubbab: document.getElementById("lencana-subbab"),
   remahModul: document.getElementById("remah-modul"),
   remahTahap: document.getElementById("remah-tahap"),
@@ -71,6 +88,7 @@ const elemen = {
   daftarTujuan: document.getElementById("daftar-tujuan"),
   kontenMateri: document.getElementById("konten-materi"),
   videoMateri: document.getElementById("video-materi"),
+  tabMedia: document.getElementById("tab-media"),
   tabTeks: document.getElementById("tab-teks"),
   tabVideo: document.getElementById("tab-video"),
   panelTeks: document.getElementById("panel-teks"),
@@ -90,8 +108,16 @@ const elemen = {
   daftarPetunjuk: document.getElementById("daftar-petunjuk"),
   wadahSolusi: document.getElementById("wadah-solusi"),
   teksSolusi: document.getElementById("teks-solusi"),
+  lencanaTahapLatihan: document.getElementById("lencana-tahap-latihan"),
   tombolLanjutKuis: document.getElementById("tombol-lanjut-kuis"),
   wadahKuis: document.getElementById("wadah-kuis"),
+  panelKuis: document.getElementById("kuis"),
+  labelNavBelajar: document.getElementById("label-nav-belajar"),
+  labelNavLatihan: document.getElementById("label-nav-latihan"),
+  labelTahapLatihan: document.getElementById("label-tahap-latihan"),
+  tautanNavKuis: document.getElementById("tautan-nav-kuis"),
+  tautanTahapKuis: document.getElementById("tautan-tahap-kuis"),
+  tautanMiniProject: document.getElementById("tautan-mini-project"),
   areaKode: document.getElementById("kode"),
   tombolJalankan: document.getElementById("tombol-jalankan"),
   tombolStop: document.getElementById("tombol-stop"),
@@ -161,7 +187,11 @@ function perbaruiPenandaSidebar() {
  */
 function namaTahapDariHash() {
   const nama = window.location.hash.replace("#", "");
-  return NAMA_TAHAP[nama] ? nama : "belajar";
+
+  if (!NAMA_TAHAP[nama]) return "belajar";
+  if (nama === "kuis" && modulAktif?.tanpaKuis) return "belajar";
+
+  return nama;
 }
 
 /**
@@ -223,7 +253,7 @@ function perbaruiNavigasiTahap(nama) {
     }
   });
 
-  elemen.remahTahap.textContent = NAMA_TAHAP[nama];
+  elemen.remahTahap.textContent = labelTahap(nama);
   perbaruiPenandaSidebar();
 
   if (nama === "latihan" && editor) {
@@ -290,6 +320,7 @@ function tampilkanTahap(nama, {
   animasi = true,
 } = {}) {
   if (!NAMA_TAHAP[nama]) nama = "belajar";
+  if (nama === "kuis" && modulAktif?.tanpaKuis) nama = "belajar";
 
   // Selesaikan animasi sebelumnya bila pengguna berpindah lagi dengan cepat.
   bersihkanTransisiTahap();
@@ -359,6 +390,10 @@ function tampilkanTahap(nama, {
 });
 
 window.addEventListener("hashchange", () => {
+  if (modulAktif?.tanpaKuis && window.location.hash === "#kuis") {
+    history.replaceState(null, "", "#belajar");
+  }
+
   tampilkanTahap(namaTahapDariHash(), { perbaruiHash: false });
 });
 
@@ -627,19 +662,94 @@ function tampilkanTujuan(tujuan) {
 }
 
 /**
+ * Menyesuaikan elemen halaman dengan kemampuan modul. Modul mini project
+ * dapat menghilangkan video dan kuis tanpa mengubah modul lain.
+ *
+ * @param {object} modul meta.json
+ */
+function terapkanFiturModul(modul) {
+  const tanpaVideo = Boolean(modul.tanpaVideo);
+  const tanpaKuis = Boolean(modul.tanpaKuis);
+  const labelLatihan = modul.labelLatihan || "Latihan";
+  const proyekAkhir = labelLatihan === "Mini Project";
+
+  if (elemen.labelNavBelajar) {
+    elemen.labelNavBelajar.textContent = tanpaVideo
+      ? "Materi"
+      : "Materi & Video";
+  }
+
+  if (elemen.labelNavLatihan) {
+    elemen.labelNavLatihan.textContent = proyekAkhir
+      ? "Mini Project"
+      : "Code Editor";
+  }
+
+  if (elemen.labelTahapLatihan) {
+    elemen.labelTahapLatihan.textContent = labelLatihan;
+  }
+
+  if (elemen.lencanaTahapLatihan) {
+    elemen.lencanaTahapLatihan.textContent = proyekAkhir
+      ? "Mini Project"
+      : "Tahap 2";
+  }
+
+  if (elemen.tombolLanjutKuis) {
+    elemen.tombolLanjutKuis.textContent = tanpaKuis
+      ? "Lihat Halaman Penutup"
+      : "Lanjut ke Kuis";
+  }
+
+  [elemen.tautanNavKuis, elemen.tautanTahapKuis].forEach((tautan) => {
+    if (tautan) tautan.hidden = tanpaKuis;
+  });
+
+  if (elemen.panelKuis && tanpaKuis) {
+    elemen.panelKuis.hidden = true;
+  }
+
+  if (navTahap) {
+    navTahap.classList.toggle("tahap-nav--dua", tanpaKuis);
+  }
+
+  // Pada Modul 8, tautan Mini Project di sidebar digantikan tahap
+  // Mini Project agar tidak ada dua tautan menuju halaman yang sama.
+  if (elemen.tautanMiniProject) {
+    elemen.tautanMiniProject.hidden = Number(modul.id) === 8;
+  }
+
+  if (tanpaVideo) {
+    if (elemen.tabMedia) elemen.tabMedia.hidden = true;
+    elemen.panelVideo.hidden = true;
+    elemen.panelTeks.hidden = false;
+    elemen.kartuSubbab.hidden = false;
+    elemen.asideModul.classList.remove("aside-modul--tanpa-subbab");
+  } else if (elemen.tabMedia) {
+    elemen.tabMedia.hidden = false;
+  }
+}
+
+/**
  * Menyisipkan iframe YouTube hanya jika `youtubeId` berisi 11 karakter
  * yang valid. URL penuh atau id kosong akan menampilkan kartu kosong.
+ * Modul bertanda tanpaVideo tidak menampilkan kartu video sama sekali.
  *
  * @param {{youtubeId?: string, judul?: string}} video
+ * @param {boolean} tanpaVideo
  */
-function tampilkanVideo(video) {
+function tampilkanVideo(video, tanpaVideo = false) {
+  elemen.videoMateri.replaceChildren();
+  elemen.videoMateri.classList.remove("video-materi--terisi");
+
+  if (tanpaVideo) return;
+
   const idVideo = String(video.youtubeId || "").trim();
   const valid = /^[A-Za-z0-9_-]{11}$/.test(idVideo);
 
-  elemen.videoMateri.replaceChildren();
-  elemen.videoMateri.classList.toggle("video-materi--terisi", valid);
-
   if (valid) {
+    elemen.videoMateri.classList.add("video-materi--terisi");
+
     const iframe = document.createElement("iframe");
     iframe.src = `https://www.youtube-nocookie.com/embed/${idVideo}?rel=0`;
     iframe.title = video.judul || "Video pembelajaran";
@@ -690,6 +800,11 @@ function tampilkanHeader(modul) {
   elemen.deskripsi.textContent = modul.deskripsi || "";
   elemen.remahModul.textContent = `Modul ${nomor}`;
   elemen.metaSubbab.textContent = `${jumlahSubbab} subbab`;
+  elemen.metaVideo.hidden = false;
+  if (elemen.pemisahMetaVideo) elemen.pemisahMetaVideo.hidden = false;
+  elemen.metaVideo.textContent = modul.tanpaVideo
+    ? modul.labelLatihan || "Mini Project"
+    : "Video belum tersedia";
   elemen.lencanaSubbab.textContent = `${jumlahSubbab} Subbab`;
   elemen.sidebarJudul.textContent = modul.judul || "Modul Python";
   elemen.sidebarInfo.textContent = `Modul ${nomor} · ${jumlahSubbab} subbab`;
@@ -712,6 +827,8 @@ function tampilkanKesalahan(judul, pesan) {
   elemen.judul.textContent = judul;
   elemen.deskripsi.textContent = pesan;
   elemen.metaSubbab.textContent = "—";
+  elemen.metaVideo.hidden = false;
+  if (elemen.pemisahMetaVideo) elemen.pemisahMetaVideo.hidden = false;
   elemen.metaVideo.textContent = "—";
   elemen.lencanaSubbab.textContent = "—";
   elemen.sidebarJudul.textContent = "Modul tidak tersedia";
@@ -876,7 +993,9 @@ function aturStatusLatihan(teks, jenis = "") {
  */
 function perbaruiStatusLatihan() {
   if (!latihanSiap) {
-    aturStatusLatihan("Latihan belum tersedia");
+    aturStatusLatihan(
+      `${modulAktif?.labelLatihan || "Latihan"} belum tersedia`
+    );
     return;
   }
 
@@ -948,8 +1067,9 @@ function tampilkanUmpanBalikBenar() {
   elemen.lencanaUmpanBalik.className = "lencana lencana--tersedia";
   elemen.lencanaUmpanBalik.textContent = "Benar";
   elemen.judulUmpanBalik.textContent = "Output sudah sesuai";
-  elemen.pesanUmpanBalik.textContent =
-    "Kerja bagus. Kamu sudah menyelesaikan latihan ini.";
+  elemen.pesanUmpanBalik.textContent = modulAktif?.tanpaKuis
+    ? "Kerja bagus. Kamu sudah menyelesaikan Mini Project Pustaka Mini."
+    : "Kerja bagus. Kamu sudah menyelesaikan latihan ini.";
 
   elemen.wadahPetunjuk.hidden = true;
   elemen.daftarPetunjuk.replaceChildren();
@@ -1092,9 +1212,11 @@ function tampilkanLatihan(data, modul) {
  * @param {object} modul meta.json
  */
 function tampilkanLatihanKosong(modul) {
-  elemen.judulLatihan.textContent = "Latihan belum tersedia";
+  const label = modul.labelLatihan || "Latihan";
+
+  elemen.judulLatihan.textContent = `${label} belum tersedia`;
   elemen.instruksiLatihan.textContent =
-    "Latihan untuk modul ini belum disiapkan.";
+    `${label} untuk modul ini belum disiapkan.`;
   elemen.wadahTarget.hidden = true;
   elemen.targetOutput.textContent = "";
   sembunyikanUmpanBalik();
@@ -1184,6 +1306,13 @@ function tentukanTujuanLanjut() {
  * @param {object} modul meta.json
  */
 async function muatKuis(folder, modul) {
+  // Modul mini project tidak memiliki kuis. Panel kuis sudah disembunyikan
+  // oleh terapkanFiturModul(), jadi tidak perlu permintaan berkas.
+  if (modul.tanpaKuis) {
+    elemen.wadahKuis.replaceChildren();
+    return;
+  }
+
   try {
     const namaFile = modul.fileKuis || "kuis.json";
     const respons = await fetch(`data/${folder}/${namaFile}`);
@@ -1334,10 +1463,21 @@ async function muatModul() {
 
     modulAktif = modul;
 
+    terapkanFiturModul(modul);
     tampilkanHeader(modul);
     tampilkanTujuan(modul.tujuanPembelajaran);
     tampilkanNavigasiSubbab(modul.subbab);
-    tampilkanVideo(modul.video || {});
+    tampilkanVideo(modul.video || {}, Boolean(modul.tanpaVideo));
+
+    // #kuis tidak valid pada modul tanpa kuis; arahkan ke tahap Belajar.
+    if (modul.tanpaKuis && window.location.hash === "#kuis") {
+      history.replaceState(null, "", "#belajar");
+    }
+
+    tampilkanTahap(namaTahapDariHash(), {
+      perbaruiHash: false,
+      animasi: false,
+    });
 
     await Promise.all([
       muatLatihan(folder, modul),
@@ -1533,6 +1673,11 @@ elemen.tombolStop.addEventListener("click", () => {
 });
 
 elemen.tombolLanjutKuis.addEventListener("click", () => {
+  if (modulAktif?.tanpaKuis) {
+    window.location.href = `selesai.html?id=${modulAktif.id}`;
+    return;
+  }
+
   tampilkanTahap("kuis", { gulir: true, perbaruiHash: true });
 });
 

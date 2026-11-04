@@ -6,7 +6,7 @@
 
   <title>Modul Pembelajaran — PYLearn</title>
   <meta name="description"
-        content="Materi, latihan kode, dan kuis interaktif Python dalam PYLearn.">
+        content="Materi, latihan kode, kuis, dan mini project interaktif Python dalam PYLearn.">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
@@ -58,20 +58,22 @@
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
         </svg>
-        Materi &amp; Video
+        <span id="label-nav-belajar">Materi &amp; Video</span>
       </a>
 
-      <a class="navigasi-utama__tautan" href="#latihan" data-tahap="latihan">
+      <a class="navigasi-utama__tautan" href="#latihan" data-tahap="latihan"
+         id="tautan-nav-latihan">
         <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round"
              stroke-linejoin="round" aria-hidden="true">
           <polyline points="16 18 22 12 16 6"></polyline>
           <polyline points="8 6 2 12 8 18"></polyline>
         </svg>
-        Code Editor
+        <span id="label-nav-latihan">Code Editor</span>
       </a>
 
-      <a class="navigasi-utama__tautan" href="#kuis" data-tahap="kuis">
+      <a class="navigasi-utama__tautan" href="#kuis" data-tahap="kuis"
+         id="tautan-nav-kuis">
         <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round"
              stroke-linejoin="round" aria-hidden="true">
@@ -81,7 +83,8 @@
         Kuis &amp; Evaluasi
       </a>
 
-      <a class="navigasi-utama__tautan" href="modul.html?id=8">
+      <a class="navigasi-utama__tautan" href="modul.html?id=8"
+         id="tautan-mini-project">
         <svg class="navigasi-utama__ikon" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round"
              stroke-linejoin="round" aria-hidden="true">
@@ -153,7 +156,8 @@
           </p>
           <div class="modul-header__meta">
             <span id="meta-subbab">— subbab</span>
-            <span class="titik-pemisah" aria-hidden="true"></span>
+            <span class="titik-pemisah" id="pemisah-meta-video"
+                  aria-hidden="true"></span>
             <span id="meta-video">Video belum tersedia</span>
           </div>
         </div>
@@ -168,7 +172,7 @@
         </a>
       </section>
 
-      <!-- Bilah tiga tahap; hash URL menentukan tahap yang tampil. -->
+      <!-- Bilah tahap; hash URL menentukan tahap yang tampil. -->
       <nav class="tahap-nav" aria-label="Tahap pembelajaran">
         <a class="tahap-nav__tautan tahap-nav__tautan--aktif"
            href="#belajar"
@@ -177,11 +181,13 @@
           <span class="tahap-nav__nomor" aria-hidden="true">1</span>
           <span class="tahap-nav__label">Belajar</span>
         </a>
-        <a class="tahap-nav__tautan" href="#latihan" data-tahap="latihan">
+        <a class="tahap-nav__tautan" href="#latihan" data-tahap="latihan"
+           id="tautan-tahap-latihan">
           <span class="tahap-nav__nomor" aria-hidden="true">2</span>
-          <span class="tahap-nav__label">Latihan</span>
+          <span class="tahap-nav__label" id="label-tahap-latihan">Latihan</span>
         </a>
-        <a class="tahap-nav__tautan" href="#kuis" data-tahap="kuis">
+        <a class="tahap-nav__tautan" href="#kuis" data-tahap="kuis"
+           id="tautan-tahap-kuis">
           <span class="tahap-nav__nomor" aria-hidden="true">3</span>
           <span class="tahap-nav__label">Kuis</span>
         </a>
@@ -191,7 +197,8 @@
       <!-- Tahap 1: materi teks dan video. -->
       <section class="panel-tahap" id="belajar" data-panel="belajar"
                aria-label="Tahap belajar">
-        <div class="tab-media" role="tablist" aria-label="Pilih media belajar">
+        <div class="tab-media" id="tab-media" role="tablist"
+             aria-label="Pilih media belajar">
           <button class="tab-media__tombol tab-media__tombol--aktif"
                   id="tab-teks" type="button" role="tab"
                   aria-selected="true" aria-controls="panel-teks"
@@ -261,7 +268,9 @@
         <div class="kartu-latihan">
           <div class="kartu-latihan__kepala">
             <div>
-              <span class="lencana lencana--biru">Tahap 2</span>
+              <span class="lencana lencana--biru" id="lencana-tahap-latihan">
+                Tahap 2
+              </span>
               <h2 class="kartu-latihan__judul" id="judul-latihan">Latihan Kode</h2>
               <p class="kartu-latihan__teks" id="instruksi-latihan">
                 Memuat latihan...

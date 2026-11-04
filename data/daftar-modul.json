@@ -62,9 +62,9 @@
       "id": 8,
       "slug": "modul-08",
       "judul": "Mini Project Python",
-      "deskripsi": "Menerapkan materi sebelumnya dalam proyek Python sederhana.",
-      "jumlahSubbab": 3,
-      "status": "segera"
+      "deskripsi": "Membangun Pustaka Mini: aplikasi data buku berbasis menu dengan fungsi, list of dictionary, dan operasi CRUD.",
+      "jumlahSubbab": 7,
+      "status": "tersedia"
     }
   ]
 }

@@ -20,9 +20,11 @@ aktif untuk CodeMirror/Pyodide.
 ## 1. Dashboard
 
 - [ ] Delapan kartu modul tampil berurutan.
-- [ ] Modul yang `tersedia` menampilkan tautan **Buka Modul**.
-- [ ] Modul `segera` menampilkan tombol nonaktif dan tidak dapat diklik.
-- [ ] Angka “Modul tersedia” di sidebar sesuai isi katalog.
+- [ ] Semua modul yang `tersedia` menampilkan tautan **Buka Modul**.
+- [ ] Modul `segera` (bila ada) menampilkan tombol nonaktif dan tidak dapat
+      diklik.
+- [ ] Angka “Modul tersedia” di sidebar sesuai isi katalog; saat ini
+      **8 dari 8 modul tersedia**.
 - [ ] Klik menu **Dashboard** dan **Daftar Modul** menggeser halaman serta
       penanda biru mengikuti section aktif.
 - [ ] Pada lebar < 1024 px, sidebar berubah menjadi drawer.
@@ -31,7 +33,7 @@ aktif untuk CodeMirror/Pyodide.
 
 Buka `modul.html?id=1`.
 
-- [ ] Judul, nomor, deskripsi, jumlah subbab, dan jumlah video terisi.
+- [ ] Judul, nomor, deskripsi, jumlah subbab, dan status video terisi.
 - [ ] Tujuan pembelajaran tampil.
 - [ ] Remah dan kartu sidebar menampilkan modul yang benar.
 - [ ] Tab **Teks** menampilkan `materi.html`.
@@ -40,6 +42,14 @@ Buka `modul.html?id=1`.
 - [ ] Saat halaman digulir, subbab aktif di daftar kanan ikut berubah.
 - [ ] Navigasi **Modul sebelumnya/berikutnya** sesuai katalog; modul `segera`
       tidak berupa tautan aktif.
+
+Buka `modul.html?id=8`:
+
+- [ ] Tidak ada tab **Teks / Video**; materi langsung tampil sebagai teks.
+- [ ] Meta modul menampilkan **7 subbab · Mini Project**, bukan status video.
+- [ ] Label sidebar berubah menjadi **Materi** dan **Mini Project**.
+- [ ] Menu **Kuis & Evaluasi** tidak tampil.
+- [ ] Tautan **Mini Project** ganda di sidebar tidak ditampilkan.
 
 ## 3. Halaman modul — Latihan
 
@@ -66,6 +76,17 @@ Buka `modul.html?id=1#latihan`.
 - [ ] Klik **Lanjut ke Kuis** membuka tahap Kuis.
 - [ ] Muat ulang halaman: percobaan kembali nol dan kode kembali ke kode awal.
 
+Buka `modul.html?id=8#latihan`:
+
+- [ ] Tab dan bilah tahap memakai label **Mini Project**, bukan **Latihan**.
+- [ ] Tab **Kuis** dan menu **Kuis & Evaluasi** tidak tampil.
+- [ ] Target output dan kode awal Pustaka Mini tampil.
+- [ ] Kode awal yang belum dilengkapi gagal pada **Periksa Output**.
+- [ ] Kunci Pustaka Mini menghasilkan output sesuai dan status **Benar**.
+- [ ] Setelah benar, tombol **Lihat Halaman Penutup** muncul, bukan **Lanjut
+      ke Kuis**.
+- [ ] Klik tombol itu membuka `selesai.html?id=8`.
+
 ## 4. Eksekusi Python
 
 - [ ] Kode `print("Halo")` menampilkan `Halo`.
@@ -88,6 +109,9 @@ Buka `modul.html?id=1#latihan`.
       program dan tidak meninggalkan output baru.
 
 ## 5. Halaman modul — Kuis
+
+Tahap ini hanya ada pada modul yang memiliki `kuis.json`. Modul 8 tidak
+memakai kuis; `modul.html?id=8#kuis` harus diarahkan ke `#belajar`.
 
 Buka `modul.html?id=1#kuis`.
 
@@ -115,9 +139,10 @@ Buka `modul.html?id=1#kuis`.
 
 ## 6. Modul belum tersedia dan id salah
 
-- [ ] `modul.html?id=8` (modul `segera`) menampilkan
-      **"Modul belum tersedia"** dengan keterangan mini project masih
-      disiapkan, bukan "Gagal memuat modul" atau 404.
+- [ ] Untuk menguji status `segera`, ubah sementara salah satu entri di
+      `data/daftar-modul.json`, lalu buka modul itu. Halaman harus menampilkan
+      **"Modul belum tersedia"**, bukan "Gagal memuat modul" atau 404.
+      Kembalikan status setelah pengujian.
 - [ ] `modul.html?id=abc`, `?id=0`, dan tanpa `?id` menampilkan pesan nomor
       tidak valid.
 - [ ] `modul.html?id=99` menampilkan “Modul tidak ditemukan”.
@@ -141,11 +166,12 @@ Buka `modul.html?id=1#kuis`.
 - [ ] `selesai.html?id=6` menampilkan "Modul 6 selesai!" dan status
       **Lulus** dengan tautan **Lanjut ke Modul 7**.
 - [ ] `selesai.html?id=7` menampilkan "Modul 7 selesai!" dan status
-      **Selesai** dengan tautan **Ulangi Modul 7** karena Modul 8 belum
-      tersedia.
+      **Lulus** dengan tautan **Lanjut ke Modul 8**.
+- [ ] `selesai.html?id=8` menampilkan **Kursus selesai** dengan ringkasan
+      tahap **Belajar · Mini Project**, tombol **Ulangi Mini Project**, dan
+      **Kembali ke Dashboard**.
 - [ ] Tautan sidebar "Halaman Penutup" mempertahankan `?id=1`.
 - [ ] `selesai.html?id=abc` menampilkan pesan id tidak valid.
-- [ ] `selesai.html?id=8` menampilkan "Mini project segera".
 - [ ] Tidak ada tautan ke modul yang belum tersedia.
 
 ## 8. Mobile dan aksesibilitas
@@ -178,8 +204,10 @@ Uji pada lebar 390 px (DevTools device toolbar).
       yang sudah mati.
 - [ ] Rusak sementara `latihan.json`: materi dan kuis tetap tampil; panel
       latihan menampilkan keadaan kosong.
-- [ ] Rusak sementara `kuis.json`: materi dan latihan tetap tampil; panel
-      kuis menampilkan “Kuis belum tersedia”.
+- [ ] Rusak sementara `kuis.json` pada modul yang memakai kuis: materi dan
+      latihan tetap tampil; panel kuis menampilkan “Kuis belum tersedia”.
+- [ ] Modul 8 tidak meminta `data/modul-08/kuis.json` dan tidak menghasilkan
+      error 404 di Console.
 - [ ] Katalog gagal dimuat: dashboard menampilkan pesan error dan jumlah
       modul menjadi “—”, bukan angka statis yang menyesatkan.
 

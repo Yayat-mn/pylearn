@@ -101,12 +101,13 @@ modul.html?id=N
             ├─ cek status "tersedia"
             │    └─ tidak → tampilkanKesalahan("Modul belum tersedia")
             ├─ fetch meta.json
-            ├─ modulSiap = true
-            └─ Promise.all([
-                 muatLatihan(),
-                 muatMateri(),
-                 muatKuis()
-               ])
+            ├─ terapkanFiturModul()      → atur label, video, dan kuis
+            ├─ Promise.all([
+            │    muatLatihan(),
+            │    muatMateri(),
+            │    muatKuis()             → dilewati bila tanpaKuis
+            │  ])
+            └─ modulSiap = true
 ```
 
 Katalog dimuat **sebelum** `meta.json`. Dengan begitu modul yang masih
@@ -120,9 +121,10 @@ Tahap disimpan di hash URL:
 
 - `#belajar`
 - `#latihan`
-- `#kuis`
+- `#kuis` (hanya modul yang memiliki kuis)
 
-`namaTahapDariHash()` mengubah hash asing menjadi `belajar`.
+`namaTahapDariHash()` mengubah hash asing menjadi `belajar`. Pada modul
+`tanpaKuis`, `#kuis` juga diarahkan ke `belajar` dan hash URL diperbarui.
 `tampilkanTahap()` menyelaraskan panel, tautan sidebar, bilah tahap, remah,
 dan `aria-current`. Perpindahan tahap memakai View Transition bila tersedia;
 jika tidak, animasi CSS sederhana. Pengguna dengan
@@ -141,7 +143,8 @@ kode awal terisi, latihanSiap=true
         │ Periksa Output
         ▼
 output dibandingkan dengan target
-   ├─ cocok   → latihanBenar=true, tombol Lanjut ke Kuis muncul
+   ├─ cocok   → latihanBenar=true, tombol lanjut muncul
+   │            (Lanjut ke Kuis atau Lihat Halaman Penutup)
    └─ beda    → percobaan++, petunjuk bertambah
                  └─ percobaan >= 3 → solusi ditampilkan
 ```
@@ -208,7 +211,9 @@ eksekusi untuk menjaga memori.
    `selesai.html?id=<nomor modul>`.
 
 Tidak ada logika khusus “id >= 8”; modul terakhir dikenali dari tidak adanya
-modul berikutnya di katalog.
+modul berikutnya di katalog. Modul `tanpaKuis` tidak memakai
+`tentukanTujuanLanjut()`; tombol setelah Mini Project benar langsung menuju
+`selesai.html?id=<nomor modul>`.
 
 ## 6. Halaman penutup
 
@@ -221,13 +226,14 @@ modul berikutnya di katalog.
 | Modul `segera` dan bukan modul terakhir | “Modul belum tersedia” |
 | Modul terakhir masih `segera` | “Mini project segera” |
 | Modul `tersedia` dengan modul berikutnya `tersedia` | “Modul N selesai!” + tautan lanjut |
-| Modul `tersedia` tanpa modul berikutnya | “Kursus selesai” + tautan mini project |
+| Modul `tersedia` tanpa modul berikutnya | “Kursus selesai” + Ulangi Mini Project |
 
 Halaman ini tidak menerima atau menyimpan nilai kuis. Status hanya
 disimpulkan dari katalog dan `meta.json` (untuk judul).
 
 ## 7. Kuis
 
+Tahap kuis hanya dipakai modul yang tidak menetapkan `"tanpaKuis": true`.
 `kuis.js` memisahkan tiga hal:
 
 1. `validasiKuis()` — memastikan struktur data benar sebelum dirender.

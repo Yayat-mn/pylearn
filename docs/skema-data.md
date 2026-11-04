@@ -63,13 +63,16 @@ Aturan:
 | `subbab` | array | Daftar subbab |
 | `subbab[].id` | string | Nomor subbab, misalnya `1.1` |
 | `subbab[].judul` | string | Judul subbab |
-| `video` | object | Video pembelajaran |
+| `video` | object | Video pembelajaran (opsional) |
 | `video.youtubeId` | string | ID video 11 karakter, bukan URL penuh |
 | `video.judul` | string | Judul video |
+| `tanpaVideo` | boolean | Jika `true`, tab video dan panel video disembunyikan |
+| `tanpaKuis` | boolean | Jika `true`, tab kuis, menu kuis, dan `kuis.json` tidak dipakai |
+| `labelLatihan` | string | Label tahap latihan; misalnya `Mini Project` |
 | `kodeAwal` | string | Cadangan kode awal editor |
 | `fileMateri` | string | Nama berkas materi, biasanya `materi.html` |
 | `fileLatihan` | string | Nama berkas latihan, biasanya `latihan.json` |
-| `fileKuis` | string | Nama berkas kuis, biasanya `kuis.json` |
+| `fileKuis` | string | Nama berkas kuis, biasanya `kuis.json` (opsional) |
 
 Contoh `video`:
 
@@ -82,10 +85,14 @@ Contoh `video`:
 
 `youtubeId` harus berupa ID 11 karakter, bukan URL seperti
 `https://www.youtube.com/watch?v=...`. Jika kosong atau tidak valid, halaman
-menampilkan pesan “Video belum tersedia untuk modul ini.”
+menampilkan pesan “Video belum tersedia untuk modul ini.” Modul bertanda
+`tanpaVideo` tidak menampilkan tab video sama sekali.
 
 Field `fileMateri`, `fileLatihan`, dan `fileKuis` bersifat opsional. Nilai
 bawaan masing-masing adalah `materi.html`, `latihan.json`, dan `kuis.json`.
+Jika `tanpaKuis` bernilai `true`, `kuis.json` tidak diminta dan tahap kuis
+tidak ditampilkan. `labelLatihan` mengubah label tahap latihan, misalnya
+menjadi `Mini Project` pada Modul 8.
 
 ## 3. `materi.html`
 
@@ -141,8 +148,10 @@ Aturan penilaian output:
   jumlah percobaan. Stop manual dan perpindahan tahap tidak dihitung.
 - Petunjuk ditampilkan bertahap setelah percobaan gagal. Setelah 3 percobaan
   gagal, `kunci` ditampilkan.
-- Setelah output sesuai, tombol **Lanjut ke Kuis** muncul. Jumlah percobaan
-  tidak disimpan dan kembali ke nol setelah halaman dimuat ulang.
+- Setelah output sesuai, tombol **Lanjut ke Kuis** muncul. Pada modul
+  `tanpaKuis`, tombol berubah menjadi **Lihat Halaman Penutup** dan menuju
+  `selesai.html?id=<nomor modul>`. Jumlah percobaan tidak disimpan dan kembali
+  ke nol setelah halaman dimuat ulang.
 - Jika `kodeAwal` kosong, halaman memakai `meta.kodeAwal`; jika keduanya
   kosong, editor mulai kosong.
 
@@ -190,17 +199,21 @@ Aturan penilaian:
 ## 6. Alur halaman modul
 
 1. **Belajar** — tab Teks memuat `materi.html`, tab Video memuat YouTube.
-   Daftar subbab dapat diklik dan disinkronkan dengan posisi gulir.
+   Daftar subbab dapat diklik dan disinkronkan dengan posisi gulir. Jika
+   `tanpaVideo`, tab video dihilangkan dan materi tampil sebagai teks saja.
 2. **Latihan** — editor memakai `latihan.kodeAwal`. Tombol Periksa Output
    membandingkan hasil dengan `outputDiharapkan`. Setelah output sesuai,
-   tombol **Lanjut ke Kuis** muncul.
-3. **Kuis** — soal dari `kuis.json`, lalu skor dan pembahasan.
+   tombol **Lanjut ke Kuis** muncul. Jika `tanpaKuis`, tombol berubah menjadi
+   **Lihat Halaman Penutup** dan langsung menuju halaman penutup.
+3. **Kuis** — soal dari `kuis.json`, lalu skor dan pembahasan. Tahap ini
+   dilewati bila `tanpaKuis` bernilai `true`.
 4. Jika lulus, lanjut ke modul berikutnya bila sudah tersedia; jika belum,
    menuju `selesai.html?id=<nomor modul>`. Jika belum lulus, tombol Ulangi
    Modul mengembalikan ke tahap Belajar.
 
-Tahap disimpan di hash URL: `#belajar`, `#latihan`, dan `#kuis`. Tidak ada
-penguncian urutan modul; semua modul yang `tersedia` dapat dibuka langsung.
+Tahap disimpan di hash URL: `#belajar`, `#latihan`, dan `#kuis`. Pada modul
+`tanpaKuis`, `#kuis` dialihkan ke `#belajar`. Tidak ada penguncian urutan
+modul; semua modul yang `tersedia` dapat dibuka langsung.
 
 ## 7. Halaman penutup
 
@@ -211,23 +224,35 @@ penguncian urutan modul; semua modul yang `tersedia` dapat dibuka langsung.
 - modul `segera` → “Modul belum tersedia”;
 - modul terakhir masih `segera` → “Mini project segera”;
 - modul tersedia dengan modul berikutnya tersedia → tautan lanjut;
-- modul tersedia tanpa modul berikutnya → “Kursus selesai”.
+- modul tersedia tanpa modul berikutnya → “Kursus selesai” dengan tombol
+  **Ulangi Mini Project** dan **Kembali ke Dashboard**.
+
+Pada modul `tanpaKuis`, ringkasan tahap di halaman penutup mengikuti
+`labelLatihan`, misalnya **Belajar · Mini Project**.
 
 ## 8. Menambah modul baru
 
 1. Buat folder `data/modul-XX`.
-2. Isi `meta.json`, `materi.html`, `latihan.json`, `kuis.json`.
-3. Pastikan id subbab di materi sama dengan `meta.json`.
-4. Tambahkan entri di `data/daftar-modul.json`.
-5. Uji modul dalam status `segera` terlebih dahulu, lalu ubah status menjadi
+2. Isi `meta.json`, `materi.html`, dan `latihan.json`. Tambahkan `kuis.json`
+   hanya jika modul memakai kuis.
+3. Untuk modul teks saja, tambahkan `"tanpaVideo": true`. Untuk modul tanpa
+   kuis, tambahkan `"tanpaKuis": true` dan tentukan `labelLatihan` bila perlu.
+4. Pastikan id subbab di materi sama dengan `meta.json`.
+5. Tambahkan entri di `data/daftar-modul.json`.
+6. Uji modul dalam status `segera` terlebih dahulu, lalu ubah status menjadi
    `tersedia`.
-6. Uji alur: materi, subbab, video, latihan (gagal/benar), kuis
-   (gagal/lulus), dan tautan lanjut.
+7. Uji alur sesuai kemampuan modul: materi, subbab, video (bila ada), latihan
+   (gagal/benar), kuis (bila ada), dan tautan lanjut.
 
 ## 9. Batasan Pyodide
 
-- `input()` belum terhubung ke `prompt()` browser. Hindari `input()` pada
-  latihan sampai dukungan `setStdin` ditambahkan.
+- `input()` belum terhubung ke `prompt()` browser. Latihan interaktif dapat
+  memakai `input_simulasi()` dengan antrean jawaban, lalu menjelaskan bahwa
+  pada Python biasa fungsi itu diganti dengan `input()`.
+- Pyodide menjalankan kode dengan `__name__` bernilai `"builtins"`, bukan
+  `"__main__"`. Kode yang memakai `if __name__ == "__main__"` perlu
+  penyesuaian `if __name__ == "builtins": __name__ = "__main__"` agar dapat
+  diuji di browser.
 - Setiap program dijalankan di namespace baru; variabel dari eksekusi
   sebelumnya tidak tersedia.
 - Setelah Stop atau timeout, Worker Pyodide dibuang dan perlu dimuat ulang
