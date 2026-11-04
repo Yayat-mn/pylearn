@@ -57,6 +57,7 @@ function labelTahap(nama) {
 }
 
 const ID_SUBBAB = /^subbab-/;
+const BATAS_JAWABAN = 200;
 
 const sidebar = document.getElementById("sidebar");
 const tombolMenu = document.getElementById("tombol-menu");
@@ -120,10 +121,15 @@ const elemen = {
   tautanMiniProject: document.getElementById("tautan-mini-project"),
   areaKode: document.getElementById("kode"),
   tombolJalankan: document.getElementById("tombol-jalankan"),
+  labelJalankan: document.getElementById("label-jalankan"),
   tombolStop: document.getElementById("tombol-stop"),
   tombolPeriksa: document.getElementById("tombol-periksa"),
   statusPython: document.getElementById("status-python"),
   output: document.getElementById("output"),
+  wadahKonsolInput: document.getElementById("wadah-konsol-input"),
+  promptJawaban: document.getElementById("prompt-jawaban"),
+  jawabanInput: document.getElementById("jawaban-input"),
+  tombolKirimJawaban: document.getElementById("tombol-kirim-jawaban"),
   tautanSebelumnya: document.getElementById("tautan-sebelumnya"),
   tautanBerikutnya: document.getElementById("tautan-berikutnya"),
 };
@@ -148,10 +154,10 @@ let latihanBenar = false;
 let modulAktif = null;
 let katalogModul = [];
 let modeJalan = null;
-let dibatalkanPengguna = false;
 let sedangMengisiKode = false;
 let timerTransisiTahap = null;
 let panelKeluar = null;
+let sesiAktif = null;
 
 // ------------------------------------------------------------
 // Navigasi tahap
@@ -224,11 +230,15 @@ function perbaruiNavigasiTahap(nama) {
 
   // Program yang masih berjalan dihentikan agar tidak bekerja tanpa terlihat.
   if (sedangJalan && nama !== "latihan") {
-    dibatalkanPengguna = true;
-    // Worker ikut dimatikan oleh hentikan(); paksa pemuatan ulang agar
-    // tombol Stop tidak aktif saat Pyodide dimuat kembali.
-    pythonSiap = false;
-    hentikan("Program dihentikan karena berpindah tahap.");
+    // Saat menunggu jawaban, worker sedang menganggur sehingga tidak
+    // perlu dimuat ulang. Saat eksekusi berjalan, Stop mematikan worker.
+    const sedangMenunggu = Boolean(sesiAktif && sesiAktif.tunggu);
+
+    batalkanSesi("Program dihentikan karena berpindah tahap.");
+
+    if (!sedangMenunggu) {
+      pythonSiap = false;
+    }
   }
 
   tautanSidebar.forEach((tautan) => {
@@ -857,6 +867,10 @@ function tampilkanKesalahan(judul, pesan) {
   aturStatusLatihan("Tidak ada latihan");
   elemen.wadahTarget.hidden = true;
   sembunyikanUmpanBalik();
+  sembunyikanKonsolInput();
+  if (elemen.labelJalankan) {
+    elemen.labelJalankan.textContent = "Jalankan Kode";
+  }
   tampilkanKuisKosong(
     elemen.wadahKuis,
     pesan,
@@ -936,6 +950,10 @@ function validasiLatihan(data) {
         )
       : [],
     kunci: typeof data.kunci === "string" ? data.kunci : "",
+    interaktif: Boolean(data.interaktif),
+    skenarioInput: Array.isArray(data.skenarioInput)
+      ? data.skenarioInput.map((jawaban) => String(jawaban))
+      : [],
   };
 }
 
@@ -1198,6 +1216,12 @@ function tampilkanLatihan(data, modul) {
     data.outputDiharapkan || "(tidak ada output)";
   elemen.wadahTarget.hidden = false;
 
+  if (elemen.labelJalankan) {
+    elemen.labelJalankan.textContent = data.interaktif
+      ? "Jalankan & Mainkan"
+      : "Jalankan Kode";
+  }
+
   const kodeAwal = data.kodeAwal.trim()
     ? data.kodeAwal
     : modul.kodeAwal || "";
@@ -1220,6 +1244,12 @@ function tampilkanLatihanKosong(modul) {
   elemen.wadahTarget.hidden = true;
   elemen.targetOutput.textContent = "";
   sembunyikanUmpanBalik();
+  sembunyikanKonsolInput();
+
+  if (elemen.labelJalankan) {
+    elemen.labelJalankan.textContent = "Jalankan Kode";
+  }
+
   aturKodeEditor(modul.kodeAwal || "");
   perbaruiStatusLatihan();
 }
@@ -1251,6 +1281,7 @@ async function muatLatihan(folder, modul) {
     latihanBenar = false;
 
     sembunyikanUmpanBalik();
+    sembunyikanKonsolInput();
     tampilkanLatihan(data, modul);
     perbaruiStatusLatihan();
   } catch (error) {
@@ -1564,13 +1595,20 @@ async function pastikanPython() {
 }
 
 /**
- * Menulis output program ke panel. Pesan error ditempel di bawah output
- * agar mahasiswa bisa membaca penyebabnya.
+ * Menulis output program ke panel. Bila program sedang menunggu input,
+ * prompt ditampilkan tepat setelah output terakhir.
  *
  * @param {{output: string, error: string|null}} hasil
+ * @param {string|null} prompt null = bukan keadaan menunggu input
  */
-function tampilkanOutput(hasil) {
-  let teks = hasil.output || "(tidak ada output)";
+function tampilkanOutput(hasil, prompt = null) {
+  let teks = hasil.output || "";
+
+  if (prompt !== null) {
+    teks += prompt;
+  } else if (!teks) {
+    teks = "(tidak ada output)";
+  }
 
   if (hasil.error) {
     teks += `\n[ERROR]\n${hasil.error}`;
@@ -1580,8 +1618,79 @@ function tampilkanOutput(hasil) {
 }
 
 /**
- * Alur eksekusi utama: kunci editor, muat Python, jalankan kode,
- * tampilkan output, dan (bila diminta) nilai latihan.
+ * Menampilkan kotak jawaban untuk prompt yang sedang ditunggu program.
+ *
+ * @param {string} prompt
+ */
+function tampilkanKonsolInput(prompt) {
+  if (!elemen.wadahKonsolInput) return;
+
+  elemen.promptJawaban.textContent = prompt || "Jawaban";
+  elemen.wadahKonsolInput.hidden = false;
+  elemen.jawabanInput.disabled = false;
+  elemen.tombolKirimJawaban.disabled = false;
+  elemen.jawabanInput.value = "";
+
+  requestAnimationFrame(() => {
+    elemen.jawabanInput.focus();
+  });
+}
+
+/**
+ * Menyembunyikan dan mengosongkan kotak jawaban.
+ */
+function sembunyikanKonsolInput() {
+  if (!elemen.wadahKonsolInput) return;
+
+  elemen.wadahKonsolInput.hidden = true;
+  elemen.jawabanInput.value = "";
+  elemen.jawabanInput.disabled = true;
+  elemen.tombolKirimJawaban.disabled = true;
+}
+
+/**
+ * Mengembalikan Promise yang selesai saat pengguna mengirim jawaban.
+ * Nilai `null` berarti sesi dibatalkan (Stop atau pindah tahap).
+ *
+ * @param {string} prompt
+ * @param {{tunggu: Function|null}} sesi
+ * @returns {Promise<string|null>}
+ */
+function tungguJawaban(prompt, sesi) {
+  return new Promise((resolve) => {
+    sesi.tunggu = resolve;
+    tampilkanKonsolInput(prompt);
+  });
+}
+
+/**
+ * Menghentikan sesi interaktif yang sedang berjalan, baik saat program
+ * dieksekusi maupun saat menunggu jawaban pengguna.
+ *
+ * @param {string} alasan
+ */
+function batalkanSesi(alasan = "Program dihentikan.") {
+  if (!sesiAktif) return;
+
+  sesiAktif.dibatalkan = true;
+
+  const lanjutkan = sesiAktif.tunggu;
+  sesiAktif.tunggu = null;
+
+  if (typeof lanjutkan === "function") {
+    lanjutkan(null);
+  }
+
+  hentikan(alasan);
+}
+
+/**
+ * Alur eksekusi utama: kunci editor, muat Python, jalankan kode, dan
+ * lanjutkan sesi setiap kali program meminta input.
+ *
+ * Setiap jawaban dijalankan ulang dari awal dengan daftar jawaban yang
+ * sudah lengkap. Cara ini membuat `input()` terasa seperti terminal
+ * sungguhan tanpa memblokir worker.
  *
  * @param {boolean} periksa true = bandingkan dengan target latihan
  */
@@ -1590,12 +1699,20 @@ async function jalankanProgram(periksa = false) {
   if (periksa && (!latihanSiap || !latihan)) return;
 
   const mode = periksa ? "periksa" : "jalankan";
+  const sesi = {
+    jawaban: periksa ? [...latihan.skenarioInput] : [],
+    dibatalkan: false,
+    tunggu: null,
+  };
+
+  sesiAktif = sesi;
   modeJalan = mode;
-  dibatalkanPengguna = false;
   let sudahDinilai = false;
+  let hasilAkhir = null;
 
   aturProses(true);
   editor.aturBolehUbah(false);
+  sembunyikanKonsolInput();
   elemen.output.textContent = periksa
     ? "Menyiapkan pemeriksaan..."
     : "Menyiapkan Python...";
@@ -1610,7 +1727,7 @@ async function jalankanProgram(periksa = false) {
     await pastikanPython();
 
     if (
-      dibatalkanPengguna ||
+      sesi.dibatalkan ||
       modeJalan !== mode ||
       tahapAktif !== "latihan"
     ) {
@@ -1620,22 +1737,71 @@ async function jalankanProgram(periksa = false) {
 
     // Tombol Stop baru aktif setelah program benar-benar mulai berjalan.
     aturProses(true, true);
-    elemen.statusPython.textContent = periksa
-      ? "Memeriksa output..."
-      : "Program berjalan...";
+    const kode = editor.ambilKode();
 
-    const hasil = await jalankanKode(editor.ambilKode());
-    tampilkanOutput(hasil);
+    while (!sesi.dibatalkan) {
+      elemen.statusPython.textContent = periksa
+        ? "Memeriksa output..."
+        : sesi.jawaban.length > 0
+          ? "Melanjutkan dengan jawabanmu..."
+          : "Program berjalan...";
 
-    if (periksa && !dibatalkanPengguna) {
-      sudahDinilai = nilaiLatihan(hasil);
+      const hasil = await jalankanKode(kode, {
+        jawaban: sesi.jawaban,
+        interaktif: !periksa,
+      });
+
+      hasilAkhir = hasil;
+
+      if (sesi.dibatalkan) break;
+
+      if (hasil.butuhInput) {
+        tampilkanOutput(hasil, hasil.butuhInput.prompt);
+
+        if (sesi.jawaban.length >= BATAS_JAWABAN) {
+          hasilAkhir = {
+            output: elemen.output.textContent,
+            error:
+              `Sesi dihentikan karena lebih dari ${BATAS_JAWABAN} jawaban. ` +
+              "Periksa apakah ada perulangan input yang tidak pernah selesai.",
+            dihentikan: false,
+            butuhInput: null,
+          };
+          tampilkanOutput(hasilAkhir);
+          break;
+        }
+
+        elemen.statusPython.textContent = "Menunggu jawabanmu...";
+
+        const jawaban = await tungguJawaban(hasil.butuhInput.prompt, sesi);
+
+        if (sesi.dibatalkan || jawaban === null) break;
+
+        sesi.jawaban.push(jawaban);
+        continue;
+      }
+
+      tampilkanOutput(hasil);
+      break;
     }
 
-    if (hasil.dihentikan) {
+    if (periksa && !sesi.dibatalkan && hasilAkhir) {
+      sudahDinilai = nilaiLatihan(hasilAkhir);
+    }
+
+    if (hasilAkhir && hasilAkhir.dihentikan) {
+      // Stop, timeout, atau perpindahan tahap mematikan worker.
       pythonSiap = false;
       elemen.statusPython.textContent = "Program dihentikan.";
+    } else if (sesi.dibatalkan) {
+      elemen.statusPython.textContent = "Program dihentikan.";
+    } else if (hasilAkhir && hasilAkhir.error) {
+      elemen.statusPython.textContent = "Program selesai dengan error.";
+    } else if (periksa) {
+      elemen.statusPython.textContent = "Pemeriksaan selesai.";
     } else {
-      elemen.statusPython.textContent = "Python siap.";
+      elemen.statusPython.textContent =
+        "Sesi selesai. Tekan Jalankan untuk mencoba menu lain.";
     }
   } catch (error) {
     pythonSiap = false;
@@ -1652,8 +1818,12 @@ async function jalankanProgram(periksa = false) {
       perbaruiStatusLatihan();
     }
 
+    if (sesiAktif === sesi) {
+      sesiAktif = null;
+    }
+
+    sembunyikanKonsolInput();
     modeJalan = null;
-    dibatalkanPengguna = false;
     editor.aturBolehUbah(true);
     aturProses(false);
   }
@@ -1668,8 +1838,24 @@ elemen.tombolPeriksa.addEventListener("click", () => {
 });
 
 elemen.tombolStop.addEventListener("click", () => {
-  dibatalkanPengguna = true;
-  hentikan("Dihentikan oleh pengguna.");
+  batalkanSesi("Dihentikan oleh pengguna.");
+});
+
+elemen.wadahKonsolInput.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  if (!sesiAktif || typeof sesiAktif.tunggu !== "function") return;
+
+  const jawaban = elemen.jawabanInput.value;
+  const lanjutkan = sesiAktif.tunggu;
+
+  sesiAktif.tunggu = null;
+  sembunyikanKonsolInput();
+
+  // Beri umpan balik langsung; hasil replay akan menggantikan teks ini
+  // dengan transkrip lengkap.
+  elemen.output.textContent += `${jawaban}\n`;
+  lanjutkan(jawaban);
 });
 
 elemen.tombolLanjutKuis.addEventListener("click", () => {

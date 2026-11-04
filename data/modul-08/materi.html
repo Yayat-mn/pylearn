@@ -8,6 +8,12 @@
       dalam memori selama program masih berjalan.
     </p>
     <p>
+      Di PYLearn, aplikasi ini dapat langsung dimainkan. Setelah kode dijalankan,
+      program berhenti di setiap <code>input()</code> dan menunggu jawabanmu.
+      Kamu dapat menambah, mengubah, dan menghapus buku dengan data pilihanmu
+      sendiri.
+    </p>
+    <p>
       Pustaka Mini menerapkan materi yang sudah dipelajari: variabel, tipe data,
       percabangan, perulangan, list, dictionary, dan fungsi. Setiap fitur
       dikerjakan oleh fungsi tersendiri agar program mudah dibaca dan diuji.
@@ -181,36 +187,31 @@ show_data()</code></pre>
       <code>int()</code>.
     </p>
 
-    <h3>Mensimulasikan input di browser</h3>
+    <h3>Input interaktif di browser</h3>
     <p>
-      Di Python biasa, program interaktif memakai <code>input()</code>. Namun,
-      Pyodide yang berjalan di browser belum terhubung ke kotak input. Agar
-      contoh tetap dapat dijalankan, kita memakai <code>input_simulasi()</code>
-      dengan antrean jawaban. Fungsi ini hanya alat bantu pembelajaran.
+      Di Python biasa, program interaktif memakai <code>input()</code>.
+      PYLearn menjalankan Python di browser dengan konsol interaktif: ketika
+      program mencapai <code>input()</code>, program berhenti dan menampilkan
+      kotak jawaban di bawah panel Output. Setelah kamu mengetik jawaban dan
+      menekan Enter, program melanjutkan memakai jawaban itu.
     </p>
-    <pre><code class="language-python">antrean_input = ["Belajar Python", "Rina", "2025", "5"]
-
-def input_simulasi(prompt=""):
-    print(prompt, end="")
-    if not antrean_input:
-        print("(antrean input habis)")
-        return "5"
-    jawaban = antrean_input.pop(0)
-    print(jawaban)
-    return jawaban
-
-daftar_buku = [
+    <p>
+      Karena itu, tulis proyek ini seperti Python biasa. Tidak perlu fungsi
+      bantuan atau antrean jawaban. Contoh di bawah dapat langsung dijalankan
+      dari editor; isi judul, penulis, tahun, dan stok dengan data pilihanmu.
+    </p>
+    <pre><code class="language-python">daftar_buku = [
     {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
 ]
 
 def insert_data():
     print("\nTAMBAH BUKU")
-    judul = input_simulasi("Judul: ")
-    penulis = input_simulasi("Penulis: ")
+    judul = input("Judul: ")
+    penulis = input("Penulis: ")
 
     try:
-        tahun = int(input_simulasi("Tahun: "))
-        stok = int(input_simulasi("Stok: "))
+        tahun = int(input("Tahun: "))
+        stok = int(input("Stok: "))
     except ValueError:
         print("Tahun dan stok harus berupa angka.")
         return
@@ -234,13 +235,13 @@ print(daftar_buku)</code></pre>
       ke menu.
     </p>
 
-    <h3>Mengganti simulasi dengan input biasa</h3>
+    <h3>Mencoba dengan data sendiri</h3>
     <p>
-      Pada Python yang dijalankan di terminal, ganti setiap pemanggilan
-      <code>input_simulasi("Judul: ")</code> menjadi <code>input("Judul: ")</code>.
-      Hapus juga <code>antrean_input</code> dan fungsi
-      <code>input_simulasi()</code>. Jangan lupa mengubah tahun dan stok dengan
-      <code>int()</code> karena <code>input()</code> selalu menghasilkan string.
+      Setelah menekan <strong>Jalankan</strong>, jawab setiap prompt. Data yang
+      kamu ketik tersimpan di <code>daftar_buku</code> selama sesi berjalan.
+      Tekan <strong>Stop</strong> bila ingin mengubah kode, lalu jalankan lagi
+      dari awal. Jangan lupa mengubah tahun dan stok dengan <code>int()</code>
+      karena <code>input()</code> selalu menghasilkan string.
     </p>
   </section>
 
@@ -259,18 +260,7 @@ print(daftar_buku)</code></pre>
       dictionary yang diubah berada pada indeks <code>0</code>. Karena itu,
       program memakai <code>daftar_buku[nomor - 1]</code>.
     </p>
-    <pre><code class="language-python">antrean_input = ["2", "Algoritma Edisi 2", "Budi", "2023", "5"]
-
-def input_simulasi(prompt=""):
-    print(prompt, end="")
-    if not antrean_input:
-        print("(antrean input habis)")
-        return "5"
-    jawaban = antrean_input.pop(0)
-    print(jawaban)
-    return jawaban
-
-daftar_buku = [
+    <pre><code class="language-python">daftar_buku = [
     {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
     {"judul": "Algoritma", "penulis": "Budi", "tahun": 2023, "stok": 2},
 ]
@@ -289,7 +279,7 @@ def edit_data():
     show_data()
 
     try:
-        nomor = int(input_simulasi("Nomor buku: "))
+        nomor = int(input("Nomor buku: "))
     except ValueError:
         print("Nomor buku harus berupa angka.")
         return
@@ -298,10 +288,10 @@ def edit_data():
         print("Nomor buku tidak valid.")
         return
 
-    judul = input_simulasi("Judul: ")
-    penulis = input_simulasi("Penulis: ")
-    tahun = int(input_simulasi("Tahun: "))
-    stok = int(input_simulasi("Stok: "))
+    judul = input("Judul: ")
+    penulis = input("Penulis: ")
+    tahun = int(input("Tahun: "))
+    stok = int(input("Stok: "))
 
     daftar_buku[nomor - 1] = {
         "judul": judul,
@@ -343,18 +333,7 @@ print(daftar_buku)</code></pre>
       mengembalikan nilai yang dihapus. Nilai kembalian itu dapat dipakai untuk
       menampilkan judul buku yang berhasil dihapus.
     </p>
-    <pre><code class="language-python">antrean_input = ["1", "y"]
-
-def input_simulasi(prompt=""):
-    print(prompt, end="")
-    if not antrean_input:
-        print("(antrean input habis)")
-        return "5"
-    jawaban = antrean_input.pop(0)
-    print(jawaban)
-    return jawaban
-
-daftar_buku = [
+    <pre><code class="language-python">daftar_buku = [
     {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
     {"judul": "Algoritma", "penulis": "Budi", "tahun": 2023, "stok": 2},
 ]
@@ -373,7 +352,7 @@ def delete_data():
     show_data()
 
     try:
-        nomor = int(input_simulasi("Nomor buku: "))
+        nomor = int(input("Nomor buku: "))
     except ValueError:
         print("Nomor buku harus berupa angka.")
         return
@@ -382,7 +361,7 @@ def delete_data():
         print("Nomor buku tidak valid.")
         return
 
-    konfirmasi = input_simulasi("Yakin hapus? (y/n): ").lower()
+    konfirmasi = input("Yakin hapus? (y/n): ").lower()
     if konfirmasi != "y":
         print("Penghapusan dibatalkan.")
         return
@@ -428,20 +407,11 @@ print(daftar_buku)</code></pre>
 if __name__ == "builtins":
     __name__ = "__main__"
 
-antrean_input = ["1", "9", "5"]
-
-def input_simulasi(prompt=""):
-    print(prompt, end="")
-    if not antrean_input:
-        print("(antrean input habis)")
-        return "5"
-    jawaban = antrean_input.pop(0)
-    print(jawaban)
-    return jawaban
 
 daftar_buku = [
     {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
 ]
+
 
 def show_data():
     print("\nDAFTAR BUKU")
@@ -459,7 +429,7 @@ def exit():
 def main():
     while True:
         show_menu()
-        pilihan = input_simulasi("Pilih menu (1-5): ")
+        pilihan = input("Pilih menu (1-5): ")
 
         if pilihan == "1":
             show_data()
@@ -566,11 +536,47 @@ if __name__ == "__main__":
       </tbody>
     </table>
 
+    <h3>Cara memainkan aplikasi</h3>
+    <ol>
+      <li>
+        Buka tab <strong>Mini Project</strong>, lalu tekan
+        <strong>Jalankan &amp; Mainkan</strong>.
+      </li>
+      <li>
+        Program berhenti di <code>Pilih menu (1-5):</code>. Ketik
+        <code>1</code> lalu Enter untuk melihat daftar buku.
+      </li>
+      <li>
+        Pilih <code>2</code> untuk menambah buku. Isi judul, penulis, tahun,
+        dan stok dengan data pilihanmu.
+      </li>
+      <li>
+        Pilih <code>1</code> lagi: buku baru harus muncul di daftar.
+      </li>
+      <li>
+        Coba <code>3</code> untuk mengubah dan <code>4</code> untuk menghapus
+        buku.
+      </li>
+      <li>
+        Pilih <code>5</code> untuk keluar. Tekan
+        <strong>Jalankan &amp; Mainkan</strong> lagi untuk memulai sesi baru.
+      </li>
+    </ol>
+    <p>
+      Setiap jawaban yang kamu ketik dipakai program pada langkah berikutnya.
+      Jika ingin memperbaiki kode di tengah sesi, tekan <strong>Stop</strong>,
+      ubah kode, lalu jalankan lagi dari awal.
+    </p>
+    <p>
+      Skenario pada tabel di atas juga dipakai tombol
+      <strong>Periksa Output</strong> untuk menilai hasil secara otomatis.
+    </p>
+
     <h3>Kode lengkap Pustaka Mini</h3>
     <p>
       Kode berikut adalah versi lengkap dari seluruh fungsi yang sudah dibahas.
-      Antrean input membuat program dapat dijalankan di browser. Di Python
-      biasa, ganti <code>input_simulasi()</code> dengan <code>input()</code>.
+      Salin ke editor atau bandingkan dengan pekerjaanmu. Jalankan kode ini lalu
+      jawab setiap prompt untuk memainkan Pustaka Mini.
     </p>
     <pre><code class="language-python"># Pyodide menjalankan kode dengan __name__ = "builtins".
 # Baris berikut menyamakannya dengan Python biasa.
@@ -578,29 +584,11 @@ if __name__ == "builtins":
     __name__ = "__main__"
 
 
-antrean_input = [
-    "1",
-    "2", "Belajar Python", "Rina", "2025", "5",
-    "3", "1", "Python Dasar Edisi 2", "Andi", "2024", "4",
-    "1",
-    "4", "2", "y",
-    "1",
-    "5",
-]
-
-def input_simulasi(prompt=""):
-    print(prompt, end="")
-    if not antrean_input:
-        print("(antrean input habis)")
-        return "5"
-    jawaban = antrean_input.pop(0)
-    print(jawaban)
-    return jawaban
-
 daftar_buku = [
     {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
     {"judul": "Algoritma", "penulis": "Budi", "tahun": 2023, "stok": 2},
 ]
+
 
 def show_data():
     print("\nDAFTAR BUKU")
@@ -614,14 +602,15 @@ def show_data():
             f"{buku['tahun']} | stok {buku['stok']}"
         )
 
+
 def insert_data():
     print("\nTAMBAH BUKU")
-    judul = input_simulasi("Judul: ")
-    penulis = input_simulasi("Penulis: ")
+    judul = input("Judul: ")
+    penulis = input("Penulis: ")
 
     try:
-        tahun = int(input_simulasi("Tahun: "))
-        stok = int(input_simulasi("Stok: "))
+        tahun = int(input("Tahun: "))
+        stok = int(input("Stok: "))
     except ValueError:
         print("Tahun dan stok harus berupa angka.")
         return
@@ -636,6 +625,7 @@ def insert_data():
     )
     print(f"Buku '{judul}' berhasil ditambahkan.")
 
+
 def edit_data():
     print("\nUBAH BUKU")
     if not daftar_buku:
@@ -645,7 +635,7 @@ def edit_data():
     show_data()
 
     try:
-        nomor = int(input_simulasi("Nomor buku: "))
+        nomor = int(input("Nomor buku: "))
     except ValueError:
         print("Nomor buku harus berupa angka.")
         return
@@ -654,12 +644,12 @@ def edit_data():
         print("Nomor buku tidak valid.")
         return
 
-    judul = input_simulasi("Judul: ")
-    penulis = input_simulasi("Penulis: ")
+    judul = input("Judul: ")
+    penulis = input("Penulis: ")
 
     try:
-        tahun = int(input_simulasi("Tahun: "))
-        stok = int(input_simulasi("Stok: "))
+        tahun = int(input("Tahun: "))
+        stok = int(input("Stok: "))
     except ValueError:
         print("Tahun dan stok harus berupa angka.")
         return
@@ -672,6 +662,7 @@ def edit_data():
     }
     print(f"Buku '{judul}' berhasil diubah.")
 
+
 def delete_data():
     print("\nHAPUS BUKU")
     if not daftar_buku:
@@ -681,7 +672,7 @@ def delete_data():
     show_data()
 
     try:
-        nomor = int(input_simulasi("Nomor buku: "))
+        nomor = int(input("Nomor buku: "))
     except ValueError:
         print("Nomor buku harus berupa angka.")
         return
@@ -690,7 +681,7 @@ def delete_data():
         print("Nomor buku tidak valid.")
         return
 
-    konfirmasi = input_simulasi("Yakin hapus? (y/n): ").lower()
+    konfirmasi = input("Yakin hapus? (y/n): ").lower()
     if konfirmasi != "y":
         print("Penghapusan dibatalkan.")
         return
@@ -698,18 +689,21 @@ def delete_data():
     buku = daftar_buku.pop(nomor - 1)
     print(f"Buku '{buku['judul']}' berhasil dihapus.")
 
+
 def show_menu():
     print("\n=== PUSTAKA MINI ===")
     print("1. Tampilkan  2. Tambah  3. Ubah  4. Hapus  5. Keluar")
+
 
 def exit():
     print("Terima kasih telah menggunakan Pustaka Mini.")
     return False
 
+
 def main():
     while True:
         show_menu()
-        pilihan = input_simulasi("Pilih menu (1-5): ")
+        pilihan = input("Pilih menu (1-5): ")
 
         if pilihan == "1":
             show_data()
@@ -725,8 +719,10 @@ def main():
         else:
             print("Pilihan tidak valid. Silakan pilih 1-5.")
 
+
 if __name__ == "__main__":
-    main()</code></pre>
+    main()
+</code></pre>
 
     <h3>Masalah umum dan cara memperbaikinya</h3>
     <table>
@@ -778,10 +774,11 @@ if __name__ == "__main__":
       <li>Tidak ada data yang hilang saat program masih berjalan.</li>
     </ul>
     <p>
-      Setelah seluruh checklist terpenuhi, buka tab <strong>Mini Project</strong>
-      dan tekan <strong>Periksa Output</strong>. Jika output sudah sesuai, kamu
-      dapat membuka halaman penutup dan menyelesaikan seluruh rangkaian modul
-      PYLearn.
+      Setelah seluruh checklist terpenuhi, mainkan aplikasi lewat tombol
+      <strong>Jalankan &amp; Mainkan</strong>. Jika aplikasi sudah berjalan
+      sesuai keinginanmu, tekan <strong>Periksa Output</strong> untuk
+      memverifikasi skenario uji. Setelah output sesuai, kamu dapat membuka
+      halaman penutup dan menyelesaikan seluruh rangkaian modul PYLearn.
     </p>
   </section>
 </article>

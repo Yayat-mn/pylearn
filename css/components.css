@@ -1436,6 +1436,57 @@
   margin: 0;
 }
 
+.konsol-input {
+  margin-top: var(--jarak-3);
+  padding: var(--jarak-3);
+  border: 1px solid var(--warna-garis);
+  border-left: 4px solid var(--warna-utama);
+  border-radius: var(--radius-kecil);
+  background: var(--warna-latar-lembut);
+}
+
+.konsol-input__label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--jarak-1);
+  color: var(--warna-teks-redup);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.konsol-input__label code {
+  color: var(--warna-teks);
+  font-family: Consolas, "Cascadia Code", "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: pre-wrap;
+}
+
+.konsol-input__baris {
+  display: flex;
+  gap: var(--jarak-2);
+  margin-top: var(--jarak-2);
+}
+
+.konsol-input__field {
+  flex: 1;
+  min-width: 0;
+  padding: 10px var(--jarak-3);
+  border: 1px solid var(--warna-garis);
+  border-radius: var(--radius-kecil);
+  background: var(--warna-kartu);
+  color: var(--warna-teks);
+  font-family: Consolas, "Cascadia Code", "Courier New", monospace;
+  font-size: 14px;
+}
+
+.konsol-input__field:focus {
+  border-color: var(--warna-utama);
+  outline: 2px solid var(--warna-utama-lembut);
+  outline-offset: 0;
+}
+
 .umpan-balik-latihan {
   margin-top: var(--jarak-5);
   padding: var(--jarak-4);
@@ -1680,6 +1731,19 @@
 
   .umpan-balik-latihan {
     padding: var(--jarak-3);
+  }
+
+  .konsol-input__baris {
+    flex-direction: column;
+  }
+
+  .konsol-input__baris .tombol {
+    width: 100%;
+  }
+
+  /* Cegah zoom otomatis iOS saat kolom jawaban difokuskan. */
+  .konsol-input__field {
+    font-size: 16px;
   }
 
   .navigasi-modul {

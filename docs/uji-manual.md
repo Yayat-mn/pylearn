@@ -58,7 +58,7 @@ Buka `modul.html?id=1#latihan`.
 - [ ] Editor CodeMirror muncul dan berisi kode awal.
 - [ ] Tombol **Jalankan** dan **Periksa Output** aktif setelah data latihan
       selesai dimuat.
-- [ ] Klik **Jalankan** menampilkan output di panel dan status “Python siap.”
+- [ ] Klik **Jalankan** menampilkan output di panel dan status sesi selesai.
 - [ ] Saat program berjalan, editor tidak dapat diubah.
 - [ ] Klik **Periksa Output** dengan kode salah:
   - [ ] status berubah menjadi “Belum sesuai · 1/3”;
@@ -81,8 +81,28 @@ Buka `modul.html?id=8#latihan`:
 - [ ] Tab dan bilah tahap memakai label **Mini Project**, bukan **Latihan**.
 - [ ] Tab **Kuis** dan menu **Kuis & Evaluasi** tidak tampil.
 - [ ] Target output dan kode awal Pustaka Mini tampil.
+- [ ] Tombol Jalankan berlabel **Jalankan & Mainkan**.
 - [ ] Kode awal yang belum dilengkapi gagal pada **Periksa Output**.
-- [ ] Kunci Pustaka Mini menghasilkan output sesuai dan status **Benar**.
+- [ ] Masukkan kunci Pustaka Mini, klik **Jalankan & Mainkan**:
+  - [ ] output menampilkan menu dan kotak jawaban muncul dengan prompt
+        `Pilih menu (1-5):`;
+  - [ ] editor terkunci selama sesi;
+  - [ ] ketik `1` lalu Enter: daftar buku tampil dan prompt menu muncul lagi;
+  - [ ] pilih `2`, isi data pilihan sendiri (misalnya `Buku Saya`, `Sari`,
+        `2026`, `4`): buku baru muncul saat memilih `1`;
+  - [ ] pilih `3`, ubah buku, lalu `1`: perubahan tampil;
+  - [ ] pilih `4`, hapus buku, lalu `1`: buku hilang;
+  - [ ] pilih `5`: pesan terima kasih tampil dan sesi selesai;
+  - [ ] output memuat jawaban yang kamu ketik, bukan data skenario tetap.
+- [ ] Klik **Periksa Output** dengan kunci yang sama:
+  - [ ] status **Benar**;
+  - [ ] output sama dengan target, bukan hasil sesi bermain.
+- [ ] Saat kotak jawaban tampil, klik **Stop**:
+  - [ ] kotak jawaban hilang;
+  - [ ] status “Program dihentikan.”;
+  - [ ] tombol **Jalankan & Mainkan** aktif lagi.
+- [ ] Setelah Stop saat menunggu jawaban, jalankan lagi: sesi baru dimulai
+      dari awal tanpa memuat ulang Pyodide.
 - [ ] Setelah benar, tombol **Lihat Halaman Penutup** muncul, bukan **Lanjut
       ke Kuis**.
 - [ ] Klik tombol itu membuka `selesai.html?id=8`.
@@ -101,12 +121,34 @@ Buka `modul.html?id=8#latihan`:
   - [ ] status “Program dihentikan.”;
   - [ ] output menyebut alasan penghentian;
   - [ ] tombol **Jalankan** aktif kembali.
-- [ ] Setelah Stop/timeout, jalankan kode lagi; Pyodide dimuat ulang dan kode
-      tetap berjalan.
+- [ ] Setelah Stop/timeout saat kode dieksekusi, jalankan kode lagi; Pyodide
+      dimuat ulang dan kode tetap berjalan.
 - [ ] Jalankan `x = 123`, lalu jalankan `print(x)` di eksekusi terpisah:
       hasilnya `NameError`, bukan `123` (namespace bersih).
 - [ ] Berpindah dari Latihan ke Kuis saat program berjalan menghentikan
       program dan tidak meninggalkan output baru.
+
+### Konsol input
+
+- [ ] Di Modul 8, jalankan `print(input())`:
+  - [ ] kotak jawaban muncul dengan label **Jawaban** (prompt kosong);
+  - [ ] fokus otomatis berada di kolom jawaban;
+  - [ ] setelah mengirim `halo`, output berisi dua baris `halo` (echo
+        terminal dan hasil `print()`).
+- [ ] Jalankan `nama = input("Nama: "); print("Hai", nama)`:
+  - [ ] prompt `Nama: ` tampil di akhir output;
+  - [ ] jawaban yang dikirim muncul pada baris prompt;
+  - [ ] output akhir menampilkan `Hai <nama>`.
+- [ ] Jawaban berisi spasi atau tanda kutip (misalnya `Buku "Saya"`) tidak
+      memotong program dan tampil utuh.
+- [ ] Kirim jawaban kosong (langsung Enter): program tetap menerima string
+      kosong.
+- [ ] Di Modul 8, isi kode yang meminta input lebih banyak daripada
+      `skenarioInput`, lalu klik **Periksa Output**:
+  - [ ] status gagal/error;
+  - [ ] pesan menyebut skenario uji sudah habis.
+- [ ] Setelah sesi selesai, tekan **Jalankan** lagi: sesi baru dimulai tanpa
+      jawaban lama.
 
 ## 5. Halaman modul — Kuis
 
@@ -191,6 +233,8 @@ Uji pada lebar 390 px (DevTools device toolbar).
 - [ ] Perbesar jendela melewati 1024 px: sidebar tampil penuh dan atribut
       `inert`/`aria-hidden` hilang.
 - [ ] Semua tombol dapat difokuskan dengan Tab dan memiliki label yang jelas.
+- [ ] Di Modul 8, kotak jawaban dan tombol **Kirim** tersusun vertikal,
+      tidak meluber, dan tetap dapat dipakai pada lebar 390 px.
 - [ ] Preferensi **Reduce motion** mematikan animasi dan smooth scroll.
 
 ## 9. Ketahanan dan kegagalan

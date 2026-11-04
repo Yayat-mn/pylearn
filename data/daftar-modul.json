@@ -62,7 +62,7 @@
       "id": 8,
       "slug": "modul-08",
       "judul": "Mini Project Python",
-      "deskripsi": "Membangun Pustaka Mini: aplikasi data buku berbasis menu dengan fungsi, list of dictionary, dan operasi CRUD.",
+      "deskripsi": "Membangun Pustaka Mini: aplikasi data buku berbasis menu dengan fungsi, list of dictionary, dan operasi CRUD, lalu memainkannya lewat konsol interaktif.",
       "jumlahSubbab": 7,
       "status": "tersedia"
     }

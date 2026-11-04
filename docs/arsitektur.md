@@ -61,10 +61,10 @@ Aturan arah dependensi:
 | `js/features/editor.js` | Membuat CodeMirror, membaca/mengisi kode, dan mengunci editor. |
 | `js/features/latihan.js` | Menormalkan output dan membandingkannya dengan target. |
 | `js/features/kuis.js` | Validasi data kuis, render soal, penilaian, pembahasan, dan reset. |
-| `js/features/python-runner.js` | Membuat/membuang Worker, menangani pesan, timeout, Stop, dan error. |
+| `js/features/python-runner.js` | Membuat/membuang Worker, menangani pesan output/`minta-input`, timeout, Stop, dan error. |
 | `js/features/sidebar.js` | Drawer responsif, `inert`, tirai, Escape, dan pengembalian fokus. |
 | `js/features/transisi-halaman.js` | Lapisan transisi saat berpindah halaman internal. |
-| `js/workers/pyodide-worker.js` | Memuat Pyodide, menangkap stdout/stderr, menjalankan kode di namespace baru. |
+| `js/workers/pyodide-worker.js` | Memuat Pyodide, menyediakan `input()` lewat prelude, menangkap stdout/stderr, menjalankan kode di namespace baru. |
 
 ## 4. Alur dashboard
 
@@ -162,22 +162,38 @@ Aturan penting:
 ### 5.4 Siklus Worker Pyodide
 
 ```text
-jalankanProgram()
+jalankanProgram(periksa)
   ├─ aturProses(true)          → Run/Periksa nonaktif, Stop belum aktif
   ├─ pastikanPython()
   │    └─ siapkanPython()      → buat Worker, muat Pyodide sekali
   ├─ aturProses(true, true)    → Stop aktif
-  ├─ jalankanKode(kode)
-  │    ├─ postMessage({kode})
-  │    ├─ worker → output / selesai
-  │    └─ timer 5 detik → hentikan()
+  ├─ sesi.jawaban = periksa ? latihan.skenarioInput : []
+  ├─ loop
+  │    ├─ jalankanKode(kode, {jawaban, interaktif})
+  │    ├─ worker → output → minta-input / selesai
+  │    ├─ minta-input? tampilkan kotak jawaban, tunggu pengguna
+  │    │    └─ jawaban.push(jawaban) → ulangi loop dari awal
+  │    └─ selesai → keluar loop
   └─ finally
        ├─ editor dibuka kembali
        └─ aturProses(false)
 ```
 
-Setiap Stop, timeout, error Worker, atau perpindahan tahap memanggil
-`bersihkanWorker()`:
+Sesi interaktif memakai replay. Worker tidak menahan eksekusi di tengah fungsi
+Python. Saat `input()` dipanggil dan daftar jawaban habis, prelude melempar
+sinyal internal `_ButuhInput`. Worker mengirim pesan `minta-input` beserta
+prompt, lalu berhenti. Halaman menampilkan kotak jawaban; setelah pengguna
+mengirim jawaban, kode dijalankan ulang dari awal dengan seluruh jawaban.
+Namespace selalu baru, sehingga replay tidak terpengaruh eksekusi sebelumnya.
+`input()` menulis `prompt + jawaban` ke output untuk meniru echo terminal.
+
+`Periksa Output` memakai jalur yang sama, tetapi `interaktif` bernilai `false`
+dan `jawaban` diisi `latihan.skenarioInput`. Bila skenario habis, prelude
+melempar `EOFError` sehingga pemeriksaan gagal dengan pesan yang jelas.
+Sesi interaktif dibatasi 200 jawaban (`BATAS_JAWABAN`).
+
+Stop, timeout, error Worker, atau perpindahan tahap memanggil
+`bersihkanWorker()` bila kode sedang dieksekusi:
 
 - `worker.terminate()`
 - `worker = null`
@@ -186,6 +202,8 @@ Setiap Stop, timeout, error Worker, atau perpindahan tahap memanggil
 Worker baru dibuat pada eksekusi berikutnya. Konsekuensinya, Pyodide perlu
 dimuat ulang setelah penghentian. Ini disengaja: Pyodide tidak menyediakan
 cara aman untuk menghentikan kode Python yang sedang berjalan dari luar.
+Stop saat program hanya menunggu jawaban tidak mematikan Worker karena tidak
+ada kode Python yang sedang berjalan.
 
 Di dalam Worker, setiap program dijalankan dengan
 `pyodide.globals.get("dict")()` sebagai namespace baru. Variabel dari
@@ -196,6 +214,9 @@ eksekusi untuk menjaga memori.
 
 - stdout dan stderr dikirim terpisah dari Worker, lalu digabung di panel
   output.
+- Saat program menunggu input, prompt ditampilkan di akhir output dan kotak
+  jawaban muncul di bawah panel. Jawaban yang dikirim ditulis ke output
+  sebagai echo, lalu replay menampilkan transkrip lengkap.
 - Output dibatasi 10.000 karakter; setelah itu muncul keterangan
   `... (output dipotong)`.
 - Pesan error Python tetap ditampilkan sebagai bagian dari output agar
@@ -290,11 +311,13 @@ Tambahkan tab/panel di `modul.html`, lalu perluas `terapkanMedia()` dan
 Ubah `normalisasiOutput()` atau `bandingkanOutput()` di
 `js/features/latihan.js`. Perubahan akan berlaku untuk semua modul.
 
-### Menambah dukungan `input()`
+### Menyesuaikan dukungan `input()`
 
-Saat ini `input()` belum terhubung ke browser. Untuk mendukungnya, tambahkan
-mekanisme `setStdin` di Worker dan saluran prompt di halaman. Jangan memakai
-`input()` di materi/latihan sebelum fitur ini selesai.
+Dukungan `input()` ada di prelude Python di `js/workers/pyodide-worker.js`
+dan di loop replay `jalankanProgram()` pada `js/pages/modul.js`. Jika protokol
+diubah, perbarui juga `jalankanKode()` di `js/features/python-runner.js`.
+Jangan mengganti mekanisme ini dengan `input_simulasi()` atau antrean jawaban
+di kode materi: materi dan latihan harus memakai `input()` biasa.
 
 ### Menyimpan progres
 

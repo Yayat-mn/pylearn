@@ -5,10 +5,11 @@
  * Peran    : menjembatani halaman dengan Web Worker Pyodide.
  * Dipakai  : js/pages/modul.js (jalankanProgram, hentikan).
  * Alur     : siapkanPython() -> jalankanKode() -> pesan worker
- *            (output/selesai) -> akhiri() -> resolve.
- * Catatan  : Stop/timeout menghentikan worker total. Worker baru
- *            dibuat saat kode dijalankan lagi, sehingga Pyodide
- *            perlu dimuat ulang setelah penghentian.
+ *            (output/minta-input/selesai) -> akhiri() -> resolve.
+ * Catatan  : Stop/timeout saat kode dieksekusi menghentikan worker total.
+ *            Worker baru dibuat saat kode dijalankan lagi, sehingga
+ *            Pyodide perlu dimuat ulang setelah penghentian. Saat program
+ *            hanya menunggu jawaban, worker tetap hidup.
  * ============================================================
  */
 
@@ -36,9 +37,13 @@ function bersihkanWorker() {
 /**
  * Mengakhiri tugas aktif dan mengembalikan hasilnya ke pemanggil.
  *
- * @param {{error: string|null, dihentikan: boolean}} hasil
+ * @param {{
+ *   error: string|null,
+ *   dihentikan: boolean,
+ *   butuhInput?: {prompt: string}|null
+ * }} hasil
  */
-function akhiri({ error, dihentikan }) {
+function akhiri({ error, dihentikan, butuhInput = null }) {
   if (!tugas) return;
 
   clearTimeout(tugas.timer);
@@ -46,7 +51,7 @@ function akhiri({ error, dihentikan }) {
   const { resolve, output } = tugas;
   tugas = null;
 
-  resolve({ output, error, dihentikan });
+  resolve({ output, error, dihentikan, butuhInput });
 }
 
 /**
@@ -94,6 +99,17 @@ function buatWorker() {
 
       if (pesan.jenis === "output") {
         tambahOutput(pesan.teks);
+        return;
+      }
+
+      if (pesan.jenis === "minta-input") {
+        akhiri({
+          error: null,
+          dihentikan: false,
+          butuhInput: {
+            prompt: typeof pesan.prompt === "string" ? pesan.prompt : "",
+          },
+        });
         return;
       }
 
@@ -146,17 +162,25 @@ export function siapkanPython() {
 
 /**
  * Menjalankan kode di worker.
- * Selalu mengembalikan `{ output, error, dihentikan }`.
+ * Selalu mengembalikan `{ output, error, dihentikan, butuhInput }`.
+ * `butuhInput` berisi prompt bila kode berhenti menunggu jawaban.
  *
  * @param {string} kode
- * @returns {Promise<{output: string, error: string|null, dihentikan: boolean}>}
+ * @param {{jawaban?: string[], interaktif?: boolean}} [opsi]
+ * @returns {Promise<{
+ *   output: string,
+ *   error: string|null,
+ *   dihentikan: boolean,
+ *   butuhInput: {prompt: string}|null
+ * }>}
  */
-export async function jalankanKode(kode) {
+export async function jalankanKode(kode, { jawaban = [], interaktif = false } = {}) {
   if (tugas) {
     return {
       output: "",
       error: "Masih ada program yang berjalan.",
       dihentikan: false,
+      butuhInput: null,
     };
   }
 
@@ -173,6 +197,7 @@ export async function jalankanKode(kode) {
       output: "",
       error: "Worker Python tidak tersedia. Coba jalankan lagi.",
       dihentikan: false,
+      butuhInput: null,
     };
   }
 
@@ -191,7 +216,11 @@ export async function jalankanKode(kode) {
     };
 
     try {
-      worker.postMessage({ kode });
+      worker.postMessage({
+        kode,
+        jawaban: Array.isArray(jawaban) ? jawaban.map(String) : [],
+        interaktif: Boolean(interaktif),
+      });
     } catch (error) {
       bersihkanWorker();
       akhiri({

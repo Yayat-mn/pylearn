@@ -136,6 +136,39 @@ Satu tugas coding per modul.
 | `petunjuk` | string[] | Petunjuk bertahap |
 | `kunci` | string | Solusi, ditampilkan setelah 3 percobaan gagal |
 
+Field tambahan untuk latihan yang meminta input:
+
+| Field | Tipe | Keterangan |
+|---|---|---|
+| `interaktif` | boolean | Menandai latihan sebagai sesi bermain: tombol Jalankan berlabel **Jalankan & Mainkan**. Saat kode memanggil `input()`, halaman menampilkan kotak jawaban. Default `false`. |
+| `skenarioInput` | string[] | Jawaban tetap yang dipakai tombol **Periksa Output**. Wajib diisi bila kode memakai `input()`. |
+
+Contoh:
+
+```json
+{
+  "interaktif": true,
+  "skenarioInput": ["1", "2", "Buku Baru", "Rina", "2025", "3", "5"]
+}
+```
+
+Cara kerja singkat:
+
+- Saat pengguna menekan **Jalankan** (atau **Jalankan & Mainkan**), kode
+  dijalankan tanpa jawaban. Ketika `input()` dipanggil dan jawaban sudah
+  habis, program berhenti dan halaman menampilkan kotak jawaban.
+- Setelah jawaban dikirim, kode dijalankan ulang dari awal dengan seluruh
+  jawaban sebelumnya. Cara ini membuat `input()` terasa seperti terminal tanpa
+  memblokir Worker.
+- `input()` menulis `prompt + jawaban` ke output, meniru echo terminal. Karena
+  itu, `print(input())` menghasilkan dua baris: echo dan hasil `print()`.
+- **Periksa Output** tidak memakai jawaban sesi. Tombol ini menjalankan kode
+  dengan `skenarioInput` agar hasil penilaian selalu sama.
+- Bila program meminta input melebihi `skenarioInput`, Worker melempar
+  `EOFError` dan pemeriksaan dianggap gagal.
+- Sesi interaktif dibatasi 200 jawaban untuk mencegah perulangan input tanpa
+  akhir.
+
 Aturan penilaian output:
 
 - Akhiran baris `\r\n` diseragamkan menjadi `\n`.
@@ -144,6 +177,8 @@ Aturan penilaian output:
 - Perbandingan bersifat case-sensitive; huruf besar dan kecil dibedakan.
 - Program mengikuti batas waktu 5 detik dan batas output 10.000 karakter.
 - Tombol Periksa Output menjalankan ulang kode, bukan memakai output lama.
+- Untuk latihan dengan `skenarioInput`, Periksa Output memakai jawaban tetap
+  itu, bukan jawaban dari sesi bermain.
 - Setiap pemeriksaan yang menghasilkan output berbeda atau error menambah
   jumlah percobaan. Stop manual dan perpindahan tahap tidak dihitung.
 - Petunjuk ditampilkan bertahap setelah percobaan gagal. Setelah 3 percobaan
@@ -201,8 +236,11 @@ Aturan penilaian:
 1. **Belajar** — tab Teks memuat `materi.html`, tab Video memuat YouTube.
    Daftar subbab dapat diklik dan disinkronkan dengan posisi gulir. Jika
    `tanpaVideo`, tab video dihilangkan dan materi tampil sebagai teks saja.
-2. **Latihan** — editor memakai `latihan.kodeAwal`. Tombol Periksa Output
-   membandingkan hasil dengan `outputDiharapkan`. Setelah output sesuai,
+2. **Latihan** — editor memakai `latihan.kodeAwal`. Tombol **Jalankan** atau
+   **Jalankan & Mainkan** menjalankan kode. Bila program memakai `input()` dan
+   `interaktif` bernilai `true`, halaman menampilkan kotak jawaban setiap kali
+   program berhenti menunggu input. Tombol Periksa Output membandingkan hasil
+   dengan `outputDiharapkan` memakai `skenarioInput`. Setelah output sesuai,
    tombol **Lanjut ke Kuis** muncul. Jika `tanpaKuis`, tombol berubah menjadi
    **Lihat Halaman Penutup** dan langsung menuju halaman penutup.
 3. **Kuis** — soal dari `kuis.json`, lalu skor dan pembahasan. Tahap ini
@@ -246,14 +284,19 @@ Pada modul `tanpaKuis`, ringkasan tahap di halaman penutup mengikuti
 
 ## 9. Batasan Pyodide
 
-- `input()` belum terhubung ke `prompt()` browser. Latihan interaktif dapat
-  memakai `input_simulasi()` dengan antrean jawaban, lalu menjelaskan bahwa
-  pada Python biasa fungsi itu diganti dengan `input()`.
+- `input()` didukung lewat prelude di Worker. Setiap jawaban baru menjalankan
+  ulang seluruh kode dari awal (replay) dengan daftar jawaban yang bertambah.
+  Variabel tidak bertahan antar-jawaban, tetapi transkrip dan hasil akhirnya
+  sama seperti program terminal biasa. Sesi dibatasi 200 jawaban.
+- Untuk penilaian otomatis, `input()` memakai `skenarioInput`. Bila jawaban
+  skenario habis, Worker melempar `EOFError`.
 - Pyodide menjalankan kode dengan `__name__` bernilai `"builtins"`, bukan
   `"__main__"`. Kode yang memakai `if __name__ == "__main__"` perlu
   penyesuaian `if __name__ == "builtins": __name__ = "__main__"` agar dapat
   diuji di browser.
 - Setiap program dijalankan di namespace baru; variabel dari eksekusi
-  sebelumnya tidak tersedia.
-- Setelah Stop atau timeout, Worker Pyodide dibuang dan perlu dimuat ulang
-  pada eksekusi berikutnya.
+  sebelumnya tidak tersedia. Namespace juga dibuat ulang pada setiap replay
+  input.
+- Setelah Stop atau timeout saat kode sedang dieksekusi, Worker Pyodide
+  dibuang dan perlu dimuat ulang pada eksekusi berikutnya. Stop saat program
+  hanya menunggu jawaban tidak membuang Worker.

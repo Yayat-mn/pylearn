@@ -304,7 +304,7 @@
                    stroke-linejoin="round" aria-hidden="true">
                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
               </svg>
-              Jalankan Kode
+              <span id="label-jalankan">Jalankan Kode</span>
             </button>
 
             <button class="tombol tombol-stop" id="tombol-stop" type="button" disabled>
@@ -329,6 +329,22 @@
             <pre class="panel-output" id="output"
                  aria-live="polite">(belum ada output)</pre>
           </div>
+
+          <!-- Muncul saat program berhenti di input(). -->
+          <form class="konsol-input" id="wadah-konsol-input" hidden>
+            <label class="konsol-input__label" for="jawaban-input">
+              Program menunggu jawaban
+              <code id="prompt-jawaban">Jawaban</code>
+            </label>
+            <div class="konsol-input__baris">
+              <input class="konsol-input__field" id="jawaban-input"
+                     type="text" autocomplete="off" autocapitalize="off"
+                     spellcheck="false" disabled
+                     placeholder="Ketik jawaban lalu tekan Enter">
+              <button class="tombol" id="tombol-kirim-jawaban"
+                      type="submit" disabled>Kirim</button>
+            </div>
+          </form>
 
           <div class="umpan-balik-latihan" id="umpan-balik-latihan"
                role="status" aria-live="polite" hidden>

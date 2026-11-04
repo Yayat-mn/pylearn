@@ -7,7 +7,9 @@ PYLearn membagi materi menjadi delapan modul. Modul 1–7 memiliki materi teks,
 video, satu latihan coding, dan kuis pilihan ganda. Modul 8 adalah mini project
 **Pustaka Mini** yang dipelajari lewat teks, dikerjakan di editor, dan tidak
 memakai kuis. Kode latihan dijalankan langsung di browser memakai Pyodide,
-tanpa server Python.
+tanpa server Python. Setelah kode Pustaka Mini lengkap dijalankan, aplikasi dapat
+dimainkan langsung: program berhenti di setiap `input()` dan menunggu
+jawabanmu.
 
 ## Fitur
 
@@ -18,8 +20,12 @@ tanpa server Python.
   diklik. Modul 8 menampilkan materi teks saja.
 - Editor Python (CodeMirror) yang berjalan di browser melalui Web Worker
   Pyodide.
+- Konsol input interaktif: saat program memanggil `input()`, program berhenti
+  dan kotak jawaban muncul di bawah panel Output. Setiap jawaban menjalankan
+  ulang kode dari awal dengan jawaban yang sudah terkumpul.
 - Pemeriksaan output latihan, petunjuk bertahap, dan solusi setelah tiga
-  percobaan gagal.
+  percobaan gagal. Untuk latihan interaktif, pemeriksaan memakai
+  `skenarioInput` tetap agar hasilnya konsisten.
 - Batas waktu eksekusi 5 detik, tombol Stop, dan batas panjang output.
 - Kuis dengan jumlah soal serta batas lulus yang diatur lewat `kuis.json`.
 - Halaman penutup, tautan lanjut ke modul berikutnya, dan halaman
@@ -104,9 +110,10 @@ pylearn/
    `materi.html` dimuat ke panel Teks. Tab Video menampilkan iframe YouTube.
    Pada Modul 8, tab video dihilangkan dan materi tampil sebagai teks saja.
 2. **Latihan / Mini Project** — `latihan.json` mengisi instruksi, target output,
-   kode awal, petunjuk, dan solusi. Tombol **Periksa Output** menjalankan kode
-   di Pyodide lalu membandingkan output dengan target. Modul 8 memakai label
-   **Mini Project**.
+   kode awal, petunjuk, dan solusi. Tombol **Jalankan** menjalankan kode. Saat
+   kode memanggil `input()`, program berhenti dan menampilkan kotak jawaban;
+   tombol **Periksa Output** memakai `skenarioInput` tetap untuk menilai hasil.
+   Modul 8 memakai label **Mini Project** dan tombol **Jalankan & Mainkan**.
 3. **Kuis** — `kuis.json` menghasilkan soal pilihan ganda. Setelah dikumpulkan,
    jawaban dikunci dan pembahasan ditampilkan. Jika lulus, tombol lanjut
    mengarah ke modul berikutnya yang `tersedia`; jika belum ada, ke halaman
@@ -132,7 +139,9 @@ data/modul-XX/
 
 Modul tanpa video menambahkan `"tanpaVideo": true` pada `meta.json`. Modul
 tanpa kuis menambahkan `"tanpaKuis": true` dan boleh mengganti label tahap
-latihan dengan `"labelLatihan": "Mini Project"`.
+latihan dengan `"labelLatihan": "Mini Project"`. Modul 8 menambahkan
+`"interaktif": true` untuk label **Jalankan & Mainkan** dan
+`"skenarioInput"` berisi jawaban tetap untuk tombol **Periksa Output**.
 
 Setelah isinya lengkap, ubah `status` modul tersebut di
 `data/daftar-modul.json` dari `segera` menjadi `tersedia`. Modul yang masih
@@ -152,11 +161,15 @@ galat 404.
 
 - Nilai kuis, jumlah percobaan, dan status latihan tidak disimpan. Memuat
   ulang halaman berarti memulai dari awal.
-- `input()` belum terhubung ke `prompt()` browser. Latihan interaktif memakai
-  `input_simulasi()` dengan antrean jawaban; pada Python biasa, ganti dengan
-  `input()`.
-- Setelah Stop atau timeout, Worker Pyodide dibuang. Eksekusi berikutnya
-  membuat Worker baru dan memuat Pyodide lagi.
+- `input()` didukung dengan replay: setiap jawaban menjalankan ulang kode dari
+  awal. Variabel tidak bertahan antar-jawaban, tetapi transkrip dan hasil
+  akhirnya sama seperti terminal. Sesi dibatasi 200 jawaban.
+- Tombol **Periksa Output** selalu memakai `skenarioInput`, bukan jawaban dari
+  sesi bermain. Jika program meminta input melebihi skenario, pemeriksaan
+  dianggap gagal.
+- Setelah Stop atau timeout saat kode sedang dieksekusi, Worker Pyodide
+  dibuang. Eksekusi berikutnya membuat Worker baru dan memuat Pyodide lagi.
+  Stop saat program hanya menunggu jawaban tidak membuang Worker.
 - Pyodide dan CodeMirror memerlukan internet karena dimuat dari CDN.
 - Proyek ini tidak memakai framework, build step, atau npm dependency.
 
