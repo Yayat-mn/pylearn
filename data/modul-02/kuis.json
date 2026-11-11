@@ -3,55 +3,33 @@
   "batasLulus": 60,
   "soal": [
     {
-      "pertanyaan": "Variabel dalam Python dapat diibaratkan sebagai ...",
-      "pilihan": [
-        "nama yang merujuk pada sebuah nilai di memori",
-        "perintah untuk mencetak teks",
-        "tipe data yang hanya menyimpan angka",
-        "berkas tempat menyimpan program"
-      ],
-      "jawaban": "A",
-      "pembahasan": "Variabel adalah nama yang merujuk pada nilai. Nilai tersebut dapat dipakai kembali atau diubah selama program berjalan."
-    },
-    {
-      "pertanyaan": "Ciri variabel Python yang membedakannya dari bahasa bertipe statis adalah ...",
-      "pilihan": [
-        "tipe harus ditulis sebelum nama variabel",
-        "tipe ditentukan dari nilai dan dapat berubah",
-        "semua variabel otomatis bertipe string",
-        "nama variabel tidak boleh mengandung huruf"
-      ],
-      "jawaban": "B",
-      "pembahasan": "Python menentukan tipe variabel berdasarkan nilai yang diberikan. Karena bersifat dinamis, tipe variabel dapat berubah jika diberi nilai dengan tipe lain."
-    },
-    {
       "pertanyaan": "Nama variabel yang valid dalam Python adalah ...",
       "pilihan": [
-        "2nama",
-        "nama siswa",
         "nama_siswa",
-        "class"
+        "nama siswa",
+        "class",
+        "2nama"
       ],
-      "jawaban": "C",
+      "jawaban": "A",
       "pembahasan": "nama_siswa valid karena diawali huruf dan hanya memakai huruf serta garis bawah. 2nama diawali angka, nama siswa mengandung spasi, dan class adalah kata kunci Python."
     },
     {
       "pertanyaan": "Python membedakan huruf besar dan kecil. Pernyataan yang benar adalah ...",
       "pilihan": [
+        "semua nama variabel harus diawali huruf kapital",
         "umur dan Umur merujuk variabel yang sama",
         "umur dan Umur adalah dua variabel berbeda",
-        "nama variabel tidak boleh memakai huruf kapital",
-        "semua nama variabel harus diawali huruf kapital"
+        "nama variabel tidak boleh memakai huruf kapital"
       ],
-      "jawaban": "B",
+      "jawaban": "C",
       "pembahasan": "Python bersifat case-sensitive, sehingga umur dan Umur dianggap sebagai dua nama variabel yang berbeda."
     },
     {
       "pertanyaan": "Perintah yang benar untuk menghapus variabel umur adalah ...",
       "pilihan": [
-        "delete umur",
-        "del umur",
         "remove umur",
+        "del umur",
+        "delete umur",
         "hapus umur"
       ],
       "jawaban": "B",
@@ -61,100 +39,78 @@
       "pertanyaan": "Nilai 3.14 memiliki tipe data ...",
       "pilihan": [
         "int",
-        "str",
         "float",
+        "str",
         "bool"
       ],
-      "jawaban": "C",
+      "jawaban": "B",
       "pembahasan": "3.14 memiliki bagian desimal sehingga bertipe float. Bilangan bulat seperti 3 bertipe int."
     },
     {
       "pertanyaan": "Bilangan 1500.0 dapat ditulis dengan notasi eksponen ...",
       "pilihan": [
-        "1.5e3",
-        "1.5e-3",
+        "15e0",
         "1.5e2",
-        "15e0"
+        "1.5e-3",
+        "1.5e3"
       ],
-      "jawaban": "A",
+      "jawaban": "D",
       "pembahasan": "1.5e3 berarti 1.5 x 10 pangkat 3, yaitu 1500.0. Notasi eksponen menghasilkan nilai bertipe float."
     },
     {
       "pertanyaan": "a, b = 10, 20 merupakan contoh ...",
       "pilihan": [
-        "konversi tipe data",
-        "penggabungan string",
         "penghapusan variabel",
-        "pengisian beberapa variabel sekaligus"
+        "konversi tipe data",
+        "pengisian beberapa variabel sekaligus",
+        "penggabungan string"
       ],
-      "jawaban": "D",
+      "jawaban": "C",
       "pembahasan": "Python memungkinkan beberapa variabel diisi dalam satu baris. Variabel a mendapat nilai 10 dan b mendapat nilai 20."
     },
     {
       "pertanyaan": "Jika teks = \"Python\", maka teks[1] menghasilkan ...",
       "pilihan": [
         "P",
-        "y",
         "t",
+        "y",
         "n"
       ],
-      "jawaban": "B",
+      "jawaban": "C",
       "pembahasan": "Indeks string dimulai dari 0. Karakter P berada pada indeks 0, sedangkan y berada pada indeks 1."
-    },
-    {
-      "pertanyaan": "Jika teks = \"Pemrograman\", maka teks[1:4] menghasilkan ...",
-      "pilihan": [
-        "Pem",
-        "emr",
-        "emro",
-        "Pemr"
-      ],
-      "jawaban": "B",
-      "pembahasan": "Pemotongan [1:4] mengambil karakter pada indeks 1, 2, dan 3, yaitu e, m, dan r. Karakter pada indeks 4 tidak ikut diambil."
     },
     {
       "pertanyaan": "String multibaris dalam Python dapat dibuat dengan ...",
       "pilihan": [
         "satu tanda petik",
         "dua tanda kutip ganda",
-        "tiga tanda petik, seperti \"\"\"...\"\"\"",
-        "tanda kurung siku"
+        "tanda kurung siku",
+        "tiga tanda petik, seperti \"\"\"...\"\"\""
       ],
-      "jawaban": "C",
+      "jawaban": "D",
       "pembahasan": "Tiga tanda petik ganda atau tiga tanda petik tunggal dapat membungkus string yang terdiri dari beberapa baris."
     },
     {
       "pertanyaan": "Penulisan nilai boolean yang benar dalam Python adalah ...",
       "pilihan": [
-        "true dan false",
         "True dan False",
-        "TRUE dan FALSE",
-        "1 dan 0"
+        "1 dan 0",
+        "true dan false",
+        "TRUE dan FALSE"
       ],
-      "jawaban": "B",
+      "jawaban": "A",
       "pembahasan": "Nilai boolean Python ditulis True dan False dengan huruf awal kapital."
     },
     {
       "pertanyaan": "Hasil int(3.9), str(42), dan bool(\"\") berturut-turut adalah ...",
       "pilihan": [
-        "3, \"42\", False",
         "4, 42, True",
-        "3, \"42\", True",
-        "3.9, \"42\", False"
+        "3, \"42\", False",
+        "3.9, \"42\", False",
+        "3, \"42\", True"
       ],
-      "jawaban": "A",
+      "jawaban": "B",
       "pembahasan": "int(3.9) memotong bagian desimal menjadi 3, str(42) menghasilkan string \"42\", dan bool(\"\") menghasilkan False karena string kosong."
-    },
-    {
-      "pertanyaan": "Hasil hex(255) dan chr(65) berturut-turut adalah ...",
-      "pilihan": [
-        "\"0b11111111\" dan \"65\"",
-        "\"0o377\" dan 65",
-        "\"0xff\" dan \"A\"",
-        "\"255\" dan \"0x41\""
-      ],
-      "jawaban": "C",
-      "pembahasan": "hex(255) menghasilkan string \"0xff\", sedangkan chr(65) menghasilkan karakter \"A\". Fungsi bin() dan oct() menghasilkan representasi biner dan oktal."
     }
   ]
 }

@@ -95,7 +95,7 @@ export function validasiKuis(data) {
     judul:
       typeof data.judul === "string" && data.judul.trim()
         ? data.judul.trim()
-        : "Kuis Evaluasi",
+        : "Kuis",
     batasLulus: Math.round(batasLulus),
     soal,
   };

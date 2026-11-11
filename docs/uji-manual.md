@@ -48,7 +48,7 @@ Buka `modul.html?id=8`:
 - [ ] Tidak ada tab **Teks / Video**; materi langsung tampil sebagai teks.
 - [ ] Meta modul menampilkan **7 subbab · Mini Project**, bukan status video.
 - [ ] Label sidebar berubah menjadi **Materi** dan **Mini Project**.
-- [ ] Menu **Kuis & Evaluasi** tidak tampil.
+- [ ] Menu **Kuis** tidak tampil.
 - [ ] Tautan **Mini Project** ganda di sidebar tidak ditampilkan.
 
 ## 3. Halaman modul — Latihan
@@ -79,7 +79,7 @@ Buka `modul.html?id=1#latihan`.
 Buka `modul.html?id=8#latihan`:
 
 - [ ] Tab dan bilah tahap memakai label **Mini Project**, bukan **Latihan**.
-- [ ] Tab **Kuis** dan menu **Kuis & Evaluasi** tidak tampil.
+- [ ] Tab dan menu **Kuis** tidak tampil.
 - [ ] Target output dan kode awal Pustaka Mini tampil.
 - [ ] Tombol Jalankan berlabel **Jalankan & Mainkan**.
 - [ ] Kode awal yang belum dilengkapi gagal pada **Periksa Output**.
