@@ -1171,6 +1171,107 @@
   line-height: 1.65;
 }
 
+.konten-materi a {
+  color: var(--warna-utama);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.konten-materi a:hover {
+  color: var(--warna-utama-gelap);
+}
+
+.konten-materi table {
+  width: 100%;
+  margin: var(--jarak-4) 0;
+  border: 1px solid var(--warna-garis-lembut);
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.konten-materi th {
+  padding: 10px var(--jarak-3);
+  border-bottom: 1px solid var(--warna-garis);
+  background: var(--warna-latar-lembut);
+  color: var(--warna-teks);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.konten-materi td {
+  padding: 10px var(--jarak-3);
+  border-top: 1px solid var(--warna-garis-lembut);
+  vertical-align: top;
+}
+
+.konten-materi tbody tr:first-child td {
+  border-top: 0;
+}
+
+.tabel-keterkaitan th:nth-child(1) {
+  width: 24%;
+}
+
+.tabel-keterkaitan th:nth-child(2) {
+  width: 30%;
+}
+
+@media (max-width: 820px) {
+  .konten-materi table {
+    font-size: 12px;
+  }
+
+  .konten-materi th,
+  .konten-materi td {
+    padding: 8px 10px;
+  }
+}
+
+/* Di layar sempit, tabel keterkaitan dibaca sebagai kartu bertumpuk agar
+   kolom tidak saling menghimpit. */
+@media (max-width: 820px) {
+  .tabel-keterkaitan,
+  .tabel-keterkaitan tbody,
+  .tabel-keterkaitan tr,
+  .tabel-keterkaitan td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabel-keterkaitan {
+    border: 0;
+  }
+
+  .tabel-keterkaitan thead {
+    display: none;
+  }
+
+  .tabel-keterkaitan tr {
+    margin-bottom: var(--jarak-3);
+    padding: var(--jarak-3) 0;
+    border: 1px solid var(--warna-garis-lembut);
+    border-radius: var(--radius-kecil);
+  }
+
+  .tabel-keterkaitan td {
+    padding: 4px var(--jarak-3);
+    border-top: 0;
+  }
+
+  .tabel-keterkaitan td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 2px;
+    color: var(--warna-teks-samar);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+
 .konten-materi [id^="subbab-"] {
   scroll-margin-top: 96px;
 }

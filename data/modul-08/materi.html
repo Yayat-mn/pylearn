@@ -1,11 +1,97 @@
 <article class="materi-python">
   <section id="subbab-8-1" aria-labelledby="judul-8-1">
-    <h2 id="judul-8-1">8.1 Rancangan Program dan Data <em>Global</em></h2>
+    <h2 id="judul-8-1">8.1 Keterkaitan dengan Modul 1–7</h2>
     <p>
-      Modul ini adalah puncak perjalanan belajar Python. Kita akan membangun
-      <strong>Pustaka Mini</strong>, yaitu aplikasi sederhana untuk mengelola
-      data buku. Program berjalan lewat menu di terminal dan menyimpan data di
-      dalam memori selama program masih berjalan.
+      Modul ini adalah puncak perjalanan belajar Python: kamu akan membangun
+      <strong>Pustaka Mini</strong>, aplikasi sederhana untuk mengelola data
+      buku. Tidak ada materi baru yang diperkenalkan, karena seluruh bagiannya
+      dibangun dari konsep yang sudah dipelajari pada Modul 1 sampai 7. Tabel
+      berikut menghubungkan setiap modul dengan bagian kode yang memakainya.
+    </p>
+    <table class="tabel-keterkaitan">
+      <thead>
+        <tr>
+          <th>Modul</th>
+          <th>Materi yang dipakai</th>
+          <th>Penerapan di Pustaka Mini</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Modul"><a href="modul.html?id=1">Modul 1</a><br>Pengenalan Python</td>
+          <td data-label="Materi">Penulisan kode dan <code>print()</code></td>
+          <td data-label="Penerapan">Menampilkan menu, daftar buku, dan pesan konfirmasi.</td>
+        </tr>
+        <tr>
+          <td data-label="Modul"><a href="modul.html?id=2">Modul 2</a><br>Variabel dan Tipe Data</td>
+          <td data-label="Materi">Variabel, <em>string</em>, <em>integer</em>, dan konversi tipe</td>
+          <td data-label="Penerapan">
+            Menyimpan <code>judul</code>, <code>penulis</code>,
+            <code>tahun</code>, dan <code>stok</code>, lalu mengubah masukan
+            pengguna menjadi bilangan bulat.
+          </td>
+        </tr>
+        <tr>
+          <td data-label="Modul"><a href="modul.html?id=3">Modul 3</a><br>Operator Python</td>
+          <td data-label="Materi">Operator aritmetika dan perbandingan</td>
+          <td data-label="Penerapan">
+            Menghitung indeks <code>nomor - 1</code> dan memeriksa nomor yang
+            berada di luar rentang.
+          </td>
+        </tr>
+        <tr>
+          <td data-label="Modul"><a href="modul.html?id=4">Modul 4</a><br>Percabangan</td>
+          <td data-label="Materi"><code>if</code>, <code>elif</code>, dan <code>else</code></td>
+          <td data-label="Penerapan">
+            Memilih menu, memeriksa isian, dan meminta konfirmasi sebelum
+            menghapus buku.
+          </td>
+        </tr>
+        <tr>
+          <td data-label="Modul"><a href="modul.html?id=5">Modul 5</a><br>Perulangan</td>
+          <td data-label="Materi"><code>for</code>, <code>while</code>, dan <code>break</code></td>
+          <td data-label="Penerapan">
+            Mengulang menu dengan <code>while True</code> dan menampilkan
+            daftar buku dengan <code>for</code>.
+          </td>
+        </tr>
+        <tr>
+          <td data-label="Modul"><a href="modul.html?id=6">Modul 6</a><br>Struktur Data</td>
+          <td data-label="Materi">
+            <em>list</em>, <em>dictionary</em>, indeks,
+            <code>append()</code>, dan <code>pop()</code>
+          </td>
+          <td data-label="Penerapan">
+            Menyimpan <code>daftar_buku</code> sebagai
+            <em>list of dictionary</em>, lalu menambah, mengubah, dan menghapus
+            <em>item</em>.
+          </td>
+        </tr>
+        <tr>
+          <td data-label="Modul"><a href="modul.html?id=7">Modul 7</a><br>Fungsi</td>
+          <td data-label="Materi">Parameter, <code>return</code>, dan lingkup variabel</td>
+          <td data-label="Penerapan">
+            Membagi program menjadi <code>show_data()</code>,
+            <code>insert_data()</code>, <code>edit_data()</code>, dan
+            <code>delete_data()</code>.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Tautan pada kolom pertama membuka modul asal konsep tersebut. Dengan
+      begitu, kamu dapat mengulang bagian tertentu tanpa meninggalkan alur
+      mini project. Setelah melihat peta materi di atas, kita mulai merancang
+      program Pustaka Mini pada subbab berikutnya.
+    </p>
+  </section>
+
+  <section id="subbab-8-2" aria-labelledby="judul-8-2">
+    <h2 id="judul-8-2">8.2 Rancangan Program dan Data <em>Global</em></h2>
+    <p>
+      Pustaka Mini adalah aplikasi sederhana untuk mengelola data buku.
+      Program berjalan lewat menu di terminal dan menyimpan data di dalam
+      memori selama program masih berjalan.
     </p>
     <p>
       Di PYLearn, aplikasi ini dapat langsung dimainkan. Setelah kode dijalankan,
@@ -109,12 +195,12 @@ print(daftar_buku)</code></pre>
     </table>
     <p>
       Dengan rancangan ini, setiap fungsi memiliki satu tugas yang jelas. Pola
-      tersebut akan memudahkan proses pengujian di subbab terakhir.
+      tersebut akan memudahkan proses pengujian pada subbab 8.8.
     </p>
   </section>
 
-  <section id="subbab-8-2" aria-labelledby="judul-8-2">
-    <h2 id="judul-8-2">8.2 Menampilkan Daftar Buku dengan show_data()</h2>
+  <section id="subbab-8-3" aria-labelledby="judul-8-3">
+    <h2 id="judul-8-3">8.3 Menampilkan Daftar Buku dengan show_data()</h2>
     <p>
       Fungsi <code>show_data()</code> bertugas menampilkan seluruh isi
       <code>daftar_buku</code>. Agar pengguna mudah memilih buku saat mengubah
@@ -178,8 +264,8 @@ show_data()</code></pre>
     </p>
   </section>
 
-  <section id="subbab-8-3" aria-labelledby="judul-8-3">
-    <h2 id="judul-8-3">8.3 Menambah Buku dengan insert_data()</h2>
+  <section id="subbab-8-4" aria-labelledby="judul-8-4">
+    <h2 id="judul-8-4">8.4 Menambah Buku dengan insert_data()</h2>
     <p>
       Fungsi <code>insert_data()</code> meminta empat data, lalu menambahkan
       <em>dictionary</em> baru ke <code>daftar_buku</code> dengan <code>append()</code>.
@@ -245,8 +331,8 @@ print(daftar_buku)</code></pre>
     </p>
   </section>
 
-  <section id="subbab-8-4" aria-labelledby="judul-8-4">
-    <h2 id="judul-8-4">8.4 Mengubah Buku dengan edit_data()</h2>
+  <section id="subbab-8-5" aria-labelledby="judul-8-5">
+    <h2 id="judul-8-5">8.5 Mengubah Buku dengan edit_data()</h2>
     <p>
       Fungsi <code>edit_data()</code> menampilkan daftar lebih dulu agar
       pengguna mengetahui nomor buku yang akan diubah. Setelah nomor dimasukkan,
@@ -319,8 +405,8 @@ print(daftar_buku)</code></pre>
     </p>
   </section>
 
-  <section id="subbab-8-5" aria-labelledby="judul-8-5">
-    <h2 id="judul-8-5">8.5 Menghapus Buku dengan delete_data()</h2>
+  <section id="subbab-8-6" aria-labelledby="judul-8-6">
+    <h2 id="judul-8-6">8.6 Menghapus Buku dengan delete_data()</h2>
     <p>
       Fungsi <code>delete_data()</code> meminta nomor buku, menampilkan daftar,
       lalu meminta konfirmasi. Konfirmasi penting karena penghapusan data tidak
@@ -386,8 +472,8 @@ print(daftar_buku)</code></pre>
     </p>
   </section>
 
-  <section id="subbab-8-6" aria-labelledby="judul-8-6">
-    <h2 id="judul-8-6">8.6 Menu, <em>Main Loop</em>, dan if __name__ == "__main__"</h2>
+  <section id="subbab-8-7" aria-labelledby="judul-8-7">
+    <h2 id="judul-8-7">8.7 Menu, <em>Main Loop</em>, dan if __name__ == "__main__"</h2>
     <p>
       Menu membuat program dapat dipakai berulang kali tanpa menjalankannya
       ulang dari awal. Fungsi <code>show_menu()</code> menampilkan pilihan,
@@ -490,8 +576,8 @@ if __name__ == "__main__":
     </p>
   </section>
 
-  <section id="subbab-8-7" aria-labelledby="judul-8-7">
-    <h2 id="judul-8-7">8.7 Pengujian dan Perbaikan</h2>
+  <section id="subbab-8-8" aria-labelledby="judul-8-8">
+    <h2 id="judul-8-8">8.8 Pengujian dan Perbaikan</h2>
     <p>
       Program yang selesai ditulis belum tentu benar. Kita perlu menguji setiap
       fitur dengan urutan yang tetap, lalu membandingkan <em>output</em> dengan

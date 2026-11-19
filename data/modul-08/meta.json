@@ -13,30 +13,34 @@
   "subbab": [
     {
       "id": "8.1",
-      "judul": "Rancangan Program dan Data Global"
+      "judul": "Keterkaitan dengan Modul 1–7"
     },
     {
       "id": "8.2",
-      "judul": "Menampilkan Daftar Buku dengan show_data()"
+      "judul": "Rancangan Program dan Data Global"
     },
     {
       "id": "8.3",
-      "judul": "Menambah Buku dengan insert_data()"
+      "judul": "Menampilkan Daftar Buku dengan show_data()"
     },
     {
       "id": "8.4",
-      "judul": "Mengubah Buku dengan edit_data()"
+      "judul": "Menambah Buku dengan insert_data()"
     },
     {
       "id": "8.5",
-      "judul": "Menghapus Buku dengan delete_data()"
+      "judul": "Mengubah Buku dengan edit_data()"
     },
     {
       "id": "8.6",
-      "judul": "Menu, Main Loop, dan if __name__ == \"__main__\""
+      "judul": "Menghapus Buku dengan delete_data()"
     },
     {
       "id": "8.7",
+      "judul": "Menu, Main Loop, dan if __name__ == \"__main__\""
+    },
+    {
+      "id": "8.8",
       "judul": "Pengujian dan Perbaikan"
     }
   ],
