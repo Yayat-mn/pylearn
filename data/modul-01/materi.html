@@ -32,7 +32,7 @@
       Python adalah bahasa pemrograman <strong>tingkat tinggi</strong> yang
       bersifat <em>general-purpose</em>, artinya dapat digunakan untuk berbagai
       jenis pekerjaan, bukan hanya satu bidang tertentu. Python juga umumnya
-      dijalankan menggunakan interpreter dan mendukung beberapa gaya
+      dijalankan menggunakan <em>interpreter</em> dan mendukung beberapa gaya
       pemrograman, seperti prosedural, berorientasi objek, dan fungsional.
     </p>
     <p>
@@ -45,7 +45,7 @@
     <h3>Kegunaan Python</h3>
     <ul>
       <li>
-        <strong>Pengembangan web</strong> dengan framework seperti Django dan
+        <strong>Pengembangan <em>web</em></strong> dengan <em>framework</em> seperti Django dan
         Flask.
       </li>
       <li>
@@ -53,7 +53,7 @@
         pandas.
       </li>
       <li>
-        <strong>Kecerdasan buatan dan machine learning</strong> dengan
+        <strong>Kecerdasan buatan dan <em>machine learning</em></strong> dengan
         TensorFlow atau PyTorch.
       </li>
       <li>
@@ -70,7 +70,7 @@
     <ul>
       <li>Mudah dipelajari dan mudah dibaca.</li>
       <li>Lintas platform: dapat berjalan di Windows, Linux, dan macOS.</li>
-      <li>Open source dan memiliki komunitas pengguna yang besar.</li>
+      <li><em>Open source</em> dan memiliki komunitas pengguna yang besar.</li>
       <li>
         Dilengkapi banyak pustaka bawaan (<em>batteries included</em>) serta
         pustaka pihak ketiga.
@@ -102,7 +102,7 @@
       <li>Sintaks ringkas sehingga program lebih cepat ditulis.</li>
       <li>Dapat berjalan di berbagai sistem operasi.</li>
       <li>Memiliki ekosistem pustaka yang sangat luas.</li>
-      <li>Open source dan didukung komunitas yang besar.</li>
+      <li><em>Open source</em> dan didukung komunitas yang besar.</li>
       <li>Cocok untuk pengembangan cepat, prototipe, dan eksperimen.</li>
     </ul>
 
@@ -156,33 +156,33 @@ int main() {
   </section>
 
   <section id="subbab-1-4" aria-labelledby="judul-1-4">
-    <h2 id="judul-1-4">1.4 Cara Kerja Interpreter dan Compiler</h2>
+    <h2 id="judul-1-4">1.4 Cara Kerja <em>Interpreter</em> dan <em>Compiler</em></h2>
     <p>
       Komputer tidak langsung memahami kode yang ditulis dalam bahasa
       pemrograman. Kode tersebut perlu diterjemahkan terlebih dahulu. Ada dua
-      pendekatan utama yang biasa digunakan: compiler dan interpreter.
+      pendekatan utama yang biasa digunakan: <em>compiler</em> dan <em>interpreter</em>.
     </p>
     <ul>
       <li>
-        <strong>Compiler</strong> menerjemahkan seluruh kode sumber menjadi
+        <strong><em>Compiler</em></strong> menerjemahkan seluruh kode sumber menjadi
         kode mesin atau berkas yang dapat dijalankan sebelum program berjalan.
-        Contoh bahasa yang umum memakai compiler adalah C dan C++.
+        Contoh bahasa yang umum memakai <em>compiler</em> adalah C dan C++.
       </li>
       <li>
-        <strong>Interpreter</strong> membaca dan menjalankan kode secara
+        <strong><em>Interpreter</em></strong> membaca dan menjalankan kode secara
         bertahap. Program tidak harus diubah menjadi berkas <em>executable</em>
-        terlebih dahulu. Contoh bahasa yang umum memakai interpreter adalah
+        terlebih dahulu. Contoh bahasa yang umum memakai <em>interpreter</em> adalah
         Python dan JavaScript.
       </li>
     </ul>
     <p>
       Python sebenarnya terlebih dahulu mengubah kode sumber menjadi
-      <strong>bytecode</strong>, lalu bytecode tersebut dijalankan oleh
+      <strong><em>bytecode</em></strong>, lalu <em>bytecode</em> tersebut dijalankan oleh
       <strong>Python Virtual Machine</strong> (PVM). Karena itu Python sering
       disebut sebagai bahasa yang diinterpretasikan.
     </p>
     <p>
-      Interpreter biasanya lebih memudahkan proses pengujian dan debugging
+      <em>Interpreter</em> biasanya lebih memudahkan proses pengujian dan <em>debugging</em>
       karena kode dapat langsung dijalankan. Namun, program yang dikompilasi
       menjadi kode mesin umumnya memiliki performa lebih tinggi.
     </p>
@@ -199,9 +199,9 @@ int main() {
         Buka situs resmi
         <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">python.org/downloads</a>.
       </li>
-      <li>Unduh installer Python untuk Windows.</li>
+      <li>Unduh <em>installer</em> Python untuk Windows.</li>
       <li>
-        Jalankan installer, lalu centang opsi
+        Jalankan <em>installer</em>, lalu centang opsi
         <strong>Add python.exe to PATH</strong>.
       </li>
       <li>
@@ -227,7 +227,7 @@ int main() {
       yang dapat digunakan untuk mencoba mode interaktif dan menulis skrip.
     </p>
     <p>
-      <strong>Catatan:</strong> PYLearn berjalan di browser dan sudah
+      <strong>Catatan:</strong> PYLearn berjalan di <em>browser</em> dan sudah
       menyediakan editor Python, sehingga kamu tidak perlu menginstal Python
       untuk mengerjakan latihan di situs ini. Instalasi lokal berguna jika
       ingin berlatih di luar PYLearn.
@@ -245,7 +245,7 @@ int main() {
     <p>
       Pada mode interaktif, kita mengetik instruksi satu per satu. Python
       langsung menjalankan instruksi tersebut dan menampilkan hasilnya. Mode
-      ini biasanya ditandai dengan prompt <code>&gt;&gt;&gt;</code>.
+      ini biasanya ditandai dengan <em>prompt</em> <code>&gt;&gt;&gt;</code>.
     </p>
     <pre><code class="language-python">&gt;&gt;&gt; 2 + 3
 5
@@ -275,14 +275,14 @@ print("Saya sedang belajar Python.")</code></pre>
       <strong>Di PYLearn</strong>, editor kode menjalankan program dalam mode
       skrip. Klik tombol <strong>Jalankan</strong> atau
       <strong>Periksa Output</strong> untuk mengeksekusi seluruh kode di
-      editor. PYLearn belum menyediakan prompt interaktif; untuk mencoba mode
+      editor. PYLearn belum menyediakan <em>prompt</em> interaktif; untuk mencoba mode
       interaktif, gunakan IDLE atau terminal Python di komputer.
     </p>
 
     <h3>print() dan input()</h3>
     <p>
       Fungsi <code>print()</code> digunakan untuk menampilkan keluaran ke
-      layar. Teks yang ditampilkan harus berupa string, yaitu teks yang diapit
+      layar. Teks yang ditampilkan harus berupa <em>string</em>, yaitu teks yang diapit
       tanda kutip tunggal atau ganda.
     </p>
     <pre><code class="language-python">print("Halo, Python!")
@@ -294,7 +294,7 @@ print("Belajar", "Python")</code></pre>
     </p>
     <p>
       Fungsi <code>input()</code> digunakan untuk menerima masukan dari
-      pengguna. Hasil <code>input()</code> selalu berupa string.
+      pengguna. Hasil <code>input()</code> selalu berupa <em>string</em>.
     </p>
     <pre><code class="language-python">nama = input("Siapa namamu? ")
 print("Halo, " + nama)</code></pre>
@@ -337,7 +337,7 @@ Python itu menyenangkan!</code></pre>
       </li>
       <li>
         Python adalah bahasa tingkat tinggi yang mudah dibaca dan digunakan
-        untuk web, data, kecerdasan buatan, otomasi, serta pendidikan.
+        untuk <em>web</em>, data, kecerdasan buatan, otomasi, serta pendidikan.
       </li>
       <li>
         Kelebihan Python antara lain sintaksnya sederhana dan pustakanya luas;
@@ -345,8 +345,8 @@ Python itu menyenangkan!</code></pre>
         menggunakan memori relatif besar.
       </li>
       <li>
-        Compiler menerjemahkan seluruh kode sebelum dijalankan, sedangkan
-        interpreter menjalankan kode secara bertahap.
+        <em>Compiler</em> menerjemahkan seluruh kode sebelum dijalankan, sedangkan
+        <em>interpreter</em> menjalankan kode secara bertahap.
       </li>
       <li>
         Instalasi Python di Windows perlu mencentang opsi
@@ -359,7 +359,7 @@ Python itu menyenangkan!</code></pre>
       </li>
       <li>
         <code>print()</code> menampilkan keluaran, sedangkan
-        <code>input()</code> menerima masukan dan mengembalikan string.
+        <code>input()</code> menerima masukan dan mengembalikan <em>string</em>.
       </li>
     </ul>
   </section>

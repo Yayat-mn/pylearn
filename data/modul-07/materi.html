@@ -159,7 +159,7 @@ print(cek_kelulusan(60))</code></pre>
     <h3>Mengembalikan beberapa nilai</h3>
     <p>
       Sebuah fungsi dapat mengembalikan beberapa nilai sekaligus. Nilai-nilai
-      tersebut dikembalikan sebagai tuple dan dapat diterima dengan beberapa
+      tersebut dikembalikan sebagai <em>tuple</em> dan dapat diterima dengan beberapa
       variabel.
     </p>
     <pre><code class="language-python">def statistik(a, b, c):
@@ -215,7 +215,7 @@ print("Dua kali luas:", luas * 2)</code></pre>
 hasil = sapa()
 print("Nilai kembalian:", hasil)</code></pre>
     <p>
-      Outputnya adalah <code>Halo!</code> lalu
+      <em>Output</em>nya adalah <code>Halo!</code> lalu
       <code>Nilai kembalian: None</code>. <code>None</code> adalah nilai khusus
       Python yang berarti tidak ada nilai. Jadi, fungsi yang tidak memiliki
       <code>return</code> tetap mengembalikan <code>None</code> secara otomatis.
@@ -228,7 +228,7 @@ print("Nilai kembalian:", hasil)</code></pre>
   </section>
 
   <section id="subbab-7-5" aria-labelledby="judul-7-5">
-    <h2 id="judul-7-5">7.5 Variabel Lokal dan Global</h2>
+    <h2 id="judul-7-5">7.5 Variabel Lokal dan <em>Global</em></h2>
     <p>
       Ruang lingkup atau <em>scope</em> menentukan di bagian mana sebuah variabel
       dapat digunakan. Variabel yang dibuat di dalam fungsi bersifat lokal,
@@ -308,28 +308,28 @@ print("Skor akhir:", skor)</code></pre>
   </section>
 
   <section id="subbab-7-6" aria-labelledby="judul-7-6">
-    <h2 id="judul-7-6">7.6 Urutan Pencarian Local-Global-Built-in dan NameError</h2>
+    <h2 id="judul-7-6">7.6 Urutan Pencarian <em>Local</em>-<em>Global</em>-<em>Built-in</em> dan NameError</h2>
     <p>
       Ketika Python menemukan nama variabel atau fungsi, Python mencarinya
-      secara berurutan: <strong>Local</strong>, lalu <strong>Global</strong>,
-      lalu <strong>Built-in</strong>. Urutan ini sering disingkat L-G-B.
+      secara berurutan: <strong><em>Local</em></strong>, lalu <strong><em>Global</em></strong>,
+      lalu <strong><em>Built-in</em></strong>. Urutan ini sering disingkat L-G-B.
     </p>
     <ul>
       <li>
-        <strong>Local</strong> adalah nama yang dibuat di dalam fungsi, termasuk
+        <strong><em>Local</em></strong> adalah nama yang dibuat di dalam fungsi, termasuk
         parameter dan variabel lokal.
       </li>
       <li>
-        <strong>Global</strong> adalah nama yang dibuat di luar fungsi pada
+        <strong><em>Global</em></strong> adalah nama yang dibuat di luar fungsi pada
         tingkat utama program.
       </li>
       <li>
-        <strong>Built-in</strong> adalah nama bawaan Python, misalnya
+        <strong><em>Built-in</em></strong> adalah nama bawaan Python, misalnya
         <code>print</code>, <code>len</code>, dan <code>sum</code>.
       </li>
     </ul>
 
-    <h3>Pencarian sampai ke built-in</h3>
+    <h3>Pencarian sampai ke <em>built-in</em></h3>
     <pre><code class="language-python">def tampilkan(data):
     panjang = len(data)
     print("Panjang data:", panjang)
@@ -338,12 +338,12 @@ tampilkan([10, 20, 30, 40])</code></pre>
     <p>
       Nama <code>data</code> dan <code>panjang</code> ditemukan di lingkup
       lokal. Nama <code>len</code> tidak ada di lokal maupun global, sehingga
-      Python mencarinya di built-in dan menemukan fungsi <code>len()</code>.
+      Python mencarinya di <em>built-in</em> dan menemukan fungsi <code>len()</code>.
     </p>
 
     <h3>NameError ketika nama tidak ditemukan</h3>
     <p>
-      Jika nama tidak ditemukan di local, global, maupun built-in, Python
+      Jika nama tidak ditemukan di local, global, maupun <em>built-in</em>, Python
       menampilkan <strong>NameError</strong>. NameError juga muncul jika kita
       mengakses variabel lokal dari luar fungsi atau salah mengetik nama
       variabel.
@@ -372,12 +372,12 @@ def sapa():
 sapa()</code></pre>
     <p>
       Fungsi <code>sapa()</code> menemukan <code>nama</code> di lingkup global.
-      Sebaliknya, <code>umur</code> tidak ada di local, global, maupun built-in,
+      Sebaliknya, <code>umur</code> tidak ada di local, global, maupun <em>built-in</em>,
       sehingga akses terhadap <code>umur</code> akan menghasilkan NameError.
     </p>
     <p>
-      Hindari juga menggunakan nama built-in seperti <code>len</code> atau
-      <code>sum</code> sebagai nama variabel. Jika nama built-in ditutupi oleh
+      Hindari juga menggunakan nama <em>built-in</em> seperti <code>len</code> atau
+      <code>sum</code> sebagai nama variabel. Jika nama <em>built-in</em> ditutupi oleh
       variabel lain, fungsi bawaan tersebut tidak dapat digunakan dengan benar.
     </p>
   </section>
@@ -412,7 +412,7 @@ sapa()</code></pre>
         diubah.
       </li>
       <li>
-        Python mencari nama dengan urutan Local, Global, lalu Built-in. Jika nama
+        Python mencari nama dengan urutan <em>Local</em>, <em>Global</em>, lalu <em>Built-in</em>. Jika nama
         tidak ditemukan, Python menampilkan <code>NameError</code>.
       </li>
     </ul>

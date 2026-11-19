@@ -1,6 +1,6 @@
 <article class="materi-python">
   <section id="subbab-8-1" aria-labelledby="judul-8-1">
-    <h2 id="judul-8-1">8.1 Rancangan Program dan Data Global</h2>
+    <h2 id="judul-8-1">8.1 Rancangan Program dan Data <em>Global</em></h2>
     <p>
       Modul ini adalah puncak perjalanan belajar Python. Kita akan membangun
       <strong>Pustaka Mini</strong>, yaitu aplikasi sederhana untuk mengelola
@@ -15,7 +15,7 @@
     </p>
     <p>
       Pustaka Mini menerapkan materi yang sudah dipelajari: variabel, tipe data,
-      percabangan, perulangan, list, dictionary, dan fungsi. Setiap fitur
+      percabangan, perulangan, <em>list</em>, <em>dictionary</em>, dan fungsi. Setiap fitur
       dikerjakan oleh fungsi tersendiri agar program mudah dibaca dan diuji.
     </p>
 
@@ -33,7 +33,7 @@
       Satu buku memiliki judul, penulis, tahun terbit, dan stok. Karena itu,
       satu buku paling tepat disimpan sebagai <code>dictionary</code>. Seluruh
       buku kemudian dikumpulkan dalam <code>list</code>. Struktur ini disebut
-      <strong>list of dictionary</strong>.
+      <strong><em>list of dictionary</em></strong>.
     </p>
     <pre><code class="language-python">daftar_buku = [
     {"judul": "Python Dasar", "penulis": "Andi", "tahun": 2024, "stok": 3},
@@ -43,7 +43,7 @@
 for buku in daftar_buku:
     print(buku["judul"], "-", buku["penulis"])</code></pre>
     <p>
-      Setiap dictionary memakai kunci yang sama, yaitu <code>judul</code>,
+      Setiap <em>dictionary</em> memakai kunci yang sama, yaitu <code>judul</code>,
       <code>penulis</code>, <code>tahun</code>, dan <code>stok</code>. Kunci
       yang seragam memudahkan fungsi lain membaca dan mengubah data.
     </p>
@@ -52,8 +52,8 @@ for buku in daftar_buku:
     <p>
       <code>daftar_buku</code> adalah variabel global karena dibuat di tingkat
       utama program, bukan di dalam fungsi. Semua fungsi dapat membacanya.
-      Fungsi juga dapat menambah, mengubah, atau menghapus isi list tanpa
-      menulis <code>global</code>, asalkan yang diubah adalah isi list, bukan
+      Fungsi juga dapat menambah, mengubah, atau menghapus isi <em>list</em> tanpa
+      menulis <code>global</code>, asalkan yang diubah adalah isi <em>list</em>, bukan
       nama variabelnya.
     </p>
     <pre><code class="language-python">daftar_buku = []
@@ -65,7 +65,7 @@ tambah_cepat("Belajar Python")
 print(daftar_buku)</code></pre>
     <p>
       Namun, jika kita menulis <code>daftar_buku = []</code> di dalam fungsi,
-      Python membuat variabel lokal baru, bukan mengosongkan list global. Untuk
+      Python membuat variabel lokal baru, bukan mengosongkan <em>list</em> global. Untuk
       proyek ini, kita hanya memakai <code>append()</code>, <code>pop()</code>,
       dan penggantian isi indeks sehingga <code>global</code> tidak diperlukan.
     </p>
@@ -147,8 +147,8 @@ def show_data():
 show_data()</code></pre>
     <p>
       Tanda <code>|</code> dipakai sebagai pemisah agar kolom mudah dibaca.
-      F-string memudahkan penggabungan teks dan nilai variabel. Perhatikan
-      bahwa kunci dictionary ditulis dengan tanda kutip di dalam f-string,
+      <em>F-string</em> memudahkan penggabungan teks dan nilai variabel. Perhatikan
+      bahwa kunci <em>dictionary</em> ditulis dengan tanda kutip di dalam <em>f-string</em>,
       misalnya <code>{buku['judul']}</code>.
     </p>
 
@@ -182,17 +182,17 @@ show_data()</code></pre>
     <h2 id="judul-8-3">8.3 Menambah Buku dengan insert_data()</h2>
     <p>
       Fungsi <code>insert_data()</code> meminta empat data, lalu menambahkan
-      dictionary baru ke <code>daftar_buku</code> dengan <code>append()</code>.
+      <em>dictionary</em> baru ke <code>daftar_buku</code> dengan <code>append()</code>.
       Data tahun dan stok perlu diubah menjadi bilangan bulat memakai
       <code>int()</code>.
     </p>
 
-    <h3>Input interaktif di browser</h3>
+    <h3><em>Input</em> interaktif di <em>browser</em></h3>
     <p>
       Di Python biasa, program interaktif memakai <code>input()</code>.
-      PYLearn menjalankan Python di browser dengan konsol interaktif: ketika
+      PYLearn menjalankan Python di <em>browser</em> dengan konsol interaktif: ketika
       program mencapai <code>input()</code>, program berhenti dan menampilkan
-      kotak jawaban di bawah panel Output. Setelah kamu mengetik jawaban dan
+      kotak jawaban di bawah panel <em>Output</em>. Setelah kamu mengetik jawaban dan
       menekan Enter, program melanjutkan memakai jawaban itu.
     </p>
     <p>
@@ -231,17 +231,17 @@ print(daftar_buku)</code></pre>
     <p>
       <code>try-except ValueError</code> menangani kesalahan ketika pengguna
       mengetik teks pada tahun atau stok. Tanpa penanganan, program berhenti
-      dengan pesan error. Dengan penanganan, program memberi pesan dan kembali
+      dengan pesan <em>error</em>. Dengan penanganan, program memberi pesan dan kembali
       ke menu.
     </p>
 
     <h3>Mencoba dengan data sendiri</h3>
     <p>
-      Setelah menekan <strong>Jalankan</strong>, jawab setiap prompt. Data yang
+      Setelah menekan <strong>Jalankan</strong>, jawab setiap <em>prompt</em>. Data yang
       kamu ketik tersimpan di <code>daftar_buku</code> selama sesi berjalan.
       Tekan <strong>Stop</strong> bila ingin mengubah kode, lalu jalankan lagi
       dari awal. Jangan lupa mengubah tahun dan stok dengan <code>int()</code>
-      karena <code>input()</code> selalu menghasilkan string.
+      karena <code>input()</code> selalu menghasilkan <em>string</em>.
     </p>
   </section>
 
@@ -250,14 +250,14 @@ print(daftar_buku)</code></pre>
     <p>
       Fungsi <code>edit_data()</code> menampilkan daftar lebih dulu agar
       pengguna mengetahui nomor buku yang akan diubah. Setelah nomor dimasukkan,
-      fungsi meminta data baru dan mengganti dictionary pada indeks yang sesuai.
+      fungsi meminta data baru dan mengganti <em>dictionary</em> pada indeks yang sesuai.
     </p>
 
-    <h3>Nomor tampilan dan indeks list</h3>
+    <h3>Nomor tampilan dan indeks <em>list</em></h3>
     <p>
       Nomor yang dilihat pengguna dimulai dari 1, sedangkan indeks
       <code>list</code> dimulai dari 0. Jika pengguna memilih buku nomor 1,
-      dictionary yang diubah berada pada indeks <code>0</code>. Karena itu,
+      <em>dictionary</em> yang diubah berada pada indeks <code>0</code>. Karena itu,
       program memakai <code>daftar_buku[nomor - 1]</code>.
     </p>
     <pre><code class="language-python">daftar_buku = [
@@ -312,10 +312,10 @@ print(daftar_buku)</code></pre>
 
     <h3>Mengubah satu bidang saja</h3>
     <p>
-      Kode di atas mengganti seluruh dictionary agar sederhana. Jika hanya ingin
+      Kode di atas mengganti seluruh <em>dictionary</em> agar sederhana. Jika hanya ingin
       mengubah stok, kita bisa menulis
       <code>daftar_buku[nomor - 1]["stok"] = stok_baru</code>. Kedua cara sama
-      valid asalkan kunci dictionary tetap lengkap dan konsisten.
+      valid asalkan kunci <em>dictionary</em> tetap lengkap dan konsisten.
     </p>
   </section>
 
@@ -387,7 +387,7 @@ print(daftar_buku)</code></pre>
   </section>
 
   <section id="subbab-8-6" aria-labelledby="judul-8-6">
-    <h2 id="judul-8-6">8.6 Menu, Main Loop, dan if __name__ == "__main__"</h2>
+    <h2 id="judul-8-6">8.6 Menu, <em>Main Loop</em>, dan if __name__ == "__main__"</h2>
     <p>
       Menu membuat program dapat dipakai berulang kali tanpa menjalankannya
       ulang dari awal. Fungsi <code>show_menu()</code> menampilkan pilihan,
@@ -451,7 +451,7 @@ if __name__ == "__main__":
       Perhatikan fungsi <code>exit()</code> mengembalikan <code>False</code>.
       Di dalam <code>main()</code>, nilai itu dipakai untuk memutuskan
       <code>break</code>. Di Python, <code>exit</code> sebenarnya juga nama
-      fungsi bawaan untuk keluar dari interpreter. Menimpa nama tersebut bisa
+      fungsi bawaan untuk keluar dari <em>interpreter</em>. Menimpa nama tersebut bisa
       membingungkan. Pada program nyata, nama <code>keluar()</code> lebih aman.
       Kita tetap memakai <code>exit()</code> di modul ini agar sesuai dengan
       rancangan proyek.
@@ -481,7 +481,7 @@ if __name__ == "__main__":
       dilewati.
     </p>
     <p>
-      Pyodide menjalankan kode di namespace khusus dengan nilai
+      Pyodide menjalankan kode di <em>namespace</em> khusus dengan nilai
       <code>__name__</code> sama dengan <code>"builtins"</code>. Karena itu,
       contoh di modul ini menambahkan pemeriksaan
       <code>__name__ == "builtins"</code> untuk menyamakan perilaku dengan
@@ -494,7 +494,7 @@ if __name__ == "__main__":
     <h2 id="judul-8-7">8.7 Pengujian dan Perbaikan</h2>
     <p>
       Program yang selesai ditulis belum tentu benar. Kita perlu menguji setiap
-      fitur dengan urutan yang tetap, lalu membandingkan output dengan
+      fitur dengan urutan yang tetap, lalu membandingkan <em>output</em> dengan
       rancangan. Untuk Pustaka Mini, gunakan skenario berikut.
     </p>
 
@@ -576,7 +576,7 @@ if __name__ == "__main__":
     <p>
       Kode berikut adalah versi lengkap dari seluruh fungsi yang sudah dibahas.
       Salin ke editor atau bandingkan dengan pekerjaanmu. Jalankan kode ini lalu
-      jawab setiap prompt untuk memainkan Pustaka Mini.
+      jawab setiap <em>prompt</em> untuk memainkan Pustaka Mini.
     </p>
     <pre><code class="language-python"># Pyodide menjalankan kode dengan __name__ = "builtins".
 # Baris berikut menyamakannya dengan Python biasa.
@@ -736,12 +736,12 @@ if __name__ == "__main__":
       <tbody>
         <tr>
           <td>Data tidak muncul setelah ditambah</td>
-          <td>Dictionary baru tidak dimasukkan ke <code>daftar_buku</code>.</td>
+          <td><em>Dictionary</em> baru tidak dimasukkan ke <code>daftar_buku</code>.</td>
           <td>Pastikan memakai <code>append()</code>.</td>
         </tr>
         <tr>
           <td>Buku yang diubah salah</td>
-          <td>Indeks list tidak dikurangi satu.</td>
+          <td>Indeks <em>list</em> tidak dikurangi satu.</td>
           <td>Gunakan <code>daftar_buku[nomor - 1]</code>.</td>
         </tr>
         <tr>
@@ -768,7 +768,7 @@ if __name__ == "__main__":
       <li>Buku baru masuk ke daftar dan langsung terlihat pada menu 1.</li>
       <li>Perubahan hanya mengenai buku yang dipilih.</li>
       <li>Penghapusan hanya berjalan setelah konfirmasi <code>y</code>.</li>
-      <li>Menu 5 keluar dari program tanpa error.</li>
+      <li>Menu 5 keluar dari program tanpa <em>error</em>.</li>
       <li>Pilihan selain 1–5 menampilkan pesan dan tidak menghentikan program.</li>
       <li>Tahun dan stok tersimpan sebagai bilangan bulat.</li>
       <li>Tidak ada data yang hilang saat program masih berjalan.</li>
@@ -777,7 +777,7 @@ if __name__ == "__main__":
       Setelah seluruh checklist terpenuhi, mainkan aplikasi lewat tombol
       <strong>Jalankan &amp; Mainkan</strong>. Jika aplikasi sudah berjalan
       sesuai keinginanmu, tekan <strong>Periksa Output</strong> untuk
-      memverifikasi skenario uji. Setelah output sesuai, kamu dapat membuka
+      memverifikasi skenario uji. Setelah <em>output</em> sesuai, kamu dapat membuka
       halaman penutup dan menyelesaikan seluruh rangkaian modul PYLearn.
     </p>
   </section>

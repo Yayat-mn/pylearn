@@ -51,7 +51,7 @@ print(type(nilai))  # tipe str</code></pre>
         tanda baca lain tidak diperbolehkan.
       </li>
       <li>
-        Python bersifat <strong>case-sensitive</strong>, sehingga
+        Python bersifat <strong><em>case-sensitive</em></strong>, sehingga
         <code>nama</code> dan <code>Nama</code> adalah dua variabel yang
         berbeda.
       </li>
@@ -98,12 +98,12 @@ del umur
     <p>
       Python memiliki beberapa tipe data angka. Pada tahap awal, kita perlu
       mengenal dua tipe yang paling sering digunakan, yaitu
-      <strong>integer</strong> dan <strong>float</strong>.
+      <strong><em>integer</em></strong> dan <strong><em>float</em></strong>.
     </p>
 
-    <h3>Integer (int)</h3>
+    <h3><em>Integer</em> (int)</h3>
     <p>
-      Integer adalah bilangan bulat, baik positif, negatif, maupun nol.
+      <em>Integer</em> adalah bilangan bulat, baik positif, negatif, maupun nol.
       Contohnya <code>10</code>, <code>-5</code>, dan <code>0</code>.
     </p>
     <pre><code class="language-python">jumlah = 10
@@ -112,12 +112,12 @@ print(jumlah)
 print(suhu)
 print(type(jumlah))  # int</code></pre>
 
-    <h3>Float</h3>
+    <h3><em>Float</em></h3>
     <p>
-      Float adalah bilangan yang memiliki bagian desimal. Contohnya
+      <em>Float</em> adalah bilangan yang memiliki bagian desimal. Contohnya
       <code>3.14</code>, <code>-0.5</code>, dan <code>160.0</code>. Perhatikan
-      bahwa <code>10</code> bertipe integer, sedangkan <code>10.0</code>
-      bertipe float.
+      bahwa <code>10</code> bertipe <em>integer</em>, sedangkan <code>10.0</code>
+      bertipe <em>float</em>.
     </p>
     <pre><code class="language-python">berat = 62.5
 rasio = -0.25
@@ -128,7 +128,7 @@ print(type(berat))  # float</code></pre>
     <p>
       Bilangan yang sangat besar atau sangat kecil dapat ditulis dengan notasi
       eksponen. Huruf <code>e</code> berarti &ldquo;kali sepuluh pangkat&rdquo;.
-      Hasil dari notasi eksponen bertipe float.
+      Hasil dari notasi eksponen bertipe <em>float</em>.
     </p>
     <pre><code class="language-python">print(1.5e3)   # 1500.0
 print(2e-3)    # 0.002
@@ -167,16 +167,16 @@ print(type(tinggi))  # float</code></pre>
     <pre><code class="language-python">x = y = 100
 print(x, y)</code></pre>
     <p>
-      Jika jumlah nilai tidak sesuai, Python akan menampilkan error. Contohnya
+      Jika jumlah nilai tidak sesuai, Python akan menampilkan <em>error</em>. Contohnya
       <code>a, b = 1, 2, 3</code> memiliki tiga nilai untuk dua variabel.
     </p>
   </section>
 
   <section id="subbab-2-3" aria-labelledby="judul-2-3">
-    <h2 id="judul-2-3">2.3 Tipe Data String</h2>
+    <h2 id="judul-2-3">2.3 Tipe Data <em>String</em></h2>
     <p>
-      String adalah tipe data untuk menyimpan teks, termasuk huruf, angka yang
-      ditulis sebagai teks, spasi, dan simbol. String ditulis dengan tanda
+      <em>String</em> adalah tipe data untuk menyimpan teks, termasuk huruf, angka yang
+      ditulis sebagai teks, spasi, dan simbol. <em>String</em> ditulis dengan tanda
       petik satu (<code>'...'</code>) atau tanda petik ganda
       (<code>"..."</code>).
     </p>
@@ -193,9 +193,9 @@ print(kalimat)</code></pre>
       (<code>\</code>).
     </p>
 
-    <h3>String multibaris</h3>
+    <h3><em>String</em> multibaris</h3>
     <p>
-      String yang terdiri dari beberapa baris dapat dibuat dengan tiga tanda
+      <em>String</em> yang terdiri dari beberapa baris dapat dibuat dengan tiga tanda
       petik, baik tiga tanda petik ganda maupun tiga tanda petik tunggal.
     </p>
     <pre><code class="language-python">paragraf = """Python adalah bahasa pemrograman.
@@ -204,10 +204,10 @@ Python banyak digunakan untuk analisis data."""
 
 print(paragraf)</code></pre>
 
-    <h3>Penggabungan string</h3>
+    <h3>Penggabungan <em>string</em></h3>
     <p>
-      Dua string atau lebih dapat digabungkan dengan operator <code>+</code>.
-      Jika ingin ada spasi, tambahkan string berisi spasi di antara keduanya.
+      Dua <em>string</em> atau lebih dapat digabungkan dengan operator <code>+</code>.
+      Jika ingin ada spasi, tambahkan <em>string</em> berisi spasi di antara keduanya.
     </p>
     <pre><code class="language-python">nama_depan = "Rani"
 nama_belakang = "Putri"
@@ -215,9 +215,9 @@ nama_belakang = "Putri"
 nama_lengkap = nama_depan + " " + nama_belakang
 print(nama_lengkap)  # Rani Putri</code></pre>
 
-    <h3>Indeks string</h3>
+    <h3>Indeks <em>string</em></h3>
     <p>
-      Setiap karakter dalam string memiliki posisi yang disebut indeks. Indeks
+      Setiap karakter dalam <em>string</em> memiliki posisi yang disebut indeks. Indeks
       dimulai dari <code>0</code>. Indeks negatif digunakan untuk menghitung
       dari belakang, dengan <code>-1</code> sebagai karakter terakhir.
     </p>
@@ -232,12 +232,12 @@ print(teks[-1])  # n</code></pre>
       <code>h=3</code>, <code>o=4</code>, dan <code>n=5</code>.
     </p>
 
-    <h3>Pemotongan string</h3>
+    <h3>Pemotongan <em>string</em></h3>
     <p>
-      Pemotongan atau <em>slicing</em> mengambil sebagian string dengan pola
+      Pemotongan atau <em>slicing</em> mengambil sebagian <em>string</em> dengan pola
       <code>[mulai:selesai]</code>. Karakter pada posisi
       <code>selesai</code> tidak ikut diambil. Jika salah satu bagian
-      dikosongkan, Python memakai awal atau akhir string.
+      dikosongkan, Python memakai awal atau akhir <em>string</em>.
     </p>
     <pre><code class="language-python">teks = "Python"
 
@@ -246,16 +246,16 @@ print(teks[:3])   # Pyt
 print(teks[3:])   # hon
 print(teks[-3:])  # hon</code></pre>
     <p>
-      Pemotongan menghasilkan string baru dan tidak mengubah string asli.
+      Pemotongan menghasilkan <em>string</em> baru dan tidak mengubah <em>string</em> asli.
     </p>
   </section>
 
   <section id="subbab-2-4" aria-labelledby="judul-2-4">
-    <h2 id="judul-2-4">2.4 Tipe Data Boolean</h2>
+    <h2 id="judul-2-4">2.4 Tipe Data <em>Boolean</em></h2>
     <p>
-      Boolean adalah tipe data yang hanya memiliki dua nilai, yaitu
+      <em>Boolean</em> adalah tipe data yang hanya memiliki dua nilai, yaitu
       <strong>True</strong> dan <strong>False</strong>. Penulisannya harus
-      diawali huruf kapital. Boolean banyak digunakan untuk menyatakan status
+      diawali huruf kapital. <em>Boolean</em> banyak digunakan untuk menyatakan status
       atau kondisi, misalnya apakah program aktif atau apakah syarat sudah
       terpenuhi.
     </p>
@@ -267,15 +267,15 @@ print(lulus)
 print(type(aktif))  # bool</code></pre>
     <p>
       Menuliskan <code>true</code> atau <code>false</code> dengan huruf kecil
-      seluruhnya tidak dikenali sebagai nilai boolean Python. Gunakan
+      seluruhnya tidak dikenali sebagai nilai <em>boolean</em> Python. Gunakan
       <code>True</code> dan <code>False</code>.
     </p>
 
     <h3>Nilai yang dianggap benar atau salah</h3>
     <p>
-      Saat diubah menjadi boolean, beberapa nilai memiliki arti khusus.
-      Angka <code>0</code> dan string kosong <code>""</code> dianggap
-      <strong>False</strong>, sedangkan angka selain nol dan string yang
+      Saat diubah menjadi <em>boolean</em>, beberapa nilai memiliki arti khusus.
+      Angka <code>0</code> dan <em>string</em> kosong <code>""</code> dianggap
+      <strong>False</strong>, sedangkan angka selain nol dan <em>string</em> yang
       berisi teks dianggap <strong>True</strong>.
     </p>
     <pre><code class="language-python">print(bool(0))       # False
@@ -284,8 +284,8 @@ print(bool(""))      # False
 print(bool("0"))     # True
 print(bool("Python"))  # True</code></pre>
     <p>
-      Perhatikan bahwa <code>"0"</code> adalah string yang berisi satu
-      karakter, bukan angka nol. Karena string tersebut tidak kosong, nilainya
+      Perhatikan bahwa <code>"0"</code> adalah <em>string</em> yang berisi satu
+      karakter, bukan angka nol. Karena <em>string</em> tersebut tidak kosong, nilainya
       dianggap <strong>True</strong>.
     </p>
   </section>
@@ -300,9 +300,9 @@ print(bool("Python"))  # True</code></pre>
 
     <h3>int()</h3>
     <p>
-      Fungsi <code>int()</code> mengubah nilai menjadi integer. Jika nilai
-      berupa float, bagian desimalnya dipotong. Jika nilai berupa string, isi
-      string harus berupa bilangan bulat yang valid.
+      Fungsi <code>int()</code> mengubah nilai menjadi <em>integer</em>. Jika nilai
+      berupa <em>float</em>, bagian desimalnya dipotong. Jika nilai berupa <em>string</em>, isi
+      <em>string</em> harus berupa bilangan bulat yang valid.
     </p>
     <pre><code class="language-python">print(int("25"))   # 25
 print(int(3.9))    # 3
@@ -312,15 +312,15 @@ print(int(-2.8))   # -2
 
     <h3>float()</h3>
     <p>
-      Fungsi <code>float()</code> mengubah nilai menjadi float. Fungsi ini
-      dapat menerima angka atau string yang berisi bilangan desimal.
+      Fungsi <code>float()</code> mengubah nilai menjadi <em>float</em>. Fungsi ini
+      dapat menerima angka atau <em>string</em> yang berisi bilangan desimal.
     </p>
     <pre><code class="language-python">print(float("3.14"))  # 3.14
 print(float(10))      # 10.0</code></pre>
 
     <h3>str()</h3>
     <p>
-      Fungsi <code>str()</code> mengubah nilai menjadi string. Fungsi ini
+      Fungsi <code>str()</code> mengubah nilai menjadi <em>string</em>. Fungsi ini
       sering dipakai saat kita ingin menggabungkan angka dengan teks memakai
       operator <code>+</code>.
     </p>
@@ -332,8 +332,8 @@ print(str(3.14))  # "3.14"</code></pre>
 
     <h3>bool()</h3>
     <p>
-      Fungsi <code>bool()</code> mengubah nilai menjadi boolean. Angka nol dan
-      string kosong menjadi <code>False</code>; nilai lain umumnya menjadi
+      Fungsi <code>bool()</code> mengubah nilai menjadi <em>boolean</em>. Angka nol dan
+      <em>string</em> kosong menjadi <code>False</code>; nilai lain umumnya menjadi
       <code>True</code>.
     </p>
     <pre><code class="language-python">print(bool(0))     # False
@@ -352,8 +352,8 @@ print(chr(97))  # a</code></pre>
 
     <h3>bin(), hex(), dan oct()</h3>
     <p>
-      Fungsi-fungsi ini mengubah bilangan bulat menjadi string representasi
-      biner, heksadesimal, dan oktal. Hasilnya berupa string yang diawali
+      Fungsi-fungsi ini mengubah bilangan bulat menjadi <em>string</em> representasi
+      biner, heksadesimal, dan oktal. Hasilnya berupa <em>string</em> yang diawali
       <code>0b</code> untuk biner, <code>0x</code> untuk heksadesimal, dan
       <code>0o</code> untuk oktal.
     </p>
@@ -363,7 +363,7 @@ print(oct(8))    # 0o10</code></pre>
     <p>
       Jika konversi tidak dapat dilakukan, Python dapat menampilkan
       <strong>ValueError</strong>, misalnya pada <code>int("abc")</code>.
-      Pastikan isi string sesuai dengan tipe tujuan.
+      Pastikan isi <em>string</em> sesuai dengan tipe tujuan.
     </p>
 
     <h3>Konversi tidak mengubah variabel asli</h3>
@@ -403,7 +403,7 @@ print("Aktif:", aktif)</code></pre>
       </li>
       <li>
         Nama variabel harus diawali huruf atau garis bawah, tidak boleh
-        mengandung spasi, bersifat case-sensitive, dan tidak boleh memakai kata
+        mengandung spasi, bersifat <em>case-sensitive</em>, dan tidak boleh memakai kata
         kunci Python.
       </li>
       <li>
@@ -413,16 +413,16 @@ print("Aktif:", aktif)</code></pre>
       <li>
         Tipe number yang umum adalah <code>int</code> untuk bilangan bulat dan
         <code>float</code> untuk bilangan desimal. Notasi eksponen seperti
-        <code>1.5e3</code> menghasilkan float.
+        <code>1.5e3</code> menghasilkan <em>float</em>.
       </li>
       <li>
-        String ditulis dengan tanda petik, dapat berupa string multibaris,
+        <em>String</em> ditulis dengan tanda petik, dapat berupa <em>string</em> multibaris,
         dapat digabungkan dengan <code>+</code>, serta dapat diakses dengan
         indeks dan pemotongan.
       </li>
       <li>
-        Boolean hanya bernilai <code>True</code> atau <code>False</code>.
-        Angka nol dan string kosong dianggap <code>False</code>.
+        <em>Boolean</em> hanya bernilai <code>True</code> atau <code>False</code>.
+        Angka nol dan <em>string</em> kosong dianggap <code>False</code>.
       </li>
       <li>
         Fungsi konversi meliputi <code>int()</code>, <code>float()</code>,

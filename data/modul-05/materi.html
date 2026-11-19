@@ -1,6 +1,6 @@
 <article class="materi-python">
   <section id="subbab-5-1" aria-labelledby="judul-5-1">
-    <h2 id="judul-5-1">5.1 Konsep Perulangan dan Counted vs Uncounted Loop</h2>
+    <h2 id="judul-5-1">5.1 Konsep Perulangan dan <em>Counted</em> vs <em>Uncounted Loop</em></h2>
     <p>
       Perulangan atau <em>looping</em> adalah cara menjalankan blok perintah
       secara berulang. Dengan perulangan, kita tidak perlu menulis perintah yang
@@ -22,26 +22,26 @@ print("Halo")</code></pre>
       membuat kode lebih singkat dan lebih mudah diubah.
     </p>
 
-    <h3>Counted loop dan uncounted loop</h3>
+    <h3><em>Counted loop</em> dan <em>uncounted loop</em></h3>
     <p>
       Python memiliki dua bentuk perulangan yang umum digunakan, yaitu
       <code>for</code> dan <code>while</code>.
     </p>
     <ul>
       <li>
-        <strong>Counted loop</strong> adalah perulangan yang jumlah iterasinya
+        <strong><em>Counted loop</em></strong> adalah perulangan yang jumlah iterasinya
         dapat diketahui sejak awal. Di Python, bentuk ini biasanya menggunakan
         <code>for</code>, misalnya <code>for i in range(5)</code>.
       </li>
       <li>
-        <strong>Uncounted loop</strong> adalah perulangan yang berhenti
+        <strong><em>Uncounted loop</em></strong> adalah perulangan yang berhenti
         berdasarkan kondisi, sehingga jumlah iterasinya belum tentu diketahui
         sejak awal. Bentuk ini menggunakan <code>while</code>.
       </li>
     </ul>
     <p>
       Perulangan <code>for</code> cocok untuk mengulang sejumlah data atau
-      menelusuri isi list. Perulangan <code>while</code> cocok ketika program
+      menelusuri isi <em>list</em>. Perulangan <code>while</code> cocok ketika program
       harus terus berjalan sampai suatu kondisi tidak lagi terpenuhi.
     </p>
     <p>
@@ -78,18 +78,18 @@ print("Halo")</code></pre>
       Karena itu, <code>range(1, 6)</code> berhenti sebelum angka 6.
     </p>
 
-    <h3>Mengubah angka menjadi string pada output</h3>
+    <h3>Mengubah angka menjadi <em>string</em> pada <em>output</em></h3>
     <p>
-      Operator <code>+</code> dapat menyambung dua string, tetapi tidak dapat
-      menyambung string dengan angka. Jika ingin menggabungkan teks dan angka,
-      ubah angka menjadi string dengan <code>str()</code>.
+      Operator <code>+</code> dapat menyambung dua <em>string</em>, tetapi tidak dapat
+      menyambung <em>string</em> dengan angka. Jika ingin menggabungkan teks dan angka,
+      ubah angka menjadi <em>string</em> dengan <code>str()</code>.
     </p>
     <pre><code class="language-python">for i in range(1, 4):
     print("Putaran ke-" + str(i))</code></pre>
     <p>
       Fungsi <code>str(i)</code> mengubah nilai angka pada variabel
-      <code>i</code> menjadi string. Tanpa <code>str()</code>, Python akan
-      menampilkan <strong>TypeError</strong> karena string dan integer tidak
+      <code>i</code> menjadi <em>string</em>. Tanpa <code>str()</code>, Python akan
+      menampilkan <strong>TypeError</strong> karena <em>string</em> dan <em>integer</em> tidak
       dapat digabung dengan operator <code>+</code>.
     </p>
 
@@ -117,16 +117,16 @@ for i in range(jumlah):
     <p>
       Kode tersebut menampilkan <code>Data ke-1</code> sampai
       <code>Data ke-4</code>. Perulangan <code>for</code> dengan
-      <code>range()</code> termasuk counted loop karena jumlah iterasinya sudah
+      <code>range()</code> termasuk <em>counted loop</em> karena jumlah iterasinya sudah
       ditentukan.
     </p>
   </section>
 
   <section id="subbab-5-3" aria-labelledby="judul-5-3">
-    <h2 id="judul-5-3">5.3 Perulangan for pada List</h2>
+    <h2 id="judul-5-3">5.3 Perulangan for pada <em>List</em></h2>
     <p>
       Selain dengan <code>range()</code>, perulangan <code>for</code> dapat
-      digunakan untuk menelusuri setiap elemen dalam list. List adalah kumpulan
+      digunakan untuk menelusuri setiap elemen dalam <em>list</em>. <em>List</em> adalah kumpulan
       nilai yang ditulis di antara tanda kurung siku.
     </p>
     <pre><code class="language-python">buah = ["apel", "jeruk", "mangga"]
@@ -135,21 +135,21 @@ for item in buah:
     print(item)</code></pre>
     <p>
       Pada setiap iterasi, variabel <code>item</code> berisi satu elemen dari
-      list. Program menampilkan <code>apel</code>, lalu <code>jeruk</code>, lalu
+      <em>list</em>. Program menampilkan <code>apel</code>, lalu <code>jeruk</code>, lalu
       <code>mangga</code>. Perulangan berhenti otomatis setelah semua elemen
       selesai diproses.
     </p>
     <p>
       Nama variabel setelah <code>for</code> boleh berbeda, misalnya
       <code>buah_terpilih</code>. Yang penting, variabel tersebut menerima nilai
-      setiap elemen list.
+      setiap elemen <em>list</em>.
     </p>
     <pre><code class="language-python">buah = ["apel", "jeruk", "mangga"]
 
 for buah_terpilih in buah:
     print("Buah: " + buah_terpilih)</code></pre>
     <p>
-      Perulangan juga dapat digunakan untuk mengolah angka pada list. Contoh
+      Perulangan juga dapat digunakan untuk mengolah angka pada <em>list</em>. Contoh
       berikut menjumlahkan seluruh harga.
     </p>
     <pre><code class="language-python">harga = [10000, 25000, 15000]
@@ -189,7 +189,7 @@ while hitung &lt;= 5:
     <p>
       Jika variabel penghitung tidak diperbarui, kondisi dapat terus bernilai
       <code>True</code> dan perulangan tidak pernah berhenti. Perulangan seperti
-      itu disebut <strong>infinite loop</strong>. Di PYLearn, program yang
+      itu disebut <strong><em>infinite loop</em></strong>. Di PYLearn, program yang
       berjalan lebih dari 5 detik akan dihentikan otomatis, dan kamu juga dapat
       menekan tombol <strong>Stop</strong>.
     </p>
@@ -268,7 +268,7 @@ while True:
       perulangan.
     </p>
 
-    <h3>Mencari data dalam list</h3>
+    <h3>Mencari data dalam <em>list</em></h3>
     <pre><code class="language-python">buah = ["apel", "jeruk", "mangga"]
 dicari = "jeruk"
 
@@ -279,7 +279,7 @@ for item in buah:
 
 print("Pencarian selesai")</code></pre>
     <p>
-      Program memeriksa list satu per satu. Ketika menemukan
+      Program memeriksa <em>list</em> satu per satu. Ketika menemukan
       <code>jeruk</code>, program menampilkan hasil lalu menghentikan
       perulangan. Perintah <code>print("Pencarian selesai")</code> tetap
       dijalankan karena berada di luar perulangan.
@@ -313,20 +313,20 @@ print("Total:", total)</code></pre>
         Python memiliki <code>for</code> dan <code>while</code>.
       </li>
       <li>
-        <code>for</code> adalah counted loop karena jumlah iterasinya dapat
+        <code>for</code> adalah <em>counted loop</em> karena jumlah iterasinya dapat
         diketahui, misalnya melalui <code>range()</code> atau jumlah elemen
-        list.
+        <em>list</em>.
       </li>
       <li>
         <code>range(5)</code> menghasilkan 0 sampai 4, sedangkan
         <code>range(1, 6)</code> menghasilkan 1 sampai 5.
       </li>
       <li>
-        <code>str()</code> digunakan untuk mengubah angka menjadi string ketika
+        <code>str()</code> digunakan untuk mengubah angka menjadi <em>string</em> ketika
         angka akan digabung dengan teks.
       </li>
       <li>
-        <code>while</code> adalah uncounted loop yang berjalan selama kondisinya
+        <code>while</code> adalah <em>uncounted loop</em> yang berjalan selama kondisinya
         bernilai <code>True</code>. Variabel pada kondisi harus diperbarui agar
         perulangan berhenti.
       </li>
