@@ -69,7 +69,7 @@
 
 .tombol--kecil {
   padding: 8px 14px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .tombol--nonaktif {
@@ -99,7 +99,7 @@
   border-radius: var(--radius-pil);
   background: var(--warna-latar-lembut);
   color: var(--warna-teks-redup);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.4;
   white-space: nowrap;
@@ -347,7 +347,7 @@
   align-items: center;
   gap: var(--jarak-4);
   min-height: 64px;
-  padding: 0 var(--jarak-6);
+  padding: 0 var(--pad-konten);
   border-bottom: 1px solid var(--warna-garis-lembut);
   background: var(--warna-latar);
 }
@@ -395,7 +395,7 @@
   width: 100%;
   max-width: var(--lebar-konten);
   margin: 0 auto;
-  padding: var(--jarak-6);
+  padding: var(--pad-konten);
 }
 
 /* ============================================================
@@ -445,7 +445,7 @@
   margin-top: var(--jarak-2);
   max-width: 58ch;
   color: var(--warna-teks-redup);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .banner__aksi {
@@ -510,8 +510,8 @@
 .kartu-ringkasan__ikon {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   margin-bottom: var(--jarak-2);
   border-radius: var(--radius-kecil);
   background: var(--warna-utama-lembut);
@@ -519,21 +519,21 @@
 }
 
 .kartu-ringkasan__nilai {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 .kartu-ringkasan__label {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .kartu-ringkasan__teks {
   color: var(--warna-teks-redup);
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 /* ============================================================
@@ -560,14 +560,14 @@
 }
 
 .bagian-modul__judul {
-  font-size: 22px;
+  font-size: 24px;
   letter-spacing: -0.02em;
 }
 
 .bagian-modul__teks {
   margin-top: var(--jarak-1);
   color: var(--warna-teks-redup);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .bagian-modul__catatan {
@@ -578,7 +578,7 @@
   border-radius: var(--radius-kecil);
   background: var(--warna-latar-lembut);
   color: var(--warna-teks-redup);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .daftar-modul {
@@ -592,7 +592,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--jarak-5);
-  padding: 18px 20px;
+  padding: 20px 24px;
   border: 1px solid var(--warna-garis-lembut);
   border-radius: var(--radius-sedang);
   background: var(--warna-kartu);
@@ -620,14 +620,14 @@
 .kartu-modul__nomor {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   flex: 0 0 auto;
   border-radius: var(--radius-kecil);
   background: var(--warna-utama-lembut);
   color: var(--warna-utama-gelap);
   font-family: Consolas, "Cascadia Code", monospace;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
 }
 
@@ -645,7 +645,7 @@
   align-items: center;
   gap: var(--jarak-2);
   color: var(--warna-teks-samar);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -669,7 +669,7 @@
 
 .kartu-modul__judul {
   margin-top: 2px;
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: -0.01em;
 }
 
@@ -678,10 +678,10 @@
   margin-top: 2px;
   overflow: hidden;
   color: var(--warna-teks-redup);
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.5;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
 }
 
 .kartu-modul__kanan {
@@ -693,14 +693,14 @@
 
 .kartu-modul__subbab {
   color: var(--warna-teks-samar);
-  font-size: 12px;
+  font-size: 13px;
   white-space: nowrap;
 }
 
 .status-modul {
   padding: var(--jarak-5);
   color: var(--warna-teks-redup);
-  font-size: 14px;
+  font-size: 15px;
   text-align: center;
 }
 
@@ -721,7 +721,7 @@
   justify-content: space-between;
   gap: var(--jarak-3);
   margin-top: auto;
-  padding: var(--jarak-5) var(--jarak-6);
+  padding: var(--jarak-5) var(--pad-konten);
   border-top: 1px solid var(--warna-garis-lembut);
   color: var(--warna-teks-samar);
   font-size: 12px;
@@ -805,6 +805,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .kartu-modul__deskripsi {
+    -webkit-line-clamp: 3;
+  }
+
   .banner {
     flex-direction: column;
     align-items: stretch;
@@ -866,7 +870,7 @@
 
   .kartu-modul__kanan {
     justify-content: space-between;
-    margin-left: 60px;
+    margin-left: 64px;
   }
 
   .footer {

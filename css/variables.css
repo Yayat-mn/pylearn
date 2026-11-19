@@ -64,5 +64,9 @@
 
   /* Tata letak */
   --lebar-sidebar: 280px;
-  --lebar-konten: 1180px;
+  /* Konten memenuhi lebar layar agar tidak ada sisa ruang di kiri
+     dan kanan kartu; batas atas ditangani oleh padding tepi. */
+  --lebar-konten: 100%;
+  /* Jarak tepi konten yang menyesuaikan lebar layar. */
+  --pad-konten: clamp(20px, 2.5vw, 40px);
 }
