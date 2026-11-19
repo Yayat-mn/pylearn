@@ -119,6 +119,18 @@
       <div class="topbar__kanan">
         <span class="lencana lencana--biru">8 Modul</span>
         <span class="lencana">Python Dasar</span>
+        <button class="tombol tombol--garis tombol--kecil tombol-panduan"
+                id="tombol-panduan" type="button" aria-haspopup="dialog"
+                aria-controls="dialog-panduan">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <path d="M12 17h.01"></path>
+          </svg>
+          Panduan
+        </button>
       </div>
     </header>
 
@@ -272,6 +284,24 @@
 
   <!-- Tirai gelap saat drawer mobile terbuka. -->
   <div class="tirai" id="tirai" hidden></div>
+
+  <!-- Dialog panduan; isinya diisi js/features/panduan.js. -->
+  <dialog class="panduan" id="dialog-panduan"
+          aria-labelledby="judul-panduan">
+    <div class="panduan__kepala">
+      <div>
+        <p class="panduan__eyebrow">Bantuan</p>
+        <h2 class="panduan__judul" id="judul-panduan">Panduan penggunaan</h2>
+      </div>
+      <button class="panduan__tutup" type="button" data-tutup-panduan
+              aria-label="Tutup panduan">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="panduan__isi" data-wadah-panduan>
+      <p class="panduan__status">Memuat panduan…</p>
+    </div>
+  </dialog>
 
   <!-- Skrip halaman dimuat sebagai ES module. -->
   <script type="module" src="js/pages/dashboard.js"></script>

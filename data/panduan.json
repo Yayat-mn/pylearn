@@ -1,0 +1,110 @@
+{
+  "bab": [
+    {
+      "judul": "Mulai cepat",
+      "langkah": [
+        {
+          "judul": "Pilih modul",
+          "teks": "Pada dashboard, gulir ke Daftar Modul Belajar lalu klik Buka Modul. Materi disusun bertingkat dari Modul 1 sampai 8, jadi sebaiknya diikuti berurutan."
+        },
+        {
+          "judul": "Ikuti tiga tahap",
+          "teks": "Setiap modul berisi tahap Belajar, Latihan, dan Kuis. Ketiganya bisa dibuka kapan saja, tetapi urutan tersebut paling mudah diikuti."
+        },
+        {
+          "judul": "Tutup dengan mini project",
+          "teks": "Modul 8 berisi mini project Pustaka Mini yang memakai seluruh materi Modul 1 sampai 7."
+        }
+      ]
+    },
+    {
+      "judul": "Mengenal dashboard",
+      "langkah": [
+        {
+          "judul": "Kartu ringkasan",
+          "teks": "Empat kartu di bagian atas menampilkan jumlah modul, tahap belajar, mini project, dan capaian pembelajaran seluruh modul."
+        },
+        {
+          "judul": "Daftar modul",
+          "teks": "Setiap kartu memuat nomor, judul, deskripsi singkat, jumlah subbab, dan tombol Buka Modul."
+        },
+        {
+          "judul": "Navigasi samping",
+          "teks": "Menu Dashboard Modul, Daftar Modul, dan Mini Project memindahkan halaman ke bagian terkait. Di layar kecil, menu dibuka lewat tombol tiga garis di kiri atas."
+        }
+      ]
+    },
+    {
+      "judul": "Membaca materi",
+      "langkah": [
+        {
+          "judul": "Pilih subbab",
+          "teks": "Daftar subbab di sisi kanan memuat seluruh bagian modul dan menandai subbab yang sedang dibaca."
+        },
+        {
+          "judul": "Tab Teks dan Video",
+          "teks": "Tombol Teks dan Video mengganti bentuk sajian materi tanpa kehilangan subbab yang sedang dibuka."
+        },
+        {
+          "judul": "Kotak tujuan pembelajaran",
+          "teks": "Kotak Tujuan Pembelajaran menjelaskan kemampuan yang diharapkan setelah modul selesai."
+        }
+      ]
+    },
+    {
+      "judul": "Menjalankan kode",
+      "langkah": [
+        {
+          "judul": "Tulis kode di editor",
+          "teks": "Kode ditulis di editor yang memiliki penomoran baris. Contoh kode pada materi dapat disalin ke editor untuk dicoba."
+        },
+        {
+          "judul": "Klik Jalankan",
+          "teks": "Tombol Jalankan mengirim kode ke Python yang berjalan di dalam browser. Pemuatan pertama memerlukan koneksi internet dan beberapa detik."
+        },
+        {
+          "judul": "Baca panel Output",
+          "teks": "Hasil program tampil di panel Output. Bila program meminta masukan, kotak isian muncul dan program menunggu jawabanmu."
+        },
+        {
+          "judul": "Stop dan batas waktu",
+          "teks": "Tombol Stop menghentikan program yang sedang berjalan. Program yang berjalan lebih dari 5 detik dihentikan otomatis, misalnya perulangan while True: pass."
+        }
+      ]
+    },
+    {
+      "judul": "Latihan dan kuis",
+      "langkah": [
+        {
+          "judul": "Mengerjakan latihan",
+          "teks": "Tulis program sesuai instruksi, jalankan, lalu klik Periksa. Jawaban dinilai dengan membandingkan output programmu dengan output yang diharapkan."
+        },
+        {
+          "judul": "Mengerjakan kuis",
+          "teks": "Pilih satu jawaban pada setiap soal lalu klik Kumpulkan Jawaban. Nilai dihitung dari jumlah jawaban benar dan dibandingkan dengan batas lulus modul."
+        },
+        {
+          "judul": "Bila belum lulus",
+          "teks": "Pelajari kembali materi lalu klik Ulangi Modul untuk mengerjakan kuis sekali lagi."
+        }
+      ]
+    },
+    {
+      "judul": "Mini project dan penyelesaian",
+      "langkah": [
+        {
+          "judul": "Membangun Pustaka Mini",
+          "teks": "Modul 8 memandu membuat aplikasi data buku berbasis menu dengan fungsi, list of dictionary, dan operasi tambah, ubah, serta hapus."
+        },
+        {
+          "judul": "Menguji program",
+          "teks": "Jalankan program di editor, lalu pilih menu 1 sampai 5 lewat kotak masukan untuk mencoba setiap fitur."
+        },
+        {
+          "judul": "Halaman penutup",
+          "teks": "Setelah kuis modul terakhir lulus, tombol lanjut membuka halaman penyelesaian yang merangkum perjalanan belajarmu."
+        }
+      ]
+    }
+  ]
+}

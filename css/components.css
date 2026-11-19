@@ -860,7 +860,7 @@
   }
 
   .remah__kelas,
-  .topbar__kanan {
+  .topbar__kanan .lencana {
     display: none;
   }
 
@@ -2563,5 +2563,267 @@ body.halaman-keluar {
 
   .selesai-langkah {
     padding: var(--jarak-4);
+  }
+}
+
+/* ============================================================
+   PANDUAN PENGGUNA
+   ------------------------------------------------------------
+   Dialog bantuan yang dibuka dari topbar dashboard. Isinya
+   diisi js/features/panduan.js dari data/panduan.json.
+   ============================================================ */
+
+.panduan {
+  width: min(720px, calc(100vw - 32px));
+  max-height: min(84vh, 760px);
+  padding: 0;
+  border: 1px solid var(--warna-garis-lembut);
+  border-radius: var(--radius-besar);
+  background: var(--warna-kartu);
+  color: var(--warna-teks);
+  box-shadow: var(--bayangan-naik);
+}
+
+.panduan[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.panduan::backdrop {
+  background: var(--tirai);
+}
+
+.panduan__kepala {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--jarak-4);
+  padding: var(--jarak-5);
+  border-bottom: 1px solid var(--warna-garis-lembut);
+}
+
+.panduan__eyebrow {
+  color: var(--warna-utama);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.panduan__judul {
+  margin-top: var(--jarak-1);
+  font-size: 22px;
+}
+
+.panduan__tutup {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border: 1px solid var(--warna-garis);
+  border-radius: var(--radius-kecil);
+  background: var(--warna-kartu);
+  color: var(--warna-teks-redup);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.panduan__tutup:hover {
+  border-color: var(--warna-utama);
+  color: var(--warna-utama);
+}
+
+.panduan__isi {
+  overflow-y: auto;
+  padding: var(--jarak-2) var(--jarak-5) var(--jarak-5);
+}
+
+.panduan__status {
+  padding: var(--jarak-4) 0;
+  color: var(--warna-teks-redup);
+  font-size: 14px;
+}
+
+.panduan__status--gagal {
+  color: var(--warna-bahaya);
+}
+
+.panduan__bab {
+  border-bottom: 1px solid var(--warna-garis-lembut);
+}
+
+.panduan__bab:last-child {
+  border-bottom: 0;
+}
+
+.panduan__judul-bab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--jarak-3);
+  padding: var(--jarak-4) 0;
+  color: var(--warna-teks);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.panduan__judul-bab::-webkit-details-marker {
+  display: none;
+}
+
+.panduan__judul-bab::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-right: 2px solid var(--warna-teks-samar);
+  border-bottom: 2px solid var(--warna-teks-samar);
+  transform: rotate(45deg);
+  transition: transform 0.18s ease;
+}
+
+.panduan__bab[open] .panduan__judul-bab::after {
+  transform: rotate(225deg);
+}
+
+.panduan__langkah {
+  margin: 0 0 var(--jarak-4);
+  padding-left: 1.35rem;
+  color: var(--warna-teks-redup);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Pembungkus isi bab dipakai sebagai sasaran animasi buka-tutup. */
+.panduan__isi-bab {
+  overflow: hidden;
+}
+
+.panduan__langkah li {
+  margin-bottom: var(--jarak-3);
+  padding-left: var(--jarak-1);
+}
+
+.panduan__langkah li::marker {
+  color: var(--warna-utama);
+  font-weight: 600;
+}
+
+.panduan__langkah strong {
+  display: block;
+  color: var(--warna-teks);
+  font-weight: 600;
+}
+
+.panduan__langkah p {
+  margin-top: 2px;
+}
+
+@media (max-width: 640px) {
+  .panduan {
+    width: calc(100vw - 24px);
+    max-height: 88vh;
+    border-radius: var(--radius-sedang);
+  }
+
+  .panduan__kepala {
+    padding: var(--jarak-4);
+  }
+
+  .panduan__judul {
+    font-size: 19px;
+  }
+
+  .panduan__isi {
+    padding: var(--jarak-1) var(--jarak-4) var(--jarak-4);
+  }
+}
+
+/* ------------------------------------------------------------
+   Animasi panduan
+   ------------------------------------------------------------
+   Tombol memberi respons halus saat disentuh, dialog muncul
+   dengan lembut, dan isi bab dibuka-tutup oleh panduan.js
+   memakai Web Animations API.
+   ------------------------------------------------------------ */
+
+.tombol-panduan {
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.tombol-panduan svg {
+  transition: transform 0.18s ease;
+}
+
+.tombol-panduan:hover {
+  border-color: var(--warna-utama);
+  box-shadow: var(--bayangan-tombol);
+  transform: translateY(-1px);
+}
+
+.tombol-panduan:hover svg {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.tombol-panduan:active {
+  box-shadow: none;
+  transform: translateY(0) scale(0.98);
+}
+
+.tombol-panduan:focus-visible {
+  outline: 2px solid var(--warna-utama);
+  outline-offset: 2px;
+}
+
+@keyframes panduan-muncul {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes panduan-tirai {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.panduan[open] {
+  animation: panduan-muncul 0.22s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.panduan[open]::backdrop {
+  animation: panduan-tirai 0.22s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tombol-panduan,
+  .tombol-panduan svg {
+    transition: none;
+  }
+
+  .tombol-panduan:hover,
+  .tombol-panduan:active,
+  .tombol-panduan:hover svg {
+    transform: none;
+  }
+
+  .panduan[open],
+  .panduan[open]::backdrop {
+    animation: none;
   }
 }

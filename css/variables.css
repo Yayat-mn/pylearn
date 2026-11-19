@@ -51,6 +51,7 @@
     0 1px 2px rgba(24, 28, 32, 0.05),
     0 1px 3px rgba(24, 28, 32, 0.04);
   --bayangan-naik: 0 8px 24px rgba(0, 68, 147, 0.12);
+  --bayangan-tombol: 0 6px 16px rgba(0, 68, 147, 0.14);
   --tirai: rgba(24, 28, 32, 0.45);
 
   /* Jarak */

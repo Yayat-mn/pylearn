@@ -11,6 +11,7 @@
  */
 
 import { muatKatalog } from "../features/katalog.js";
+import { siapkanPanduan } from "../features/panduan.js";
 import { siapkanSidebar } from "../features/sidebar.js";
 import { siapkanTransisiHalaman } from "../features/transisi-halaman.js";
 
@@ -35,6 +36,10 @@ const bagianDaftarModul = document.getElementById("daftar-modul");
 
 siapkanSidebar({ sidebar, tombolMenu, tirai });
 siapkanTransisiHalaman();
+siapkanPanduan({
+  dialog: document.getElementById("dialog-panduan"),
+  tombolBuka: document.getElementById("tombol-panduan"),
+});
 
 // ------------------------------------------------------------
 // Kartu modul
