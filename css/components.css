@@ -492,7 +492,7 @@
 
 .ringkasan {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.6fr);
   gap: var(--jarak-4);
 }
 
@@ -534,6 +534,27 @@
   color: var(--warna-teks-redup);
   font-size: 14px;
   line-height: 1.55;
+}
+
+/* Kartu capaian pembelajaran: lebih lebar dan menjadi penekanan. */
+.kartu-ringkasan--capaian {
+  justify-content: flex-start;
+  gap: var(--jarak-2);
+  border-color: var(--warna-utama-lembut);
+  background: linear-gradient(160deg, var(--warna-utama-lembut), var(--warna-kartu) 72%);
+}
+
+.kartu-ringkasan--capaian .kartu-ringkasan__ikon {
+  background: var(--warna-utama);
+  color: var(--warna-putih);
+}
+
+.kartu-ringkasan--capaian .kartu-ringkasan__label {
+  color: var(--warna-utama-gelap);
+}
+
+.kartu-ringkasan--capaian .kartu-ringkasan__teks {
+  color: var(--warna-teks);
 }
 
 /* ============================================================
@@ -763,10 +784,17 @@
 /* ============================================================
    RESPONSIF DASAR
    ------------------------------------------------------------
+   1599px: kartu ringkasan disusun dua kolom.
    1024px: sidebar berubah menjadi drawer (dikendalikan sidebar.js).
    820px : grid dua kolom mulai ditumpuk.
    640px : tata letak satu kolom dan tombol melebar.
    ============================================================ */
+
+@media (max-width: 1599px) {
+  .ringkasan {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
 @media (max-width: 1024px) {
   .sidebar {
