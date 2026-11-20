@@ -7,6 +7,14 @@
   <title>Modul Selesai — PYLearn</title>
   <meta name="description"
         content="Halaman penutup PYLearn: ringkasan modul yang telah diselesaikan dan langkah belajar berikutnya.">
+  <meta name="theme-color" content="#005bbf">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="PYLearn">
+  <meta property="og:title" content="Modul Selesai — PYLearn">
+  <meta property="og:description"
+        content="Ringkasan modul yang telah diselesaikan dan langkah belajar berikutnya.">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
@@ -19,7 +27,10 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
-<body>
+<body id="atas">
+
+  <!-- Tautan lompat; hanya tampil saat fokus keyboard. -->
+  <a class="lewati-konten" href="#konten">Lewati ke konten utama</a>
 
   <!-- ==================== SIDEBAR ==================== -->
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
@@ -93,14 +104,6 @@
         Teruskan perjalanan belajarmu.
       </p>
     </div>
-
-    <div class="sidebar__kaki">
-      <span class="avatar" aria-hidden="true">K4</span>
-      <div class="sidebar__kaki-teks">
-        <strong>Kelompok 4</strong>
-        <span>PTIK B 2024</span>
-      </div>
-    </div>
   </aside>
 
   <div class="bingkai-utama">
@@ -119,7 +122,7 @@
       </button>
 
       <nav class="remah" aria-label="Remah roti">
-        <a class="remah__kelas" href="index.html">Kelas Python</a>
+        <a class="remah__kelas" href="index.html">PYLearn</a>
         <span class="remah__pemisah" aria-hidden="true">›</span>
         <span class="remah__aktif">Halaman Penutup</span>
       </nav>
@@ -133,7 +136,7 @@
     </header>
 
     <!-- ==================== KONTEN PENUTUP ==================== -->
-    <main class="konten-utama konten-selesai">
+    <main class="konten-utama konten-selesai" id="konten" tabindex="-1">
 
       <!-- Kartu utama; isinya diubah oleh js/pages/selesai.js. -->
       <section class="selesai-kartu" aria-labelledby="judul-selesai">
@@ -215,8 +218,9 @@
 
     <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
-      <p>© 2026 PYLearn — Kelompok 4 PTIK B 2024</p>
-      <p>Multimedia Pembelajaran Python</p>
+      <p class="footer__merek">PYLearn</p>
+      <p class="footer__tagline">Python Pathway · Media Pembelajaran Interaktif</p>
+      <a class="footer__atas" href="#atas">Kembali ke atas ↑</a>
     </footer>
   </div>
 

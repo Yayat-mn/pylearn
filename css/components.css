@@ -291,43 +291,6 @@
   line-height: 1.5;
 }
 
-.sidebar__kaki {
-  display: flex;
-  align-items: center;
-  gap: var(--jarak-3);
-  margin-top: var(--jarak-4);
-  padding: var(--jarak-2);
-}
-
-.avatar {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  flex: 0 0 auto;
-  border-radius: var(--radius-pil);
-  background: var(--warna-utama-lembut);
-  color: var(--warna-utama-gelap);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.sidebar__kaki-teks {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.35;
-}
-
-.sidebar__kaki-teks strong {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.sidebar__kaki-teks span {
-  color: var(--warna-teks-samar);
-  font-size: 11px;
-}
-
 /* ============================================================
    BINGKAI UTAMA, TOPBAR, DAN KONTEN
    ============================================================ */
@@ -350,6 +313,15 @@
   padding: 0 var(--pad-konten);
   border-bottom: 1px solid var(--warna-garis-lembut);
   background: var(--warna-latar);
+  box-shadow: var(--bayangan-topbar);
+}
+
+/* Efek kaca hanya bila peramban mendukung backdrop-filter. */
+@supports (backdrop-filter: blur(8px)) {
+  .topbar {
+    background: var(--latar-topbar);
+    backdrop-filter: blur(8px);
+  }
 }
 
 .tombol-menu {
@@ -736,16 +708,58 @@
    FOOTER DAN TIRAI
    ============================================================ */
 
+/* Tautan lompat: tersembunyi sampai mendapat fokus keyboard. */
+.lewati-konten {
+  position: fixed;
+  top: var(--jarak-3);
+  left: var(--jarak-3);
+  z-index: 100;
+  padding: var(--jarak-2) var(--jarak-4);
+  border-radius: var(--radius-kecil);
+  background: var(--warna-utama);
+  color: var(--warna-putih);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--bayangan-naik);
+  transform: translateY(-200%);
+}
+
+.lewati-konten:focus-visible {
+  color: var(--warna-putih);
+  transform: translateY(0);
+}
+
+/* Sasaran tautan lompat tidak perlu garis fokus; posisi sudah berpindah. */
+#konten:focus {
+  outline: none;
+}
+
 .footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--jarak-3);
+  gap: var(--jarak-4);
   margin-top: auto;
   padding: var(--jarak-5) var(--pad-konten);
   border-top: 1px solid var(--warna-garis-lembut);
   color: var(--warna-teks-samar);
-  font-size: 12px;
+  font-size: 13px;
+}
+
+.footer__merek {
+  color: var(--warna-teks);
+  font-weight: 600;
+}
+
+.footer__atas {
+  color: var(--warna-teks-samar);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.footer__atas:hover {
+  color: var(--warna-utama);
+  text-decoration: underline;
 }
 
 .tirai {
@@ -864,6 +878,11 @@
     display: none;
   }
 
+  /* Pemisah ikut disembunyikan agar tidak ada "›" menggantung. */
+  .remah__kelas + .remah__pemisah {
+    display: none;
+  }
+
   .konten-utama {
     gap: var(--jarak-4);
     padding: var(--jarak-4);
@@ -904,6 +923,7 @@
   .footer {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--jarak-2);
     padding: var(--jarak-4);
   }
 }

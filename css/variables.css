@@ -52,7 +52,11 @@
     0 1px 3px rgba(24, 28, 32, 0.04);
   --bayangan-naik: 0 8px 24px rgba(0, 68, 147, 0.12);
   --bayangan-tombol: 0 6px 16px rgba(0, 68, 147, 0.14);
+  --bayangan-topbar: 0 1px 12px rgba(24, 28, 32, 0.06);
   --tirai: rgba(24, 28, 32, 0.45);
+
+  /* Latar topbar semi-transparan agar konten samar terlihat di baliknya. */
+  --latar-topbar: color-mix(in srgb, var(--warna-latar) 88%, transparent);
 
   /* Jarak */
   --jarak-1: 4px;

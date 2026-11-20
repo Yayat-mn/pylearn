@@ -7,6 +7,14 @@
   <title>Modul Pembelajaran — PYLearn</title>
   <meta name="description"
         content="Materi, latihan kode, kuis, dan mini project interaktif Python dalam PYLearn.">
+  <meta name="theme-color" content="#005bbf">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:site_name" content="PYLearn">
+  <meta property="og:title" content="Modul Pembelajaran — PYLearn">
+  <meta property="og:description"
+        content="Materi, latihan kode, kuis, dan mini project interaktif Python dalam PYLearn.">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
@@ -21,7 +29,10 @@
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
 </head>
-<body>
+<body id="atas">
+
+  <!-- Tautan lompat; hanya tampil saat fokus keyboard. -->
+  <a class="lewati-konten" href="#konten">Lewati ke konten utama</a>
 
   <!-- ==================== SIDEBAR ==================== -->
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
@@ -104,14 +115,6 @@
         Menyiapkan materi pembelajaran.
       </p>
     </div>
-
-    <div class="sidebar__kaki">
-      <span class="avatar" aria-hidden="true">K4</span>
-      <div class="sidebar__kaki-teks">
-        <strong>Kelompok 4</strong>
-        <span>PTIK B 2024</span>
-      </div>
-    </div>
   </aside>
 
   <div class="bingkai-utama">
@@ -130,7 +133,7 @@
       </button>
 
       <nav class="remah" aria-label="Remah roti">
-        <a class="remah__kelas" href="index.html">Kelas Python</a>
+        <a class="remah__kelas" href="index.html">PYLearn</a>
         <span class="remah__pemisah" aria-hidden="true">›</span>
         <span id="remah-modul">Modul</span>
         <span class="remah__pemisah" aria-hidden="true">›</span>
@@ -144,7 +147,7 @@
     </header>
 
     <!-- ==================== KONTEN MODUL ==================== -->
-    <main class="konten-utama konten-modul">
+    <main class="konten-utama konten-modul" id="konten" tabindex="-1">
 
       <!-- Identitas modul; diisi oleh js/pages/modul.js. -->
       <section class="modul-header" aria-labelledby="judul-modul">
@@ -386,8 +389,9 @@
 
     <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
-      <span>PYLearn — Multimedia Pembelajaran Python</span>
-      <span>Kelompok 4 · PTIK B 2024</span>
+      <p class="footer__merek">PYLearn</p>
+      <p class="footer__tagline">Python Pathway · Media Pembelajaran Interaktif</p>
+      <a class="footer__atas" href="#atas">Kembali ke atas ↑</a>
     </footer>
   </div>
 
