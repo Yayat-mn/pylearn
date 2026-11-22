@@ -101,8 +101,8 @@
           "teks": "Jalankan program di editor, lalu pilih menu 1 sampai 5 lewat kotak masukan untuk mencoba setiap fitur."
         },
         {
-          "judul": "Halaman penutup",
-          "teks": "Setelah kuis modul terakhir lulus, tombol lanjut membuka halaman penyelesaian yang merangkum perjalanan belajarmu."
+          "judul": "Menyelesaikan rangkaian",
+          "teks": "Setelah Mini Project Modul 8 diperiksa dan outputnya sesuai, tekan tombol Kembali ke Dashboard untuk menutup rangkaian modul PYLearn."
         }
       ]
     }

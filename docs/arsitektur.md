@@ -17,13 +17,13 @@ perlu diketahui sebelum mengubah fitur. Untuk format berkas data, lihat
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│ HTML: index.html, modul.html, selesai.html                  │
+│ HTML: index.html, modul.html                                │
 │ Struktur dan placeholder; tanpa logika data.                │
 └───────────────────────────┬─────────────────────────────────┘
                             │ <script type="module">
 ┌───────────────────────────▼─────────────────────────────────┐
 │ js/pages/                                                    │
-│ dashboard.js   modul.js   selesai.js                        │
+│ dashboard.js   modul.js                                     │
 │ Mengatur satu halaman, memanggil fitur, menulis DOM.        │
 └───────────────────────────┬─────────────────────────────────┘
                             │ import
@@ -56,7 +56,6 @@ Aturan arah dependensi:
 |---|---|
 | `js/pages/dashboard.js` | Memuat katalog, merender kartu, menghitung modul tersedia, dan menyinkronkan navigasi section. |
 | `js/pages/modul.js` | Orkestrasi halaman modul: katalog, meta, materi, video, latihan, kuis, tahap, dan tombol. |
-| `js/pages/selesai.js` | Menentukan status akhir berdasarkan katalog dan merender langkah lanjutan. |
 | `js/features/katalog.js` | Sumber tunggal `daftar-modul.json`; cache, pengurutan, pencarian, dan cek ketersediaan. |
 | `js/features/editor.js` | Membuat CodeMirror, membaca/mengisi kode, dan mengunci editor. |
 | `js/features/latihan.js` | Menormalkan output dan membandingkannya dengan target. |
@@ -144,7 +143,7 @@ kode awal terisi, latihanSiap=true
         ▼
 output dibandingkan dengan target
    ├─ cocok   → latihanBenar=true, tombol lanjut muncul
-   │            (Lanjut ke Kuis atau Lihat Halaman Penutup)
+   │            (Lanjut ke Kuis atau Kembali ke Dashboard)
    └─ beda    → percobaan++, petunjuk bertambah
                  └─ percobaan >= 3 → solusi ditampilkan
 ```
@@ -228,31 +227,14 @@ eksekusi untuk menjaga memori.
 `tentukanTujuanLanjut()` memakai katalog:
 
 1. Jika modul berikutnya ada dan `tersedia`, tampilkan tautan ke modul itu.
-2. Jika tidak ada atau belum tersedia, arahkan ke
-   `selesai.html?id=<nomor modul>`.
+2. Jika tidak ada atau belum tersedia, arahkan ke Dashboard.
 
 Tidak ada logika khusus “id >= 8”; modul terakhir dikenali dari tidak adanya
 modul berikutnya di katalog. Modul `tanpaKuis` tidak memakai
 `tentukanTujuanLanjut()`; tombol setelah Mini Project benar langsung menuju
-`selesai.html?id=<nomor modul>`.
+Dashboard dan menutup rangkaian modul.
 
-## 6. Halaman penutup
-
-`selesai.html?id=N` menerima id dari URL. Perilakunya:
-
-| Keadaan | Tampilan |
-|---|---|
-| `id` tidak valid | Pesan nomor modul tidak valid |
-| `id` tidak ada di katalog | Modul belum terdaftar |
-| Modul `segera` dan bukan modul terakhir | “Modul belum tersedia” |
-| Modul terakhir masih `segera` | “Mini project segera” |
-| Modul `tersedia` dengan modul berikutnya `tersedia` | “Modul N selesai!” + tautan lanjut |
-| Modul `tersedia` tanpa modul berikutnya | “Kursus selesai” + Ulangi Mini Project |
-
-Halaman ini tidak menerima atau menyimpan nilai kuis. Status hanya
-disimpulkan dari katalog dan `meta.json` (untuk judul).
-
-## 7. Kuis
+## 6. Kuis
 
 Tahap kuis hanya dipakai modul yang tidak menetapkan `"tanpaKuis": true`.
 `kuis.js` memisahkan tiga hal:
@@ -273,7 +255,7 @@ Setelah submit:
 Jumlah soal tidak dikunci di kode; `kuis.json` menentukan jumlahnya. Kunci
 jawaban memakai huruf `A`–`D`, dan jumlah pilihan boleh 2–4.
 
-## 8. Sidebar dan aksesibilitas
+## 7. Sidebar dan aksesibilitas
 
 - Breakpoint drawer: `max-width: 1024px`.
 - Saat tertutup di mobile, sidebar diberi `inert` dan `aria-hidden="true"`.
@@ -282,7 +264,7 @@ jawaban memakai huruf `A`–`D`, dan jumlah pilihan boleh 2–4.
 - Fokus dikembalikan ke tombol menu setelah drawer ditutup.
 - Saat layar melewati 1024 px, `inert` dan `aria-hidden` dibersihkan.
 
-## 9. Keamanan dan ketahanan
+## 8. Keamanan dan ketahanan
 
 - Teks dari data JSON ditulis dengan `textContent`.
 - `innerHTML` hanya dipakai untuk `materi.html`, yang merupakan konten
@@ -294,7 +276,7 @@ jawaban memakai huruf `A`–`D`, dan jumlah pilihan boleh 2–4.
 - CDN yang gagal dimuat tidak membuat halaman crash; editor atau Python
   menampilkan status gagal dan tombol yang sesuai.
 
-## 10. Titik perluasan
+## 9. Titik perluasan
 
 ### Menambah modul
 
@@ -325,7 +307,7 @@ Saat ini tidak ada penyimpanan. Jika nanti ditambahkan, letakkan di lapisan
 fitur terpisah (misalnya `js/features/progres.js`) dan jangan mencampur
 logika penyimpanan ke `kuis.js` atau `latihan.js`.
 
-## 11. Konvensi kode
+## 10. Konvensi kode
 
 - Nama variabel, fungsi, dan komentar memakai Bahasa Indonesia.
 - Setiap berkas diawali blok komentar: peran, pemakai, alur, dan catatan.

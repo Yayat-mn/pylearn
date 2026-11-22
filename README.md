@@ -28,8 +28,8 @@ jawabanmu.
   `skenarioInput` tetap agar hasilnya konsisten.
 - Batas waktu eksekusi 5 detik, tombol Stop, dan batas panjang output.
 - Kuis dengan jumlah soal serta batas lulus yang diatur lewat `kuis.json`.
-- Halaman penutup, tautan lanjut ke modul berikutnya, dan halaman
-  **Kursus selesai** setelah Mini Project.
+- Tautan lanjut ke modul berikutnya dan tombol **Kembali ke Dashboard**
+  setelah Mini Project selesai.
 - Tampilan responsif: sidebar berubah menjadi drawer pada layar kecil.
 
 ## Menjalankan
@@ -54,8 +54,6 @@ Lalu buka:
 - Modul 6: <http://localhost:8000/modul.html?id=6>
 - Modul 7: <http://localhost:8000/modul.html?id=7>
 - Modul 8 (Mini Project): <http://localhost:8000/modul.html?id=8>
-- Halaman penutup: <http://localhost:8000/selesai.html?id=1>
-- Kursus selesai: <http://localhost:8000/selesai.html?id=8>
 
 Alternatif tanpa Python: ekstensi **Live Server** di VS Code, lalu klik
 **Go Live** (biasanya port 5500). Sesuaikan port pada URL.
@@ -74,7 +72,6 @@ Catatan:
 pylearn/
 ├── index.html                 # dashboard
 ├── modul.html                 # kerangka halaman modul
-├── selesai.html               # halaman penutup
 ├── css/
 │   ├── variables.css          # token warna, jarak, bayangan
 │   ├── base.css               # reset dan dasar tipografi
@@ -82,8 +79,7 @@ pylearn/
 ├── js/
 │   ├── pages/
 │   │   ├── dashboard.js       # katalog dan navigasi dashboard
-│   │   ├── modul.js           # alur tahap halaman modul
-│   │   └── selesai.js         # status akhir dan langkah lanjutan
+│   │   └── modul.js           # alur tahap halaman modul
 │   ├── features/
 │   │   ├── editor.js          # wrapper CodeMirror
 │   │   ├── katalog.js         # pemuat katalog bersama
@@ -116,9 +112,9 @@ pylearn/
    Modul 8 memakai label **Mini Project** dan tombol **Jalankan & Mainkan**.
 3. **Kuis** — `kuis.json` menghasilkan soal pilihan ganda. Setelah dikumpulkan,
    jawaban dikunci dan pembahasan ditampilkan. Jika lulus, tombol lanjut
-   mengarah ke modul berikutnya yang `tersedia`; jika belum ada, ke halaman
-   penutup. Modul 8 tidak memiliki tahap ini; setelah Mini Project benar,
-   tombol **Lihat Halaman Penutup** langsung menuju `selesai.html?id=8`.
+   mengarah ke modul berikutnya yang `tersedia`; jika belum ada, kembali ke
+   Dashboard. Modul 8 tidak memiliki tahap ini; setelah Mini Project benar,
+   tombol **Kembali ke Dashboard** mengakhiri rangkaian modul.
 
 Status halaman disimpan di URL (`#belajar`, `#latihan`, `#kuis`), sehingga
 tahap tertentu dapat dibuka langsung. Pada Modul 8, `#kuis` dialihkan ke

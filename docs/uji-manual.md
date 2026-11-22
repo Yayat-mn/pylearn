@@ -103,9 +103,9 @@ Buka `modul.html?id=8#latihan`:
   - [ ] tombol **Jalankan & Mainkan** aktif lagi.
 - [ ] Setelah Stop saat menunggu jawaban, jalankan lagi: sesi baru dimulai
       dari awal tanpa memuat ulang Pyodide.
-- [ ] Setelah benar, tombol **Lihat Halaman Penutup** muncul, bukan **Lanjut
+- [ ] Setelah benar, tombol **Kembali ke Dashboard** muncul, bukan **Lanjut
       ke Kuis**.
-- [ ] Klik tombol itu membuka `selesai.html?id=8`.
+- [ ] Klik tombol itu membuka `index.html`.
 
 ## 4. Eksekusi Python
 
@@ -177,7 +177,7 @@ Buka `modul.html?id=1#kuis`.
 - [ ] Jika lulus dan modul berikutnya tersedia, tombol lanjut menuju modul
       tersebut.
 - [ ] Jika lulus dan modul berikutnya belum tersedia, tombol lanjut menuju
-      `selesai.html?id=<id>`.
+      `index.html`.
 
 ## 6. Modul belum tersedia dan id salah
 
@@ -193,30 +193,7 @@ Buka `modul.html?id=1#kuis`.
 - [ ] Navigasi sebelumnya/berikutnya tetap masuk akal dan tidak membuka
       halaman yang salah.
 
-## 7. Halaman penutup
-
-- [ ] `selesai.html?id=1` menampilkan "Modul 1 selesai!" dan tautan yang
-      sesuai.
-- [ ] `selesai.html?id=2` menampilkan "Modul 2 selesai!" dan status
-      **Lulus** dengan tautan **Lanjut ke Modul 3**.
-- [ ] `selesai.html?id=3` menampilkan "Modul 3 selesai!" dan status
-      **Lulus** dengan tautan **Lanjut ke Modul 4**.
-- [ ] `selesai.html?id=4` menampilkan "Modul 4 selesai!" dan status
-      **Lulus** dengan tautan **Lanjut ke Modul 5**.
-- [ ] `selesai.html?id=5` menampilkan "Modul 5 selesai!" dan status
-      **Lulus** dengan tautan **Lanjut ke Modul 6**.
-- [ ] `selesai.html?id=6` menampilkan "Modul 6 selesai!" dan status
-      **Lulus** dengan tautan **Lanjut ke Modul 7**.
-- [ ] `selesai.html?id=7` menampilkan "Modul 7 selesai!" dan status
-      **Lulus** dengan tautan **Lanjut ke Modul 8**.
-- [ ] `selesai.html?id=8` menampilkan **Kursus selesai** dengan ringkasan
-      tahap **Belajar · Mini Project**, tombol **Ulangi Mini Project**, dan
-      **Kembali ke Dashboard**.
-- [ ] Tautan sidebar "Halaman Penutup" mempertahankan `?id=1`.
-- [ ] `selesai.html?id=abc` menampilkan pesan id tidak valid.
-- [ ] Tidak ada tautan ke modul yang belum tersedia.
-
-## 8. Mobile dan aksesibilitas
+## 7. Mobile dan aksesibilitas
 
 Uji pada lebar 390 px (DevTools device toolbar).
 
@@ -237,7 +214,7 @@ Uji pada lebar 390 px (DevTools device toolbar).
       tidak meluber, dan tetap dapat dipakai pada lebar 390 px.
 - [ ] Preferensi **Reduce motion** mematikan animasi dan smooth scroll.
 
-## 9. Ketahanan dan kegagalan
+## 8. Ketahanan dan kegagalan
 
 - [ ] Buka halaman tanpa HTTP server (`file://`): muncul pesan yang
       menyarankan HTTP server, bukan layar kosong.
@@ -255,7 +232,7 @@ Uji pada lebar 390 px (DevTools device toolbar).
 - [ ] Katalog gagal dimuat: dashboard menampilkan pesan error dan jumlah
       modul menjadi “—”, bukan angka statis yang menyesatkan.
 
-## 10. Pemeriksaan akhir
+## 9. Pemeriksaan akhir
 
 - [ ] Console tidak menampilkan error tak terduga.
 - [ ] Tidak ada permintaan 404 untuk modul yang seharusnya `segera`.

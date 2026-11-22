@@ -4,7 +4,7 @@
  * ------------------------------------------------------------
  * Peran   : memasang lapisan gelap sebelum berpindah ke halaman
  *           internal, lalu menavigasi setelah animasi selesai.
- * Dipakai : index.html, modul.html, selesai.html.
+ * Dipakai : index.html, modul.html.
  * Catatan : tautan hash di halaman yang sama tidak dicegat agar
  *           smooth scroll dan navigasi tahap tetap bekerja.
  * ============================================================

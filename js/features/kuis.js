@@ -431,9 +431,9 @@ export function buatKuis({
     const wadahAksi = buatElemen("div", "kuis__hasil-aksi");
 
     if (lulus) {
-      // Tujuan lanjut ditentukan halaman (modul berikutnya atau halaman
-      // penutup). Bila katalog belum siap, tombol utama tidak ditampilkan;
-      // tautan dashboard di bawah tetap menjadi jalan keluar.
+      // Tujuan lanjut ditentukan halaman (modul berikutnya atau dashboard).
+      // Bila katalog belum siap, tombol utama tidak ditampilkan; tautan
+      // dashboard di bawah tetap menjadi jalan keluar.
       const tujuan =
         typeof dapatkanLanjut === "function" ? dapatkanLanjut() : null;
 

@@ -3,8 +3,7 @@
  * SIDEBAR RESPONSIF
  * ------------------------------------------------------------
  * Peran   : mengatur buka-tutup sidebar pada layar kecil.
- * Dipakai : dashboard, halaman modul, dan halaman penutup agar
- *           perilakunya sama.
+ * Dipakai : dashboard dan halaman modul agar perilakunya sama.
  * Catatan : di mobile, sidebar tertutup diberi `inert` agar
  *           tautannya tidak bisa dijangkau Tab dari balik tirai.
  * ============================================================

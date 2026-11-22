@@ -707,7 +707,7 @@ function terapkanFiturModul(modul) {
 
   if (elemen.tombolLanjutKuis) {
     elemen.tombolLanjutKuis.textContent = tanpaKuis
-      ? "Lihat Halaman Penutup"
+      ? "Kembali ke Dashboard"
       : "Lanjut ke Kuis";
   }
 
@@ -1086,7 +1086,7 @@ function tampilkanUmpanBalikBenar() {
   elemen.lencanaUmpanBalik.textContent = "Benar";
   elemen.judulUmpanBalik.textContent = "Output sudah sesuai";
   elemen.pesanUmpanBalik.textContent = modulAktif?.tanpaKuis
-    ? "Kerja bagus. Kamu sudah menyelesaikan Mini Project Pustaka Mini."
+    ? "Kerja bagus. Kamu sudah menyelesaikan Mini Project Pustaka Mini dan seluruh rangkaian modul PYLearn."
     : "Kerja bagus. Kamu sudah menyelesaikan latihan ini.";
 
   elemen.wadahPetunjuk.hidden = true;
@@ -1302,7 +1302,7 @@ async function muatLatihan(folder, modul) {
 /**
  * Menentukan tombol setelah kuis lulus:
  * - modul berikutnya bila sudah "tersedia",
- * - halaman penutup bila belum ada/belum siap.
+ * - dashboard bila belum ada/belum siap.
  *
  * @returns {{label: string, href: string}}
  */
@@ -1322,10 +1322,10 @@ function tentukanTujuanLanjut() {
     };
   }
 
-  // Modul berikutnya belum tersedia: tutup alur lewat halaman penutup.
+  // Modul berikutnya belum tersedia: tutup alur lewat dashboard.
   return {
-    label: "Lihat Halaman Penutup",
-    href: `selesai.html?id=${id}`,
+    label: "Kembali ke Dashboard",
+    href: "index.html",
   };
 }
 
@@ -1860,7 +1860,7 @@ elemen.wadahKonsolInput.addEventListener("submit", (event) => {
 
 elemen.tombolLanjutKuis.addEventListener("click", () => {
   if (modulAktif?.tanpaKuis) {
-    window.location.href = `selesai.html?id=${modulAktif.id}`;
+    window.location.href = "index.html";
     return;
   }
 

@@ -184,9 +184,9 @@ Aturan penilaian output:
 - Petunjuk ditampilkan bertahap setelah percobaan gagal. Setelah 3 percobaan
   gagal, `kunci` ditampilkan.
 - Setelah output sesuai, tombol **Lanjut ke Kuis** muncul. Pada modul
-  `tanpaKuis`, tombol berubah menjadi **Lihat Halaman Penutup** dan menuju
-  `selesai.html?id=<nomor modul>`. Jumlah percobaan tidak disimpan dan kembali
-  ke nol setelah halaman dimuat ulang.
+  `tanpaKuis`, tombol berubah menjadi **Kembali ke Dashboard** dan menutup
+  rangkaian modul. Jumlah percobaan tidak disimpan dan kembali ke nol setelah
+  halaman dimuat ulang.
 - Jika `kodeAwal` kosong, halaman memakai `meta.kodeAwal`; jika keduanya
   kosong, editor mulai kosong.
 
@@ -227,7 +227,7 @@ Aturan penilaian:
 - Setelah submit, jawaban dikunci dan pembahasan ditampilkan.
 - Jika lulus dan modul berikutnya `tersedia`, tombol lanjut menuju modul itu.
   Jika tidak ada modul berikutnya yang tersedia, tombol lanjut menuju
-  `selesai.html?id=<nomor modul>`.
+  Dashboard.
 - Jika belum lulus, tombol **Ulangi Modul** mereset kuis dan kembali ke tahap
   Belajar.
 
@@ -242,33 +242,18 @@ Aturan penilaian:
    program berhenti menunggu input. Tombol Periksa Output membandingkan hasil
    dengan `outputDiharapkan` memakai `skenarioInput`. Setelah output sesuai,
    tombol **Lanjut ke Kuis** muncul. Jika `tanpaKuis`, tombol berubah menjadi
-   **Lihat Halaman Penutup** dan langsung menuju halaman penutup.
+   **Kembali ke Dashboard** dan menutup rangkaian modul.
 3. **Kuis** — soal dari `kuis.json`, lalu skor dan pembahasan. Tahap ini
    dilewati bila `tanpaKuis` bernilai `true`.
 4. Jika lulus, lanjut ke modul berikutnya bila sudah tersedia; jika belum,
-   menuju `selesai.html?id=<nomor modul>`. Jika belum lulus, tombol Ulangi
-   Modul mengembalikan ke tahap Belajar.
+   kembali ke Dashboard. Jika belum lulus, tombol Ulangi Modul mengembalikan
+   ke tahap Belajar.
 
 Tahap disimpan di hash URL: `#belajar`, `#latihan`, dan `#kuis`. Pada modul
 `tanpaKuis`, `#kuis` dialihkan ke `#belajar`. Tidak ada penguncian urutan
 modul; semua modul yang `tersedia` dapat dibuka langsung.
 
-## 7. Halaman penutup
-
-`selesai.html?id=<nomor>` membaca katalog dan `meta.json` untuk menentukan:
-
-- id tidak valid → pesan kesalahan;
-- modul belum terdaftar → pesan kesalahan;
-- modul `segera` → “Modul belum tersedia”;
-- modul terakhir masih `segera` → “Mini project segera”;
-- modul tersedia dengan modul berikutnya tersedia → tautan lanjut;
-- modul tersedia tanpa modul berikutnya → “Kursus selesai” dengan tombol
-  **Ulangi Mini Project** dan **Kembali ke Dashboard**.
-
-Pada modul `tanpaKuis`, ringkasan tahap di halaman penutup mengikuti
-`labelLatihan`, misalnya **Belajar · Mini Project**.
-
-## 8. Menambah modul baru
+## 7. Menambah modul baru
 
 1. Buat folder `data/modul-XX`.
 2. Isi `meta.json`, `materi.html`, dan `latihan.json`. Tambahkan `kuis.json`
@@ -282,7 +267,7 @@ Pada modul `tanpaKuis`, ringkasan tahap di halaman penutup mengikuti
 7. Uji alur sesuai kemampuan modul: materi, subbab, video (bila ada), latihan
    (gagal/benar), kuis (bila ada), dan tautan lanjut.
 
-## 9. Batasan Pyodide
+## 8. Batasan Pyodide
 
 - `input()` didukung lewat prelude di Worker. Setiap jawaban baru menjalankan
   ulang seluruh kode dari awal (replay) dengan daftar jawaban yang bertambah.

@@ -3,8 +3,8 @@
  * KATALOG MODUL
  * ------------------------------------------------------------
  * Peran   : sumber tunggal data `data/daftar-modul.json`.
- * Dipakai : dashboard, halaman modul, dan halaman penutup agar
- *           status "tersedia/segera" tidak ditafsirkan berbeda.
+ * Dipakai : dashboard dan halaman modul agar status
+ *           "tersedia/segera" tidak ditafsirkan berbeda.
  * Cache   : hasil muat disimpan; jika gagal, cache dibersihkan
  *           supaya percobaan berikutnya masih bisa berhasil.
  * ============================================================
